@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Mirror terraces garden with reflecting pools and workshop ruins">
+<defs>
+ <linearGradient id="base" x2="0" y2="1"><stop stop-color="#1b3a43"/><stop offset="1" stop-color="#0b2631"/></linearGradient>
+ <linearGradient id="top" x2="0" y2="1"><stop stop-color="#41655e"/><stop offset="1" stop-color="#2a514e"/></linearGradient>
+ <linearGradient id="mid" x2="0" y2="1"><stop stop-color="#315a55"/><stop offset="1" stop-color="#234b4b"/></linearGradient>
+ <linearGradient id="low" x2="0" y2="1"><stop stop-color="#224c4b"/><stop offset="1" stop-color="#15383e"/></linearGradient>
+ <linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#164553"/><stop offset=".5" stop-color="#26738a"/><stop offset="1" stop-color="#143b50"/></linearGradient>
+ <radialGradient id="warm"><stop stop-color="#fce5b0" stop-opacity=".45"/><stop offset="1" stop-color="#fce5b0" stop-opacity="0"/></radialGradient>
+ <pattern id="mosaic" width="54" height="54" patternUnits="userSpaceOnUse"><path d="M0 0H54M0 0V54" fill="none" stroke="#d8ca9f" stroke-width="1" opacity=".13"/><circle cx="27" cy="27" r="1.3" fill="#b7e0b9" opacity=".23"/></pattern>
+ <g id="shrub"><circle r="13" fill="#132f35"/><circle cx="-4" cy="-3" r="10" fill="#467d69"/><circle cx="5" cy="-4" r="8" fill="#75a07a"/><circle cx="4" cy="6" r="9" fill="#285f58"/><circle cx="-2" cy="-3" r="2.5" fill="#e4c77c"/></g>
+ <g id="lamp"><circle r="27" fill="url(#warm)"/><path d="M0-10L9 0 0 10-9 0Z" fill="#e6bd75" stroke="#fff1be" stroke-width="2"/><circle r="2.5" fill="#fff9df"/></g>
+</defs>
+<rect width="1280" height="720" fill="url(#base)"/>
+<!-- Elevation is shown through subtle stepped contours; paths are owned by the renderer. -->
+<path d="M0 0H1280V242Q974 264 652 246T0 254Z" fill="url(#top)"/>
+<path d="M0 258Q337 231 650 254T1280 244V490Q986 481 650 502T0 486Z" fill="url(#mid)"/>
+<path d="M0 501Q321 477 650 504T1280 490V720H0Z" fill="url(#low)"/>
+<path d="M0 253Q310 229 651 249T1280 244 M0 497Q338 474 650 504T1280 490" fill="none" stroke="#102d34" stroke-width="17" opacity=".55"/>
+<path d="M0 251Q310 230 651 247T1280 242 M0 495Q338 472 650 502T1280 488" fill="none" stroke="#c5a573" stroke-width="4" opacity=".82"/>
+<rect width="1280" height="720" fill="url(#mosaic)"/>
+<!-- Decorative axial garden rails stay outside the traffic corridors. -->
+<g fill="none" stroke="#a3ad82" stroke-width="5" opacity=".54">
+ <path d="M42 65Q134 40 226 65M42 260Q150 244 251 270M803 73Q1014 50 1225 77"/>
+ <path d="M355 326Q413 308 468 342M792 625Q897 649 990 622M27 665Q185 641 325 669"/>
+ <path d="M831 429Q868 403 904 424M305 619Q400 604 483 631"/>
+</g>
+<!-- Reserved gameplay water polygons. -->
+<path d="M85 338L110 306 209 296 281 328 294 375 265 425 158 436 91 407Z" fill="url(#water)" stroke="#aac4a9" stroke-width="7" stroke-linejoin="round"/>
+<path d="M957 350L994 329 1126 336 1171 367 1148 419 1021 433 967 405Z" fill="url(#water)" stroke="#aac4a9" stroke-width="7" stroke-linejoin="round"/>
+<g fill="none" stroke="#d4e8d0" stroke-width="2" opacity=".56">
+ <path d="M109 351Q172 325 255 348M117 378Q182 396 264 371M157 415L245 397"/>
+ <path d="M982 364Q1054 344 1141 371M989 391Q1065 415 1148 392M1030 420L1101 407"/>
+</g>
+<g opacity=".54" fill="#dddbbd">
+ <path d="M159 352l11-15 11 15-11 17zM219 398l8-11 8 11-8 12z"/>
+ <path d="M1047 370l14-17 14 17-14 19zM1115 390l9-12 9 12-9 12z"/>
+</g>
+<!-- Workshop and plinths match the blocked polygons exactly. -->
+<g fill="#213e44" stroke="#c1aa80" stroke-width="4" stroke-linejoin="round">
+ <path d="M602 79L697 79 709 115 684 146 618 146 590 116Z"/>
+ <path d="M320 76L375 86 387 119 348 141 309 123Z"/>
+ <path d="M1020 254L1090 263 1107 294 1071 317 1004 302Z"/>
+ <path d="M594 610L616 586 684 586 711 619 694 663 609 659Z"/>
+ <path d="M1096 610L1141 597 1208 621 1197 661 1110 664Z"/>
+</g>
+<g fill="none" stroke="#d6c08a" stroke-width="2" opacity=".78">
+ <path d="M627 92L678 92 694 114 674 132 629 132 606 116Z"/>
+ <path d="M334 93L367 99 375 114 348 128 323 117Z"/>
+ <path d="M1033 270L1080 277 1088 292 1063 304 1022 294Z"/>
+ <path d="M615 623L634 603 674 603 692 622 679 646 624 644Z"/>
+ <path d="M1117 624L1146 612 1190 627 1180 648 1127 648Z"/>
+</g>
+<g stroke="#82bbb0" stroke-width="3" fill="#bdded0" opacity=".88">
+ <path d="M650 93l11 23-11 18-11-18z"/><path d="M1054 268l9 16-9 14-9-14z"/>
+ <path d="M647 609l8 17-8 17-8-17z"/>
+</g>
+<!-- A discreet geometric garden grid and warm anchor lights leave tower pads readable. -->
+<g opacity=".88">
+ <use href="#shrub" x="70" y="82"/><use href="#shrub" x="108" y="88"/><use href="#shrub" x="143" y="66"/><use href="#shrub" x="257" y="91"/>
+ <use href="#shrub" x="442" y="83"/><use href="#shrub" x="483" y="93"/><use href="#shrub" x="771" y="74"/><use href="#shrub" x="802" y="84"/>
+ <use href="#shrub" x="1178" y="74"/><use href="#shrub" x="1225" y="92"/><use href="#shrub" x="1240" y="295"/>
+ <use href="#shrub" x="1232" y="449"/><use href="#shrub" x="1185" y="462"/><use href="#shrub" x="60" y="475"/>
+ <use href="#shrub" x="58" y="616"/><use href="#shrub" x="106" y="642"/><use href="#shrub" x="200" y="651"/>
+ <use href="#shrub" x="335" y="650"/><use href="#shrub" x="532" y="652"/><use href="#shrub" x="799" y="659"/>
+ <use href="#shrub" x="924" y="665"/><use href="#shrub" x="1003" y="654"/><use href="#shrub" x="1250" y="669"/>
+ </g>
+<g opacity=".8">
+ <use href="#lamp" x="267" y="272"/><use href="#lamp" x="601" y="188"/><use href="#lamp" x="788" y="449"/>
+ <use href="#lamp" x="423" y="604"/><use href="#lamp" x="981" y="628"/><use href="#lamp" x="1192" y="265"/>
+</g>
+<!-- The central crossing is deliberately not decorated as an obstacle. -->
+<g opacity=".28" stroke="#dbe4bc" fill="none" stroke-width="2"><circle cx="650" cy="360" r="53" stroke-dasharray="3 13"/><path d="M650 299v14M650 407v14M590 360h14M696 360h14"/></g>
+</svg>
