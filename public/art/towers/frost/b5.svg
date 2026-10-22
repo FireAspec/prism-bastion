@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 240 240" role="img" aria-label="Ice crystal tower illustration">
+  <defs>
+   <linearGradient id="ice" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0ffff"/><stop offset=".28" stop-color="#99efff"/><stop offset=".7" stop-color="#36b9e6"/><stop offset="1" stop-color="#1663a1"/></linearGradient>
+   <linearGradient id="dark" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#54718a"/><stop offset=".4" stop-color="#284860"/><stop offset="1" stop-color="#0a2139"/></linearGradient>
+   <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d6f5ff"/><stop offset=".34" stop-color="#688ca9"/><stop offset=".65" stop-color="#375674"/><stop offset="1" stop-color="#14283d"/></linearGradient>
+   <radialGradient id="aura"><stop stop-color="#5bb6ff" stop-opacity=".58"/><stop offset=".55" stop-color="#5bb6ff" stop-opacity=".15"/><stop offset="1" stop-color="#5bb6ff" stop-opacity="0"/></radialGradient>
+   <radialGradient id="core"><stop stop-color="#fff"/><stop offset=".23" stop-color="#eaffff"/><stop offset=".7" stop-color="#77e7fd"/><stop offset="1" stop-color="#149dc5"/></radialGradient>
+   <filter id="shine" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4"/></filter>
+   <clipPath id="frame"><rect width="240" height="240" rx="8"/></clipPath>
+  </defs>
+  <g clip-path="url(#frame)">
+   <circle cx="120" cy="128" r="105" fill="url(#aura)" />
+   <circle cx="120" cy="195" r="65" fill="#051a2b" opacity=".31" transform="scale(1 .15) translate(0 1100)"/>
+   <polygon points="76,177 120,155 164,177 164,192 120,213 76,192" fill="#0f3248" stroke="#092336" stroke-width="3" stroke-linejoin="round" />
+   <polygon points="64,169 120,143 176,169 176,181 120,207 64,181" fill="url(#steel)" stroke="#142e46" stroke-width="3" stroke-linejoin="round" />
+   <polygon points="64,169 120,143 176,169 120,195" fill="url(#dark)" stroke="#a4d2dd" stroke-width="1.3" stroke-linejoin="round" />
+   <polygon points="120,143 176,169 120,195 64,169" fill="none" stroke="#91e5ee" stroke-width="2" stroke-linejoin="round" />
+   <path d="M78 181l42 19 42-19" fill="none" stroke="#6fcce6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+   <polygon points="87,158 120,143 153,158 153,170 120,186 87,170" fill="url(#dark)" stroke="#122f49" stroke-width="2" stroke-linejoin="round" />
+   <circle cx="120" cy="108" r="95" fill="url(#aura)" />
+   <polygon points="59,157 70,89 90,106 119,20 145,83 168,58 184,146 162,178 96,179" fill="url(#ice)" stroke="#102f4c" stroke-width="4" stroke-linejoin="round" />
+   <polygon points="119,20 145,83 130,149 116,171 90,106" fill="#f4ffff" stroke="none" stroke-width="0" stroke-linejoin="round" opacity=".66"/>
+   <polygon points="145,83 168,58 184,146 162,178 130,149" fill="#178fc2" stroke="none" stroke-width="0" stroke-linejoin="round" opacity=".52"/>
+   <polygon points="70,89 91,107 96,179 59,157" fill="#c2fbff" stroke="none" stroke-width="0" stroke-linejoin="round" opacity=".5"/>
+   <path d="M119 24l-3 98 -23 42 M168 61l-23 61 13 26" fill="none" stroke="#e8ffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" />
+   <polygon points="75,121 88,126 98,167 83,171 65,137" fill="url(#steel)" stroke="#20374c" stroke-width="2.6" stroke-linejoin="round" />
+   <polygon points="149,120 163,117 181,140 173,162 151,160" fill="url(#steel)" stroke="#20374c" stroke-width="2.6" stroke-linejoin="round" />
+   <circle cx="80" cy="140" r="4" fill="url(#core)" stroke="#193e56" stroke-width="2"/><circle cx="164" cy="140" r="4" fill="url(#core)" stroke="#193e56" stroke-width="2"/>
+   <polygon points="107,134 120,124 131,139 120,150" fill="url(#steel)" stroke="#0d263b" stroke-width="2.7" stroke-linejoin="round" /><path d="M78 72L56 51 M174 88l21-31" fill="none" stroke="#defdff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+   <polygon points="41,137 64,111 69,164 46,178" fill="url(#steel)" stroke="#19334b" stroke-width="3" stroke-linejoin="round" /><polygon points="183,115 204,130 193,174 172,164" fill="url(#steel)" stroke="#19334b" stroke-width="3" stroke-linejoin="round" />
+      <g transform="translate(65 45) rotate(-28) scale(0.55)">
+ <polygon points="0,-30 12,-9 8,25 0,35 -11,12 -12,-9" fill="url(#ice)" stroke="#123d59" stroke-width="2.3" stroke-linejoin="round" />
+ <polygon points="0,-28 12,-8 0,8" fill="white" stroke="none" stroke-width="0" stroke-linejoin="round" opacity=".56"/><path d="M0 -25V30" fill="none" stroke="#deffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></g><g transform="translate(120 60) rotate(0) scale(0.55)">
+ <polygon points="0,-30 12,-9 8,25 0,35 -11,12 -12,-9" fill="url(#ice)" stroke="#123d59" stroke-width="2.3" stroke-linejoin="round" />
+ <polygon points="0,-28 12,-8 0,8" fill="white" stroke="none" stroke-width="0" stroke-linejoin="round" opacity=".56"/><path d="M0 -25V30" fill="none" stroke="#deffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></g><g transform="translate(175 45) rotate(28) scale(0.55)">
+ <polygon points="0,-30 12,-9 8,25 0,35 -11,12 -12,-9" fill="url(#ice)" stroke="#123d59" stroke-width="2.3" stroke-linejoin="round" />
+ <polygon points="0,-28 12,-8 0,8" fill="white" stroke="none" stroke-width="0" stroke-linejoin="round" opacity=".56"/><path d="M0 -25V30" fill="none" stroke="#deffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" /></g>
+      <path d="M120 30L102 83l15 15 -30 41 27-12 21 27" fill="none" stroke="#0f5586" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" /><path d="M120 29L102 83l15 15 -30 41" fill="none" stroke="#d7ffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <g stroke="#e9ffff" stroke-width="2.5" stroke-linecap="round" opacity=".95"><g transform="rotate(0 52 76)"><path d="M44 76H60" fill="none" stroke="#e9ffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" /><path d="M47 72l-4 4 4 4 M57 72l4 4 -4 4" fill="none" stroke="#a6f5ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></g><g transform="rotate(60 52 76)"><path d="M44 76H60" fill="none" stroke="#e9ffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" /><path d="M47 72l-4 4 4 4 M57 72l4 4 -4 4" fill="none" stroke="#a6f5ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></g><g transform="rotate(120 52 76)"><path d="M44 76H60" fill="none" stroke="#e9ffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" /><path d="M47 72l-4 4 4 4 M57 72l4 4 -4 4" fill="none" stroke="#a6f5ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></g></g><g stroke="#e9ffff" stroke-width="2.5" stroke-linecap="round" opacity=".95"><g transform="rotate(0 200 83)"><path d="M191 83H209" fill="none" stroke="#e9ffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" /><path d="M194 79l-4 4 4 4 M206 79l4 4 -4 4" fill="none" stroke="#a6f5ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></g><g transform="rotate(60 200 83)"><path d="M191 83H209" fill="none" stroke="#e9ffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" /><path d="M194 79l-4 4 4 4 M206 79l4 4 -4 4" fill="none" stroke="#a6f5ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></g><g transform="rotate(120 200 83)"><path d="M191 83H209" fill="none" stroke="#e9ffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" /><path d="M194 79l-4 4 4 4 M206 79l4 4 -4 4" fill="none" stroke="#a6f5ff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></g></g>
+   <circle cx="31" cy="75" r="2.1" fill="#c7fdff" opacity=".83"/><circle cx="47" cy="147" r="1.7" fill="#c7fdff" opacity=".83"/><circle cx="196" cy="75" r="2.1" fill="#c7fdff" opacity=".83"/><circle cx="211" cy="147" r="1.7" fill="#c7fdff" opacity=".83"/>
+  </g></svg>
