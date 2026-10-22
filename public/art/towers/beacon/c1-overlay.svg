@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Signal beacon illustration">
+<defs>
+ <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffdd9d"/><stop offset=".28" stop-color="#d29357"/><stop offset=".68" stop-color="#855040"/><stop offset="1" stop-color="#382f41"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd2f4" stop-opacity=".98"/><stop offset=".45" stop-color="#e985c8"/><stop offset="1" stop-color="#8252a4"/></linearGradient>
+ <radialGradient id="core"><stop stop-color="#fffef2"/><stop offset=".26" stop-color="#ffd2f4"/><stop offset=".66" stop-color="#e985c8" stop-opacity=".88"/><stop offset="1" stop-color="#e985c8" stop-opacity=".04"/></radialGradient>
+ <linearGradient id="plinth" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#597989"/><stop offset=".5" stop-color="#365260"/><stop offset="1" stop-color="#233b4b"/></linearGradient>
+ <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs><path d="M23 35V66" fill="none" stroke="#ffd2f4" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="29" cy="77" r="8" fill="url(#glass)" stroke="#483c67" stroke-width="1.25"/><path d="M23 35L29 77" stroke="#e985c8" stroke-width="2" stroke-linecap="round"/></svg>
