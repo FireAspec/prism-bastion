@@ -91,3 +91,4 @@
 |85|Движение, снятие слоёв и гибель врагов|`src/render-animations/enemies/**`, `tests/animations/enemies/**`, `docs/animations/enemies.md`|
 |86|Анимации магазина, веток и наград|`src/ui-motion/**`, `tests/animations/ui/**`, `docs/animations/ui.md`|
 |87|Контакт снарядов, ближних ударов и эффектов|`tests/contact/**`, `src/contact-validation/**`, `validation/contact/**`, `docs/qa/contact.md`|
+|88|4K, Upscayl и финальное качество ресурсов|`scripts/prepare-assets-4k.mjs`, `src/asset-quality/**`, `tests/asset-quality/**`, `validation/asset-quality/**`, `docs/ASSET-QUALITY.md`|

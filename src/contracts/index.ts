@@ -154,6 +154,7 @@ export interface GameEngine {
  step(realSeconds:number):void;
  getSnapshot():GameState;
  drainEvents():GameEvent[];
+ reassignOwner(fromPlayerId:string,toPlayerId:string):CommandResult;
 }
 export interface DamagePacket {source:string; damage:number; element:Element;armorPierce:number;shieldMultiplier:number;bossMultiplier:number;statuses:StatusSpec[];}
 export interface RenderPreferences {reducedMotion:boolean;quality:'low'|'high';colorblind:boolean;}
@@ -162,7 +163,7 @@ export interface GameRenderer {
  render(state:GameState,overlay:RenderOverlay,events:GameEvent[],realSeconds:number):void;
  screenToWorld(clientX:number,clientY:number):Vec; resize():void; dispose():void;
 }
-export interface UIHooks {command:(command:GameCommand)=>CommandResult;chooseTower:(id:string|null)=>void;select:(id:string|null)=>void;exit:()=>void;}
+export interface UIHooks {command:(command:GameCommand)=>CommandResult;chooseTower:(id:string|null)=>void;select:(id:string|null)=>void;exit:()=>void;playerId?:string;isHost?:boolean;}
 export interface HUD {
  update(state:GameState,selected:string|null,placing:string|null):void;
  notify(message:string):void; dispose():void;
@@ -179,8 +180,8 @@ export interface SaveEnvelope {version:1; savedAt:string;contentVersion:string;p
 export interface SaveStore {
  load():SaveEnvelope; save(value:SaveEnvelope):void; export():string; import(json:string):SaveEnvelope; reset():void;
 }
-export interface MenuHooks {start:(options:RunOptions)=>void;resume:()=>void;settings:(value:Settings)=>void;knowledge:()=>void;coop:()=>void;}
-export interface MenuUI {show(screen:'title'|'maps'|'settings'|'help'|'victory'|'defeat',profile:Profile,run?:GameState|null):void;hide():void;dispose():void;}
+export interface MenuHooks {start:(options:RunOptions)=>void;resume:()=>void;settings:(value:Settings)=>void;knowledge:()=>void;coop:()=>void;exportProfile?:()=>string;importProfile?:(json:string)=>CommandResult;}
+export interface MenuUI {show(screen:'title'|'maps'|'settings'|'help'|'victory'|'defeat',profile:Profile,run?:GameState|null,receipt?:RewardReceipt):void;hide():void;dispose():void;}
 export interface AudioSystem {unlock():Promise<void>;setSettings(settings:Settings):void;consume(events:GameEvent[]):void;setScene(scene:'menu'|'build'|'wave'|'boss'|'end'):void;dispose():void;}
 export interface LocaleCatalog {text(key:string,vars?:Record<string,string|number>):string;setLanguage(language:'ru'|'en'):void;}
 export interface DesktopBridge {
@@ -206,6 +207,7 @@ export type ServerMessage =
  | {type:'room';room:RoomState}
  | {type:'snapshot';seq:number;state:GameState;events:GameEvent[]}
  | {type:'result';seq:number;result:CommandResult}
+ | {type:'runResult';result:RunResult}
  | {type:'error';code:string;message:string}
  | {type:'pong';at:number};
 export interface CoopClient {
