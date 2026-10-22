@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Вторичная ветка A, тир 1">
+
+<defs>
+ <linearGradient id="copper" x1=".1" y1="0" x2=".9" y2="1"><stop stop-color="#f9d7a2"/><stop offset=".24" stop-color="#bb8050"/><stop offset=".65" stop-color="#694537"/><stop offset="1" stop-color="#271f32"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dcfcf5"/><stop offset=".24" stop-color="#618f9a"/><stop offset=".59" stop-color="#294c5d"/><stop offset="1" stop-color="#142d41"/></linearGradient>
+ <linearGradient id="void" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#326578"/><stop offset=".52" stop-color="#102538"/><stop offset="1" stop-color="#091727"/></linearGradient>
+ <linearGradient id="pearl" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#fffef0"/><stop offset=".24" stop-color="#bbfff1"/><stop offset=".5" stop-color="#82b6fa"/><stop offset=".8" stop-color="#c8a8ed"/><stop offset="1" stop-color="#fff2dc"/></linearGradient>
+ <linearGradient id="lava" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fffbc0"/><stop offset=".32" stop-color="#ffc05e"/><stop offset=".65" stop-color="#ee6543"/><stop offset="1" stop-color="#612836"/></linearGradient>
+ <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f1deff"/><stop offset=".45" stop-color="#a9b7ff"/><stop offset="1" stop-color="#6e65bd"/></linearGradient>
+ <radialGradient id="core"><stop stop-color="#ffffff"/><stop offset=".3" stop-color="#c9fff7"/><stop offset=".66" stop-color="#53d8cf"/><stop offset="1" stop-color="#206d87"/></radialGradient>
+ <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.5"/></filter>
+</defs><path d="M16 45L21 35L26 45L26 76L21 81L16 76Z" fill="url(#steel)" stroke="#9ffbea" stroke-width="1.5"/><circle cx="21" cy="48" r="3.3" fill="url(#pearl)" stroke="#fff" stroke-width="0.7"/><path d="M102 45L107 35L112 45L112 76L107 81L102 76Z" fill="url(#steel)" stroke="#9ffbea" stroke-width="1.5"/><circle cx="107" cy="48" r="3.3" fill="url(#pearl)" stroke="#fff" stroke-width="0.7"/></svg>
