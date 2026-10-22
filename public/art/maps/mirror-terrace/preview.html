@@ -16,10 +16,8 @@ h1{font-size:clamp(18px,2.2vw,27px);margin:0;line-height:1.15;letter-spacing:.4p
 .frame{position:relative;width:min(100%,calc((100vh - 108px)*16/9));margin:auto;aspect-ratio:16/9;background:#183b42;border:2px solid #9db8a0;border-radius:12px;overflow:hidden;box-shadow:0 18px 60px #0009,inset 0 0 0 1px #fcdda955}
 .frame img{display:block;width:100%;height:100%;object-fit:fill}
 .overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:1;transition:opacity .16s}
-#show:checked ~ .frame .overlay{opacity:1}
-#show:not(:checked) ~ .frame .overlay{opacity:0}
-#pads:checked ~ .frame .pads{opacity:1}
-#pads:not(:checked) ~ .frame .pads{opacity:0}
+body:has(#show:not(:checked)) .frame .overlay{opacity:0}
+body:has(#pads:not(:checked)) .frame .pads{opacity:0}
 .toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin:6px 0 12px}
 .legend{font-size:12px;color:#c2d5ca;display:flex;gap:14px;flex-wrap:wrap}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:#d6b172}.dot.b{background:#84c9da}.dot.c{background:#f0df9c}
