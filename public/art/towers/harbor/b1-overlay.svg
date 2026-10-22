@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" aria-label="Harbor tower illustration"><defs>
+ <linearGradient id="wood" x1="0" y1="0" x2=".2" y2="1"><stop stop-color="#e7bd7d"/><stop offset=".55" stop-color="#b77b4e"/><stop offset="1" stop-color="#795443"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2d49b"/><stop offset=".38" stop-color="#a9b4ad"/><stop offset="1" stop-color="#4b7380"/></linearGradient>
+ <linearGradient id="armor" x1=".1" y1="0" x2=".8" y2="1"><stop stop-color="#9db9b9"/><stop offset=".3" stop-color="#526d79"/><stop offset="1" stop-color="#263f52"/></linearGradient>
+ <linearGradient id="wave" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#58d1c4" stop-opacity=".65"/><stop offset="1" stop-color="#13586e" stop-opacity=".12"/></linearGradient>
+ <linearGradient id="canvas" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fdcf78"/><stop offset="1" stop-color="#e58757"/></linearGradient>
+ <radialGradient id="lamp"><stop stop-color="#fff6c2"/><stop offset=".4" stop-color="#ffe28f"/><stop offset="1" stop-color="#fab564" stop-opacity="0"/></radialGradient>
+ <filter id="soft"><feGaussianBlur stdDeviation="2"/></filter>
+ </defs><rect x="49" y="15" width="26" height="6" rx="3" fill="url(#metal)" stroke="#16323d" stroke-width="1.5"/><circle cx="64" cy="16" r="7" fill="#b5e7d7" stroke="#16323d" stroke-width="1.4"/><path d="M64 11L64 5" stroke="#eac486" stroke-width="2" stroke-linecap="round" /></svg>
