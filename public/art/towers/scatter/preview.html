@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Веерный страж — атлас моделей</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#eff9fc;background:#101d30}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 35% -10%,#2c4a5a,#101d30 58%)}
+    main{max-width:1216px;margin:0 auto;padding:32px 22px 55px}
+    h1{font-size:clamp(28px,4vw,42px);margin:0 0 4px;letter-spacing:-1px}
+    h2{font-size:22px;letter-spacing:.1px;margin:34px 0 16px}
+    p{color:#adbfca;margin:5px 0 15px;line-height:1.5}
+    .toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:13px 16px;border-radius:14px;background:#1d3245;border:1px solid #426173}
+    .toolbar label{display:flex;align-items:center;gap:9px}.toolbar input{accent-color:#84dccf}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px}
+    .card{border:1px solid #476271;border-radius:18px;overflow:hidden;background:linear-gradient(165deg,#29465a,#192e41);box-shadow:0 8px 20px #08132069;min-width:0}
+    .art{position:relative;display:grid;place-items:center;aspect-ratio:1;background:radial-gradient(circle,#35526a 5%,#1c3449 58%,#183044 100%);isolation:isolate;overflow:hidden}
+    .art:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fff1 1px,transparent 1px),linear-gradient(#fff1 1px,transparent 1px);background-size:32px 32px;opacity:.15}
+    .art img{position:absolute;inset:8%;width:84%;height:84%;object-fit:contain;filter:drop-shadow(0 8px 5px #06162695)}
+    .art img.overlay{inset:8%;z-index:1}.caption{padding:12px 13px 15px}
+    .tag{font-size:11px;font-weight:700;letter-spacing:1.3px;color:#98efda;text-transform:uppercase}
+    .card h3{margin:5px 0;font-size:15px;line-height:1.25}.card p{margin:0;font-size:12px;line-height:1.4;min-height:34px}
+    .hidden{display:none!important}.light .art{background:radial-gradient(circle,#ddf0fa,#b7cfdb)}
+    .light .art:before{background:linear-gradient(90deg,#073e3c17 1px,transparent 1px),linear-gradient(#073e3c17 1px,transparent 1px);background-size:32px 32px;opacity:1}
+    @media(max-width:520px){main{padding:20px 12px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.caption{padding:10px}.card h3{font-size:13px}.card p{font-size:11px}}
+    @media(prefers-reduced-motion:no-preference){.card{transition:transform .2s,border-color .2s}.card:hover{transform:translateY(-3px);border-color:#a3e2d9}}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Веерный страж</h1>
+  <p>Prism Bastion · 16 законченных моделей + 6 накладок · 128×128 SVG · прозрачный фон. Наведите на карточку для осмотра деталей.</p>
+  <div class="toolbar">
+    <label><input id="light" type="checkbox"> Светлая подложка</label>
+    <label><input id="cross" type="checkbox" checked> Показать финальные сочетания</label>
+    <span style="color:#a7bdc6;font-size:12px">В игре размер коллизии не меняется при улучшении.</span>
+  </div>
+  <section>
+    <h2>База и три направления развития</h2>
+    <div class="grid" id="models"></div>
+  </section>
+  <section id="cross-section">
+    <h2>Шесть финальных путей 5–2–0</h2>
+    <p>Основная модель пятого тира сохранена целиком. Накладка второй ветки находится поверх неё, а не заменяет силуэт.</p>
+    <div class="grid" id="cross-models"></div>
+  </section>
+</main>
+<script>
+  const paths = [
+    {id:'a',name:'Ураган',titles:['Шестая рейка','Расширитель дуги','Стена дроби','Двойной веер','Перламутровый шквал'],hint:'Веер стволов и перламутровая картечь'},
+    {id:'b',name:'Охотник',titles:['Стальная сердцевина','Щитобойный заряд','Парные камеры','Кузнечный разгон','Трёхкамерный горн'],hint:'Тяжёлые квадратные камеры, жар сердечников'},
+    {id:'c',name:'Кольцевой караул',titles:['Периметральный прицел','Бдительный привод','Октагон дозора','Роторная стена','Венец восьми ветров'],hint:'Октагон, радиальные сопла и круговая защита'}
+  ];
+  function card(name,label,hint,base,overlay){
+    const el=document.createElement('article');el.className='card';
+    const art=document.createElement('div');art.className='art';
+    const img=document.createElement('img');img.src=base+'.svg';img.alt=name;img.loading='lazy';art.append(img);
+    if(overlay){const over=document.createElement('img');over.className='overlay';over.src=overlay+'.svg';over.alt='';over.setAttribute('aria-hidden','true');over.loading='lazy';art.append(over);}
+    const caption=document.createElement('div');caption.className='caption';
+    const tag=document.createElement('div');tag.className='tag';tag.textContent=label;
+    const title=document.createElement('h3');title.textContent=name;
+    const detail=document.createElement('p');detail.textContent=hint;
+    caption.append(tag,title,detail);el.append(art,caption);return el;
+  }
+  const models=document.getElementById('models');
+  models.append(card('Веерный страж','База','Пять картечин, общий медно-стальной поворотный корпус','base'));
+  for(const path of paths)for(let i=1;i<=5;i++)models.append(card(path.titles[i-1],path.name+' · Т'+i,path.hint,path.id+i));
+  const crossModels=document.getElementById('cross-models');
+  for(const main of paths)for(const secondary of paths.filter(p=>p!==main)){
+    crossModels.append(card(main.name+' / '+secondary.name,'5–2–0','Пятый тир '+main.name.toLowerCase()+' + накладка второго тира '+secondary.name.toLowerCase(),main.id+'5',secondary.id+'2-overlay'));
+  }
+  document.getElementById('light').addEventListener('change',e=>document.body.classList.toggle('light',e.target.checked));
+  document.getElementById('cross').addEventListener('change',e=>document.getElementById('cross-section').classList.toggle('hidden',!e.target.checked));
+</script>
+</body>
+</html>
