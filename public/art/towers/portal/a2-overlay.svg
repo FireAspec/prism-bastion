@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none" role="img" aria-label="a2-overlay"><defs>
+  <linearGradient id="iron" x2="1" y2="1"><stop stop-color="#ddceaa"/><stop offset=".32" stop-color="#866f77"/><stop offset=".65" stop-color="#304b5d"/><stop offset="1" stop-color="#101c31"/></linearGradient>
+  <linearGradient id="edge" x2="0" y2="1"><stop stop-color="#f6d69f"/><stop offset=".46" stop-color="#c78e57"/><stop offset="1" stop-color="#534256"/></linearGradient>
+  <radialGradient id="heart"><stop stop-color="#d0fff6"/><stop offset=".22" stop-color="#83dbe9"/><stop offset=".58" stop-color="#4f5ed2"/><stop offset="1" stop-color="#1a214b"/></radialGradient>
+  <radialGradient id="abyss"><stop stop-color="#fff0c7"/><stop offset=".21" stop-color="#fa936f"/><stop offset=".5" stop-color="#8d415c"/><stop offset="1" stop-color="#241c39"/></radialGradient>
+  <radialGradient id="courier"><stop stop-color="#eafffc"/><stop offset=".28" stop-color="#77f2d6"/><stop offset=".62" stop-color="#257f9b"/><stop offset="1" stop-color="#182c4c"/></radialGradient>
+  <filter id="halo" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.7"/></filter>
+  <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter>
+  <clipPath id="gateway"><path d="M45 91V53C45 26 83 26 83 53V91Z"/></clipPath>
+  </defs>
+    <path d="M17 54Q31 25 50 26 M111 54Q97 25 78 26" fill="none" stroke="#c9b5ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /><path d="M64 14L68.8 20 64 26 59.2 20Z" fill="#f2dfff" stroke="#f3e7c8" stroke-width=".8"/></svg>
