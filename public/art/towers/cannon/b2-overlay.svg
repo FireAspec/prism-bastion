@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Бастионная пушка">
+<defs>
+ <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#82959a"/><stop offset=".32" stop-color="#40596b"/><stop offset=".69" stop-color="#243c4b"/><stop offset="1" stop-color="#142a38"/></linearGradient>
+ <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe2a0"/><stop offset=".28" stop-color="#dba361"/><stop offset=".68" stop-color="#a9693b"/><stop offset="1" stop-color="#754d39"/></linearGradient>
+ <linearGradient id="bright" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b9"/><stop offset=".5" stop-color="#ffd26f"/><stop offset="1" stop-color="#b97737"/></linearGradient>
+ <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8fff8"/><stop offset=".4" stop-color="#66e4df"/><stop offset="1" stop-color="#237b91"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#b6fbf5" stop-opacity=".65"/><stop offset=".56" stop-color="#61deda" stop-opacity=".21"/><stop offset="1" stop-color="#61deda" stop-opacity="0"/></radialGradient>
+ <radialGradient id="shadow"><stop stop-color="#020d15" stop-opacity=".53"/><stop offset="1" stop-color="#020d15" stop-opacity="0"/></radialGradient>
+ <linearGradient id="barrel" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1e3542"/><stop offset=".24" stop-color="#7a8c94"/><stop offset=".54" stop-color="#405662"/><stop offset=".78" stop-color="#213b49"/><stop offset="1" stop-color="#112630"/></linearGradient>
+ <filter id="halo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.1"/></filter>
+</defs>
+<rect x="15" y="64" width="15" height="21" rx="5" fill="url(#bronze)" stroke="#132b37" stroke-width="2.2"/><rect x="98" y="64" width="15" height="21" rx="5" fill="url(#bronze)" stroke="#132b37" stroke-width="2.2"/><circle cx="22" cy="73" r="4.3" fill="#ffdb9f" stroke="#132b37" stroke-width="1.5" /><circle cx="106" cy="73" r="4.3" fill="#ffdb9f" stroke="#132b37" stroke-width="1.5" /><path d="M19 85L27 85" fill="none" stroke="#ffe9be" stroke-width="1.6" stroke-linecap="round" /><path d="M101 85L109 85" fill="none" stroke="#ffe9be" stroke-width="1.6" stroke-linecap="round" /><path d="M19 89L27 89" fill="none" stroke="#ffe9be" stroke-width="1.6" stroke-linecap="round" /><path d="M101 89L109 89" fill="none" stroke="#ffe9be" stroke-width="1.6" stroke-linecap="round" /><path d="M19 93L27 93" fill="none" stroke="#ffe9be" stroke-width="1.6" stroke-linecap="round" /><path d="M101 93L109 93" fill="none" stroke="#ffe9be" stroke-width="1.6" stroke-linecap="round" />
+</svg>
