@@ -35,7 +35,6 @@ function polylineDistance(p:Vec,lanes:readonly (readonly Vec[])[]):number {
 function polygonClearance(poly:Vec[],lane:Vec[]):number {
  const pe=segments(poly,true),le=segments(lane);
  for(const edge of pe)for(const road of le)if(intersection(edge,road))return 0;
- if(poly.some(p=>pointInPolygon(p,lane)))return 0;
  return Math.min(
   ...poly.flatMap(p=>le.map(([a,b])=>distanceToSegment(p,a,b))),
   ...lane.flatMap(p=>pe.map(([a,b])=>distanceToSegment(p,a,b))),
