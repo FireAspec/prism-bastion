@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" role="img" aria-label="Ангар дронов">
+  <defs>
+ <linearGradient id="steel" x1="0" x2="0.92" y1="0" y2="1"><stop stop-color="#86a5a9"/><stop offset=".28" stop-color="#426d79"/><stop offset=".64" stop-color="#244456"/><stop offset="1" stop-color="#102c3d"/></linearGradient>
+ <linearGradient id="roof" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#355d69"/><stop offset=".48" stop-color="#112e40"/><stop offset="1" stop-color="#071e30"/></linearGradient>
+ <linearGradient id="copper" x1="0" x2=".8" y1="0" y2="1"><stop stop-color="#ffe2a0"/><stop offset=".48" stop-color="#bd8359"/><stop offset="1" stop-color="#7b453c"/></linearGradient>
+ <radialGradient id="reactor"><stop stop-color="#ecfff6"/><stop offset=".25" stop-color="#9af4db"/><stop offset=".55" stop-color="#38bcae"/><stop offset="1" stop-color="#0c4c60"/></radialGradient>
+ <radialGradient id="hot"><stop stop-color="#fff8ca"/><stop offset=".3" stop-color="#ffca78"/><stop offset=".75" stop-color="#f48b4e"/><stop offset="1" stop-color="#6c3741"/></radialGradient>
+ <linearGradient id="glass" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#c1fbff" stop-opacity=".95"/><stop offset=".4" stop-color="#3dafa7" stop-opacity=".55"/><stop offset="1" stop-color="#12526b" stop-opacity=".7"/></linearGradient>
+ <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+ </defs><g><circle cx="15" cy="92" r="8" fill="url(#hot)" stroke="#ffedb8" stroke-width="1.8"/>
+       <circle cx="113" cy="92" r="8" fill="url(#hot)" stroke="#ffedb8" stroke-width="1.8"/>
+       <path d="M22 90 L42 77" stroke="#ffba70" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7" /><path d="M106 90 L86 77" stroke="#ffba70" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7" /></g></svg>
