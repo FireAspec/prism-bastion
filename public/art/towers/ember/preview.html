@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Prism Bastion — Жаровая печь: атлас</title>
+  <style>
+    :root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(ellipse at 54% 0%,#284e5d 0%,#102c3d 40%,#091c2a 95%);color:#e7e9e4;min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.15;background-image:repeating-linear-gradient(0deg,transparent 0 39px,#80c6ba 40px),repeating-linear-gradient(90deg,transparent 0 39px,#80c6ba 40px)}
+    main{position:relative;max-width:1350px;margin:0 auto;padding:50px 30px 90px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid #75959855;padding-bottom:25px;margin-bottom:40px}
+    .eyebrow{color:#efbc78;letter-spacing:.24em;font-size:12px;text-transform:uppercase;font-weight:800}
+    h1{font-size:clamp(32px,4vw,56px);margin:8px 0 8px;letter-spacing:-.045em;line-height:1.05;color:#fff3d8}
+    .sub{font-size:15px;color:#a6c0c4;line-height:1.6;max-width:730px}
+    .seal{border:1px solid #c89560;color:#fbd18c;padding:12px 16px;border-radius:10px;font-size:13px;white-space:nowrap;box-shadow:0 0 25px #e9a75d15}
+    h2{font-size:24px;margin:0 0 9px;color:#fff0d4;font-weight:750}
+    .intro{color:#a0babf;margin:0 0 22px;font-size:14px}
+    section{margin-top:44px}
+    .gallery{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+    .plate{background:linear-gradient(155deg,#1c3d4bdf,#0d2534f0);border:1px solid #6c89914d;border-radius:16px;overflow:hidden;box-shadow:0 12px 27px #03111b55}
+    .plate:focus-within,.plate:hover{border-color:#efb47388;transform:translateY(-2px);transition:.2s ease;box-shadow:0 16px 30px #03111b77,0 0 25px #f1a3580c}
+    .stage{position:relative;aspect-ratio:1;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 57%,#54717652,#1836444a 48%,#142e3a 73%)}
+    .stage:before{content:"";position:absolute;inset:12%;border:1px solid #83bcb42c;border-radius:50%;box-shadow:0 0 0 15px #88bfb208,0 0 0 30px #88bfb208}
+    .stage:after{content:"";position:absolute;width:60%;height:12%;bottom:8%;left:20%;border-radius:50%;background:#05131b55;filter:blur(12px)}
+    .stage img{position:absolute;width:91%;height:91%;inset:4.5%;object-fit:contain;z-index:1;filter:drop-shadow(0 5px 7px #070d20a0)}
+    .stage img.overlay{filter:drop-shadow(0 2px 3px #080e16aa)}
+    .plate-label{padding:11px 13px 14px;border-top:1px solid #71908b36;min-height:61px;display:flex;flex-direction:column;gap:4px}
+    .plate-label strong{font-weight:750;font-size:13px;color:#f6e7d5}
+    .plate-label small{color:#a3babc;font-size:11px}
+    .section-head{display:flex;gap:15px;align-items:center;margin-bottom:13px}
+    .line{height:1px;flex:1;background:linear-gradient(90deg,#d9a66e66,#71919b06)}
+    .tier1 .plate-label{border-top-color:#c482594d}
+    .tier5{border-color:#dca15b88;box-shadow:0 0 30px #faba6120,0 14px 27px #03111b66}
+    .tier5 .stage{background:radial-gradient(circle at 50% 45%,#92664a75,#1b40514d 52%,#102835 75%)}
+    .base{max-width:240px}
+    .crosses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+    .crosses .stage{aspect-ratio:1.3}
+    .crosses .stage img{height:95%;width:72%;inset:2.5% 14%}
+    .badge{position:absolute;z-index:2;top:12px;left:12px;font-weight:850;letter-spacing:.05em;font-size:11px;border:1px solid #e7bd7a88;padding:6px 9px;border-radius:6px;background:#122a37db;color:#f5d49a}
+    .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:12px;color:#b3c6c6}
+    .legend span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#efb56f;margin-right:7px}
+    .a{color:#ffbd7a}.b{color:#ffecae}.c{color:#efa98b}
+    footer{margin-top:50px;font-size:12px;color:#829da5;border-top:1px solid #71909533;padding-top:19px}
+    @media(max-width:950px){.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.crosses{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:570px){main{padding:22px 14px 50px}header{display:block}.seal{display:inline-block;margin-top:16px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.crosses{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.plate-label{padding:9px}.stage img{width:100%;height:100%;inset:0}.crosses .stage img{width:95%;inset:2.5%}.stage:before{display:none}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><div class="eyebrow">Prism Bastion / Tower Art · 08</div>
+      <h1>Жаровая печь</h1>
+      <div class="sub">Кованая медь, янтарный свет и три самостоятельные формы боевой эволюции. 16 полноразмерных моделей, 6 накладок и все финальные сочетания 5–2–0.</div></div>
+    <div class="seal">SVG · 128 × 128<br>16 моделей · 6 накладок</div>
+  </header>
+  <section>
+    <div class="section-head"><h2>Исходная форма</h2><div class="line"></div></div>
+    <div class="gallery"><article class="plate base"><div class="stage"><img src="base.svg" alt="Базовая медная печь"></div><div class="plate-label"><strong>Медное сердце</strong><small>600 кредитов · 9 / 0,8 с</small></div></article></div>
+  </section>
+  <section>
+    <div class="section-head"><h2><span class="a">A</span> / Адская кузня</h2><div class="line"></div></div>
+    <p class="intro">Меха и жаропрочные каналы → сердце горна → перегретый реактор → высокий колосс с тремя пламенными рукавами.</p>
+    <div class="gallery">
+      <article class="plate tier1"><div class="stage"><img src="a1.svg" alt="Меха раздува"></div><div class="plate-label"><strong>01 · Меха раздува</strong><small>300 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="a2.svg" alt="Керамические каналы"></div><div class="plate-label"><strong>02 · Керамические каналы</strong><small>600 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="a3.svg" alt="Сердце горна"></div><div class="plate-label"><strong>03 · Сердце горна</strong><small>1 500 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="a4.svg" alt="Шлаковый реактор"></div><div class="plate-label"><strong>04 · Шлаковый реактор</strong><small>3 600 кредитов</small></div></article>
+      <article class="plate tier5"><div class="stage"><span class="badge">TIER V</span><img src="a5.svg" alt="Инфернальный колосс"></div><div class="plate-label"><strong>05 · Инфернальный колосс</strong><small>9 000 кредитов</small></div></article>
+    </div>
+  </section>
+  <section>
+    <div class="section-head"><h2><span class="b">B</span> / Солнечная вспышка</h2><div class="line"></div></div>
+    <p class="intro">Сбор света линзами → призменная оптика → корона волн → пульсар → парящая сфера над тремя сияющими лепестками.</p>
+    <div class="gallery">
+      <article class="plate tier1"><div class="stage"><img src="b1.svg" alt="Гелиоконцентратор"></div><div class="plate-label"><strong>01 · Гелиоконцентратор</strong><small>330 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="b2.svg" alt="Рассветная оптика"></div><div class="plate-label"><strong>02 · Рассветная оптика</strong><small>660 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="b3.svg" alt="Корона фотонов"></div><div class="plate-label"><strong>03 · Корона фотонов</strong><small>1 650 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="b4.svg" alt="Пульсарная розетка"></div><div class="plate-label"><strong>04 · Пульсарная розетка</strong><small>3 960 кредитов</small></div></article>
+      <article class="plate tier5"><div class="stage"><span class="badge">TIER V</span><img src="b5.svg" alt="Сердце протуберанца"></div><div class="plate-label"><strong>05 · Сердце протуберанца</strong><small>9 900 кредитов</small></div></article>
+    </div>
+  </section>
+  <section>
+    <div class="section-head"><h2><span class="c">C</span> / Пепельный дождь</h2><div class="line"></div></div>
+    <p class="intro">Заряд из искр → магматическая смесь → кратерный ствол → двойные вулканы → три дымящихся жерла и лавовые хвосты.</p>
+    <div class="gallery">
+      <article class="plate tier1"><div class="stage"><img src="c1.svg" alt="Искровой распылитель"></div><div class="plate-label"><strong>01 · Искровой распылитель</strong><small>285 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="c2.svg" alt="Магматическая смесь"></div><div class="plate-label"><strong>02 · Магматическая смесь</strong><small>570 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="c3.svg" alt="Кратерный ствол"></div><div class="plate-label"><strong>03 · Кратерный ствол</strong><small>1 425 кредитов</small></div></article>
+      <article class="plate"><div class="stage"><img src="c4.svg" alt="Двойной вулкан"></div><div class="plate-label"><strong>04 · Двойной вулкан</strong><small>3 420 кредитов</small></div></article>
+      <article class="plate tier5"><div class="stage"><span class="badge">TIER V</span><img src="c5.svg" alt="Вулканический триумвират"></div><div class="plate-label"><strong>05 · Вулканический триумвират</strong><small>8 550 кредитов</small></div></article>
+    </div>
+  </section>
+  <section>
+    <div class="section-head"><h2>Финальные перекрёстные пути</h2><div class="line"></div></div>
+    <p class="intro">Основной полный T5-SVG сохранён. Второй путь подключается отдельной прозрачной накладкой T2 — без замены силуэта.</p>
+    <div class="crosses">
+      <article class="plate"><div class="stage"><span class="badge">5–2–0</span><img src="a5.svg" alt="Колосс с солнечной оптикой"><img class="overlay" src="b2-overlay.svg" alt=""></div><div class="plate-label"><strong>A5 + B2</strong><small>Инфернальный колосс / оптика</small></div></article>
+      <article class="plate"><div class="stage"><span class="badge">5–0–2</span><img src="a5.svg" alt="Колосс с магматическим топливом"><img class="overlay" src="c2-overlay.svg" alt=""></div><div class="plate-label"><strong>A5 + C2</strong><small>Инфернальный колосс / смесь</small></div></article>
+      <article class="plate"><div class="stage"><span class="badge">2–5–0</span><img src="b5.svg" alt="Солнечная сфера с мехами"><img class="overlay" src="a2-overlay.svg" alt=""></div><div class="plate-label"><strong>B5 + A2</strong><small>Сердце протуберанца / меха</small></div></article>
+      <article class="plate"><div class="stage"><span class="badge">0–5–2</span><img src="b5.svg" alt="Солнечная сфера с распылителями"><img class="overlay" src="c2-overlay.svg" alt=""></div><div class="plate-label"><strong>B5 + C2</strong><small>Сердце протуберанца / смесь</small></div></article>
+      <article class="plate"><div class="stage"><span class="badge">2–0–5</span><img src="c5.svg" alt="Тройной вулкан с мехами"><img class="overlay" src="a2-overlay.svg" alt=""></div><div class="plate-label"><strong>C5 + A2</strong><small>Триумвират / меха</small></div></article>
+      <article class="plate"><div class="stage"><span class="badge">0–2–5</span><img src="c5.svg" alt="Тройной вулкан с оптикой"><img class="overlay" src="b2-overlay.svg" alt=""></div><div class="plate-label"><strong>C5 + B2</strong><small>Триумвират / оптика</small></div></article>
+    </div>
+    <div class="legend"><span>Подложка — основной путь T5</span><span>Передний слой — вторичная накладка</span><span>Прозрачный фон во всех SVG</span></div>
+  </section>
+  <section>
+    <div class="section-head"><h2>Накладки вспомогательных веток</h2><div class="line"></div></div>
+    <p class="intro">Отдельные прозрачные SVG для T1 и T2 каждой ветки. Здесь показаны поверх базового корпуса для проверки геометрии и читаемости.</p>
+    <div class="crosses">
+      <article class="plate"><div class="stage"><img src="base.svg" alt="Печь с мехами"><img class="overlay" src="a1-overlay.svg" alt=""></div><div class="plate-label"><strong>A1 · Меха</strong><small>Внешние поршни</small></div></article>
+      <article class="plate"><div class="stage"><img src="base.svg" alt="Печь с каналами"><img class="overlay" src="a2-overlay.svg" alt=""></div><div class="plate-label"><strong>A2 · Каналы</strong><small>Дополнительные трубопроводы</small></div></article>
+      <article class="plate"><div class="stage"><img src="base.svg" alt="Печь с линзами"><img class="overlay" src="b1-overlay.svg" alt=""></div><div class="plate-label"><strong>B1 · Линзы</strong><small>Парные световые ячейки</small></div></article>
+      <article class="plate"><div class="stage"><img src="base.svg" alt="Печь с оптикой"><img class="overlay" src="b2-overlay.svg" alt=""></div><div class="plate-label"><strong>B2 · Оптика</strong><small>Верхние солнечные антенны</small></div></article>
+      <article class="plate"><div class="stage"><img src="base.svg" alt="Печь с золой"><img class="overlay" src="c1-overlay.svg" alt=""></div><div class="plate-label"><strong>C1 · Распылители</strong><small>Боковые пепельные кассеты</small></div></article>
+      <article class="plate"><div class="stage"><img src="base.svg" alt="Печь со смесью"><img class="overlay" src="c2-overlay.svg" alt=""></div><div class="plate-label"><strong>C2 · Смесь</strong><small>Подводящие магматические магистрали</small></div></article>
+    </div>
+  </section>
+  <footer>Prism Bastion · Визуальный атлас игровой постройки · Все рисунки — локальные векторные ресурсы, без внешних зависимостей.</footer>
+</main>
+</body>
+</html>
