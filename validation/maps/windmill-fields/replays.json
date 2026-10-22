@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "mapId": "windmill-fields",
+  "verification": "unverified",
+  "verificationReason": "The frozen-base combat engine, enemy catalog and wave program are stubs; no real victory or budget was observed.",
+  "profile": {
+    "unlockedTowers": ["needle", "cannon", "frost", "beacon", "scatter", "ember", "saw", "venom"],
+    "knowledge": [],
+    "players": [{"id": "solo", "name": "Защитник", "color": "#9ed7af", "connected": true}]
+  },
+  "scenarios": [
+    {
+      "id": "standard-center-ring",
+      "modeId": "standard", "difficulty": "easy", "seed": 400301,
+      "expected": {"won": null, "endingLives": null, "endingCredits": null, "note": "Candidate: central sustained damage, southern crowd control, northern frost. Requires real replay."},
+      "actions": [
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "centerNeedle","tower": "needle","pos": {"x": 452,"y": 444}},
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "northFrost","tower": "frost","pos": {"x": 345,"y": 163}},
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "southScatter","tower": "scatter","pos": {"x": 710,"y": 604}},
+        {"beforeWave": 4,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 6,"tick": 0,"type": "place","slot": "centerCannon","tower": "cannon","pos": {"x": 572,"y": 444}},
+        {"beforeWave": 8,"tick": 0,"type": "upgrade","slot": "northFrost","path": 0},
+        {"beforeWave": 9,"tick": 0,"type": "upgrade","slot": "southScatter","path": 0},
+        {"beforeWave": 10,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 11,"tick": 0,"type": "place","slot": "northEmber","tower": "ember","pos": {"x": 700,"y": 163}},
+        {"beforeWave": 12,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 13,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 15,"tick": 0,"type": "place","slot": "westVenom","tower": "venom","pos": {"x": 165,"y": 411}},
+        {"beforeWave": 17,"tick": 0,"type": "upgrade","slot": "westVenom","path": 1},
+        {"beforeWave": 20,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 21,"tick": 0,"type": "upgrade","slot": "northFrost","path": 0},
+        {"beforeWave": 24,"tick": 0,"type": "upgrade","slot": "southScatter","path": 0},
+        {"beforeWave": 26,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 29,"tick": 0,"type": "upgrade","slot": "northEmber","path": 0},
+        {"beforeWave": 30,"tick": 0,"type": "upgrade","slot": "westVenom","path": 1},
+        {"beforeWave": 33,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 35,"tick": 0,"type": "place","slot": "northBeacon","tower": "beacon","pos": {"x": 925,"y": 164}},
+        {"beforeWave": 36,"tick": 0,"type": "upgrade","slot": "northBeacon","path": 1},
+        {"beforeWave": 38,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 39,"tick": 0,"type": "upgrade","slot": "northBeacon","path": 1}
+      ]
+    },
+    {
+      "id": "half-cash-needle-net",
+      "modeId": "half-cash", "difficulty": "easy", "seed": 400302,
+      "expected": {"won": null, "endingLives": null, "endingCredits": null, "note": "Candidate: low-cost layered needles followed by multi-target defenses. Deficits must be covered by actual layer payouts."},
+      "actions": [
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "centerNeedle","tower": "needle","pos": {"x": 452,"y": 444}},
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "northNeedle","tower": "needle","pos": {"x": 345,"y": 163}},
+        {"beforeWave": 4,"tick": 0,"type": "place","slot": "southNeedle","tower": "needle","pos": {"x": 710,"y": 604}},
+        {"beforeWave": 6,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 9,"tick": 0,"type": "place","slot": "centerScatter","tower": "scatter","pos": {"x": 572,"y": 444}},
+        {"beforeWave": 10,"tick": 0,"type": "upgrade","slot": "northNeedle","path": 1},
+        {"beforeWave": 12,"tick": 0,"type": "place","slot": "northFrost","tower": "frost","pos": {"x": 700,"y": 163}},
+        {"beforeWave": 14,"tick": 0,"type": "upgrade","slot": "centerScatter","path": 0},
+        {"beforeWave": 16,"tick": 0,"type": "place","slot": "westVenom","tower": "venom","pos": {"x": 165,"y": 411}},
+        {"beforeWave": 18,"tick": 0,"type": "upgrade","slot": "westVenom","path": 1},
+        {"beforeWave": 20,"tick": 0,"type": "upgrade","slot": "centerScatter","path": 0},
+        {"beforeWave": 22,"tick": 0,"type": "place","slot": "southCannon","tower": "cannon","pos": {"x": 420,"y": 604}},
+        {"beforeWave": 26,"tick": 0,"type": "upgrade","slot": "southCannon","path": 0},
+        {"beforeWave": 29,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 32,"tick": 0,"type": "upgrade","slot": "southCannon","path": 0},
+        {"beforeWave": 34,"tick": 0,"type": "place","slot": "northBeacon","tower": "beacon","pos": {"x": 925,"y": 164}},
+        {"beforeWave": 36,"tick": 0,"type": "upgrade","slot": "northBeacon","path": 1},
+        {"beforeWave": 39,"tick": 0,"type": "upgrade","slot": "southCannon","path": 0}
+      ]
+    },
+    {
+      "id": "iron-oath-distributed",
+      "modeId": "iron-oath", "difficulty": "easy", "seed": 400303,
+      "expected": {"won": null, "endingLives": null, "endingCredits": null, "note": "Candidate: distributed coverage, strict no-leaks/no-selling/no-economic-support composition; no knowledge."},
+      "actions": [
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "centerNeedle","tower": "needle","pos": {"x": 452,"y": 444}},
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "northFrost","tower": "frost","pos": {"x": 345,"y": 163}},
+        {"beforeWave": 1,"tick": 0,"type": "place","slot": "southNeedle","tower": "needle","pos": {"x": 710,"y": 604}},
+        {"beforeWave": 4,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 5,"tick": 0,"type": "place","slot": "centerCannon","tower": "cannon","pos": {"x": 572,"y": 444}},
+        {"beforeWave": 7,"tick": 0,"type": "upgrade","slot": "northFrost","path": 0},
+        {"beforeWave": 8,"tick": 0,"type": "place","slot": "southScatter","tower": "scatter","pos": {"x": 420,"y": 604}},
+        {"beforeWave": 10,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 11,"tick": 0,"type": "place","slot": "westVenom","tower": "venom","pos": {"x": 165,"y": 411}},
+        {"beforeWave": 13,"tick": 0,"type": "place","slot": "northEmber","tower": "ember","pos": {"x": 700,"y": 163}},
+        {"beforeWave": 16,"tick": 0,"type": "upgrade","slot": "westVenom","path": 1},
+        {"beforeWave": 17,"tick": 0,"type": "place","slot": "northBeacon","tower": "beacon","pos": {"x": 925,"y": 164}},
+        {"beforeWave": 18,"tick": 0,"type": "upgrade","slot": "northBeacon","path": 1},
+        {"beforeWave": 20,"tick": 0,"type": "upgrade","slot": "southScatter","path": 0},
+        {"beforeWave": 22,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 24,"tick": 0,"type": "upgrade","slot": "southScatter","path": 0},
+        {"beforeWave": 27,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 30,"tick": 0,"type": "upgrade","slot": "centerNeedle","path": 1},
+        {"beforeWave": 34,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0},
+        {"beforeWave": 37,"tick": 0,"type": "upgrade","slot": "northBeacon","path": 1},
+        {"beforeWave": 39,"tick": 0,"type": "upgrade","slot": "centerCannon","path": 0}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Поля ветряков — схема карты</title>
+ <style>
+  :root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0c1f27;color:#ebf4e7}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;overflow-x:hidden;background:radial-gradient(ellipse at 50% 0,#244e4b 0,#0b1c25 73%)}
+  header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:13px 28px;border-bottom:1px solid #6f998666;background:#0c252de8}
+  h1{margin:0;color:#f5e1a6;font-size:clamp(17px,2.2vw,25px);font-weight:800;letter-spacing:.02em}
+  .sub{color:#a8c3b7;font-size:12px;margin-left:10px}
+  .options{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13px}
+  label{cursor:pointer;white-space:nowrap}input{accent-color:#e8c66e;vertical-align:middle;margin-right:4px}
+  main{height:calc(100dvh - 91px);min-height:340px;display:grid;place-items:center;padding:13px}
+  .stage{position:relative;width:min(100%,calc((100dvh - 117px)*16/9));max-width:1280px;aspect-ratio:16/9;border:1px solid #7ab0a777;border-radius:13px;overflow:hidden;box-shadow:0 24px 90px #020b0cb3,0 0 0 5px #16363a;}
+  svg{display:block;width:100%;height:100%;background:#23493f}
+  .road{fill:none;stroke:#bca275;stroke-width:46;stroke-linejoin:round;stroke-linecap:round}
+  .roadEdge{fill:none;stroke:#172f34;stroke-opacity:.8;stroke-width:58;stroke-linejoin:round;stroke-linecap:round}
+  .roadTrim{fill:none;stroke:#f0d69a;stroke-width:2;stroke-dasharray:5 17;stroke-linecap:round;opacity:.66}
+  .pad{fill:#7de0aa;fill-opacity:.17;stroke:#b9ffd4;stroke-opacity:.95;stroke-width:3;stroke-dasharray:9 5}
+  .padLabel{fill:#efffe9;font-weight:800;font-size:20px;paint-order:stroke;stroke:#153c40;stroke-width:5px;text-anchor:middle;dominant-baseline:middle}
+  .waterPad{fill:#54e6ee;fill-opacity:.22;stroke:#b8fdff;stroke-width:3;stroke-dasharray:8 5}
+  .waterLabel{fill:#e3ffff;font-size:17px;font-weight:800;text-anchor:middle;paint-order:stroke;stroke:#164d62;stroke-width:4}
+  .nodeLabel{font-weight:800;font-size:19px;fill:#fff7de;paint-order:stroke;stroke:#183637;stroke-width:6}
+  .off{display:none}
+  .legend{position:absolute;right:12px;bottom:11px;max-width:min(41%,285px);background:#0d2833e3;border:1px solid #9ac5b57e;padding:9px 12px;border-radius:8px;color:#e6f6ea;font-size:clamp(9px,1.1vw,13px);line-height:1.5;pointer-events:none}
+  footer{font-size:11px;color:#9ab8ac;text-align:center;margin:0 0 6px}
+  @media(max-width:650px){header{padding:10px 12px}.sub{display:block;margin-left:0}.legend{font-size:9px;right:6px;bottom:6px;padding:5px 6px}}
+ </style>
+</head>
+<body>
+ <header>
+  <div><h1>Поля ветряков <span class="sub">Карта 03 · 1280 × 720 · easy · 40 волн</span></h1></div>
+  <div class="options">
+   <label><input id="showRoad" type="checkbox" checked>Дорога</label>
+   <label><input id="showSites" type="checkbox" checked>Площадки</label>
+   <label><input id="showWater" type="checkbox" checked>Водные точки</label>
+  </div>
+ </header>
+ <main>
+  <div class="stage">
+   <svg viewBox="0 0 1280 720" aria-label="Схема спиральной дороги с местами установки">
+    <image href="./background.svg" width="1280" height="720"/>
+    <g id="roads">
+     <path class="roadEdge" d="M0 80L1150 80 1195 130 1195 638 1140 678 110 678 72 629 72 263 130 244 1025 244 1075 290 1075 505 1030 535 290 535 250 500 250 387 300 358 780 358 830 400 830 421 792 452 670 452"/>
+     <path class="road" d="M0 80L1150 80 1195 130 1195 638 1140 678 110 678 72 629 72 263 130 244 1025 244 1075 290 1075 505 1030 535 290 535 250 500 250 387 300 358 780 358 830 400 830 421 792 452 670 452"/>
+     <path class="roadTrim" d="M0 80L1150 80 1195 130 1195 638 1140 678 110 678 72 629 72 263 130 244 1025 244 1075 290 1075 505 1030 535 290 535 250 500 250 387 300 358 780 358 830 400 830 421 792 452 670 452"/>
+     <g transform="translate(25 80)"><circle r="26" fill="#153b3b" stroke="#bbf3c3" stroke-width="4"/><path d="M-8-13l17 13-17 13" fill="none" stroke="#dfffe0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+     <g transform="translate(670 452)"><circle r="33" fill="#183f43" stroke="#f7dc86" stroke-width="5"/><circle r="23" fill="#9d7945" stroke="#fff4c5" stroke-width="2" stroke-dasharray="5 4"/><path d="M0-15L13 0 0 15-13 0Z" fill="#ffe9a9" stroke="#ffffff" stroke-width="2"/></g>
+     <text x="32" y="45" class="nodeLabel">ВХОД</text><text x="671" y="510" text-anchor="middle" class="nodeLabel">ЭНЕРГОУЗЕЛ · ВЫХОД</text>
+    </g>
+    <g id="sites">
+     <circle class="pad" cx="345" cy="163" r="31"/><text class="padLabel" x="345" y="163">N1</text>
+     <circle class="pad" cx="700" cy="163" r="31"/><text class="padLabel" x="700" y="163">N2</text>
+     <circle class="pad" cx="925" cy="164" r="31"/><text class="padLabel" x="925" y="164">N3</text>
+     <circle class="pad" cx="165" cy="411" r="31"/><text class="padLabel" x="165" y="411">W1</text>
+     <circle class="pad" cx="452" cy="444" r="31"/><text class="padLabel" x="452" y="444">C1</text>
+     <circle class="pad" cx="572" cy="444" r="31"/><text class="padLabel" x="572" y="444">C2</text>
+     <circle class="pad" cx="420" cy="604" r="31"/><text class="padLabel" x="420" y="604">S1</text>
+     <circle class="pad" cx="710" cy="604" r="31"/><text class="padLabel" x="710" y="604">S2</text>
+    </g>
+    <g id="waterSites"><circle class="waterPad" cx="497" cy="301" r="21"/><text class="waterLabel" x="497" y="306">A</text><circle class="waterPad" cx="950" cy="318" r="21"/><text class="waterLabel" x="950" y="323">B</text></g>
+   </svg>
+   <div class="legend"><strong>Кольца обороны</strong><div>N — северная гряда · C — сердце полей · S — южная гряда · W — западный обход</div><div>Пунктир — позиции (не видны в самой игре). Ветряки — запретные участки.</div></div>
+  </div>
+ </main>
+ <footer>Предпросмотр схемы. Путь и места установки берутся из координат карты; в игре путь и башни рисует renderer.</footer>
+ <script>
+  for(const [checkbox,group] of [['showRoad','roads'],['showSites','sites'],['showWater','waterSites']]){
+   document.getElementById(checkbox).addEventListener('change',e=>{
+    document.getElementById(group).classList.toggle('off',!e.currentTarget.checked);
+   });
+  }
+ </script>
+</body>
+</html>
