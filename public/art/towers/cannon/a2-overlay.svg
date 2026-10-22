@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Бастионная пушка">
+<defs>
+ <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#82959a"/><stop offset=".32" stop-color="#40596b"/><stop offset=".69" stop-color="#243c4b"/><stop offset="1" stop-color="#142a38"/></linearGradient>
+ <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe2a0"/><stop offset=".28" stop-color="#dba361"/><stop offset=".68" stop-color="#a9693b"/><stop offset="1" stop-color="#754d39"/></linearGradient>
+ <linearGradient id="bright" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b9"/><stop offset=".5" stop-color="#ffd26f"/><stop offset="1" stop-color="#b97737"/></linearGradient>
+ <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8fff8"/><stop offset=".4" stop-color="#66e4df"/><stop offset="1" stop-color="#237b91"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#b6fbf5" stop-opacity=".65"/><stop offset=".56" stop-color="#61deda" stop-opacity=".21"/><stop offset="1" stop-color="#61deda" stop-opacity="0"/></radialGradient>
+ <radialGradient id="shadow"><stop stop-color="#020d15" stop-opacity=".53"/><stop offset="1" stop-color="#020d15" stop-opacity="0"/></radialGradient>
+ <linearGradient id="barrel" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1e3542"/><stop offset=".24" stop-color="#7a8c94"/><stop offset=".54" stop-color="#405662"/><stop offset=".78" stop-color="#213b49"/><stop offset="1" stop-color="#112630"/></linearGradient>
+ <filter id="halo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.1"/></filter>
+</defs>
+<path d="M26 71L15 78L18 91L39 85M102 71L113 78L110 91L89 85" fill="url(#bronze)" stroke="#132b37" stroke-width="2.4"/><path d="M21 85L10 98" fill="none" stroke="#f4c587" stroke-width="3" stroke-linecap="round" /><path d="M107 85L118 98" fill="none" stroke="#f4c587" stroke-width="3" stroke-linecap="round" /><circle cx="10" cy="98" r="3" fill="#ffdc92" stroke="#132b37" stroke-width="1" /><circle cx="118" cy="98" r="3" fill="#ffdc92" stroke="#132b37" stroke-width="1" />
+</svg>

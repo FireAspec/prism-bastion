@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Бастионная пушка">
+<defs>
+ <linearGradient id="iron" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#82959a"/><stop offset=".32" stop-color="#40596b"/><stop offset=".69" stop-color="#243c4b"/><stop offset="1" stop-color="#142a38"/></linearGradient>
+ <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe2a0"/><stop offset=".28" stop-color="#dba361"/><stop offset=".68" stop-color="#a9693b"/><stop offset="1" stop-color="#754d39"/></linearGradient>
+ <linearGradient id="bright" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b9"/><stop offset=".5" stop-color="#ffd26f"/><stop offset="1" stop-color="#b97737"/></linearGradient>
+ <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8fff8"/><stop offset=".4" stop-color="#66e4df"/><stop offset="1" stop-color="#237b91"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#b6fbf5" stop-opacity=".65"/><stop offset=".56" stop-color="#61deda" stop-opacity=".21"/><stop offset="1" stop-color="#61deda" stop-opacity="0"/></radialGradient>
+ <radialGradient id="shadow"><stop stop-color="#020d15" stop-opacity=".53"/><stop offset="1" stop-color="#020d15" stop-opacity="0"/></radialGradient>
+ <linearGradient id="barrel" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1e3542"/><stop offset=".24" stop-color="#7a8c94"/><stop offset=".54" stop-color="#405662"/><stop offset=".78" stop-color="#213b49"/><stop offset="1" stop-color="#112630"/></linearGradient>
+ <filter id="halo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.1"/></filter>
+</defs>
+
+<ellipse cx="64" cy="103" rx="51" ry="16" fill="url(#shadow)"/>
+
+<rect x="18" y="72" width="23" height="27" rx="8" fill="url(#iron)" stroke="#132b37" stroke-width="3"/><rect x="87" y="72" width="23" height="27" rx="8" fill="url(#iron)" stroke="#132b37" stroke-width="3"/>
+<rect x="21" y="75" width="17" height="19" rx="5" fill="url(#bronze)" stroke="#132b37" stroke-width="2"/><rect x="90" y="75" width="17" height="19" rx="5" fill="url(#bronze)" stroke="#132b37" stroke-width="2"/>
+<circle cx="29" cy="85" r="4" fill="#213744" stroke="#ffd89a" stroke-width="1.7" /><circle cx="99" cy="85" r="4" fill="#213744" stroke="#ffd89a" stroke-width="1.7" />
+<polygon points="64,40 95,49 106,67 101,91 83,103 45,103 27,91 22,67 33,49" fill="url(#bronze)" stroke="#132b37" stroke-width="3.2" stroke-linejoin="round" />
+<polygon points="64,47 90,54 98,69 93,87 80,95 48,95 35,87 30,69 38,54" fill="url(#iron)" stroke="#f3bd79" stroke-width="1.7" stroke-linejoin="round" />
+<path d="M40 58L88 58" fill="none" stroke="#c7d5cb" stroke-width="1.4" stroke-linecap="round" />
+<circle cx="35" cy="68" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" /><circle cx="44" cy="53" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" /><circle cx="84" cy="53" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" /><circle cx="93" cy="68" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" /><circle cx="90" cy="88" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" /><circle cx="38" cy="88" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" /><circle cx="64" cy="98" r="2" fill="#ffda91" stroke="#6b4d38" stroke-width="0.75" />
+<polygon points="45,71 56,58 72,58 83,71 78,88 50,88" fill="url(#bronze)" stroke="#132b37" stroke-width="2.5" stroke-linejoin="round" />
+<circle cx="64" cy="74" r="13" fill="url(#iron)" stroke="#efc58a" stroke-width="2" /><circle cx="64" cy="74" r="6" fill="url(#bright)" stroke="#132b37" stroke-width="1.5" />
+
+
+<rect x="54" y="27" width="20" height="48" rx="4" fill="url(#barrel)" stroke="#132b37" stroke-width="2.8"/>
+<path d="M57 33 V68" stroke="#e4e5d0" stroke-opacity=".5" stroke-width="1.8"/>
+<rect x="52" y="42" width="24" height="8" rx="2" fill="url(#bronze)" stroke="#132b37" stroke-width="1.7"/>
+<rect x="51.2" y="25" width="25.6" height="9" rx="3" fill="url(#bronze)" stroke="#132b37" stroke-width="2.5"/><rect x="55" y="26.5" width="18" height="3" rx="1" fill="#152b38" stroke="#f4bc70" stroke-width="1"/>
+<rect x="48" y="64" width="32" height="17" rx="7" fill="url(#bronze)" stroke="#132b37" stroke-width="3"/><rect x="56" y="69" width="16" height="6" rx="2" fill="url(#iron)" stroke="#ffd18e" stroke-width="1.4"/><circle cx="64" cy="77" r="3.3" fill="#ffe49e" stroke="#593b2e" stroke-width="1.2" />
+</svg>

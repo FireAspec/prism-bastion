@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Бастионная пушка — модели и кросс-пути</title><style>
+:root{color-scheme:dark;font-family:system-ui,Segoe UI,Arial,sans-serif;background:#101e2a;color:#f5e6cd}
+*{box-sizing:border-box}body{max-width:1230px;margin:auto;padding:26px 22px 50px;background:radial-gradient(ellipse at 70% 0%,#254956 0%,transparent 55%)}
+h1{font-size:clamp(25px,4vw,42px);margin:0;letter-spacing:.01em;color:#ffe0ad}p{color:#b9d3d5;line-height:1.6}h2{margin:38px 0 15px;color:#8ee5dc;font-size:22px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:16px}.tile{margin:0;text-align:center;border:1px solid #3e6370;background:linear-gradient(160deg,#294450,#182a36);border-radius:16px;padding:16px 12px 12px;box-shadow:0 8px 20px #07111a65}
+.tile img{display:block;position:relative;margin:0 auto;width:142px;height:142px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 10px 7px #060f1599)}.tile figcaption{margin:10px auto 0;letter-spacing:.02em;font-weight:650}
+.stack{position:relative;width:142px;height:142px;margin:auto}.stack img{position:absolute;top:0;left:0}.stack .overlay{filter:drop-shadow(0 0 3px #f7d99b77)}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:#e9d7ae}.legend span:before{content:'';display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;background:var(--c)}
+@media(prefers-reduced-motion:no-preference){.tile:hover img{transform:translateY(-4px);transition:transform .18s ease}}
+</style></head><body><h1>Бастионная пушка</h1><p>16 полноразмерных SVG-моделей и 6 конечных кросс-путей. Все изображения прозрачные, поворот и крепление — вокруг центра 64×64. Конфигурации T5 показывают отдельный второй путь T2 поверх основного корпуса.</p>
+<div class="legend"><span style="--c:#f3c07d">A: Осада</span><span style="--c:#d99871">B: Картечь</span><span style="--c:#79ede3">C: Шоковый ствол</span></div>
+<h2>База и 15 улучшений</h2><div class="gallery"><figure class="tile"><img src="base.svg" width="128" height="128" alt="База"><figcaption>База</figcaption></figure>
+<figure class="tile"><img src="a1.svg" width="128" height="128" alt="Осада · T1"><figcaption>Осада · T1</figcaption></figure>
+<figure class="tile"><img src="a2.svg" width="128" height="128" alt="Осада · T2"><figcaption>Осада · T2</figcaption></figure>
+<figure class="tile"><img src="a3.svg" width="128" height="128" alt="Осада · T3"><figcaption>Осада · T3</figcaption></figure>
+<figure class="tile"><img src="a4.svg" width="128" height="128" alt="Осада · T4"><figcaption>Осада · T4</figcaption></figure>
+<figure class="tile"><img src="a5.svg" width="128" height="128" alt="Осада · T5"><figcaption>Осада · T5</figcaption></figure>
+<figure class="tile"><img src="b1.svg" width="128" height="128" alt="Картечь · T1"><figcaption>Картечь · T1</figcaption></figure>
+<figure class="tile"><img src="b2.svg" width="128" height="128" alt="Картечь · T2"><figcaption>Картечь · T2</figcaption></figure>
+<figure class="tile"><img src="b3.svg" width="128" height="128" alt="Картечь · T3"><figcaption>Картечь · T3</figcaption></figure>
+<figure class="tile"><img src="b4.svg" width="128" height="128" alt="Картечь · T4"><figcaption>Картечь · T4</figcaption></figure>
+<figure class="tile"><img src="b5.svg" width="128" height="128" alt="Картечь · T5"><figcaption>Картечь · T5</figcaption></figure>
+<figure class="tile"><img src="c1.svg" width="128" height="128" alt="Шок · T1"><figcaption>Шок · T1</figcaption></figure>
+<figure class="tile"><img src="c2.svg" width="128" height="128" alt="Шок · T2"><figcaption>Шок · T2</figcaption></figure>
+<figure class="tile"><img src="c3.svg" width="128" height="128" alt="Шок · T3"><figcaption>Шок · T3</figcaption></figure>
+<figure class="tile"><img src="c4.svg" width="128" height="128" alt="Шок · T4"><figcaption>Шок · T4</figcaption></figure>
+<figure class="tile"><img src="c5.svg" width="128" height="128" alt="Шок · T5"><figcaption>Шок · T5</figcaption></figure></div><h2>Шесть финальных сочетаний 5–2–0</h2><div class="gallery"><figure class="tile cross"><div class="stack"><img src="a5.svg" width="128" height="128" alt="a5"><img class="overlay" src="b2-overlay.svg" width="128" height="128" alt="Накладка b2"></div><figcaption>A5 / B2</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="a5.svg" width="128" height="128" alt="a5"><img class="overlay" src="c2-overlay.svg" width="128" height="128" alt="Накладка c2"></div><figcaption>A5 / C2</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="b5.svg" width="128" height="128" alt="b5"><img class="overlay" src="a2-overlay.svg" width="128" height="128" alt="Накладка a2"></div><figcaption>B5 / A2</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="b5.svg" width="128" height="128" alt="b5"><img class="overlay" src="c2-overlay.svg" width="128" height="128" alt="Накладка c2"></div><figcaption>B5 / C2</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="c5.svg" width="128" height="128" alt="c5"><img class="overlay" src="a2-overlay.svg" width="128" height="128" alt="Накладка a2"></div><figcaption>C5 / A2</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="c5.svg" width="128" height="128" alt="c5"><img class="overlay" src="b2-overlay.svg" width="128" height="128" alt="Накладка b2"></div><figcaption>C5 / B2</figcaption></figure></div><h2>Шесть прозрачных накладок T1/T2</h2><div class="gallery"><figure class="tile cross"><div class="stack"><img src="base.svg" width="128" height="128" alt="Базовая пушка"><img class="overlay" src="a1-overlay.svg" width="128" height="128" alt="Накладка a1"></div><figcaption>A1 · отдельная накладка</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="base.svg" width="128" height="128" alt="Базовая пушка"><img class="overlay" src="a2-overlay.svg" width="128" height="128" alt="Накладка a2"></div><figcaption>A2 · отдельная накладка</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="base.svg" width="128" height="128" alt="Базовая пушка"><img class="overlay" src="b1-overlay.svg" width="128" height="128" alt="Накладка b1"></div><figcaption>B1 · отдельная накладка</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="base.svg" width="128" height="128" alt="Базовая пушка"><img class="overlay" src="b2-overlay.svg" width="128" height="128" alt="Накладка b2"></div><figcaption>B2 · отдельная накладка</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="base.svg" width="128" height="128" alt="Базовая пушка"><img class="overlay" src="c1-overlay.svg" width="128" height="128" alt="Накладка c1"></div><figcaption>C1 · отдельная накладка</figcaption></figure>
+<figure class="tile cross"><div class="stack"><img src="base.svg" width="128" height="128" alt="Базовая пушка"><img class="overlay" src="c2-overlay.svg" width="128" height="128" alt="Накладка c2"></div><figcaption>C2 · отдельная накладка</figcaption></figure></div></body></html>
