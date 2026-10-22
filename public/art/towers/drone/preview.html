@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Prism Bastion — Ангар дронов · 15 улучшений</title>
+ <style>
+  :root {color-scheme:dark; font-family:system-ui,-apple-system,Segoe UI,sans-serif; color:#ebf7f6;
+   background:#071923; font-synthesis:none}
+  * {box-sizing:border-box}
+  body {margin:0;background:radial-gradient(ellipse at 70% -15%,#25505a 0,transparent 50%),
+   linear-gradient(135deg,#092430,#05151e 75%); min-height:100vh}
+  main {max-width:1390px;padding:40px 28px 84px;margin:auto}
+  header {border-bottom:1px solid #42626a;padding-bottom:23px;margin-bottom:30px}
+  .eyebrow {font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:#e6b27e;font-weight:750}
+  h1 {font-size:clamp(30px,4vw,57px);letter-spacing:-.045em;margin:8px 0 8px;font-weight:800}
+  h2 {font-size:22px;letter-spacing:-.02em;margin:38px 0 15px}
+  .intro {max-width:740px;color:#9cbbc0;line-height:1.6;margin:0}
+  .chips {display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .chip {font-size:12px;padding:6px 11px;border:1px solid #49717c;border-radius:30px;color:#9fd1cf}
+  .section-head {display:flex;gap:15px;align-items:baseline;justify-content:space-between}
+  .section-head small {color:#88a9b2}
+  .base-grid {display:grid;grid-template-columns:minmax(180px,245px) 1fr;gap:18px;align-items:stretch}
+  .hero-card {display:flex;flex-direction:column;align-items:center;justify-content:center;
+   border:1px solid #47636a;background:linear-gradient(150deg,#173441,#0d2734);
+   border-radius:15px;padding:18px}
+  .hero-card .art {width:182px;height:182px}
+  .base-note {color:#a4c3c8;padding:20px 0;line-height:1.75}
+  .base-note strong {color:#ffe4af}
+  .path {margin-top:25px}
+  .path-label {display:flex;align-items:baseline;gap:12px;margin:0 0 12px}
+  .path-label b {font-size:21px}
+  .path-label span {color:#a8c0c8;font-size:13px}
+  .path.a {--accent:#6ae9ee}.path.b {--accent:#ffbc78}.path.c {--accent:#9df5bd}
+  .cards {display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+  .card {background:linear-gradient(140deg,#1a3441,#0a222f);border:1px solid #355561;
+   border-radius:14px;overflow:hidden;box-shadow:0 10px 25px #02131b55}
+  .card.final {border-color:var(--accent);box-shadow:inset 0 0 0 1px #ffffff18,0 0 26px #6be7ed17}
+  .art-box {display:flex;justify-content:center;align-items:center;position:relative;min-height:180px;
+   background:radial-gradient(circle at center,#244f5b 2%,#142f3a 48%,#0b2531 80%)}
+  .art-box:before {content:"";position:absolute;width:118px;height:118px;border:1px solid #70b3b225;
+   transform:rotate(45deg);border-radius:20px;pointer-events:none}
+  .art {position:relative;z-index:1;width:165px;height:165px;object-fit:contain}
+  .tier {font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);font-weight:800}
+  .info {padding:13px 14px 16px}
+  .name {font-size:14px;font-weight:750;line-height:1.4;margin:5px 0 10px;min-height:39px}
+  .price {font-variant-numeric:tabular-nums;font-size:12px;color:#bacfd0}
+  .price b {color:#e4c18d}
+  .combined {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .combo {background:linear-gradient(130deg,#14343f,#0c2633);border:1px solid #497078;border-radius:14px;
+   display:grid;grid-template-columns:130px 1fr;gap:9px;padding:15px;min-height:150px;align-items:center}
+  .layers {height:128px;width:128px;position:relative;background:radial-gradient(circle,#284b52,#112e39 72%);
+   border-radius:12px}
+  .layers img {position:absolute;inset:0;width:128px;height:128px;object-fit:contain}
+  .layers img:nth-child(2) {z-index:2}
+  .combo b {display:block;letter-spacing:.02em;font-size:15px;margin:0 0 8px}
+  .combo p {margin:0;color:#9ebdc1;font-size:12px;line-height:1.55}
+  .foot {font-size:12px;line-height:1.7;color:#7f9eaa;margin-top:32px;border-top:1px solid #30535d;padding-top:17px}
+  @media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}.combined{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:660px){main{padding:27px 14px}.cards{grid-template-columns:repeat(2,1fr)}
+    .combined{grid-template-columns:1fr}.base-grid{grid-template-columns:1fr}
+    .art{width:140px;height:140px}.art-box{min-height:153px}.path-label{display:block}
+    .combo{grid-template-columns:130px 1fr}}
+ </style>
+</head>
+<body>
+<main>
+ <header>
+  <div class="eyebrow">Prism Bastion · Tech tower 15/30</div>
+  <h1>Ангар дронов</h1>
+  <p class="intro">Шестнадцать самостоятельных полноразмерных SVG, три игровые специализации, шесть вторичных накладок. Силуэт меняется с каждым улучшением; пятые ступени превращают ангар в три принципиально разные машины.</p>
+  <div class="chips"><span class="chip">128 × 128 · SVG</span><span class="chip">Наземная постройка</span><span class="chip">900 кредитов</span><span class="chip">15 улучшений</span><span class="chip">6 финальных сочетаний</span></div>
+ </header>
+ <h2>Исходная платформа</h2>
+ <div class="base-grid">
+  <div class="hero-card"><img class="art" src="base.svg" alt="Базовый ангар дронов"><span>Базовая модель</span></div>
+  <div class="base-note"><strong>12 урона / 0,8 с / 230 дальности</strong><p>Медно-стальная палуба с энергетическим ядром, открытым пусковым люком и патрульным аппаратом. Улучшения сохраняют узнаваемую технологическую основу, постепенно заменяя её летучими доками, тяжёлым стапелем или антенной решёткой.</p></div>
+ </div>
+ <section class="path a" aria-label="Ветка A">
+  <div class="path-label"><b>А · Рой</b><span>Умножение аппаратов, независимые атаки, орбиты запуска</span></div>
+  <div class="cards">
+   <div class="card"><div class="art-box"><img class="art" src="a1.svg" alt="Парная палуба"></div><div class="info"><div class="tier">Ступень 01</div><div class="name">Парная палуба</div><div class="price"><b>450</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="a2.svg" alt="Стабилизаторы звена"></div><div class="info"><div class="tier">Ступень 02</div><div class="name">Стабилизаторы звена</div><div class="price"><b>900</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="a3.svg" alt="Штурмовое крыло"></div><div class="info"><div class="tier">Ступень 03</div><div class="name">Штурмовое крыло</div><div class="price"><b>2 250</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="a4.svg" alt="Перекрёстный заход"></div><div class="info"><div class="tier">Ступень 04</div><div class="name">Перекрёстный заход</div><div class="price"><b>5 400</b> кредитов</div></div></div>
+   <div class="card final"><div class="art-box"><img class="art" src="a5.svg" alt="Шесть небесных доков"></div><div class="info"><div class="tier">Ступень 05 · Финал</div><div class="name">Шесть небесных доков</div><div class="price"><b>13 500</b> кредитов</div></div></div>
+  </div>
+ </section>
+ <section class="path b" aria-label="Ветка B">
+  <div class="path-label"><b>Б · Тяжёлый борт</b><span>Бронебойные контейнеры, взрывы, осадный «Левиафан»</span></div>
+  <div class="cards">
+   <div class="card"><div class="art-box"><img class="art" src="b1.svg" alt="Бронебойные контейнеры"></div><div class="info"><div class="tier">Ступень 01</div><div class="name">Бронебойные контейнеры</div><div class="price"><b>430</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="b2.svg" alt="Усилитель залпа"></div><div class="info"><div class="tier">Ступень 02</div><div class="name">Усилитель залпа</div><div class="price"><b>855</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="b3.svg" alt="Бомбовый челнок"></div><div class="info"><div class="tier">Ступень 03</div><div class="name">Бомбовый челнок</div><div class="price"><b>2 140</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="b4.svg" alt="Осадные пилоны"></div><div class="info"><div class="tier">Ступень 04</div><div class="name">Осадные пилоны</div><div class="price"><b>5 130</b> кредитов</div></div></div>
+   <div class="card final"><div class="art-box"><img class="art" src="b5.svg" alt="Левиафан стапеля"></div><div class="info"><div class="tier">Ступень 05 · Финал</div><div class="name">Левиафан стапеля</div><div class="price"><b>12 825</b> кредитов</div></div></div>
+  </div>
+ </section>
+ <section class="path c" aria-label="Ветка C">
+  <div class="path-label"><b>В · Ретранслятор</b><span>Обнаружение, метки целей, полевые усилители, связные дроны</span></div>
+  <div class="cards">
+   <div class="card"><div class="art-box"><img class="art" src="c1.svg" alt="Спектральный радар"></div><div class="info"><div class="tier">Ступень 01</div><div class="name">Спектральный радар</div><div class="price"><b>500</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="c2.svg" alt="Лазерные маячки"></div><div class="info"><div class="tier">Ступень 02</div><div class="name">Лазерные маячки</div><div class="price"><b>995</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="c3.svg" alt="Узел сопровождения"></div><div class="info"><div class="tier">Ступень 03</div><div class="name">Узел сопровождения</div><div class="price"><b>2 480</b> кредитов</div></div></div>
+   <div class="card"><div class="art-box"><img class="art" src="c4.svg" alt="Сеть целеуказания"></div><div class="info"><div class="tier">Ступень 04</div><div class="name">Сеть целеуказания</div><div class="price"><b>5 945</b> кредитов</div></div></div>
+   <div class="card final"><div class="art-box"><img class="art" src="c5.svg" alt="Небесная решётка"></div><div class="info"><div class="tier">Ступень 05 · Финал</div><div class="name">Небесная решётка</div><div class="price"><b>14 855</b> кредитов</div></div></div>
+  </div>
+ </section>
+ <h2>Шесть допустимых финальных кросс-путей</h2>
+ <div class="combined">
+  <div class="combo"><div class="layers"><img src="a5.svg" alt="Рой"><img src="b2-overlay.svg" alt="Усилитель залпа"></div><div><b>5–2–0</b><p>Шесть дронов с бронебойными контейнерами и усиленным залпом.</p></div></div>
+  <div class="combo"><div class="layers"><img src="a5.svg" alt="Рой"><img src="c2-overlay.svg" alt="Лазерные маячки"></div><div><b>5–0–2</b><p>Шесть патрульных аппаратов с обнаружением и отметкой целей.</p></div></div>
+  <div class="combo"><div class="layers"><img src="b5.svg" alt="Тяжёлый борт"><img src="a2-overlay.svg" alt="Стабилизаторы"></div><div><b>2–5–0</b><p>«Левиафан» с парной палубой и ускоренными вылетами.</p></div></div>
+  <div class="combo"><div class="layers"><img src="b5.svg" alt="Тяжёлый борт"><img src="c2-overlay.svg" alt="Лазерные маячки"></div><div><b>0–5–2</b><p>Осадный аппарат с радарами, раскрытием и метками.</p></div></div>
+  <div class="combo"><div class="layers"><img src="c5.svg" alt="Ретранслятор"><img src="a2-overlay.svg" alt="Стабилизаторы"></div><div><b>2–0–5</b><p>Антенная решётка с дополнительным разведчиком.</p></div></div>
+  <div class="combo"><div class="layers"><img src="c5.svg" alt="Ретранслятор"><img src="b2-overlay.svg" alt="Усилитель залпа"></div><div><b>0–2–5</b><p>Разведывательная сеть с пробитием брони и щитов.</p></div></div>
+ </div>
+ <div class="foot">Изображения локальные, без внешних ссылок, скриптов, шрифтов и растров. Кросс-пути показывают полную модель T5 ведущей ветки и отдельный SVG вторичной ветки T2. При T1 вторичной ветки используются соответствующие a1-, b1- и c1-overlay.svg.</div>
+</main>
+</body>
+</html>
