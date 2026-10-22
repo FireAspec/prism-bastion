@@ -35,4 +35,4 @@
 - src/render-animations/towers/index.ts:createTowerMotion():EntityMotion.
 - src/render-animations/enemies/index.ts:createEnemyMotion():EntityMotion.
 - src/ui-motion/index.ts:createUIMotion(settings):UIMotion.
-Контракты motion/progression/coop входят в общий frozen boundary. Renderer использует EntityMotion.sample для transform, не создаёт другую физику снарядов. Все credit начисляются через frozen runtime.credit(state,amount), чтобы дробный остаток half-cash и сохранение работали одинаково в engine/combat.
+Контракты motion/progression/coop входят в общий frozen boundary. Renderer использует EntityMotion.sample для transform, не создаёт другую физику снарядов. Все credit начисляются через frozen runtime.credit(state,amount), чтобы дробный остаток half-cash и сохранение работали одинаково в engine/combat. В кооперативе синхронный UIHooks.command может вернуть pending=true и requestId: это только ожидание, не подтверждённая покупка. Успешная анимация запускается после ServerMessage.result с ok=true и соответствующего события/snapshot. Повторная отправка и отказ не запускают успешный эффект.

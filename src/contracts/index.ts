@@ -143,7 +143,7 @@ export type GameAction =
  | {type:'startWave'} | {type:'pause';value:boolean} | {type:'speed';value:1|2|3}
  | {type:'autoStart';value:boolean};
 export type GameCommand = GameAction & {actor?:string;requestId?:string};
-export interface CommandResult {ok:boolean; reason?:string; entity?:string; amount?:number;}
+export interface CommandResult {ok:boolean; reason?:string; entity?:string; amount?:number;pending?:boolean;requestId?:string;}
 export interface CombatModule {
  resolveTower(def:TowerDef,tiers:Tiers):ResolvedTower;
  step(state:GameState,config:GameConfig,dt:number):void;
