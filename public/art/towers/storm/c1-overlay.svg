@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><defs>
+ <linearGradient id="metal" x1=".08" y1=".15" x2=".85" y2=".9"><stop stop-color="#ffe9af"/><stop offset=".3" stop-color="#bb8b59"/><stop offset=".66" stop-color="#5f5a70"/><stop offset="1" stop-color="#29354f"/></linearGradient>
+ <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#397d84"/><stop offset=".5" stop-color="#1e4054"/><stop offset="1" stop-color="#101d38"/></linearGradient>
+ <linearGradient id="sky" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#e8f8ff"/><stop offset=".35" stop-color="#a4d9ff"/><stop offset="1" stop-color="#5da9ed"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#a4d9ff" stop-opacity=".52"/><stop offset=".6" stop-color="#5da9ed" stop-opacity=".14"/><stop offset="1" stop-color="#5da9ed" stop-opacity="0"/></radialGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e8f8ff" stop-opacity=".96"/><stop offset=".4" stop-color="#5da9ed" stop-opacity=".75"/><stop offset="1" stop-color="#133f64" stop-opacity=".95"/></linearGradient>
+ <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e9faff"/><stop offset=".42" stop-color="#a9d8ee"/><stop offset="1" stop-color="#4786a6"/></linearGradient>
+ </defs>
+ <path d="M34 77 Q27.75 85.75 29 90.75 A5 5 0 0 0 39 90.75 Q40.25 85.75 34 77 Z" fill="url(#glass)" stroke="#8cdaf7" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round" /><path d="M94 77 Q87.75 85.75 89 90.75 A5 5 0 0 0 99 90.75 Q100.25 85.75 94 77 Z" fill="url(#glass)" stroke="#8cdaf7" stroke-width="0.8" stroke-linejoin="round" stroke-linecap="round" /><path d="M35 69 L31 76 M93 69 L97 76" fill="none" stroke="#b1e8ff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" opacity="1"/></svg>
