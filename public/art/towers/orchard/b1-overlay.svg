@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Энергосад — вторичная ветка 1">
+<title>Энергосад — вторичная ветка 1</title>
+<defs>
+ <radialGradient id="gold"><stop stop-color="#fffce0"/><stop offset=".33" stop-color="#ffe86d"/><stop offset=".78" stop-color="#eda741"/><stop offset="1" stop-color="#a95339"/></radialGradient>
+ <radialGradient id="mint"><stop stop-color="#f2ffff"/><stop offset=".36" stop-color="#8afce9"/><stop offset=".8" stop-color="#37adc3"/><stop offset="1" stop-color="#12677a"/></radialGradient>
+ <radialGradient id="rose"><stop stop-color="#fff1c4"/><stop offset=".33" stop-color="#fa997a"/><stop offset=".76" stop-color="#b54a5b"/><stop offset="1" stop-color="#712a42"/></radialGradient>
+ <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a5"/><stop offset=".22" stop-color="#d79b65"/><stop offset=".55" stop-color="#8b574d"/><stop offset=".85" stop-color="#e1b16c"/><stop offset="1" stop-color="#85514f"/></linearGradient>
+ <linearGradient id="bark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b78b65"/><stop offset=".4" stop-color="#654b4b"/><stop offset=".78" stop-color="#473d48"/><stop offset="1" stop-color="#bb8b54"/></linearGradient>
+ <radialGradient id="foliage"><stop stop-color="#b6f3a1"/><stop offset=".55" stop-color="#5fa98c"/><stop offset="1" stop-color="#245d67"/></radialGradient>
+ <radialGradient id="darkLeaf"><stop stop-color="#74d8bd"/><stop offset=".48" stop-color="#398a8e"/><stop offset="1" stop-color="#20495a"/></radialGradient>
+ <filter id="soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.2"/></filter>
+ <filter id="shine" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation=".9"/></filter>
+ </defs>
+<path d="M65 99Q95 89 105 106M65 99Q89 102 95 78" fill="none" stroke="#1a6d78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" /><path d="M65 99Q95 89 105 106M65 99Q89 102 95 78" fill="none" stroke="#8affef" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /><g transform="translate(104 84) scale(0.7) rotate(0)"><polygon points="2,-17 -6,-2 0,-2 -4,15 10,-6 3,-6 8,-17" fill="#caffed" stroke="#f4fff3" stroke-width="0.65" stroke-linejoin="round"/></g>
+</svg>
