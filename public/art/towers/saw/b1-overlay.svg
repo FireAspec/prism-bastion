@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Mechanical saw defense tower">
+  <defs>
+    <linearGradient id="steel" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f4e8c7"/><stop offset=".42" stop-color="#76939d"/><stop offset=".78" stop-color="#304e62"/><stop offset="1" stop-color="#c6d1cd"/></linearGradient>
+    <radialGradient id="disc"><stop stop-color="#c6eadf"/><stop offset=".56" stop-color="#587887"/><stop offset="1" stop-color="#183947"/></radialGradient>
+    <linearGradient id="copper"><stop stop-color="#ffdfa2"/><stop offset=".45" stop-color="#b77446"/><stop offset="1" stop-color="#5b352a"/></linearGradient>
+    <linearGradient id="plinth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2bb76"/><stop offset=".45" stop-color="#a76c42"/><stop offset="1" stop-color="#543b35"/></linearGradient>
+    <linearGradient id="side"><stop stop-color="#c78c4e"/><stop offset="1" stop-color="#54332d"/></linearGradient>
+    <radialGradient id="core"><stop stop-color="#f9ffff"/><stop offset=".4" stop-color="#ffd0a0"/><stop offset="1" stop-color="#77332d"/></radialGradient>
+  </defs>
+  <g><path d="M35 86 29 77 25 90 36 96 M93 86 99 77 103 90 92 96" fill="#c88152" stroke="#ffe2ad" stroke-width="1.5"/></g>
+  </svg>
