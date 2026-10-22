@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none" role="img" aria-label="a secondary 1">
+<defs>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0b7"/><stop offset=".23" stop-color="#d7a965"/><stop offset=".55" stop-color="#8d6249"/><stop offset=".82" stop-color="#e6b771"/><stop offset="1" stop-color="#68475a"/></linearGradient>
+  <linearGradient id="steel" x1=".2" y1="0" x2=".7" y2="1"><stop stop-color="#315565"/><stop offset=".45" stop-color="#1a344d"/><stop offset="1" stop-color="#0c2337"/></linearGradient>
+  <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffffff"/><stop offset=".13" stop-color="#dffeff"/><stop offset=".44" stop-color="#7ff9df"/><stop offset=".65" stop-color="#2c8885"/><stop offset="1" stop-color="#102d48"/></linearGradient>
+  <radialGradient id="gem" cx=".35" cy=".25" r=".8"><stop stop-color="#fffef5"/><stop offset=".22" stop-color="#dffeff"/><stop offset=".55" stop-color="#7ff9df"/><stop offset="1" stop-color="#2c8885"/></radialGradient>
+  <linearGradient id="ray" x1=".5" y1="0" x2=".5" y2="1"><stop stop-color="#dffeff" stop-opacity=".08"/><stop offset=".6" stop-color="#7ff9df" stop-opacity=".65"/><stop offset="1" stop-color="#dffeff" stop-opacity="0"/></linearGradient>
+  <filter id="halo" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2.3"/></filter>
+  </defs>
+<g transform="translate(19 81) rotate(-25)"><polygon points="0,-9 5.6000000000000005,0 0,9 -5.6000000000000005,0" fill="url(#glass)" stroke="#1c4054" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="0,-6 2.94,0 0,3.15" fill="#e4fffd" stroke="none" stroke-width="0" stroke-linejoin="round"/><path d="M 0 -4 V 5" fill="none" stroke="#effffe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/></g><g transform="translate(109 81) rotate(25)"><polygon points="0,-9 5.6000000000000005,0 0,9 -5.6000000000000005,0" fill="url(#glass)" stroke="#1c4054" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="0,-6 2.94,0 0,3.15" fill="#e4fffd" stroke="none" stroke-width="0" stroke-linejoin="round"/><path d="M 0 -4 V 5" fill="none" stroke="#effffe" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="1"/></g>
+      <path d="M 23 74 Q 34 65 42 71 M 105 74 Q 94 65 86 71" fill="none" stroke="#dbfff6" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+</svg>
