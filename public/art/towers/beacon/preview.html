@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сигнальный фонарь — атлас моделей</title>
+<style>
+ :root{color-scheme:dark; font-family:system-ui,-apple-system,Segoe UI,sans-serif; background:#0e1c2a;color:#e9eef0}
+ body{max-width:1270px;margin:0 auto;padding:36px 28px 75px;background:radial-gradient(circle at 50% 4%,#284650 0,transparent 42%)}
+ header{border-bottom:1px solid #405965;padding-bottom:24px;margin-bottom:30px}
+ h1{font-size:clamp(27px,3.7vw,43px);letter-spacing:.025em;color:#ffe0a4;margin:0 0 8px}
+ p{color:#aac3cd;line-height:1.55;max-width:75ch}
+ h2{font-size:23px;font-weight:650;margin:32px 0 17px}
+ .tag{display:inline-block;border:1px solid #768c87;border-radius:99px;padding:4px 11px;color:#d8e5da;font-size:12px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:15px}
+ .panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}
+ .tile{--tint:#edbd6c;position:relative;background:linear-gradient(155deg,#273d4b,#172b39 76%);border:1px solid #4f6b76;border-radius:18px;padding:13px 12px 16px;min-width:0;box-shadow:inset 0 1px #61798355,0 8px 22px #06131a50}
+ .tile.a{--tint:#ffcd79}.tile.b{--tint:#88e8e6}.tile.c{--tint:#eda7df}
+ .stage{background:radial-gradient(ellipse at 50% 66%,#49636c 0,#1e3442 52%,#172c38 71%);border-radius:12px;aspect-ratio:1.14;display:grid;place-items:center;position:relative;overflow:hidden}
+ .stage:after{content:'';position:absolute;width:74%;height:11%;bottom:12%;left:13%;background:#0e1b25;border-radius:50%;filter:blur(7px);opacity:.5}
+ .stage img{width:min(100%,188px);height:100%;object-fit:contain;position:relative;z-index:1;filter:drop-shadow(0 7px 4px #08192380)}
+ .stage img.overlay{position:absolute;inset:0;margin:auto;z-index:2}
+ .tile small{display:block;color:var(--tint);font-size:12px;letter-spacing:.10em;text-transform:uppercase;margin:11px 0 4px}
+ .tile strong{font-size:15px;font-weight:640;display:block;line-height:1.34}
+ .tile .detail{font-size:12px;color:#acc0c9;line-height:1.42;margin-top:5px}
+ .panel.end{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+ .panel.end .stage{aspect-ratio:1.55}
+ footer{margin-top:35px;color:#839fac;font-size:13px}
+ @media(prefers-reduced-motion:no-preference){.tile:hover .stage img:not(.overlay){transform:translateY(-3px) scale(1.055);transition:transform .3s ease}}
+</style>
+</head>
+<body>
+<header>
+ <span class="tag">Prism Bastion · 23 / beacon</span>
+ <h1>Сигнальный фонарь</h1>
+ <p>Полные векторные модели размером 128 × 128. Ветки сохраняют медно-стеклянное ядро, но раскрывают собственные силуэты: золотая корона, четыре оптических сканера и часовой резонатор.</p>
+</header>
+<h2>Начальная постройка</h2>
+<div class="panel"><article class="tile"><div class="stage"><img src="base.svg" alt="Начальная модель сигнального фонаря"></div><small>600 кредитов</small><strong>Сигнальный фонарь</strong><div class="detail">+4% урона соседей · радиус 160</div></article></div>
+<h2 style="color:#ffcd79">A · Командный свет</h2>
+<div class="panel">
+ <article class="tile a"><div class="stage"><img src="a1.svg" alt="Знак отличия"></div><small>T1 · 300</small><strong>Знак отличия</strong><div class="detail">Пробивание брони +1</div></article>
+ <article class="tile a"><div class="stage"><img src="a2.svg" alt="Сдвоенный рефлектор"></div><small>T2 · 600</small><strong>Сдвоенный рефлектор</strong><div class="detail">Урон +8%</div></article>
+ <article class="tile a"><div class="stage"><img src="a3.svg" alt="Световой штаб"></div><small>T3 · 1500</small><strong>Световой штаб</strong><div class="detail">Урон +18%, пробивание +2</div></article>
+ <article class="tile a"><div class="stage"><img src="a4.svg" alt="Солнечные регалии"></div><small>T4 · 3600</small><strong>Солнечные регалии</strong><div class="detail">Урон +28%, пробивание +4</div></article>
+ <article class="tile a"><div class="stage"><img src="a5.svg" alt="Корона первого света"></div><small>T5 · 9000</small><strong>Корона первого света</strong><div class="detail">Урон +40%, активный натиск</div></article>
+</div>
+<h2 style="color:#88e8e6">B · Дозор</h2>
+<div class="panel">
+ <article class="tile b"><div class="stage"><img src="b1.svg" alt="Линза дозорного"></div><small>T1 · 300</small><strong>Линза дозорного</strong><div class="detail">Обнаружение скрытых</div></article>
+ <article class="tile b"><div class="stage"><img src="b2.svg" alt="Телескопический штатив"></div><small>T2 · 600</small><strong>Телескопический штатив</strong><div class="detail">Дальность +6%</div></article>
+ <article class="tile b"><div class="stage"><img src="b3.svg" alt="Перекрёстный надзор"></div><small>T3 · 1500</small><strong>Перекрёстный надзор</strong><div class="detail">Обнаружение 230, дальность +14%</div></article>
+ <article class="tile b"><div class="stage"><img src="b4.svg" alt="Картограф горизонта"></div><small>T4 · 3600</small><strong>Картограф горизонта</strong><div class="detail">Обнаружение 285, дальность +24%</div></article>
+ <article class="tile b"><div class="stage"><img src="b5.svg" alt="Четыре зенита"></div><small>T5 · 9000</small><strong>Четыре зенита</strong><div class="detail">4 линзы, маркирующий разведимпульс</div></article>
+</div>
+<h2 style="color:#eda7df">C · Боевой ритм</h2>
+<div class="panel">
+ <article class="tile c"><div class="stage"><img src="c1.svg" alt="Медный маятник"></div><small>T1 · 285</small><strong>Медный маятник</strong><div class="detail">Темп +6%</div></article>
+ <article class="tile c"><div class="stage"><img src="c2.svg" alt="Счётная шестерня"></div><small>T2 · 570</small><strong>Счётная шестерня</strong><div class="detail">Скидка +3%</div></article>
+ <article class="tile c"><div class="stage"><img src="c3.svg" alt="Ритм эскадры"></div><small>T3 · 1425</small><strong>Ритм эскадры</strong><div class="detail">Темп +16%, скидка +5%</div></article>
+ <article class="tile c"><div class="stage"><img src="c4.svg" alt="Синхронный привод"></div><small>T4 · 3420</small><strong>Синхронный привод</strong><div class="detail">Темп +32%, скидка +7,5%</div></article>
+ <article class="tile c"><div class="stage"><img src="c5.svg" alt="Метроном резонанса"></div><small>T5 · 8550</small><strong>Метроном резонанса</strong><div class="detail">Темп +50%, замедляющий импульс</div></article>
+</div>
+<h2>Финальные сочетания · 5–2–0</h2>
+<p>Основная специализация всегда остаётся полноразмерной моделью пятого тира. Вторичная ветка первого или второго тира добавляет отдельный прозрачный слой поверх неё.</p>
+<div class="panel end">
+ <article class="tile a"><div class="stage"><img src="a5.svg" alt="Командная корона"><img class="overlay" src="b2-overlay.svg" alt="Накладка дозора"></div><small>5A / 2B / 0C</small><strong>Корона + телескопическая оптика</strong></article>
+ <article class="tile a"><div class="stage"><img src="a5.svg" alt="Командная корона"><img class="overlay" src="c2-overlay.svg" alt="Накладка ритма"></div><small>5A / 0B / 2C</small><strong>Корона + счётный привод</strong></article>
+ <article class="tile b"><div class="stage"><img src="b5.svg" alt="Четыре сканера"><img class="overlay" src="a2-overlay.svg" alt="Накладка командования"></div><small>2A / 5B / 0C</small><strong>Сканеры + командные зеркала</strong></article>
+ <article class="tile b"><div class="stage"><img src="b5.svg" alt="Четыре сканера"><img class="overlay" src="c2-overlay.svg" alt="Накладка ритма"></div><small>0A / 5B / 2C</small><strong>Сканеры + счётный привод</strong></article>
+ <article class="tile c"><div class="stage"><img src="c5.svg" alt="Метроном"><img class="overlay" src="a2-overlay.svg" alt="Накладка командования"></div><small>2A / 0B / 5C</small><strong>Метроном + командные зеркала</strong></article>
+ <article class="tile c"><div class="stage"><img src="c5.svg" alt="Метроном"><img class="overlay" src="b2-overlay.svg" alt="Накладка дозора"></div><small>0A / 2B / 5C</small><strong>Метроном + телескопическая оптика</strong></article>
+</div>
+<footer>Всё изображено автономными SVG без внешних ресурсов. Фон и подписи используются только в этом атласе, а игровые модели прозрачны.</footer>
+</body>
+</html>
