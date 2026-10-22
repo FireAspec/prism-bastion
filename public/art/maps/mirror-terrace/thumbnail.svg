@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="288" viewBox="0 0 512 288" role="img" aria-label="Зеркальные террасы — миниатюра карты">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#375e5d"/><stop offset=".65" stop-color="#1b484c"/><stop offset="1" stop-color="#102d38"/></linearGradient>
+ <linearGradient id="pool" x2="0" y2="1"><stop stop-color="#3795a5"/><stop offset="1" stop-color="#17566e"/></linearGradient>
+ <linearGradient id="shade" x2="0" y2="1"><stop stop-color="#091d28" stop-opacity="0"/><stop offset="1" stop-color="#071721" stop-opacity=".93"/></linearGradient>
+ <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<rect width="512" height="288" fill="url(#sky)"/>
+<path d="M0 0H512V101Q252 89 0 104Z" fill="#436e61"/>
+<path d="M0 107Q256 96 512 105V198Q256 206 0 194Z" fill="#30605a"/>
+<path d="M0 202Q256 191 512 205V288H0Z" fill="#20484b"/>
+<path d="M0 102Q265 88 512 103M0 199Q272 192 512 201" fill="none" stroke="#ceb586" stroke-width="3" opacity=".7"/>
+<path d="M34 135L44 122 84 118 112 131 117 150 106 170 63 174 36 163Z" fill="url(#pool)" stroke="#bbd5c2" stroke-width="3"/>
+<path d="M383 140L398 132 450 135 469 147 459 168 408 173 387 162Z" fill="url(#pool)" stroke="#bbd5c2" stroke-width="3"/>
+<g fill="#284349" stroke="#d2bd92" stroke-width="2">
+ <path d="M242 32h37l5 14-9 13h-28l-11-13z"/>
+ <path d="M130 31l20 5 5 12-15 9-16-7z"/>
+ <path d="M405 103l30 3 8 13-15 8-27-6z"/>
+ <path d="M238 246l8-10h27l12 13-7 16h-32z"/>
+</g>
+<!-- The paths are a thumbnail-only illustration; the gameplay background never paints roads. -->
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M0 66L47 66 76 83 123 83 154 66 197 66 229 96 229 133 260 144 290 162 290 209 337 228 389 228 423 209 466 209 512 210"
+  stroke="#071f29" stroke-width="14"/>
+ <path d="M0 224L40 224 72 203 114 203 142 224 180 224 212 187 212 159 260 144 303 123 303 74 343 56 394 56 433 77 472 77 512 77"
+  stroke="#071f29" stroke-width="14"/>
+ <path d="M0 66L47 66 76 83 123 83 154 66 197 66 229 96 229 133 260 144 290 162 290 209 337 228 389 228 423 209 466 209 512 210"
+  stroke="#d8b47d" stroke-width="8"/>
+ <path d="M0 224L40 224 72 203 114 203 142 224 180 224 212 187 212 159 260 144 303 123 303 74 343 56 394 56 433 77 472 77 512 77"
+  stroke="#a8d1cd" stroke-width="8"/>
+</g>
+<circle cx="260" cy="144" r="16" fill="#ffe1ad" opacity=".55" filter="url(#glow)"/>
+<path d="M260 131l11 13-11 13-11-13z" fill="#f6d292" stroke="#fff3c7" stroke-width="2"/>
+<g fill="#d9e6c4"><circle cx="172" cy="125" r="3"/><circle cx="340" cy="160" r="4"/><circle cx="82" cy="37" r="4"/><circle cx="465" cy="41" r="3"/></g>
+<rect y="215" width="512" height="73" fill="url(#shade)"/>
+<text x="27" y="258" font-family="sans-serif" font-size="25" font-weight="700" letter-spacing="1.3" fill="#f7e4b5">ЗЕРКАЛЬНЫЕ ТЕРРАСЫ</text>
+<text x="28" y="279" font-family="sans-serif" font-size="11" fill="#b8d4cc" letter-spacing="2.5">14 · САДОВЫЙ ЯРУС · ДВЕ ДОРОГИ</text>
+</svg>
