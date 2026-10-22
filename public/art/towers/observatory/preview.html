@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Обсерватория — галерея моделей</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,'Segoe UI',sans-serif;background:#091e29;color:#e6ede9}
+*{box-sizing:border-box}body{max-width:1420px;margin:auto;padding:28px 24px 50px;background:radial-gradient(ellipse at 70% 0%,#1b4653 0%,transparent 42%)}
+h1{font-size:clamp(28px,4vw,44px);letter-spacing:.02em;margin:0}h2{margin:28px 0 12px;color:#f7d798;font-size:22px}
+p{color:#a5c0c8;line-height:1.5}.lead{max-width:680px}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:16px}
+.card{background:linear-gradient(155deg,#173747,#112735);border:1px solid #466572;border-radius:17px;padding:12px;box-shadow:0 8px 22px #05151d88;transition:transform .2s ease,border-color .2s ease}
+.card:hover{transform:translateY(-3px);border-color:#e2b878}
+.tile{position:relative;display:grid;place-items:center;aspect-ratio:1;background:radial-gradient(circle at 50% 45%,#285163 0%,#163744 48%,#0b2431 73%);border:1px solid #3d6770;border-radius:12px;overflow:hidden}
+.tile:after{content:"";position:absolute;inset:10%;border:1px dashed #4a7f8790;border-radius:100%;pointer-events:none}
+.tile img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0;image-rendering:auto;filter:drop-shadow(0 5px 4px #061b22a0)}
+.tile img.overlay{filter:drop-shadow(0 0 4px #f5dcad)}
+.name{margin-top:10px;font-size:15px;font-weight:700}.sub{font-size:12px;color:#a4c7c7;margin-top:3px}
+.key{display:inline-block;border:1px solid #5b8086;padding:4px 9px;border-radius:8px;margin:2px 0 16px;color:#aacbd0;font-size:12px}
+.a{color:#8af5e8}.b{color:#ffd182}.c{color:#d4a8ff}
+@media(prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<h1>Обсерватория <span style="color:#8af3e4">✦</span></h1>
+<p class="lead">Полные векторные модели 128 × 128, прозрачный фон. Теплая медь, светящиеся стёкла и три разные архитектуры. Конфигурации 5–2–0 показаны с настоящими вторичными накладками.</p>
+<div class="key">22 SVG: база · 15 ступеней · 6 накладок</div>
+<section><h2>Начальная станция</h2><div class="gallery">
+ <article class="card"><div class="tile"><img src="base.svg" alt="Базовая обсерватория"></div><div class="name">Основание</div><div class="sub">Дозорная труба, кристалл обнаружения</div></article>
+</div></section>
+<section><h2 class="a">A · Всевидящее око</h2><div class="gallery">
+ <article class="card"><div class="tile"><img src="a1.svg" alt="А1"></div><div class="name">A1 · Окуляр</div><div class="sub">Дополнительный оптический модуль</div></article>
+ <article class="card"><div class="tile"><img src="a2.svg" alt="А2"></div><div class="name">A2 · Ночные линзы</div><div class="sub">Боковая линза и башенная оптика</div></article>
+ <article class="card"><div class="tile"><img src="a3.svg" alt="А3"></div><div class="name">A3 · Дозор</div><div class="sub">Высокая узкая шахта наблюдения</div></article>
+ <article class="card"><div class="tile"><img src="a4.svg" alt="А4"></div><div class="name">A4 · Меридиан</div><div class="sub">Раскрывающиеся защитные крылья</div></article>
+ <article class="card"><div class="tile"><img src="a5.svg" alt="А5"></div><div class="name">A5 · Небосвод</div><div class="sub">Сегментированный купол, яркий глаз</div></article>
+</div></section>
+<section><h2 class="b">B · Балистика</h2><div class="gallery">
+ <article class="card"><div class="tile"><img src="b1.svg" alt="B1"></div><div class="name">B1 · Дуги</div><div class="sub">Первые измерительные дуги</div></article>
+ <article class="card"><div class="tile"><img src="b2.svg" alt="B2"></div><div class="name">B2 · Поправки</div><div class="sub">Парные обсервационные кольца</div></article>
+ <article class="card"><div class="tile"><img src="b3.svg" alt="B3"></div><div class="name">B3 · Параллакс</div><div class="sub">Вращающийся гравированный лимб</div></article>
+ <article class="card"><div class="tile"><img src="b4.svg" alt="B4"></div><div class="name">B4 · Точность</div><div class="sub">Два встречных прицельных кольца</div></article>
+ <article class="card"><div class="tile"><img src="b5.svg" alt="B5"></div><div class="name">B5 · Астролябия</div><div class="sub">Многокольцевой инструмент, два излучателя</div></article>
+</div></section>
+<section><h2 class="c">C · Звёздная печать</h2><div class="gallery">
+ <article class="card"><div class="tile"><img src="c1.svg" alt="C1"></div><div class="name">C1 · Созвездия</div><div class="sub">Парящая проекционная карта</div></article>
+ <article class="card"><div class="tile"><img src="c2.svg" alt="C2"></div><div class="name">C2 · Эфемериды</div><div class="sub">Орбитальные рамки и звёзды</div></article>
+ <article class="card"><div class="tile"><img src="c3.svg" alt="C3"></div><div class="name">C3 · Именная</div><div class="sub">Многолистная звёздная пластина</div></article>
+ <article class="card"><div class="tile"><img src="c4.svg" alt="C4"></div><div class="name">C4 · Венец</div><div class="sub">Сеть созвездий вокруг центра</div></article>
+ <article class="card"><div class="tile"><img src="c5.svg" alt="C5"></div><div class="name">C5 · Тысяча звёзд</div><div class="sub">Полная астральная карта, три печати</div></article>
+</div></section>
+<section><h2>Финальные сочетания 5–2–0</h2><p>Каждая композиция сохраняет силуэт пятой ступени основной ветки и добавляет реальную накладку второй ветки второго тира.</p>
+<div class="gallery">
+ <article class="card"><div class="tile"><img src="a5.svg" alt="A5+B2"><img class="overlay" src="b2-overlay.svg" alt="Накладка B2"></div><div class="name">A5 + B2</div><div class="sub">Глаз и золотой баллистический визир</div></article>
+ <article class="card"><div class="tile"><img src="a5.svg" alt="A5+C2"><img class="overlay" src="c2-overlay.svg" alt="Накладка C2"></div><div class="name">A5 + C2</div><div class="sub">Глаз и звёздная печать</div></article>
+ <article class="card"><div class="tile"><img src="b5.svg" alt="B5+A2"><img class="overlay" src="a2-overlay.svg" alt="Накладка A2"></div><div class="name">B5 + A2</div><div class="sub">Астролябия с ночной линзой</div></article>
+ <article class="card"><div class="tile"><img src="b5.svg" alt="B5+C2"><img class="overlay" src="c2-overlay.svg" alt="Накладка C2"></div><div class="name">B5 + C2</div><div class="sub">Астролябия со звёздным знаком</div></article>
+ <article class="card"><div class="tile"><img src="c5.svg" alt="C5+A2"><img class="overlay" src="a2-overlay.svg" alt="Накладка A2"></div><div class="name">C5 + A2</div><div class="sub">Карта с дополнительной оптикой</div></article>
+ <article class="card"><div class="tile"><img src="c5.svg" alt="C5+B2"><img class="overlay" src="b2-overlay.svg" alt="Накладка B2"></div><div class="name">C5 + B2</div><div class="sub">Карта с баллистическим визиром</div></article>
+</div></section>
+</body>
+</html>
