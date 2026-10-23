@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Black Lighthouse: midnight estuary, copper seawalls, three approach shores and a besieged beacon">
+  <defs>
+    <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#1d4145"/><stop offset=".45" stop-color="#1b3338"/><stop offset="1" stop-color="#15252f"/>
+    </linearGradient>
+    <radialGradient id="mist" cx=".8" cy=".48" r=".8">
+      <stop stop-color="#426b65" stop-opacity=".28"/><stop offset=".55" stop-color="#21484e" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#0a1a25" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sea" x1=".2" y1="0" x2=".8" y2="1">
+      <stop stop-color="#081c32"/><stop offset=".45" stop-color="#0c3040"/><stop offset="1" stop-color="#163f48"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#667b77"/><stop offset=".48" stop-color="#33474b"/><stop offset="1" stop-color="#1b2a32"/>
+    </linearGradient>
+    <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#f7d394"/><stop offset=".5" stop-color="#ad7050"/><stop offset="1" stop-color="#553e40"/>
+    </linearGradient>
+    <radialGradient id="lantern">
+      <stop stop-color="#fff9d5" stop-opacity=".97"/><stop offset=".12" stop-color="#ffdc8a" stop-opacity=".85"/>
+      <stop offset=".34" stop-color="#ffaf5d" stop-opacity=".32"/><stop offset="1" stop-color="#f3a34b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="water-lines" width="75" height="44" patternUnits="userSpaceOnUse" patternTransform="rotate(-9)">
+      <path d="M5 13q12-5 26 0m16 17q9-4 20-1" fill="none" stroke="#9cc6bb" stroke-opacity=".15" stroke-width="1.8" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="land-grain" width="79" height="71" patternUnits="userSpaceOnUse">
+      <path d="M4 33l13-3m34-16 19 6M18 61l12-4" stroke="#b9b18b" stroke-opacity=".09" stroke-width="1.6"/>
+      <circle cx="56" cy="58" r="1.6" fill="#d2b47b" opacity=".12"/>
+      <circle cx="32" cy="9" r=".9" fill="#a0bcb4" opacity=".19"/>
+    </pattern>
+  </defs>
+
+  <!-- Terrain stays under the runtime's road and entity layers. -->
+  <rect width="1280" height="720" fill="url(#land)"/>
+  <rect width="1280" height="720" fill="url(#land-grain)"/>
+  <rect width="1280" height="720" fill="url(#mist)"/>
+  <g fill="none" stroke="#b4aa7e" stroke-opacity=".10" stroke-width="2">
+    <path d="M25 122Q210 54 380 83T680 115T997 93"/>
+    <path d="M40 151Q235 79 420 118T753 127T1019 118"/>
+    <path d="M205 287Q385 219 576 258T864 237"/>
+    <path d="M220 302Q407 239 573 277T837 249"/>
+    <path d="M17 426Q202 386 322 457T622 390"/>
+    <path d="M207 692Q410 652 558 682T901 607"/>
+  </g>
+
+  <!-- The boundary of each water polygon matches MapDef.water. -->
+  <g fill="url(#sea)" stroke="#6aa6a3" stroke-opacity=".52" stroke-width="5" stroke-linejoin="round">
+    <path d="M0 0H1280V99L1180 87 1055 104 940 74 810 66 700 42 580 55 440 32 285 65 132 47 0 56Z"/>
+    <path d="M0 178L198 182 247 204 237 259 143 270 0 262Z"/>
+    <path d="M398 433L477 420 538 442 610 413 686 424 724 462 692 502 610 493 535 504 462 480 398 494Z"/>
+    <path d="M1000 516L1060 522 1130 510 1280 482V720H826L835 662 915 610 955 562Z"/>
+    <path d="M0 675L170 687 312 697 440 681 504 700 504 720H0Z"/>
+  </g>
+  <g fill="url(#water-lines)" pointer-events="none">
+    <path d="M0 0H1280V99L1180 87 1055 104 940 74 810 66 700 42 580 55 440 32 285 65 132 47 0 56Z"/>
+    <path d="M0 178L198 182 247 204 237 259 143 270 0 262Z"/>
+    <path d="M398 433L477 420 538 442 610 413 686 424 724 462 692 502 610 493 535 504 462 480 398 494Z"/>
+    <path d="M1000 516L1060 522 1130 510 1280 482V720H826L835 662 915 610 955 562Z"/>
+    <path d="M0 675L170 687 312 697 440 681 504 700 504 720H0Z"/>
+  </g>
+  <g stroke="#c3ac78" stroke-opacity=".26" stroke-width="2" fill="none">
+    <path d="M20 276Q125 298 245 274"/>
+    <path d="M397 508Q534 534 690 518"/>
+    <path d="M829 640Q903 570 967 538"/>
+    <path d="M1054 112Q1128 133 1224 116"/>
+  </g>
+
+  <!-- Impassable scenery is described by MapDef.blocked, not by alpha masks. -->
+  <g stroke="#a8987a" stroke-opacity=".65" stroke-width="4" stroke-linejoin="round">
+    <path d="M1090 165L1173 155 1218 196 1200 284 1150 305 1085 276 1062 220Z" fill="url(#stone)"/>
+    <path d="M256 154L304 151 324 178 300 198 248 188Z" fill="#3a4d4e"/>
+    <path d="M65 484L144 479 182 509 170 543 96 546Z" fill="#354d4f"/>
+    <path d="M535 606L595 608 618 661 578 684 521 655Z" fill="#304449"/>
+    <path d="M912 102L964 96 995 120 989 154 931 151Z" fill="#334750"/>
+  </g>
+  <!-- Maritime wreck and fortifications reinforce the shape of the obstacles. -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M261 165L296 160 312 177 288 191 259 181Z" stroke="#b58b60" stroke-width="3"/>
+    <path d="M279 163L287 182m-22-6 40 4" stroke="#dfa66c" stroke-opacity=".7" stroke-width="2"/>
+    <path d="M94 492l54 25-24 17-41-16m30-27-11 42" stroke="#a58f76" stroke-width="3"/>
+    <path d="M542 628l51 17-19 27m-9-59 7 33m17-21-48 31" stroke="#8c9690" stroke-width="3"/>
+    <path d="M931 112l45 10-4 20-40-3z" stroke="#b0a17c" stroke-width="3"/>
+  </g>
+
+  <!-- Lighthouse: a readable landmark above the final road, not a fake building slot. -->
+  <g transform="translate(1141 231)">
+    <circle r="100" fill="url(#lantern)" opacity=".62"/>
+    <path d="M-33-23L-76-59M31-27L71-66M-22 30L-63 66M22 29L70 56" stroke="#f3bb6e" stroke-opacity=".30" stroke-width="4"/>
+    <circle r="65" fill="none" stroke="#f2ba7a" stroke-opacity=".29" stroke-dasharray="5 12" stroke-width="4"/>
+    <circle r="42" fill="#1a2b35" stroke="#b88359" stroke-width="7"/>
+    <circle r="33" fill="#293e41" stroke="#ffe2a0" stroke-opacity=".64" stroke-width="2"/>
+    <path d="M0-32V32M-32 0H32" stroke="#b67e58" stroke-width="7"/>
+    <circle r="19" fill="url(#copper)" stroke="#1a3439" stroke-width="3"/>
+    <circle r="11" fill="#ffefba"/>
+    <circle r="4" fill="#fffdf0"/>
+    <path d="M-51-48l17 8m80-8-19 12M-51 46l16-12m75 14-14-12" stroke="#eed9ab" opacity=".45" stroke-width="3"/>
+  </g>
+  <path d="M1108 306l-19 24 14 3 15-19m51-4 20 21-13 2-16-14" fill="#a36e52" opacity=".57"/>
+
+  <!-- Dry hardpoints: unobtrusive brass inlays marking defendable ground. -->
+  <g fill="none" stroke="#edb97b" stroke-opacity=".43" stroke-width="2">
+    <circle cx="736" cy="103" r="28" stroke-dasharray="7 10"/>
+    <circle cx="300" cy="230" r="31" stroke-dasharray="7 10"/>
+    <circle cx="518" cy="276" r="30" stroke-dasharray="7 10"/>
+    <circle cx="690" cy="260" r="30" stroke-dasharray="7 10"/>
+    <circle cx="351" cy="514" r="30" stroke-dasharray="7 10"/>
+    <circle cx="788" cy="411" r="29" stroke-dasharray="7 10"/>
+    <circle cx="1012" cy="235" r="31" stroke-dasharray="7 10"/>
+    <circle cx="1055" cy="463" r="31" stroke-dasharray="7 10"/>
+  </g>
+  <g fill="#e5bd82" opacity=".55">
+    <circle cx="736" cy="103" r="3"/><circle cx="300" cy="230" r="3"/>
+    <circle cx="518" cy="276" r="3"/><circle cx="690" cy="260" r="3"/>
+    <circle cx="351" cy="514" r="3"/><circle cx="788" cy="411" r="3"/>
+    <circle cx="1012" cy="235" r="3"/><circle cx="1055" cy="463" r="3"/>
+  </g>
+  <!-- Tiny boundary lanterns make all entrances and the common escape obvious. -->
+  <g fill="#f2c17c" stroke="#1f3136" stroke-width="3">
+    <path d="M0 90l16 14-16 14Z"/><path d="M0 322l16 14-16 14Z"/>
+    <path d="M0 614l16 14-16 14Z"/>
+    <path d="M1280 340l-18 17 18 17Z" fill="#e7816b"/>
+  </g>
+  <g fill="#a3d4be" opacity=".35">
+    <circle cx="120" cy="224" r="3"/><circle cx="144" cy="218" r="2"/>
+    <circle cx="581" cy="456" r="3"/><circle cx="630" cy="474" r="2"/>
+    <circle cx="1081" cy="585" r="3"/><circle cx="1117" cy="568" r="2"/>
+  </g>
+</svg>
