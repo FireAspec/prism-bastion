@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Сад фонарей: лужайки, пруд, цветники и старый сторожевой пост">
+ <defs>
+  <linearGradient id="ground" x2="1" y2="1"><stop stop-color="#173c42"/><stop offset=".44" stop-color="#225048"/><stop offset="1" stop-color="#143b3c"/></linearGradient>
+  <radialGradient id="east" cx="88%" cy="18%" r="64%"><stop stop-color="#639372" stop-opacity=".28"/><stop offset="1" stop-color="#2c644e" stop-opacity="0"/></radialGradient>
+  <radialGradient id="west" cx="5%" cy="82%" r="55%"><stop stop-color="#83a55a" stop-opacity=".21"/><stop offset="1" stop-color="#83a55a" stop-opacity="0"/></radialGradient>
+  <radialGradient id="pond" cx="42%" cy="35%" r="83%"><stop stop-color="#2d9f9d"/><stop offset=".53" stop-color="#176a75"/><stop offset="1" stop-color="#103e59"/></radialGradient>
+  <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe4a1"/><stop offset=".44" stop-color="#d89950"/><stop offset="1" stop-color="#72533e"/></linearGradient>
+  <radialGradient id="lamp"><stop stop-color="#fff8c5" stop-opacity=".82"/><stop offset=".27" stop-color="#ffc45a" stop-opacity=".5"/><stop offset="1" stop-color="#f5b548" stop-opacity="0"/></radialGradient>
+  <pattern id="grass" width="62" height="60" patternUnits="userSpaceOnUse"><path d="M9 12l2-7m2 8 4-6m23 42 2-5m4 6 3-9M24 29l-2-6m5 5 3-5" fill="none" stroke="#b4ca8c" stroke-width="1.2" stroke-linecap="round" opacity=".12"/><circle cx="35" cy="9" r="1.5" fill="#d4d49a" opacity=".19"/></pattern>
+  <pattern id="mosaic" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M0 0L22 22M22 0L0 22" stroke="#a1c1a0" stroke-opacity=".035" fill="none" stroke-width=".8"/></pattern>
+  <g id="sprig" stroke="#a7c886" stroke-width="2" stroke-linecap="round" fill="none" opacity=".43"><path d="M0 13Q-2 1 -8-11M0 13Q3-1 10-12M-4 4l-11-1M5 1l10-2"/><path d="M-7-8q-9-2-9-9q8-1 9 9M8-8q7-3 8-10q-9 1-8 10M-12 2q-8 0-11-7q9-2 11 7M12-1q6 0 9-7q-8-1-9 7" fill="#87ac83" stroke="none"/></g>
+  <g id="clover"><circle r="4" cx="-4" cy="0" fill="#adca83"/><circle r="4" cx="4" cy="0" fill="#adca83"/><circle r="4" cx="0" cy="-5" fill="#c9d18d"/><path d="M0 0L4 10" stroke="#aac58a" fill="none" stroke-width="1.5"/></g>
+  <g id="tiny-lamp"><circle r="24" fill="url(#lamp)"/><path d="M-8 11H8L6-6H-6Z" fill="#603e37" stroke="#dcb67b" stroke-width="2"/><rect x="-4.5" y="-4.5" width="9" height="12" rx="2" fill="#ffde7c"/><path d="M-11-8h22M0-16v7M-13 13H13" stroke="#f1c991" stroke-width="2" stroke-linecap="round"/><circle r="2" cy="-17" fill="#f7d98e"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#ground)"/>
+ <rect width="1280" height="720" fill="url(#east)"/>
+ <rect width="1280" height="720" fill="url(#west)"/>
+ <rect width="1280" height="720" fill="url(#grass)"/>
+ <rect width="1280" height="720" fill="url(#mosaic)"/>
+ <!-- Terrain rhythm uses broad, low-contrast shapes so live towers remain prominent. -->
+ <path d="M0 0H430Q310 55 226 108L0 147Z" fill="#2d6150" opacity=".29"/>
+ <path d="M698 0H1280V167Q1100 122 973 135Q865 131 698 0Z" fill="#2b6553" opacity=".23"/>
+ <path d="M0 659Q280 623 446 714L0 720Z" fill="#8c9e62" opacity=".1"/>
+ <path d="M1290 620Q1020 672 824 720H1280Z" fill="#66966f" opacity=".1"/>
+ <!-- The single pond is also the gameplay water polygon. -->
+ <path d="M550 291L564 264L591 245L628 237L670 240L708 251L733 271L740 296L731 320L704 340L665 349L626 350L588 340L561 321Z" fill="#082c3d" stroke="#9fa877" stroke-opacity=".8" stroke-width="12" stroke-linejoin="round"/>
+ <path d="M550 291L564 264L591 245L628 237L670 240L708 251L733 271L740 296L731 320L704 340L665 349L626 350L588 340L561 321Z" fill="url(#pond)" stroke="#5cbaa6" stroke-width="2.2" stroke-opacity=".88" stroke-linejoin="round"/>
+ <path d="M565 286Q594 260 622 265M663 255Q701 261 720 282M577 320Q625 348 684 331" fill="none" stroke="#abe1c3" stroke-width="2" opacity=".5" stroke-linecap="round"/>
+ <g fill="#83b99c" stroke="#2a7368" stroke-width="1.5"><path d="M582 299q7-18 25-15l-10 15 11 5q-20 11-26-5"/><path d="M682 307q9-15 24-8l-11 10 9 7q-19 8-22-9"/><path d="M632 325q8-15 19-12l-7 11 8 6q-13 6-20-5"/></g>
+ <g fill="#f2c9a6"><circle cx="602" cy="286" r="2.8"/><circle cx="692" cy="300" r="2.3"/><circle cx="643" cy="317" r="2.3"/></g>
+ <!-- Low flower beds are blocked footprints, with no wall above them. -->
+ <g fill="#254c46" stroke="#6e8b65" stroke-width="5" stroke-linejoin="round">
+  <path d="M73 54L183 54L197 113L65 113Z"/>
+  <path d="M27 357L125 350L140 421L27 421Z"/>
+  <path d="M1108 463L1238 469L1238 532L1105 534Z"/>
+  <path d="M492 662L598 657L616 696L484 696Z"/>
+ </g>
+ <g fill="#608660" opacity=".8"><ellipse cx="129" cy="80" rx="55" ry="20"/><ellipse cx="79" cy="389" rx="39" ry="17"/><ellipse cx="1176" cy="499" rx="52" ry="19"/><ellipse cx="549" cy="678" rx="51" ry="9"/></g>
+ <g fill="#d6bf80" opacity=".62"><circle cx="96" cy="78" r="3"/><circle cx="150" cy="88" r="3.5"/><circle cx="112" cy="95" r="2"/><circle cx="64" cy="386" r="3"/><circle cx="111" cy="394" r="2.5"/><circle cx="1141" cy="497" r="3"/><circle cx="1199" cy="491" r="2"/><circle cx="534" cy="680" r="2.5"/><circle cx="568" cy="675" r="2.5"/></g>
+ <!-- Watch-post foundation; initially dark, restored after story success. -->
+ <path d="M1120 57H1242V127H1120Z" fill="#1a373c" stroke="#b89b6a" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M1128 66H1234V118H1128Z" fill="none" stroke="#708e83" stroke-width="1.8" stroke-dasharray="6 5"/>
+ <g transform="translate(1181 91)" stroke="url(#brass)" stroke-width="3" fill="none"><path d="M0-22L17-12V12L0 22L-17 12V-12Z"/><path d="M-15 0H15M0-19V20M-10-10L10 10M10-10L-10 10" opacity=".56"/><circle r="6" fill="#426a69"/></g>
+ <!-- Decorative clusters occupy only the texture layer, not the collision layer. -->
+ <g><use xlink:href="#sprig" x="328" y="79"/><use xlink:href="#sprig" x="427" y="69" transform="rotate(18 427 69)"/><use xlink:href="#sprig" x="757" y="71"/><use xlink:href="#sprig" x="874" y="83" transform="rotate(-18 874 83)"/><use xlink:href="#sprig" x="96" y="279"/><use xlink:href="#sprig" x="175" y="316"/><use xlink:href="#sprig" x="323" y="329"/><use xlink:href="#sprig" x="795" y="319"/><use xlink:href="#sprig" x="960" y="306"/><use xlink:href="#sprig" x="1240" y="331"/><use xlink:href="#sprig" x="356" y="527"/><use xlink:href="#sprig" x="797" y="528"/><use xlink:href="#sprig" x="992" y="511"/><use xlink:href="#sprig" x="71" y="638"/><use xlink:href="#sprig" x="127" y="687"/></g>
+ <g opacity=".45"><use xlink:href="#clover" x="232" y="62"/><use xlink:href="#clover" x="514" y="83"/><use xlink:href="#clover" x="1033" y="89"/><use xlink:href="#clover" x="59" y="236"/><use xlink:href="#clover" x="430" y="354"/><use xlink:href="#clover" x="842" y="351"/><use xlink:href="#clover" x="1208" y="389"/><use xlink:href="#clover" x="345" y="676"/><use xlink:href="#clover" x="894" y="685"/><use xlink:href="#clover" x="1056" y="679"/></g>
+ <!-- Lanterns indicate a warm restored garden without hiding shots or units. -->
+ <g opacity=".83"><use xlink:href="#tiny-lamp" x="174" y="237"/><use xlink:href="#tiny-lamp" x="478" y="235"/><use xlink:href="#tiny-lamp" x="858" y="249"/><use xlink:href="#tiny-lamp" x="1007" y="471"/><use xlink:href="#tiny-lamp" x="526" y="490"/><use xlink:href="#tiny-lamp" x="143" y="566"/></g>
+ <!-- Brass corner rules and subdued registration grid frame the world. -->
+ <path d="M21 36V21H112M1168 21H1259V36M21 684V699H112M1168 699H1259V684" fill="none" stroke="#cfaf70" stroke-width="2" opacity=".56"/>
+ <rect x="10" y="10" width="1260" height="700" rx="7" fill="none" stroke="#e6c78b" stroke-opacity=".12" stroke-width="2"/>
+</svg>

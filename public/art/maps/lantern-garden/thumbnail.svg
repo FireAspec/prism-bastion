@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Миниатюра первой карты Сад фонарей">
+ <defs>
+  <linearGradient id="field" x2="1" y2="1"><stop stop-color="#174147"/><stop offset=".5" stop-color="#2e6555"/><stop offset="1" stop-color="#153d43"/></linearGradient>
+  <linearGradient id="path" x2="1" y2=".2"><stop stop-color="#ae9e77"/><stop offset=".5" stop-color="#cfb487"/><stop offset="1" stop-color="#8d9676"/></linearGradient>
+  <radialGradient id="pond"><stop stop-color="#50b7aa"/><stop offset="1" stop-color="#14566e"/></radialGradient>
+  <radialGradient id="fire"><stop stop-color="#ffedb1" stop-opacity=".9"/><stop offset=".3" stop-color="#f7bb54" stop-opacity=".65"/><stop offset="1" stop-color="#f7bb54" stop-opacity="0"/></radialGradient>
+  <pattern id="blades" width="31" height="27" patternUnits="userSpaceOnUse"><path d="M4 8l2-5m16 22 3-6M10 17l-2-3" stroke="#b8cf98" stroke-opacity=".16" stroke-width="1.1"/></pattern>
+  <g id="flower"><path d="M0 6V-5" stroke="#aac88c" stroke-width="2"/><circle cy="-8" r="6" fill="#bdba79"/><circle cy="-8" r="2.5" fill="#e8cd91"/></g>
+  <g id="lamp"><circle r="16" fill="url(#fire)"/><path d="M-5 7H5L4-5H-4Z" fill="#694b3e" stroke="#e8c07a" stroke-width="1.6"/><rect x="-2.5" y="-4" width="5" height="8" fill="#ffed9a"/><path d="M-7-6H7M0-11V-6" stroke="#e7c780" stroke-width="1.6"/></g>
+ </defs>
+ <rect width="640" height="360" rx="15" fill="#0e2732"/>
+ <rect x="6" y="6" width="628" height="348" rx="11" fill="url(#field)"/>
+ <rect x="6" y="6" width="628" height="348" rx="11" fill="url(#blades)"/>
+ <path d="M10 36Q144 12 226 40T625 46M10 300Q132 276 215 323T635 301" stroke="#a4bb81" stroke-width="18" opacity=".1" fill="none"/>
+ <!-- A small, exactly scaled route sketch, visibly exposed at both edges. -->
+ <g transform="scale(.5)">
+  <polyline points="0,170 115,170 252,169 395,165 540,166 686,171 823,180 932,191 1015,216 1067,250 1091,291 1094,331 1073,373 1034,397 974,409 869,410 740,413 610,419 485,422 367,432 286,450 233,477 206,515 208,550 229,580 273,601 347,610 482,612 624,613 769,611 910,607 1050,603 1170,600 1280,600" stroke="#395250" stroke-width="68" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+  <polyline points="0,170 115,170 252,169 395,165 540,166 686,171 823,180 932,191 1015,216 1067,250 1091,291 1094,331 1073,373 1034,397 974,409 869,410 740,413 610,419 485,422 367,432 286,450 233,477 206,515 208,550 229,580 273,601 347,610 482,612 624,613 769,611 910,607 1050,603 1170,600 1280,600" stroke="url(#path)" stroke-width="46" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+  <polyline points="0,170 115,170 252,169 395,165 540,166 686,171 823,180 932,191 1015,216 1067,250 1091,291 1094,331 1073,373 1034,397 974,409 869,410 740,413 610,419 485,422 367,432 286,450 233,477 206,515 208,550 229,580 273,601 347,610 482,612 624,613 769,611 910,607 1050,603 1170,600 1280,600" stroke="#eee0aa" stroke-width="1.5" stroke-dasharray="9 17" stroke-linecap="round" fill="none" opacity=".48"/>
+  <path d="M550 291L564 264L591 245L628 237L670 240L708 251L733 271L740 296L731 320L704 340L665 349L626 350L588 340L561 321Z" fill="url(#pond)" stroke="#b7bc8a" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M567 291Q603 263 641 264M648 331Q693 333 716 300" stroke="#b1e3cd" stroke-width="2.5" fill="none" opacity=".7"/>
+ </g>
+ <g fill="#355f4a" stroke="#a4ae7c" stroke-width="2"><rect x="37" y="28" width="58" height="24" rx="7"/><rect x="556" y="24" width="57" height="38" rx="5"/><rect x="15" y="184" width="54" height="26" rx="7"/><rect x="557" y="238" width="57" height="23" rx="6"/></g>
+ <g><use href="#flower" x="54" y="41"/><use href="#flower" x="73" y="40"/><use href="#flower" x="33" y="195"/><use href="#flower" x="55" y="200"/><use href="#flower" x="572" y="251"/><use href="#flower" x="601" y="250"/></g>
+ <g transform="translate(584 43)" stroke="#ffd58c" fill="none" stroke-width="2"><path d="M0-14L12-7V8L0 15L-12 8V-7Z"/><path d="M-10 0H10M0-13V13" opacity=".48"/><circle r="4" fill="#36686a"/></g>
+ <g><use href="#lamp" x="101" y="122"/><use href="#lamp" x="235" y="121"/><use href="#lamp" x="427" y="124"/><use href="#lamp" x="493" y="249"/><use href="#lamp" x="256" y="243"/><use href="#lamp" x="75" y="277"/></g>
+ <path d="M6 51H320Q376 51 393 6H20Q6 6 6 21Z" fill="#092c39" opacity=".88"/>
+ <text x="24" y="33" fill="#fff0bf" font-size="19" font-weight="700" font-family="Arial,DejaVu Sans,sans-serif" letter-spacing="1.1">САД ФОНАРЕЙ</text>
+ <rect x="23" y="322" width="144" height="23" rx="11.5" fill="#0b3442" stroke="#c5a875" stroke-opacity=".75"/>
+ <text x="39" y="338" fill="#f5e4b9" font-size="12" font-family="Arial,DejaVu Sans,sans-serif">01  •  ПЕРВАЯ КАРТА</text>
+ <circle cx="20" cy="85" r="7" fill="#83eed1" stroke="#16464a" stroke-width="3"/><path d="m615 293 12 7-12 7" stroke="#fee6a9" stroke-width="4" fill="none" stroke-linejoin="round"/>
+ <rect x="5" y="5" width="630" height="350" rx="12" fill="none" stroke="#bfad78" stroke-width="2" stroke-opacity=".8"/>
+</svg>
