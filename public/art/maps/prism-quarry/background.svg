@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Призменный карьер, кристаллические жилы, рудничные сооружения и технологический бассейн">
+ <defs>
+  <linearGradient id="ground" x2="0.5" y2="1"><stop stop-color="#364f56"/><stop offset=".47" stop-color="#293e49"/><stop offset="1" stop-color="#142c3c"/></linearGradient>
+  <radialGradient id="vignette"><stop stop-color="#e5bd7d" stop-opacity=".12"/><stop offset=".76" stop-color="#718b8b" stop-opacity=".03"/><stop offset="1" stop-color="#081625" stop-opacity=".65"/></radialGradient>
+  <linearGradient id="rock" x1="0" x2=".7" y2="1"><stop stop-color="#667b76"/><stop offset=".48" stop-color="#40565c"/><stop offset="1" stop-color="#233742"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d4a0"/><stop offset=".35" stop-color="#947a63"/><stop offset=".72" stop-color="#c9a274"/><stop offset="1" stop-color="#564c4c"/></linearGradient>
+  <linearGradient id="water" x1=".1" y1="0" x2="1" y2="1"><stop stop-color="#80e0dd"/><stop offset=".4" stop-color="#318cb0"/><stop offset="1" stop-color="#1a4367"/></linearGradient>
+  <linearGradient id="crystal" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fff5c9"/><stop offset=".31" stop-color="#8de6e4"/><stop offset=".63" stop-color="#5c9ebd"/><stop offset="1" stop-color="#51508e"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#e4fff1" stop-opacity=".69"/><stop offset=".3" stop-color="#8bd7e0" stop-opacity=".28"/><stop offset="1" stop-color="#8bd7e0" stop-opacity="0"/></radialGradient>
+  <pattern id="grit" width="53" height="43" patternUnits="userSpaceOnUse"><circle cx="8" cy="12" r="1.2" fill="#ebd4a5" opacity=".19"/><circle cx="43" cy="33" r="1" fill="#b4ebdf" opacity=".17"/><path d="M20 33l7-2M37 8l4 4" stroke="#bdd1c6" opacity=".11"/></pattern>
+  <pattern id="tiles" width="48" height="48" patternUnits="userSpaceOnUse" patternTransform="rotate(12)"><path d="M0 0H48V48H0Z" fill="none" stroke="#c0d3bd" stroke-opacity=".065" stroke-width="2"/></pattern>
+  <g id="ore"><path d="M0-32 17-8 9 25-11 18-18-7Z" fill="url(#crystal)" stroke="#e7f0d3" stroke-opacity=".75" stroke-width="1.6"/><path d="M0-32V23L-11 18-18-7Z" fill="#3d79a1" opacity=".5"/><path d="M0-32V23" stroke="#fff5cf" opacity=".74"/></g>
+  <g id="lamp"><circle r="22" fill="url(#glow)"/><circle r="4.6" fill="#f7d9a1"/><circle r="2" fill="#fffde2"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#ground)"/>
+ <path d="M-20 12 306-18 309 102 180 228-20 215Z" fill="#9aaa89" opacity=".13"/>
+ <path d="M225-20H727L690 101 592 249 401 304 296 195Z" fill="#c8b38f" opacity=".09"/>
+ <path d="M743-20H1300V263L1166 354 964 307 852 166Z" fill="#83b5a8" opacity=".085"/>
+ <path d="M-20 482 172 428 375 462 482 560 485 742H-20Z" fill="#d6ac72" opacity=".12"/>
+ <path d="M457 539 682 512 978 605 1010 740H442Z" fill="#e0b576" opacity=".09"/>
+ <path d="M973 336 1300 308V740H1105L1002 573Z" fill="#e8ba77" opacity=".1"/>
+ <rect width="1280" height="720" fill="url(#tiles)"/>
+ <rect width="1280" height="720" fill="url(#grit)"/>
+ <g fill="none" stroke="#d3b88c" stroke-linecap="round" opacity=".13"><path d="M-20 312 187 331 431 334 552 312 747 352 1060 351 1310 332" stroke-width="4"/><path d="M0 402 179 387 351 422 587 412 812 409 1064 400 1290 387" stroke-width="3"/><path d="M165 610 288 622 386 643 472 619M930 69 1037 95 1108 54" stroke-width="2"/></g>
+ <!-- Each raised shelf is identical to one blocked polygon in MapDef. -->
+ <g fill="url(#rock)" stroke="#ad9f7d" stroke-width="5" stroke-linejoin="round">
+  <path d="M38 35 150 29 187 93 177 127 57 127Z"/><path d="M306 28 438 37 449 93 345 104Z"/>
+  <path d="M742 33 850 29 876 92 820 128 753 115Z"/><path d="M40 628 183 628 190 693 44 689Z"/>
+  <path d="M491 326 541 317 559 359 540 390 489 385Z"/><path d="M1030 635 1170 618 1191 687 1051 694Z"/>
+  <path d="M1145 62 1230 65 1240 152 1190 173 1137 144Z"/>
+ </g>
+ <g fill="#b9b69a" opacity=".16"><path d="M38 35 150 29 187 93 115 77 57 127Z"/><path d="M306 28 438 37 394 65 345 104Z"/><path d="M742 33 850 29 806 72 753 115Z"/><path d="M40 628 183 628 116 659 44 689Z"/><path d="M1030 635 1170 618 1104 656 1051 694Z"/></g>
+ <!-- Mechanical silhouettes stay within blocked shelves. -->
+ <g stroke="url(#metal)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M60 94 93 44 156 92M76 94V62H141V94M93 44 117 90M76 62 140 94"/>
+  <path d="M326 85 345 46H409L427 85M345 46 411 84M411 46 344 84"/>
+  <path d="M767 99V72L793 45 839 73V98M767 73H839M795 46V98"/>
+  <path d="M1154 135 1174 85H1215L1230 129 1195 153 1154 135M1174 85V146M1156 120H1226"/>
+  <path d="M56 658 168 682M168 658 56 682M57 670H173"/>
+  <path d="M1052 666 1083 641 1165 643 1175 670 1137 686 1074 686ZM1083 641 1137 686M1165 643 1074 686"/>
+ </g>
+ <g fill="#253b48" stroke="#e6bc85" stroke-width="5"><circle cx="111" cy="74" r="18"/><circle cx="376" cy="67" r="17"/><circle cx="799" cy="79" r="20"/><circle cx="1190" cy="118" r="24"/><circle cx="119" cy="666" r="19"/><circle cx="1120" cy="660" r="18"/></g>
+ <g fill="#7ec9cb" opacity=".8"><circle cx="111" cy="74" r="6"/><circle cx="376" cy="67" r="5"/><circle cx="799" cy="79" r="9"/><circle cx="1190" cy="118" r="11"/><circle cx="1120" cy="660" r="6"/></g>
+ <!-- Small technological pool, exactly matching the water polygon. -->
+ <path d="M706 626 751 597 846 600 889 633 868 692 733 694 702 667Z" stroke="#a78f6b" stroke-width="15" fill="#071e31" stroke-linejoin="round"/>
+ <path d="M706 626 751 597 846 600 889 633 868 692 733 694 702 667Z" fill="url(#water)" stroke="#a3efdc" stroke-opacity=".6" stroke-width="3" stroke-linejoin="round"/>
+ <g fill="none" stroke="#d2fbeb" stroke-width="3" opacity=".27"><path d="M726 639Q793 610 863 640M714 657Q804 626 878 655M738 680Q799 652 865 674"/></g>
+ <g fill="#253c48" stroke="#dbc090" stroke-width="4"><circle cx="725" cy="641" r="9"/><circle cx="867" cy="647" r="9"/><circle cx="790" cy="607" r="9"/></g>
+ <!-- Thin veins and prismatic clusters provide landmarks without obscuring roads. -->
+ <g fill="none" stroke="#83d5d6" stroke-opacity=".29" stroke-width="3" stroke-linecap="round"><path d="M169 349 205 330 229 337 252 320M569 595 615 575 650 593 687 585M904 646 930 672 971 670 985 702"/></g>
+ <g><use href="#ore" transform="translate(222 395) rotate(-16) scale(.78)"/><use href="#ore" transform="translate(239 406) rotate(23) scale(.42)"/><use href="#ore" transform="translate(984 322) rotate(19) scale(.69)"/><use href="#ore" transform="translate(1007 328) rotate(-23) scale(.4)"/><use href="#ore" transform="translate(602 638) rotate(-10) scale(.5)"/><use href="#ore" transform="translate(927 74) rotate(24) scale(.5)"/></g>
+ <g><use href="#lamp" x="202" y="137"/><use href="#lamp" x="482" y="96"/><use href="#lamp" x="701" y="325"/><use href="#lamp" x="1093" y="316"/><use href="#lamp" x="1140" y="437"/><use href="#lamp" x="337" y="514"/></g>
+ <!-- Distinct terminal portals; no shared hidden destination. -->
+ <g transform="translate(1251 283)"><circle r="53" fill="url(#glow)"/><path d="M-13-37 12-37 21-17V17L12 37H-13L-22 17V-17Z" fill="#273f4f" stroke="#edcd9b" stroke-width="5"/><path d="M-5-23 8-8-3 8 7 23" stroke="#9febeb" stroke-width="5" fill="none"/></g>
+ <g transform="translate(1251 469)"><circle r="53" fill="url(#glow)"/><path d="M-13-37 12-37 21-17V17L12 37H-13L-22 17V-17Z" fill="#273f4f" stroke="#edcd9b" stroke-width="5"/><path d="M-5-23 8-8-3 8 7 23" stroke="#9febeb" stroke-width="5" fill="none"/></g>
+ <rect width="1280" height="720" fill="url(#vignette)" pointer-events="none"/>
+</svg>

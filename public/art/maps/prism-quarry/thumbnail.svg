@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Призменный карьер — две дороги к ядру маяка">
+ <defs><linearGradient id="ground" x2="1" y2="1"><stop stop-color="#3b5358"/><stop offset="1" stop-color="#112839"/></linearGradient>
+ <linearGradient id="road" x2="1"><stop stop-color="#b6a384"/><stop offset=".5" stop-color="#f1d5a3"/><stop offset="1" stop-color="#baa486"/></linearGradient>
+ <linearGradient id="gem" x2=".8" y2="1"><stop stop-color="#fff6c7"/><stop offset=".48" stop-color="#8fe3e3"/><stop offset="1" stop-color="#595d9b"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#bdf6e3" stop-opacity=".8"/><stop offset="1" stop-color="#8ed1d7" stop-opacity="0"/></radialGradient>
+ </defs>
+ <rect width="640" height="360" fill="url(#ground)"/>
+ <path d="M0 0H231L203 81 150 120 0 98ZM311 0H640V135L550 154 455 107 409 18Z" fill="#bdc6a2" opacity=".1"/>
+ <path d="M0 247 179 207 295 268 377 360H0ZM479 249 640 176V360H571Z" fill="#e5b276" opacity=".12"/>
+ <g fill="#38515a" stroke="#9c9b81" stroke-width="3"><path d="M19 18 80 14 100 64 33 67Z"/><path d="M151 14 221 19 225 47 171 53Z"/><path d="M373 17 420 14 441 46 404 64 377 57Z"/><path d="M21 312 91 313 98 347 21 347Z"/><path d="M516 320 590 310 598 348 526 347Z"/></g>
+ <path d="M16 85 105 85 133 139 202 139 238 58 315 58 348 143 415 143 450 77 522 77 555 142 624 142" fill="none" stroke="#081d2c" stroke-width="33" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M16 275 153 275 193 241 380 241 421 276 528 276 560 235 624 235" fill="none" stroke="#081d2c" stroke-width="33" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M16 85 105 85 133 139 202 139 238 58 315 58 348 143 415 143 450 77 522 77 555 142 624 142" fill="none" stroke="url(#road)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M16 275 153 275 193 241 380 241 421 276 528 276 560 235 624 235" fill="none" stroke="url(#road)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M16 85 105 85 133 139 202 139 238 58 315 58 348 143 415 143 450 77 522 77 555 142 624 142M16 275 153 275 193 241 380 241 421 276 528 276 560 235 624 235" fill="none" stroke="#fff3ca" stroke-opacity=".53" stroke-dasharray="3 13" stroke-width="2"/>
+ <path d="M354 312 377 297 421 301 443 316 434 345 370 348 351 335Z" fill="#287e9d" stroke="#c7ac7d" stroke-width="8"/>
+ <path d="M371 318Q401 302 430 328M371 336Q409 317 430 338" fill="none" stroke="#a3f9e7" stroke-width="3" opacity=".7"/>
+ <g fill="url(#gem)" stroke="#fff6d5" stroke-width="2"><path d="M77 188 94 157 113 188 100 214 86 210Z"/><path d="M266 185 286 149 303 183 290 213 275 208Z"/><path d="M481 189 497 161 513 189 502 214 489 208Z"/></g>
+ <circle cx="626" cy="142" r="44" fill="url(#halo)"/><circle cx="626" cy="235" r="44" fill="url(#halo)"/>
+ <g fill="#294453" stroke="#ffdda3" stroke-width="3"><path d="M615 128 626 117 639 128V155L626 165 615 155Z"/><path d="M615 222 626 211 639 222V249L626 259 615 249Z"/></g>
+ <rect x="17" y="155" width="320" height="119" rx="17" fill="#102c3b" opacity=".9" stroke="#9bc8bd" stroke-opacity=".35" stroke-width="1.5"/>
+ <g font-family="system-ui,Arial,sans-serif" font-size="31" font-weight="800" letter-spacing="1.6" fill="#ffebc3"><text x="28" y="195">ПРИЗМЕННЫЙ</text><text x="28" y="227">КАРЬЕР</text></g>
+ <path d="M25 237H217" stroke="#8de1d4" stroke-width="2"/><text x="25" y="255" fill="#b9ece3" font-family="system-ui,Arial,sans-serif" font-size="13" letter-spacing="1.4">ДВЕ ЛИНИИ · ОДНО ЯДРО</text>
+ <rect x="3" y="3" width="634" height="354" rx="14" fill="none" stroke="#dbc094" stroke-opacity=".42" stroke-width="2"/>
+</svg>

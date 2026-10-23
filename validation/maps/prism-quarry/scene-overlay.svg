@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Визуальная проверка фона с двумя дорогами и площадками">
+ <!-- Transparent QA overlay; composite over background-1366x768.png. -->
+ <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+ <path d="M32 170 210 170 266 278 404 278 476 116 630 116 697 286 830 286 900 155 1045 155 1110 283 1246 283" stroke="#102633" stroke-width="60"/>
+ <path d="M32 548 305 548 385 481 760 481 841 552 1055 552 1120 469 1246 469" stroke="#102633" stroke-width="60"/>
+ <path d="M32 170 210 170 266 278 404 278 476 116 630 116 697 286 830 286 900 155 1045 155 1110 283 1246 283" stroke="#b5a187" stroke-width="44"/>
+ <path d="M32 548 305 548 385 481 760 481 841 552 1055 552 1120 469 1246 469" stroke="#b5a187" stroke-width="44"/>
+ <path d="M32 170 210 170 266 278 404 278 476 116 630 116 697 286 830 286 900 155 1045 155 1110 283 1246 283" stroke="#e2ceaa" stroke-width="35"/>
+ <path d="M32 548 305 548 385 481 760 481 841 552 1055 552 1120 469 1246 469" stroke="#e2ceaa" stroke-width="35"/>
+ <path d="M32 170 210 170 266 278 404 278 476 116 630 116 697 286 830 286 900 155 1045 155 1110 283 1246 283" stroke="#fff4cd" stroke-width="2" stroke-dasharray="4 17"/>
+ <path d="M32 548 305 548 385 481 760 481 841 552 1055 552 1120 469 1246 469" stroke="#fff4cd" stroke-width="2" stroke-dasharray="4 17"/></g>
+ <g fill="#7ce4cd" fill-opacity=".11" stroke="#94e8d6" stroke-dasharray="7 6" stroke-width="2"><circle cx="370" cy="385" r="40"/><circle cx="810" cy="384" r="40"/><circle cx="1159" cy="375" r="40"/><circle cx="570" cy="225" r="38"/><circle cx="627" cy="399" r="38"/><circle cx="212" cy="456" r="38"/><circle cx="972" cy="630" r="38"/></g>
+ <g font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#ffefcf" text-anchor="middle" font-weight="700"><text x="370" y="390">А</text><text x="810" y="389">Б</text><text x="1159" y="380">В</text><text x="570" y="231">СЕВЕР</text><text x="627" y="405">ЮГ</text></g>
+ <rect x="42" y="318" width="305" height="75" rx="13" fill="#122d3b" fill-opacity=".93" stroke="#85b4b4" stroke-opacity=".7"/>
+ <g font-family="DejaVu Sans,Arial,sans-serif" font-weight="700"><text x="60" y="349" font-size="17" fill="#ffe7b8">ПРИЗМЕННЫЙ КАРЬЕР</text><text x="60" y="375" font-size="12" fill="#a4e6de">ДВЕ ДОРОГИ · 3 УЗЛА</text></g>
+</svg>
