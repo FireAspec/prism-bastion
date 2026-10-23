@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Медный ручей — карта 02</title>
+<style>
+ :root{color-scheme:dark;--mint:#a8dec6;--gold:#eed0a0}*{box-sizing:border-box}
+ body{margin:0;background:radial-gradient(ellipse at 30% 0,#254840,#0c1d26 80%);color:#eef3e9;font:14px/1.5 system-ui,sans-serif}
+ main{max-width:1510px;margin:auto;padding:23px}.title{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px}
+ .eyebrow{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--mint);margin:0 0 6px}
+ h1{font-size:clamp(26px,3vw,40px);margin:0;line-height:1.1}small{color:#b8c9bf}.pill{border:1px solid #688779;background:#21423c;border-radius:40px;padding:9px 14px;white-space:nowrap}
+ .layout{display:grid;grid-template-columns:minmax(0,1fr) 312px;gap:20px}.board,.panel{border:1px solid #49695d;border-radius:17px;overflow:hidden;box-shadow:0 16px 40px #06141688}
+ .map{position:relative;aspect-ratio:16/9;background:#829f78}.map img,.map svg{width:100%;height:100%;position:absolute;inset:0}.map svg{pointer-events:none}
+ .map .route{stroke:#fff4cc;stroke-width:3;fill:none;stroke-dasharray:12 12}.water{fill:#33c8da;fill-opacity:.23;stroke:#a5ecf3;stroke-width:3}.blocked{fill:#e58f56;fill-opacity:.3;stroke:#ffd09a;stroke-width:3;stroke-dasharray:9 6}
+ .site{fill:#133d36;fill-opacity:.2;stroke:#ebf6d8;stroke-width:2;stroke-dasharray:5 4}.site.water-site{stroke:#8ce9f4}.point{fill:#f4f5bb;stroke:#244e46;stroke-width:2}
+ .tower{stroke:#183b39;stroke-width:3}.tower-label{font:800 14px system-ui;fill:white;paint-order:stroke;stroke:#23433b;stroke-width:4;text-anchor:middle}
+ #enemy{fill:#ffda96;stroke:#6c4328;stroke-width:4;filter:drop-shadow(0 2px 8px #ffad59)}svg [hidden]{display:none}
+ footer{display:flex;justify-content:space-between;gap:15px;padding:13px 16px;background:#153236;color:#d2e1d6}
+ .panel{background:linear-gradient(150deg,#1e3d39,#142f34);padding:20px}.panel h2{font-size:16px;margin:0 0 10px}.panel p{color:#bacbbf;font-size:13px}
+ .option{display:flex;gap:10px;margin:8px 0;cursor:pointer}input{accent-color:#b9d7b2}button{display:block;width:100%;padding:10px;margin:6px 0;text-align:left;border:1px solid #50736a;background:#1b403f;border-radius:10px;color:#e8eee4;font:inherit;cursor:pointer}
+ button[aria-pressed=true]{background:#ead09a;color:#264137;font-weight:800}button:focus-visible{outline:3px solid white}
+ input[type=range]{width:100%}output{float:right;color:var(--gold)}.rule{height:1px;background:#47645b;margin:17px 0}
+ @media(max-width:1000px){.layout{grid-template-columns:1fr}.pill{display:none}}@media(max-width:560px){main{padding:12px}footer{display:block}}
+</style></head><body><main>
+<header class="title"><div><p class="eyebrow">PRISM BASTION / КАМПАНИЯ / 02</p><h1>Медный ручей</h1><small>Спасите мастерскую лесничего · Сложность I · Рекомендована лёгкая</small></div><div class="pill">1280 × 720 · 1 маршрут · 2 петли</div></header>
+<div class="layout"><section class="board"><div class="map">
+ <img src="./background.svg" alt="Тропа с двумя петлями, ручьём, мастерской и видимым выходом"/>
+ <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <g id="waterLayer" hidden><polygon class="water" points="619,243 644,232 683,255 705,290 720,339 712,398 705,444 679,486 647,508 608,488 593,441 604,397 606,344 598,293"/><polygon class="water" points="42,260 84,250 113,275 120,317 105,369 72,408 32,400 22,365 30,310"/><polygon class="water" points="1016,645 1070,632 1130,637 1173,657 1185,707 1014,707"/></g>
+  <g id="blockedLayer" hidden><polygon class="blocked" points="1055,270 1195,270 1208,284 1208,418 1055,418"/><polygon class="blocked" points="1030,125 1124,125 1150,160 1130,199 1042,200 1018,160"/><polygon class="blocked" points="7,639 73,632 96,660 85,704 8,703"/><polygon class="blocked" points="576,621 654,617 675,650 658,698 583,700"/></g>
+  <polyline id="route" class="route" points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591"/>
+  <g id="siteLayer"></g><g id="towerLayer"></g><circle id="enemy" cx="0" cy="152" r="10"/>
+ </svg></div><footer><span>Дорога · Вода · Зоны запрета · Площадки</span><span>Путь 2797 пикселей · выход справа</span></footer></section>
+ <aside class="panel"><h2>Слои карты</h2>
+  <label class="option"><input id="showRoute" type="checkbox" checked/>Маршрут</label>
+  <label class="option"><input id="showSites" type="checkbox" checked/>Места для башен</label>
+  <label class="option"><input id="showWater" type="checkbox"/>Границы воды</label>
+  <label class="option"><input id="showBlocked" type="checkbox"/>Зоны запрета</label>
+  <div class="rule"></div><h2>Кандидаты обороны</h2><p>Визуальные расстановки не являются подтверждением победы.</p>
+  <button data-mode="none" aria-pressed="true">Без башен</button><button data-mode="standard" aria-pressed="false">Обычная оборона</button>
+  <button data-mode="half-cash" aria-pressed="false">Половина снабжения</button><button data-mode="iron-oath" aria-pressed="false">Клятва маяка</button>
+  <p id="description">Свободные площадки вокруг обеих петель.</p><div class="rule"></div>
+  <h2>Путь к выходу <output id="percentage">0%</output></h2><input id="progress" type="range" min="0" max="100" step="1" value="0" aria-label="Условное положение врага"/>
+  <p>Маркер показывает только движение по геометрии, не ход реального боя.</p>
+ </aside></div></main><script>
+ const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+ const sites={upper:[203,271,36],garden:[438,365,36],lower:[303,518,35],beacon:[445,481,31],ridge:[700,93,34],court:[823,342,36],final:[1044,499,36],meadow:[697,552,29],creek:[656,368,32],oxbow:[74,330,24]};
+ const plans={none:[],standard:[['upper','needle'],['garden','frost'],['lower','cannon'],['beacon','beacon'],['court','scatter'],['final','ember'],['ridge','needle'],['meadow','cannon']],
+ 'half-cash':[['upper','needle'],['garden','needle'],['lower','scatter'],['court','frost'],['beacon','beacon'],['final','cannon']],
+ 'iron-oath':[['upper','needle'],['lower','cannon'],['garden','frost'],['court','needle'],['beacon','beacon'],['meadow','ember'],['final','scatter']]};
+ const colors={needle:'#eddd89',cannon:'#f4a66b',frost:'#92d9eb',beacon:'#b1c6ff',scatter:'#e5b8ff',ember:'#ff9d70'};
+ const hints={none:'Свободные площадки вокруг обеих петель.',standard:'Контроль первого сада и резерв у выхода.', 'half-cash':'Экономный старт и постепенная поддержка.', 'iron-oath':'Раздельные позиции без права на утечку.'};
+ function draw(tag,attrs,into){const el=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,v);into.append(el);return el;}
+ for(const [id,[x,y,r]] of Object.entries(sites)){draw('circle',{cx:x,cy:y,r,class:id==='creek'||id==='oxbow'?'site water-site':'site'},$('siteLayer'));draw('circle',{cx:x,cy:y,r:5,class:'point'},$('siteLayer'));}
+ function setMode(mode){$('towerLayer').replaceChildren();plans[mode].forEach(([slot,tower],i)=>{const [x,y]=sites[slot];draw('circle',{cx:x,cy:y,r:17,fill:colors[tower],class:'tower'},$('towerLayer'));draw('text',{x,y:y+5,class:'tower-label'},$('towerLayer')).textContent=String(i+1);});$('description').textContent=hints[mode];document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));}
+ document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+ for(const [input,layer] of [['showRoute','route'],['showSites','siteLayer'],['showWater','waterLayer'],['showBlocked','blockedLayer']])$(input).addEventListener('change',e=>$(layer).toggleAttribute('hidden',!e.target.checked));
+ const move=()=>{const v=Number($('progress').value),route=$('route'),p=route.getPointAtLength(route.getTotalLength()*v/100);$('enemy').setAttribute('cx',p.x);$('enemy').setAttribute('cy',p.y);$('percentage').textContent=v+'%';};$('progress').addEventListener('input',move);setMode('none');move();
+ </script></body></html>

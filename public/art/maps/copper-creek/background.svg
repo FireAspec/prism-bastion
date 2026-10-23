@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Медный ручей: дорога с двумя петлями, заводи и мастерская лесничего">
+ <defs>
+  <linearGradient id="earth" x2=".85" y2="1"><stop stop-color="#799a6e"/><stop offset=".48" stop-color="#90aa75"/><stop offset="1" stop-color="#5f8b70"/></linearGradient>
+  <radialGradient id="meadow"><stop stop-color="#b4c796" stop-opacity=".95"/><stop offset="1" stop-color="#92af78" stop-opacity="0"/></radialGradient>
+  <linearGradient id="water" x2=".85" y2="1"><stop stop-color="#226c74"/><stop offset=".45" stop-color="#388f91"/><stop offset="1" stop-color="#266d7d"/></linearGradient>
+  <linearGradient id="road" x2="0" y2="1"><stop stop-color="#e9d6a2"/><stop offset=".56" stop-color="#d8be8a"/><stop offset="1" stop-color="#cbb183"/></linearGradient>
+  <linearGradient id="roof" x2=".4" y2="1"><stop stop-color="#bd7649"/><stop offset=".55" stop-color="#965a37"/><stop offset="1" stop-color="#70452f"/></linearGradient>
+  <radialGradient id="pine"><stop stop-color="#5b865e"/><stop offset=".65" stop-color="#346d59"/><stop offset="1" stop-color="#245946"/></radialGradient>
+  <pattern id="grain" width="68" height="61" patternUnits="userSpaceOnUse"><path d="M8 23l5 -4m30 30l-5 5m18 -33l4 2" stroke="#d9d4a2" stroke-width="2" opacity=".17" stroke-linecap="round"/><circle cx="33" cy="11" r="2" fill="#335e54" opacity=".12"/></pattern>
+  <pattern id="pebbles" width="43" height="31" patternUnits="userSpaceOnUse"><ellipse cx="5" cy="12" rx="4" ry="2" fill="#a78b60" opacity=".32"/><ellipse cx="28" cy="24" rx="3" ry="1.5" fill="#fff0c4" opacity=".3"/></pattern>
+  <g id="tree"><ellipse cx="6" cy="10" rx="35" ry="17" fill="#244c43" opacity=".3"/><circle r="25" fill="url(#pine)" stroke="#1d574a" stroke-width="3"/><circle cx="-6" cy="-7" r="17" fill="#689d66" opacity=".49"/><path d="M-13 7q15 12 29 -2" fill="none" stroke="#b4c48b" stroke-width="2" opacity=".26"/></g>
+  <g id="shrub"><ellipse cx="0" cy="3" rx="19" ry="10" fill="#3f7454" opacity=".3"/><circle cx="-9" cy="-2" r="12" fill="#5c9258"/><circle cx="5" cy="-6" r="14" fill="#407b56"/><circle cx="15" cy="2" r="8" fill="#79a661"/></g>
+  <g id="flower"><path d="M0 0v7" stroke="#467d55" stroke-width="2"/><circle cy="-4" r="4" fill="#f6cd78"/><circle cx="5" cy="-1" r="4" fill="#f5dca3"/><circle cx="-4" cy="-2" r="4" fill="#ebad82"/><circle cy="-1" r="2" fill="#97653e"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#earth)"/>
+ <path d="M0 65Q200 0 385 55T755 60T1280 20V0H0Z" fill="#416e57" opacity=".25"/>
+ <path d="M0 690Q220 615 425 670T850 658T1280 693V720H0Z" fill="#446a57" opacity=".32"/>
+ <ellipse cx="414" cy="359" rx="252" ry="250" fill="url(#meadow)"/><ellipse cx="827" cy="354" rx="210" ry="210" fill="url(#meadow)"/>
+ <rect width="1280" height="720" fill="url(#grain)"/>
+ <g fill="none" stroke="#436b54" opacity=".2" stroke-width="3"><path d="M8 76Q205 36 405 84T816 79T1250 69"/><path d="M8 98Q190 55 380 105T796 99T1250 91"/><path d="M12 677Q192 623 367 677T800 659T1270 679"/></g>
+ <!-- Polygon points exactly match MapDef.water. -->
+ <g stroke="#b8d0a0" stroke-width="7" stroke-linejoin="round" paint-order="stroke">
+  <polygon data-zone="water-0" points="619,243 644,232 683,255 705,290 720,339 712,398 705,444 679,486 647,508 608,488 593,441 604,397 606,344 598,293" fill="url(#water)"/>
+  <polygon data-zone="water-1" points="42,260 84,250 113,275 120,317 105,369 72,408 32,400 22,365 30,310" fill="url(#water)"/>
+  <polygon data-zone="water-2" points="1016,645 1070,632 1130,637 1173,657 1185,707 1014,707" fill="url(#water)"/>
+ </g>
+ <g fill="none" stroke-linecap="round" stroke-width="3" stroke="#a3dacc" opacity=".63">
+  <path d="M626 277q27 -9 47 8M623 324q28 11 64 -1M623 374q37 -12 65 3M614 432q31 10 64 -4M644 467q20 4 31 -4"/>
+  <path d="M46 298q22 -7 47 2M42 340q29 9 50 -3M51 372q20 6 38 -8"/><path d="M1033 677q52 -18 110 -6"/>
+ </g>
+ <g fill="#c6dab1" opacity=".83"><ellipse cx="625" cy="333" rx="12" ry="3" transform="rotate(-16 625 333)"/><ellipse cx="688" cy="409" rx="12" ry="3" transform="rotate(23 688 409)"/><ellipse cx="84" cy="378" rx="9" ry="3"/></g>
+ <!-- Underpainting follows the game route without smoothing the actual corners. -->
+ <polyline class="route-underlay" data-path="lane-0" points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591" fill="none" stroke="#3e634a" stroke-opacity=".23" stroke-width="80" stroke-linejoin="round" stroke-linecap="round"/>
+ <polyline points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591" fill="none" stroke="#927f5b" stroke-width="68" stroke-linejoin="round" stroke-linecap="round" opacity=".8"/>
+ <polyline points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591" fill="none" stroke="url(#road)" stroke-width="56" stroke-linejoin="round" stroke-linecap="round"/>
+ <polyline points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591" fill="none" stroke="url(#pebbles)" stroke-width="52" stroke-linejoin="round" stroke-linecap="round"/>
+ <!-- Blocked shapes exactly match MapDef.blocked. -->
+ <g stroke-linejoin="round">
+  <polygon data-zone="blocked-0" points="1055,270 1195,270 1208,284 1208,418 1055,418" fill="#79563b" stroke="#e5d09d" stroke-width="5"/>
+  <polygon data-zone="blocked-1" points="1030,125 1124,125 1150,160 1130,199 1042,200 1018,160" fill="#5b766f" stroke="#365a57" stroke-width="5"/>
+  <polygon data-zone="blocked-2" points="7,639 73,632 96,660 85,704 8,703" fill="#577157" stroke="#b0bb8d" stroke-width="4"/>
+  <polygon data-zone="blocked-3" points="576,621 654,617 675,650 658,698 583,700" fill="#977451" stroke="#d4be8a" stroke-width="4"/>
+ </g>
+ <g transform="translate(1066 282)"><rect y="30" width="131" height="89" rx="4" fill="#bf9763" stroke="#624d38" stroke-width="5"/><path d="M-13 42L65 -10L144 42Z" fill="url(#roof)" stroke="#663f2e" stroke-width="6" stroke-linejoin="round"/><path d="M65 -8V42M26 18L65 -6L105 18" fill="none" stroke="#dcad72" stroke-width="4"/><rect x="43" y="64" width="43" height="55" fill="#79503c" stroke="#503a2e" stroke-width="4"/><path d="M51 77h27m-27 10h27m-27 10h27" stroke="#c99d70" stroke-width="3"/><rect x="9" y="57" width="23" height="25" fill="#7eb8a3" stroke="#644930" stroke-width="4"/><rect x="99" y="57" width="23" height="25" fill="#7eb8a3" stroke="#644930" stroke-width="4"/></g>
+ <g fill="#81958a" stroke="#d5d1b3" stroke-width="3"><path d="M1028 152l29 -16 40 9 8 24 -26 21 -40 -5Z"/><path d="M1090 138l31 -5 19 27 -19 26 -32 -7Z" fill="#6f8780"/><path d="M23 658l36 -18 23 22 -21 27 -41 -6Z" fill="#667f65"/></g>
+ <g stroke="#684d36" stroke-width="8" stroke-linecap="round"><path d="M590 639h57M584 654h67M594 668h64M591 686h57"/></g>
+ <g fill="none" stroke="#d1d29b" stroke-width="5" opacity=".65" stroke-dasharray="12 15"><ellipse cx="433" cy="368" rx="64" ry="92" transform="rotate(5 433 368)"/><ellipse cx="814" cy="348" rx="49" ry="80" transform="rotate(-4 814 348)"/></g>
+ <g opacity=".95">
+  <use xlink:href="#tree" x="16" y="20"/><use xlink:href="#tree" x="78" y="47"/><use xlink:href="#tree" x="140" y="10"/><use xlink:href="#tree" x="244" y="40"/><use xlink:href="#tree" x="355" y="23"/><use xlink:href="#tree" x="462" y="34"/><use xlink:href="#tree" x="555" y="18"/><use xlink:href="#tree" x="635" y="35"/><use xlink:href="#tree" x="800" y="15"/><use xlink:href="#tree" x="914" y="35"/><use xlink:href="#tree" x="1000" y="18"/><use xlink:href="#tree" x="1171" y="26"/><use xlink:href="#tree" x="1258" y="67"/>
+  <use xlink:href="#tree" x="14" y="471"/><use xlink:href="#tree" x="26" y="558"/><use xlink:href="#tree" x="119" y="676"/><use xlink:href="#tree" x="232" y="697"/><use xlink:href="#tree" x="370" y="706"/><use xlink:href="#tree" x="474" y="672"/><use xlink:href="#tree" x="738" y="698"/><use xlink:href="#tree" x="854" y="687"/><use xlink:href="#tree" x="971" y="706"/><use xlink:href="#tree" x="1242" y="683"/><use xlink:href="#tree" x="1252" y="345"/>
+ </g>
+ <g opacity=".85"><use xlink:href="#shrub" x="92" y="208"/><use xlink:href="#shrub" x="408" y="229"/><use xlink:href="#shrub" x="464" y="277"/><use xlink:href="#shrub" x="438" y="454"/><use xlink:href="#shrub" x="242" y="347"/><use xlink:href="#shrub" x="742" y="257"/><use xlink:href="#shrub" x="976" y="316"/><use xlink:href="#shrub" x="987" y="416"/><use xlink:href="#shrub" x="747" y="636"/><use xlink:href="#shrub" x="1206" y="501"/></g>
+ <g opacity=".9"><use xlink:href="#flower" x="399" y="294"/><use xlink:href="#flower" x="469" y="343"/><use xlink:href="#flower" x="423" y="409"/><use xlink:href="#flower" x="851" y="285"/><use xlink:href="#flower" x="799" y="322"/><use xlink:href="#flower" x="841" y="408"/><use xlink:href="#flower" x="983" y="539"/><use xlink:href="#flower" x="1091" y="473"/><use xlink:href="#flower" x="218" y="279"/><use xlink:href="#flower" x="264" y="301"/><use xlink:href="#flower" x="681" y="561"/></g>
+ <g font-family="system-ui,sans-serif" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.4">
+  <g transform="translate(53 97)"><rect x="-47" y="-18" width="94" height="28" rx="10" fill="#253f3d" opacity=".84"/><text y="1" fill="#f8e7ba">ВХОД →</text></g>
+  <g transform="translate(1210 533)"><rect x="-61" y="-18" width="122" height="28" rx="10" fill="#253f3d" opacity=".84"/><text y="1" fill="#f8e7ba">ВЫХОД →</text></g>
+  <text x="1130" y="246" fill="#344e43" font-size="15">МАСТЕРСКАЯ</text>
+ </g>
+</svg>
