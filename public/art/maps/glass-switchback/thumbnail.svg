@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" role="img" aria-label="Стеклянный серпантин — четыре разворота на приливном плато">
+ <defs>
+  <linearGradient id="ground" x2=".8" y2="1"><stop stop-color="#2c6463"/><stop offset="1" stop-color="#102d3e"/></linearGradient>
+  <linearGradient id="wave" x2="1" y2="1"><stop stop-color="#16a4a7"/><stop offset="1" stop-color="#07536e"/></linearGradient>
+  <linearGradient id="road" x2="0" y2="1"><stop stop-color="#e9dfbf"/><stop offset="1" stop-color="#b9a47d"/></linearGradient>
+  <clipPath id="round"><rect width="480" height="270" rx="14"/></clipPath>
+ </defs>
+ <g clip-path="url(#round)">
+  <rect width="480" height="270" fill="url(#ground)"/>
+  <g transform="scale(.375)" stroke-linejoin="round">
+   <g fill="url(#wave)" stroke="#7ce0d3" stroke-width="8" stroke-opacity=".55">
+    <path d="M948 74L1218 64 1263 116 1253 286 1160 309 980 273 946 195Z"/>
+    <path d="M40 338L255 330 307 365 295 517 217 550 49 535Z"/>
+    <path d="M973 355L1200 356 1265 403 1235 500 1060 519 964 468Z"/>
+    <path d="M632 628L812 623 860 697 585 700Z"/>
+   </g>
+   <g fill="#617a78" stroke="#b3c1a7" stroke-width="5">
+    <path d="M270 24L556 15 592 73 494 91 302 76Z"/>
+    <path d="M545 282L592 278 617 299 581 317 544 310Z"/>
+    <path d="M460 643L550 633 571 691 426 703Z"/>
+    <path d="M1096 12L1240 16 1264 52 1084 57Z"/>
+   </g>
+   <path d="M0 126L775 126 826 168 826 195 775 238 420 238 369 277 369 307 420 347 842 347 892 388 892 412 842 455 415 455 366 492 366 520 415 563 1280 563" fill="none" stroke="#0c2938" stroke-width="73" stroke-linejoin="round" stroke-linecap="round"/>
+   <path d="M0 126L775 126 826 168 826 195 775 238 420 238 369 277 369 307 420 347 842 347 892 388 892 412 842 455 415 455 366 492 366 520 415 563 1280 563" fill="none" stroke="url(#road)" stroke-width="38" stroke-linejoin="round" stroke-linecap="round"/>
+   <path d="M0 126L775 126 826 168 826 195 775 238 420 238 369 277 369 307 420 347 842 347 892 388 892 412 842 455 415 455 366 492 366 520 415 563 1280 563" fill="none" stroke="#fff9d1" stroke-width="3" stroke-dasharray="6 17" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <circle cx="1" cy="47.25" r="9" fill="#acf2c7" stroke="#194049" stroke-width="3"/>
+  <circle cx="479" cy="211.1" r="9" fill="#f4a08a" stroke="#194049" stroke-width="3"/>
+  <path d="M203 121l6-26 5 15 8-20 7 30Z" fill="#8ae4d9" stroke="#e9fff2" stroke-width="2"/>
+  <rect x="2" y="2" width="476" height="266" rx="12" fill="none" stroke="#dfbc7f" stroke-opacity=".72" stroke-width="4"/>
+ </g>
+</svg>

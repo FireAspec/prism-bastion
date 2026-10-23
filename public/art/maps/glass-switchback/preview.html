@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width,initial-scale=1"/>
+ <title>Стеклянный серпантин · предпросмотр</title>
+ <style>
+  :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark;color:#f3e9d4;background:#061c28}
+  *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 65% -35%,#29636a,#092832 55%,#061722)}
+  header{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:24px 3%;border-bottom:1px solid #84af9745}
+  .kicker{font-size:11px;font-weight:800;letter-spacing:.23em;color:#d8bd88}h1{font-size:clamp(25px,2.6vw,40px);letter-spacing:-.035em;margin:2px 0;font-weight:600}
+  .badge{padding:7px 12px;border-radius:99px;border:1px solid #b8a77b80;color:#e8d6ae;font-size:12px}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:20px;max-width:1700px;padding:25px 2.8%;margin:auto;align-items:start}
+  .field{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:14px;border:1px solid #b4d5bb55;box-shadow:0 20px 64px #0009;background:#234b50}
+  .field img,.field svg{position:absolute;inset:0;width:100%;height:100%;display:block}.field img{pointer-events:none}.field svg{pointer-events:none}.field .site{pointer-events:all;cursor:pointer}
+  .field .flag{position:absolute;left:15px;bottom:12px;background:#061f2be0;border-radius:6px;border:1px solid #7aa09b66;padding:8px 12px;font-size:12px;color:#e9dbc2}
+  aside{border:1px solid #8bb19c60;background:#0c2b36ea;border-radius:14px;padding:20px;box-shadow:0 18px 45px #0004}
+  aside h2{margin:0 0 12px;font-size:17px;font-weight:620}aside p{color:#aecac2;font-size:13px;line-height:1.6}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:19px 0}.stats div{border-radius:8px;background:#1b4851b3;padding:12px}.stats b{font-size:21px;color:#f4dbad}.stats span{display:block;color:#b2c6bb;font-size:11px;margin-top:4px}
+  .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+  button{font:inherit;font-size:12px;cursor:pointer;min-height:38px;color:#e3e9df;background:#1c464e;border:1px solid #779c96;border-radius:8px;padding:8px}
+  button[aria-pressed="true"]{background:#e5c992;color:#152e32;border-color:#f1dcae;font-weight:750}button:hover{filter:brightness(1.15)}button:focus-visible{outline:2px solid #ffe3aa;outline-offset:3px}
+  #detail{font-size:13px;line-height:1.6;color:#eddbb3;background:#254a5275;min-height:100px;border-left:3px solid #eac887;padding:13px}
+  .legend{font-size:12px;color:#bfd4ca;margin:10px 0}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;background:#e7c586}.dot.blue{background:#56d6d7}
+  footer{padding:0 3% 25px;color:#8bb3a9;font-size:12px;line-height:1.6}
+  @media(max-width:980px){main{grid-template-columns:1fr}.controls{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:540px){main{padding:12px}.controls{grid-template-columns:1fr 1fr}.field .flag{font-size:10px;bottom:5px;left:6px;padding:5px}}
+ </style>
+</head>
+<body>
+ <header><div><div class="kicker">PRISM BASTION · УЧАСТОК 15 / 20</div><h1>Стеклянный серпантин</h1></div><div><span class="badge">Эстуарий · группа 3</span> <span class="badge">Hard · 80 волн</span></div></header>
+ <main>
+  <section class="field" aria-label="Игровое поле 1280 на 720 с четырьмя разворотами">
+   <img src="./background.svg" alt="Приливные озёра, скалы и светящиеся кристаллы"/>
+   <svg id="overlay" viewBox="0 0 1280 720" role="group" aria-label="Маршрут и позиции обороны"></svg>
+   <div class="flag">● Вход слева → 4 разворота → ● Выход справа</div>
+  </section>
+  <aside><h2>Тактические уступы</h2>
+   <p>Ближний перекрёстный огонь, сухие полки и водные карманы. Выберите построение; точки можно нажимать для пояснения.</p>
+   <div class="stats"><div><b>3472 px</b><span>длина пути</span></div><div><b>4</b><span>разворота</span></div><div><b>38 px</b><span>ширина дороги</span></div><div><b>80</b><span>волн hard</span></div></div>
+   <div class="controls"><button id="defense" aria-pressed="true">Оборона</button><button id="hybrid" aria-pressed="false">Гибрид</button><button id="zones" aria-pressed="false">Зоны</button><button id="route" aria-pressed="true">Маршрут</button></div>
+   <div id="detail" aria-live="polite">Сухая оборона: быстрый огонь сверху, замедление в середине и дальний перехват у выхода.</div>
+   <div class="legend"><span class="dot"></span>Наземная позиция с footprint</div><div class="legend"><span class="dot blue"></span>Водная позиция для повторного прохождения</div>
+   <p style="font-size:11px">Это просмотр геометрии, не боевая симуляция. Победные replay требуют проверки игровым движком.</p>
+  </aside>
+ </main>
+ <footer>Сюжетная цель: разминировать старый перевал. Награда после победы — «Минный узел». Он не требуется для первого прохождения этой карты.</footer>
+ <script id="map-geometry" type="application/json">
+{
+ "lanes":[[{"x":0,"y":126},{"x":775,"y":126},{"x":826,"y":168},{"x":826,"y":195},{"x":775,"y":238},{"x":420,"y":238},{"x":369,"y":277},{"x":369,"y":307},{"x":420,"y":347},{"x":842,"y":347},{"x":892,"y":388},{"x":892,"y":412},{"x":842,"y":455},{"x":415,"y":455},{"x":366,"y":492},{"x":366,"y":520},{"x":415,"y":563},{"x":1280,"y":563}]],
+ "pathWidth":38,
+ "water":[[{"x":948,"y":74},{"x":1218,"y":64},{"x":1263,"y":116},{"x":1253,"y":286},{"x":1160,"y":309},{"x":980,"y":273},{"x":946,"y":195}],[{"x":40,"y":338},{"x":255,"y":330},{"x":307,"y":365},{"x":295,"y":517},{"x":217,"y":550},{"x":49,"y":535}],[{"x":973,"y":355},{"x":1200,"y":356},{"x":1265,"y":403},{"x":1235,"y":500},{"x":1060,"y":519},{"x":964,"y":468}],[{"x":632,"y":628},{"x":812,"y":623},{"x":860,"y":697},{"x":585,"y":700}]],
+ "blocked":[[{"x":270,"y":24},{"x":556,"y":15},{"x":592,"y":73},{"x":494,"y":91},{"x":302,"y":76}],[{"x":545,"y":282},{"x":592,"y":278},{"x":617,"y":299},{"x":581,"y":317},{"x":544,"y":310}],[{"x":460,"y":643},{"x":550,"y":633},{"x":571,"y":691},{"x":426,"y":703}],[{"x":1096,"y":12},{"x":1240,"y":16},{"x":1264,"y":52},{"x":1084,"y":57}]]
+}
+ </script>
+ <script>
+ 'use strict';
+ const NS='http://www.w3.org/2000/svg', map=JSON.parse(document.getElementById('map-geometry').textContent), overlay=document.getElementById('overlay'),detail=document.getElementById('detail');
+ const state={mode:'defense',zones:false,route:true};
+ const strategies={
+  defense:[
+   {x:640,y:184,r:160,name:'Верхняя игла',why:'Начальный огонь по первой и возвратной линии.'},
+   {x:483,y:295,r:115,name:'Западный сектор',why:'Веерная башня держит внутренний разворот.'},
+   {x:711,y:292,r:155,name:'Холодный центр',why:'Контроль второй и третьей полос.'},
+   {x:700,y:509,r:290,name:'Нижний дальнобой',why:'Пробитие брони и прикрытие финальной прямой.'},
+   {x:1077,y:620,r:185,name:'Последний заслон',why:'Снимает остатки быстрых целей до правого выхода.'}
+  ],
+  hybrid:[
+   {x:640,y:184,r:160,name:'Обязательная оборона',why:'Урон до любых вложений в экономику.'},
+   {x:711,y:292,r:155,name:'Контроль центра',why:'Замедление между двумя параллельными участками.'},
+   {x:190,y:247,r:0,name:'Экономический уступ',why:'Ферма только после достаточного запаса урона.'},
+   {x:1104,y:183,r:185,water:true,name:'Водный карман',why:'Причал или насос — не обязательный для первой победы.'},
+   {x:700,y:509,r:190,name:'Нижний перехват',why:'Страховка экономического построения.'}
+  ]
+ };
+ const points=poly=>poly.map(p=>`${p.x},${p.y}`).join(' ');
+ function elem(tag,attrs,parent=overlay){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));parent.append(e);return e;}
+ function draw(){
+  overlay.replaceChildren();
+  if(state.zones){for(const poly of map.water)elem('polygon',{points:points(poly),stroke:'#8cf3ea','stroke-width':3,'stroke-dasharray':'12 9',fill:'#2ed2d2','fill-opacity':'.21'});for(const poly of map.blocked)elem('polygon',{points:points(poly),stroke:'#f1c78c','stroke-width':3,'stroke-dasharray':'7 7',fill:'#dbcba4','fill-opacity':'.28'});}
+  if(state.route){const p=points(map.lanes[0]);elem('polyline',{points:p,fill:'none',stroke:'#0c2933','stroke-width':54,'stroke-linecap':'round','stroke-linejoin':'round'});elem('polyline',{points:p,fill:'none',stroke:'#bfb698','stroke-width':map.pathWidth,'stroke-linecap':'round','stroke-linejoin':'round'});elem('polyline',{points:p,fill:'none',stroke:'#fff5d1','stroke-width':2.3,'stroke-dasharray':'7 17'});elem('path',{d:'M9 126l32 -17v34z',fill:'#a3f4ba',stroke:'#174248','stroke-width':3});elem('path',{d:'M1271 563l-32 -17v34z',fill:'#f2aa85',stroke:'#4e3541','stroke-width':3});}
+  for(const [i,p] of strategies[state.mode].entries()){
+   const group=elem('g',{class:'site',role:'button',tabindex:0,'aria-label':p.name});
+   if(p.r)elem('circle',{cx:p.x,cy:p.y,r:p.r,stroke:p.water?'#63e0dc':'#f4dca0','stroke-width':1.2,'stroke-dasharray':'7 10','stroke-opacity':'.55',fill:p.water?'#22b6c1':'#e9c988','fill-opacity':'.045'},group);
+   elem('circle',{cx:p.x,cy:p.y,r:31,fill:'#102d38',stroke:p.water?'#5ae7ec':'#f3d694','stroke-width':3},group);
+   elem('circle',{cx:p.x,cy:p.y,r:24,fill:p.water?'#188e9e':'#c6a56e'},group);
+   const label=elem('text',{x:p.x,y:p.y+7,'text-anchor':'middle','font-size':18,'font-weight':750,fill:'#17333b'},group);label.textContent=String(i+1);
+   const activate=()=>detail.textContent=`${i+1}. ${p.name}: ${p.why}`;
+   group.addEventListener('click',activate);group.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});
+  }
+ }
+ for(const id of ['defense','hybrid'])document.getElementById(id).addEventListener('click',()=>{state.mode=id;for(const name of ['defense','hybrid'])document.getElementById(name).setAttribute('aria-pressed',String(name===id));detail.textContent=id==='defense'?'Сухая оборона: ранний урон, контроль и страховка выхода.':'Гибрид: оборона, поздняя экономика и дополнительные водные позиции.';draw();});
+ document.getElementById('zones').addEventListener('click',e=>{state.zones=!state.zones;e.currentTarget.setAttribute('aria-pressed',String(state.zones));draw();});
+ document.getElementById('route').addEventListener('click',e=>{state.route=!state.route;e.currentTarget.setAttribute('aria-pressed',String(state.route));draw();});
+ draw();
+ </script>
+</body>
+</html>
