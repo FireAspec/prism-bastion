@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Миниатюра финальной карты Сердце бури">
+  <defs>
+    <radialGradient id="land"><stop stop-color="#2e6969"/><stop offset="1" stop-color="#092331"/></radialGradient>
+    <linearGradient id="sea" x1="0" x2=".7" y1="0" y2="1"><stop stop-color="#0b344c"/><stop offset=".6" stop-color="#1c6b80"/><stop offset="1" stop-color="#0c293d"/></linearGradient>
+    <linearGradient id="trail"><stop stop-color="#82beb3"/><stop offset="1" stop-color="#e9c98c"/></linearGradient>
+    <radialGradient id="aura"><stop stop-color="#b0ffe2" stop-opacity=".78"/><stop offset=".2" stop-color="#50d5cf" stop-opacity=".2"/><stop offset="1" stop-color="#50d5cf" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#land)"/>
+  <g fill="url(#sea)" stroke="#71c5cb" stroke-opacity=".5" stroke-width="2">
+    <path d="M0 0H640V29L540 32 442 30 335 26 220 32 100 29 0 36Z"/>
+    <path d="M296 38L364 47 428 58 490 60 536 46 569 71 534 117 480 124 390 125 310 106 284 80Z"/>
+    <path d="M299 260L350 244 447 250 524 250 560 280 533 360H276L254 318Z"/>
+    <path d="M129 172L170 164 192 173 193 187 168 201 132 197Z"/>
+  </g>
+  <g fill="none" stroke="#92f5e6" stroke-opacity=".28" stroke-width="2">
+    <ellipse cx="455" cy="83" rx="85" ry="28" transform="rotate(-11 455 83)"/>
+    <ellipse cx="455" cy="83" rx="54" ry="15" transform="rotate(12 455 83)"/>
+  </g>
+  <g fill="none" stroke="#062a36" stroke-width="27" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 52H53L86 73H144L185 100H237L285 138 328 177H372L413 151H467L512 177H542"/>
+    <path d="M0 133H49L94 146 137 143 190 151 245 160 283 171 328 177H372L413 151H467L512 177H542"/>
+    <path d="M0 232H49L94 220 137 222 193 208 246 200 283 188 328 177H372L413 151H467L512 177H542"/>
+    <path d="M0 312H48L90 278H143L187 249 240 242 283 211 328 177H372L413 151H467L512 177H542"/>
+    <path d="M542 177L570 150 596 106H640M542 177L570 204 596 255H640"/>
+  </g>
+  <g fill="none" stroke="url(#trail)" stroke-width="17" stroke-linecap="round" stroke-linejoin="round" opacity=".91">
+    <path d="M0 52H53L86 73H144L185 100H237L285 138 328 177H372L413 151H467L512 177H542L570 150 596 106H640"/>
+    <path d="M0 133H49L94 146 137 143 190 151 245 160 283 171 328 177H372L413 151H467L512 177H542L570 204 596 255H640"/>
+    <path d="M0 232H49L94 220 137 222 193 208 246 200 283 188 328 177H372L413 151H467L512 177H542L570 150 596 106H640"/>
+    <path d="M0 312H48L90 278H143L187 249 240 242 283 211 328 177H372L413 151H467L512 177H542L570 204 596 255H640"/>
+  </g>
+  <g fill="none" stroke="#f7efc2" stroke-opacity=".55" stroke-width="2" stroke-dasharray="2 13" stroke-linecap="round">
+    <path d="M2 52H53L86 73H144L185 100H237L285 138 328 177H372L413 151H467L512 177H542L570 150 596 106H638"/>
+    <path d="M2 312H48L90 278H143L187 249 240 242 283 211 328 177"/>
+  </g>
+  <g fill="url(#aura)"><circle cx="397" cy="205" r="63"/><circle cx="326" cy="127" r="59"/></g>
+  <g fill="#163a46" stroke="#e5bf83" stroke-width="3">
+    <path d="M627 96l-10-16h-12l-10 16v29h32zM627 244l-10-16h-12l-10 16v29h32z"/>
+    <path d="M313 128v-20l11-18 11 18v20zM387 230v-21l11-18 11 18v21z"/>
+  </g>
+  <g fill="#ffe6a5"><circle cx="611" cy="93" r="5"/><circle cx="611" cy="241" r="5"/><circle cx="324" cy="106" r="4"/><circle cx="398" cy="207" r="4"/></g>
+  <rect x="16" y="291" width="400" height="61" rx="12" fill="#081f2c" fill-opacity=".9" stroke="#6caa9e" stroke-opacity=".35"/>
+  <g font-family="system-ui,sans-serif" font-weight="800" fill="#f7eac4">
+    <text x="26" y="326" font-size="37" letter-spacing="1">СЕРДЦЕ БУРИ</text>
+    <text x="29" y="345" font-size="10" letter-spacing="3" fill="#98f3dc">ФИНАЛ · ЧЕТЫРЕ ВХОДА · ДВА МАЯКА</text>
+  </g>
+  <rect x="4" y="4" width="632" height="352" rx="12" stroke="#dfb97c" stroke-opacity=".54" stroke-width="3" fill="none"/>
+</svg>

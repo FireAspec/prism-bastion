@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "mapId": "heart-of-storm",
+  "difficulty": "extreme",
+  "rounds": 100,
+  "tickRate": 60,
+  "verification": "unverified",
+  "actualFinalLives": null,
+  "actualFinalCredits": null,
+  "reason": "Enemy, tower, wave and simulation modules are placeholders at the frozen base commit. No combat victory is claimed.",
+  "unlockedTowers": [
+    "needle","cannon","frost","beacon","scatter","ember","saw","venom","rail",
+    "tesla","mortar","observatory","mint","orchard","drone","rocket","resonator",
+    "forge","harbor","tide","coral","chrono","gravity","prism","mirror","mine",
+    "portal","bank","storm","bastion"
+  ],
+  "scenarios": [
+    {
+      "id": "standard-confluence",
+      "modeId": "standard",
+      "seed": 570001,
+      "startingCredits": 850,
+      "openingSpend": 600,
+      "openingRemainder": 250,
+      "composition": "confluence",
+      "strategy": "Two cheap sentries at the convergence; add splash and anti-shield damage before high-tier boss waves.",
+      "contingency": "If the north entry leaks, move the optional south-approach reserve purchase earlier; if shields survive, prefer tesla B upgrades over more kinetic damage.",
+      "actions": [
+        {"wave":1,"tick":0,"type":"place","tower":"needle","site":"north-socket","ref":"north-needle"},
+        {"wave":1,"tick":0,"type":"place","tower":"needle","site":"south-socket","ref":"south-needle"},
+        {"wave":3,"tick":0,"type":"upgrade","ref":"north-needle","path":0},
+        {"wave":5,"tick":0,"type":"place","tower":"cannon","site":"storm-eye","ref":"storm-cannon"},
+        {"wave":7,"tick":0,"type":"upgrade","ref":"south-needle","path":1},
+        {"wave":9,"tick":0,"type":"upgrade","ref":"storm-cannon","path":0},
+        {"wave":11,"tick":0,"type":"place","tower":"frost","site":"return-ramp","ref":"return-frost"},
+        {"wave":16,"tick":0,"type":"place","tower":"mortar","site":"south-battery","ref":"south-mortar"},
+        {"wave":22,"tick":0,"type":"place","tower":"tesla","site":"fork-guard","ref":"fork-tesla"},
+        {"wave":27,"tick":0,"type":"upgrade","ref":"south-mortar","path":0},
+        {"wave":35,"tick":0,"type":"place","tower":"rail","site":"north-lantern","ref":"north-rail"},
+        {"wave":45,"tick":0,"type":"upgrade","ref":"fork-tesla","path":1},
+        {"wave":56,"tick":0,"type":"place","tower":"observatory","site":"south-lantern","ref":"late-detection"},
+        {"wave":67,"tick":0,"type":"place","tower":"venom","site":"north-approach","ref":"north-venom"},
+        {"wave":82,"tick":0,"type":"place","tower":"rocket","site":"south-approach","ref":"south-rocket"}
+      ]
+    },
+    {
+      "id": "half-cash-confluence",
+      "modeId": "half-cash",
+      "seed": 570002,
+      "startingCredits": 425,
+      "openingSpend": 300,
+      "openingRemainder": 125,
+      "composition": "confluence",
+      "strategy": "One centrally placed needle is affordable without farming; grow it first, then buy an economical splash gun and dedicated boss damage.",
+      "contingency": "No purchase is allowed to assume full income: all actions are affordability-gated and require a real half-cash replay. A failed gate invalidates this candidate.",
+      "actions": [
+        {"wave":1,"tick":0,"type":"place","tower":"needle","site":"storm-eye","ref":"heart-needle"},
+        {"wave":4,"tick":0,"type":"upgrade","ref":"heart-needle","path":0},
+        {"wave":11,"tick":0,"type":"place","tower":"needle","site":"north-socket","ref":"north-needle"},
+        {"wave":19,"tick":0,"type":"place","tower":"cannon","site":"south-battery","ref":"south-cannon"},
+        {"wave":26,"tick":0,"type":"upgrade","ref":"south-cannon","path":0},
+        {"wave":38,"tick":0,"type":"place","tower":"frost","site":"return-ramp","ref":"return-frost"},
+        {"wave":51,"tick":0,"type":"place","tower":"tesla","site":"fork-guard","ref":"fork-tesla"},
+        {"wave":64,"tick":0,"type":"place","tower":"rail","site":"north-lantern","ref":"north-rail"},
+        {"wave":76,"tick":0,"type":"upgrade","ref":"fork-tesla","path":1},
+        {"wave":89,"tick":0,"type":"place","tower":"mortar","site":"south-lantern","ref":"south-mortar"}
+      ]
+    },
+    {
+      "id": "iron-oath-split",
+      "modeId": "iron-oath",
+      "seed": 570003,
+      "startingCredits": 850,
+      "openingSpend": 600,
+      "openingRemainder": 250,
+      "composition": "split",
+      "strategy": "Build defensive depth with no economy towers or resale. Invest in convergence DPS first, then duplicate detection and anti-boss coverage by the two exits.",
+      "contingency": "One leak fails the run; defer speculative damage upgrades in favor of permanent coverage at the weaker exit. No passive money and no selling.",
+      "actions": [
+        {"wave":1,"tick":0,"type":"place","tower":"needle","site":"north-socket","ref":"north-needle"},
+        {"wave":1,"tick":0,"type":"place","tower":"needle","site":"south-socket","ref":"south-needle"},
+        {"wave":4,"tick":0,"type":"upgrade","ref":"north-needle","path":1},
+        {"wave":8,"tick":0,"type":"place","tower":"cannon","site":"storm-eye","ref":"core-cannon"},
+        {"wave":13,"tick":0,"type":"upgrade","ref":"core-cannon","path":0},
+        {"wave":21,"tick":0,"type":"place","tower":"frost","site":"return-ramp","ref":"frost"},
+        {"wave":30,"tick":0,"type":"place","tower":"tesla","site":"fork-guard","ref":"fork-tesla"},
+        {"wave":40,"tick":0,"type":"place","tower":"rail","site":"north-lantern","ref":"north-rail"},
+        {"wave":48,"tick":0,"type":"place","tower":"mortar","site":"south-lantern","ref":"south-mortar"},
+        {"wave":61,"tick":0,"type":"upgrade","ref":"fork-tesla","path":1},
+        {"wave":73,"tick":0,"type":"place","tower":"observatory","site":"south-battery","ref":"detection"},
+        {"wave":88,"tick":0,"type":"place","tower":"rocket","site":"north-approach","ref":"boss-rocket"}
+      ]
+    }
+  ]
+}
