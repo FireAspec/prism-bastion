@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Мост раскола — просмотр карты</title>
+  <style>
+    :root{color-scheme:dark;font:15px/1.4 system-ui,sans-serif;background:#0a1b28;color:#e6dcc8}
+    *{box-sizing:border-box}body{margin:0;padding:22px max(14px,calc((100vw - 1400px)/2))}
+    header{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:15px}
+    h1{font-size:clamp(22px,3vw,34px);margin:0;color:#f7d49d}small{color:#95c4bb}
+    .toggles{display:flex;flex-wrap:wrap;gap:10px}label{border:1px solid #45626a;border-radius:9px;background:#173645;padding:8px;cursor:pointer}
+    input{accent-color:#f0bd77}.stage{position:relative;aspect-ratio:1280/720;max-width:1366px;overflow:hidden;border:2px solid #b08052;border-radius:12px;background:#18363d}
+    .stage img,.stage svg{position:absolute;inset:0;width:100%;height:100%}.stage img{object-fit:fill}
+    .stage svg{pointer-events:none}#routes,#zones,#pads{display:none}
+    body:has(#show-routes:checked) #routes,body:has(#show-zones:checked) #zones,body:has(#show-pads:checked) #pads{display:block}
+    .legend{margin-top:12px;color:#b5d2cb}p{max-width:900px}
+  </style>
+</head>
+<body>
+  <header>
+    <div><small>PRISM BASTION · КАРТА 16 · EXTREME</small><h1>Мост раскола</h1><small>1366 × 768 · автономный просмотр ресурсов, не игровой движок</small></div>
+    <div class="toggles"><label><input id="show-routes" type="checkbox"> Маршруты</label><label><input id="show-zones" type="checkbox"> Зоны коллизий</label><label><input id="show-pads" type="checkbox"> Тактические позиции</label></div>
+  </header>
+  <div class="stage">
+    <img src="background.svg" alt="Два литейных тракта сходятся к мосту через светящийся разлом">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" aria-hidden="true">
+      <g id="routes" fill="none" stroke="#fff1ae" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M0 174H140L214 230H318L392 294H476L560 360H680H940H1040L1110 420H1280" stroke-width="48" opacity=".4"/>
+        <path d="M0 566H140L214 502H330L406 428H486L560 360" stroke-width="48" opacity=".4"/>
+        <path d="M0 174H140L214 230H318L392 294H476L560 360H680H940H1040L1110 420H1280" stroke-width="3" stroke-dasharray="7 10"/>
+        <path d="M0 566H140L214 502H330L406 428H486L560 360" stroke-width="3" stroke-dasharray="7 10"/>
+      </g>
+      <g id="zones">
+        <path d="M698 0L687 74 707 131 690 206 705 273 687 326 691 414 712 483 688 549 707 632 700 720H947L932 632 949 560 934 479 951 414 944 326 957 271 934 203 952 133 936 66 946 0Z" fill="#41d5df" fill-opacity=".24" stroke="#78ffff" stroke-width="3"/>
+        <g fill="#f28b73" fill-opacity=".42" stroke="#ff9f8b" stroke-width="2">
+          <polygon points="38,18 222,18 232,88 50,105"/><polygon points="327,27 476,22 492,95 331,101"/>
+          <polygon points="48,624 214,618 236,700 46,704"/><polygon points="319,625 476,630 484,709 307,702"/>
+          <polygon points="526,31 636,41 637,146 520,139"/><polygon points="659,213 735,208 741,285 663,287"/>
+          <polygon points="659,436 741,436 737,514 665,509"/><polygon points="908,213 975,209 979,285 907,288"/>
+          <polygon points="910,437 976,434 976,516 904,512"/><polygon points="998,23 1186,34 1196,132 999,129"/>
+          <polygon points="1072,171 1236,166 1241,251 1070,251"/>
+          <polygon points="969,590 1037,588 1041,700 963,705"/><polygon points="1177,544 1265,541 1265,705 1171,705"/>
+        </g>
+      </g>
+      <g id="pads" font-family="system-ui,sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+        <g fill="#ffde9c" fill-opacity=".22" stroke="#ffdf9c" stroke-width="2"><circle cx="365" cy="362" r="30"/><circle cx="363" cy="148" r="30"/><circle cx="364" cy="580" r="30"/><circle cx="523" cy="218" r="30"/><circle cx="528" cy="512" r="30"/><circle cx="613" cy="254" r="30"/><circle cx="611" cy="475" r="30"/><circle cx="1096" cy="512" r="30"/></g>
+        <g fill="#fff0c8"><text x="365" y="367">C</text><text x="363" y="153">N</text><text x="364" y="585">S</text><text x="523" y="223">U</text><text x="528" y="517">D</text><text x="613" y="259">B1</text><text x="611" y="480">B2</text><text x="1096" y="517">E</text></g>
+        <g fill="#6ef5e9" fill-opacity=".2" stroke="#8bf5ec" stroke-width="2"><circle cx="822" cy="262" r="30"/><circle cx="821" cy="468" r="30"/></g>
+        <g fill="#e8fffa"><text x="822" y="267">W1</text><text x="821" y="473">W2</text></g>
+      </g>
+    </svg>
+  </div>
+  <p class="legend">C — центр развилки · N/S — верхний/нижний вход · U/D — предмостовые площадки · B1/B2 — берега моста · E — последняя малая зона · W1/W2 — вода.</p>
+</body>
+</html>
