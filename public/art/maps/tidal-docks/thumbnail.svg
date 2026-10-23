@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Миниатюра карты Приливные доки">
+  <defs>
+    <linearGradient id="earth" x2="0" y2="1"><stop stop-color="#66796d"/><stop offset="1" stop-color="#415958"/></linearGradient>
+    <linearGradient id="sea" x2=".7" y2="1"><stop stop-color="#173e53"/><stop offset="1" stop-color="#117885"/></linearGradient>
+    <pattern id="planks" patternUnits="userSpaceOnUse" width="10" height="10"><rect width="10" height="10" fill="#b58d62"/><path d="M0 0H10M2 0V10" fill="none" stroke="#6d5443" stroke-width=".7"/></pattern>
+    <radialGradient id="lamp"><stop stop-color="#ffda92" stop-opacity=".9"/><stop offset="1" stop-color="#ffbb76" stop-opacity="0"/></radialGradient>
+    <path id="route" d="M0 178L68 178 87 166 104.5 135 125 123 182.5 123 206 135 217.5 158 217.5 200 231 220.5 260 233 305 233 329.5 221 342 200 342 160 355.5 135.5 379.5 121 427.5 121 447 132.5 456 157.5 456 197.5 470 220.5 490 234 525.5 234 546 219.5 555 200 555 176 575 167 640 167" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </defs>
+  <rect width="640" height="360" rx="14" fill="url(#earth)"/>
+  <path d="M0 0H640V105L585 99 540 100 490 96 445 99 390 93 340 94 292 97 236 98 188 94 126 95 72 100 0 101Z" fill="url(#sea)" stroke="#b6bc99" stroke-width="3"/>
+  <path d="M0 293 50 289 110 290 165 288 227 283 292 290 365 285 423 291 480 285 539 294 600 290 640 291V360H0Z" fill="url(#sea)" stroke="#b6bc99" stroke-width="3"/>
+  <path d="M245 105l68 -2 8 46 -11 8h-55l-10 -10ZM95 257h110v19H95ZM374 258l65 -7 4 26h-69Z" fill="url(#sea)" stroke="#b6bc99" stroke-width="3"/>
+  <g fill="none" stroke="#9dded8" stroke-width="1.5" opacity=".3"><path d="M28 42q80 -16 151 0t147 0t148 0t143 0M0 326q96 -10 170 1t150 -1t152 0t168 2"/></g>
+  <use xlink:href="#route" stroke="#243c42" stroke-width="41"/>
+  <use xlink:href="#route" stroke="#e2bf88" stroke-width="35"/>
+  <use xlink:href="#route" stroke="url(#planks)" stroke-width="28"/>
+  <g fill="#625448" stroke="#e2bd88" stroke-width="2"><rect x="31" y="113" width="37" height="31" rx="3"/><rect x="148" y="69" width="37" height="24" rx="3"/><rect x="259" y="175" width="26" height="19" rx="2"/><rect x="385" y="200" width="26" height="19" rx="2"/><rect x="502" y="115" width="37" height="30" rx="3"/><rect x="583" y="222" width="32" height="27" rx="2"/></g>
+  <g><circle cx="91" cy="150" r="22" fill="url(#lamp)"/><circle cx="207" cy="217" r="22" fill="url(#lamp)"/><circle cx="353" cy="207" r="22" fill="url(#lamp)"/><circle cx="440" cy="136" r="22" fill="url(#lamp)"/><circle cx="545" cy="160" r="22" fill="url(#lamp)"/></g>
+  <g fill="none" stroke="#ffe1a6" stroke-width="4" stroke-linecap="round"><path d="m9 166 11 12 -11 12M612 155l12 12 -12 12"/></g>
+  <path d="M0 285H640V360H0Z" fill="#143746" opacity=".9"/>
+  <text x="28" y="326" fill="#f4daa4" font-family="system-ui,sans-serif" font-weight="800" font-size="28" letter-spacing="1">ПРИЛИВНЫЕ ДОКИ</text>
+  <text x="611" y="326" text-anchor="end" fill="#98ddd2" font-family="system-ui,sans-serif" font-weight="700" font-size="22">08</text>
+  <rect x="3" y="3" width="634" height="354" rx="13" stroke="#dfc995" stroke-opacity=".54" stroke-width="3" fill="none"/>
+</svg>

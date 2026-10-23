@@ -1,0 +1,59 @@
+{
+  "schema":1,"contractVersion":1,"mapId":"tidal-docks","replayStatus":"unverified","difficulty":"normal","rounds":60,
+  "profile":{"unlockedTowers":["needle","cannon","frost","beacon","scatter","ember","saw","venom","rail","tesla","mortar","observatory","mint","orchard","drone","rocket","resonator","forge"],"knowledge":[]},
+  "budgetNotes":"Actual prices and earnings come ONLY from the real engine. Starting balances are normal=900, half-cash=450, iron-oath=900; no injected money, no automatic purchase skips. A rejected purchase fails the candidate.",
+  "cases":[
+    {"id":"standard-crossfire","modeId":"standard","seed":45081,"startingCredits":900,"startingLives":150,
+      "hypothesis":"West needle and middle cannon create early crossfire. Frost, reveal beacon and rail cover fast, cloaked and armoured groups; mortar and rocket reinforce boss fights.",
+      "actions":[
+        {"wave":1,"tick":0,"type":"place","site":"W1","position":{"x":244,"y":362},"tower":"needle","bind":"needle"},
+        {"wave":1,"tick":0,"type":"place","site":"C1","position":{"x":612,"y":356},"tower":"cannon","bind":"cannon"},
+        {"wave":4,"tick":0,"type":"place","site":"E1","position":{"x":815,"y":349},"tower":"frost","bind":"frost"},
+        {"wave":7,"tick":0,"type":"upgrade","ref":"needle","path":0},
+        {"wave":10,"tick":0,"type":"upgrade","ref":"cannon","path":1},
+        {"wave":12,"tick":120,"type":"place","site":"E3","position":{"x":758,"y":352},"tower":"beacon","bind":"beacon"},
+        {"wave":16,"tick":0,"type":"place","site":"E2","position":{"x":1032,"y":362},"tower":"rail","bind":"rail"},
+        {"wave":20,"tick":0,"type":"upgrade","ref":"frost","path":0},
+        {"wave":25,"tick":0,"type":"place","site":"W2","position":{"x":325,"y":345},"tower":"tesla","bind":"tesla"},
+        {"wave":32,"tick":0,"type":"upgrade","ref":"rail","path":0},
+        {"wave":39,"tick":0,"type":"place","site":"S1","position":{"x":558,"y":526},"tower":"mortar","bind":"mortar"},
+        {"wave":44,"tick":0,"type":"upgrade","ref":"cannon","path":1},
+        {"wave":50,"tick":0,"type":"place","site":"E4","position":{"x":976,"y":392},"tower":"rocket","bind":"rocket"},
+        {"wave":56,"tick":0,"type":"upgrade","ref":"mortar","path":0}
+      ]},
+    {"id":"half-cash-concentrated","modeId":"half-cash","seed":45082,"startingCredits":450,"startingLives":150,
+      "hypothesis":"One cheap opener followed by modest upgrades, central crowd control, later armour penetration and a final artillery line; no farms required.",
+      "actions":[
+        {"wave":1,"tick":0,"type":"place","site":"W1","position":{"x":244,"y":362},"tower":"needle","bind":"needle"},
+        {"wave":6,"tick":0,"type":"upgrade","ref":"needle","path":0},
+        {"wave":9,"tick":0,"type":"place","site":"C1","position":{"x":612,"y":356},"tower":"cannon","bind":"cannon"},
+        {"wave":13,"tick":0,"type":"place","site":"E1","position":{"x":815,"y":349},"tower":"frost","bind":"frost"},
+        {"wave":18,"tick":0,"type":"upgrade","ref":"cannon","path":0},
+        {"wave":23,"tick":0,"type":"place","site":"E2","position":{"x":1032,"y":362},"tower":"rail","bind":"rail"},
+        {"wave":28,"tick":0,"type":"place","site":"E3","position":{"x":758,"y":352},"tower":"beacon","bind":"beacon"},
+        {"wave":34,"tick":0,"type":"upgrade","ref":"frost","path":1},
+        {"wave":40,"tick":0,"type":"upgrade","ref":"needle","path":0},
+        {"wave":43,"tick":0,"type":"place","site":"S1","position":{"x":558,"y":526},"tower":"mortar","bind":"mortar"},
+        {"wave":50,"tick":0,"type":"place","site":"W2","position":{"x":325,"y":345},"tower":"tesla","bind":"tesla"},
+        {"wave":56,"tick":0,"type":"upgrade","ref":"rail","path":0}
+      ]},
+    {"id":"iron-oath-no-economy","modeId":"iron-oath","seed":45083,"startingCredits":900,"startingLives":1,
+      "hypothesis":"One-life defense without resale, permanent knowledge, farms or interest. Overlapping cannon, frost, reveal and rail with rocket/mortar boss backups.",
+      "actions":[
+        {"wave":1,"tick":0,"type":"place","site":"W2","position":{"x":325,"y":345},"tower":"cannon","bind":"cannon"},
+        {"wave":1,"tick":0,"type":"place","site":"E1","position":{"x":815,"y":349},"tower":"needle","bind":"needle"},
+        {"wave":5,"tick":0,"type":"place","site":"C1","position":{"x":612,"y":356},"tower":"frost","bind":"frost"},
+        {"wave":9,"tick":0,"type":"upgrade","ref":"needle","path":0},
+        {"wave":13,"tick":0,"type":"place","site":"E3","position":{"x":758,"y":352},"tower":"beacon","bind":"beacon"},
+        {"wave":17,"tick":0,"type":"place","site":"E2","position":{"x":1032,"y":362},"tower":"rail","bind":"rail"},
+        {"wave":22,"tick":0,"type":"upgrade","ref":"frost","path":0},
+        {"wave":27,"tick":0,"type":"upgrade","ref":"rail","path":0},
+        {"wave":32,"tick":0,"type":"place","site":"W3","position":{"x":312,"y":412},"tower":"rocket","bind":"rocket"},
+        {"wave":38,"tick":0,"type":"upgrade","ref":"cannon","path":1},
+        {"wave":44,"tick":0,"type":"place","site":"S1","position":{"x":558,"y":526},"tower":"mortar","bind":"mortar"},
+        {"wave":50,"tick":0,"type":"upgrade","ref":"needle","path":0},
+        {"wave":55,"tick":0,"type":"place","site":"E4","position":{"x":976,"y":392},"tower":"resonator","bind":"resonator"},
+        {"wave":58,"tick":0,"type":"upgrade","ref":"rail","path":1}
+      ]}
+  ]
+}
