@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Колокольная литейная, три разворота дороги, два служебных входа, кузня, цеха и бассейны">
+  <defs>
+    <linearGradient id="ground" x2="1" y2="1"><stop stop-color="#183c43"/><stop offset=".55" stop-color="#1e3540"/><stop offset="1" stop-color="#0b2532"/></linearGradient>
+    <linearGradient id="road" x2="0" y2="1"><stop stop-color="#435862"/><stop offset="1" stop-color="#283c47"/></linearGradient>
+    <linearGradient id="roof" x2="1" y2="1"><stop stop-color="#6a7974"/><stop offset=".5" stop-color="#36545b"/><stop offset="1" stop-color="#1d3844"/></linearGradient>
+    <linearGradient id="copper" x2="1" y2="1"><stop stop-color="#efc27a"/><stop offset=".4" stop-color="#b67b4d"/><stop offset="1" stop-color="#754638"/></linearGradient>
+    <radialGradient id="heat"><stop stop-color="#ffe8a6" stop-opacity=".8"/><stop offset=".3" stop-color="#f7a44f" stop-opacity=".45"/><stop offset="1" stop-color="#de6f41" stop-opacity="0"/></radialGradient>
+    <linearGradient id="pool" x2="0" y2="1"><stop stop-color="#278092"/><stop offset="1" stop-color="#124050"/></linearGradient>
+    <pattern id="floor" width="54" height="36" patternUnits="userSpaceOnUse"><path d="M0 0H54M0 18H54M27 0V18M0 18V36" stroke="#a3c1b7" stroke-opacity=".08" fill="none"/></pattern>
+    <pattern id="roofLines" width="18" height="18" patternUnits="userSpaceOnUse" patternTransform="rotate(30)"><path d="M4 0V18M12 0V18" stroke="#c2bc9a" stroke-opacity=".18" stroke-width="3"/></pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="150%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#071821" flood-opacity=".8"/></filter>
+    <g id="lamp"><circle r="13" fill="#e9974d" opacity=".18"/><circle r="5" fill="#ffce76" stroke="#334248" stroke-width="2"/></g>
+    <g id="gear"><circle r="21" fill="#2e4850" stroke="#c79660" stroke-width="5"/><circle r="11" fill="#19343c" stroke="#d6a268" stroke-width="4"/><path d="M-3-25H3V-17H-3ZM-3 17H3V25H-3ZM-25-3H-17V3H-25ZM17-3H25V3H17Z" fill="#d6a268"/></g>
+  </defs>
+  <rect width="1280" height="720" fill="url(#ground)"/>
+  <rect width="1280" height="720" fill="url(#floor)"/>
+  <ellipse cx="610" cy="360" rx="430" ry="270" fill="url(#heat)" opacity=".65"/>
+  <path d="M18 18H1262V702H18Z" fill="none" stroke="#86a59b" stroke-opacity=".2" stroke-width="2"/>
+
+  <!-- Exact MapDef water contours, including useful full-footprint water centres. -->
+  <path d="M402 642L554 631L601 648L591 702L412 701Z" fill="url(#pool)" stroke="#b68c5b" stroke-width="6"/>
+  <path d="M653 632L805 635L822 675L795 704L648 696Z" fill="url(#pool)" stroke="#b68c5b" stroke-width="6"/>
+  <g stroke="#9cddd8" opacity=".5" fill="none" stroke-width="2">
+    <path d="M425 655Q480 643 541 655T579 662M435 685Q505 676 568 688M674 653Q742 642 791 655M679 681Q750 670 790 687"/>
+  </g>
+
+  <!-- Tram route: identical world centreline and 46px usable strip. -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M0 150H888V287H255V431H935V579H0" stroke="#081f2c" stroke-width="66"/>
+    <path d="M0 76H193V150M1280 350H1050L935 431" stroke="#081f2c" stroke-width="66"/>
+    <path d="M0 150H888V287H255V431H935V579H0" stroke="#bb8752" stroke-width="55"/>
+    <path d="M0 76H193V150M1280 350H1050L935 431" stroke="#bb8752" stroke-width="55"/>
+    <path d="M0 150H888V287H255V431H935V579H0" stroke="url(#road)" stroke-width="46"/>
+    <path d="M0 76H193V150M1280 350H1050L935 431" stroke="url(#road)" stroke-width="46"/>
+    <path d="M0 150H888V287H255V431H935V579H0" stroke="#e0b781" stroke-width="2" stroke-dasharray="8 13"/>
+    <path d="M0 76H193V150M1280 350H1050L935 431" stroke="#e0b781" stroke-width="2" stroke-dasharray="8 13"/>
+  </g>
+
+  <!-- Foundry hall, exact blocked rectangle 976..1251 / 25..287. -->
+  <g filter="url(#shadow)">
+    <rect x="976" y="25" width="275" height="262" rx="6" fill="#152c36" stroke="url(#copper)" stroke-width="3"/>
+    <rect x="982" y="31" width="263" height="250" rx="4" fill="url(#roof)"/>
+    <rect x="982" y="31" width="263" height="250" fill="url(#roofLines)"/>
+    <rect x="995" y="45" width="238" height="35" rx="4" fill="#203844" stroke="#aa8658" stroke-width="3"/>
+    <rect x="995" y="229" width="238" height="39" rx="4" fill="#203844" stroke="#aa8658" stroke-width="3"/>
+    <path d="M1024 87V222M1189 87V222" stroke="#a67f56" stroke-width="8"/>
+    <circle cx="1109" cy="154" r="67" fill="#162d39" stroke="#d7a164" stroke-width="9"/>
+    <circle cx="1109" cy="154" r="50" fill="#7d4b3b" stroke="#5d6969" stroke-width="6"/>
+    <circle cx="1109" cy="154" r="36" fill="#f2a154"/><circle cx="1109" cy="154" r="24" fill="#ffd68a"/>
+    <path d="M1109 92V216M1048 154H1170" stroke="#1c3941" stroke-width="6" opacity=".8"/>
+    <use href="#gear" transform="translate(1211 252) scale(.7)"/>
+  </g>
+
+  <!-- Bell assembly workshop, exact blocked rectangle 1012..1257 / 477..699. -->
+  <g filter="url(#shadow)">
+    <rect x="1012" y="477" width="245" height="222" rx="6" fill="#152c36" stroke="url(#copper)" stroke-width="3"/>
+    <rect x="1018" y="483" width="233" height="210" fill="url(#roof)"/>
+    <rect x="1018" y="483" width="233" height="210" fill="url(#roofLines)"/>
+    <rect x="1034" y="497" width="200" height="48" rx="4" fill="#253e45" stroke="#bb8855" stroke-width="3"/>
+    <rect x="1034" y="625" width="200" height="50" rx="4" fill="#253e45" stroke="#bb8855" stroke-width="3"/>
+    <circle cx="1091" cy="587" r="35" fill="#152e38" stroke="#cc965f" stroke-width="6"/>
+    <circle cx="1180" cy="587" r="35" fill="#152e38" stroke="#cc965f" stroke-width="6"/>
+    <path d="M1091 566Q1112 587 1091 609Q1070 587 1091 566ZM1180 566Q1201 587 1180 609Q1159 587 1180 566Z" fill="#d79757"/>
+    <use href="#gear" transform="translate(1052 656) scale(.55)"/>
+  </g>
+
+  <!-- Ingot store and overhead racks, matching the smaller blocked regions. -->
+  <g filter="url(#shadow)">
+    <rect x="37" y="334" width="130" height="177" rx="6" fill="#223b43" stroke="#c3915f" stroke-width="3"/>
+    <rect x="43" y="340" width="118" height="165" fill="url(#roof)"/>
+    <path d="M52 347L150 480M52 385L131 496M80 345L155 450" stroke="#a37753" stroke-width="8"/>
+    <rect x="62" y="368" width="76" height="83" fill="#18343c" stroke="#bb8954" stroke-width="4"/>
+    <path d="M70 383H129M70 401H129M70 419H129M70 437H129" stroke="#b78451" stroke-width="5"/>
+    <rect x="408" y="28" width="187" height="62" rx="5" fill="#2d4c53" stroke="#bf8c5f" stroke-width="3"/>
+    <rect x="416" y="36" width="171" height="46" fill="url(#roofLines)"/>
+    <path d="M436 39V79M464 39V79M492 39V79M520 39V79M548 39V79M576 39V79" stroke="#ba8754" stroke-width="6"/>
+  </g>
+
+  <!-- Objective furnace, strictly within blocked polygon 548..675 / 332..390. -->
+  <g filter="url(#shadow)">
+    <path d="M548 332H655L675 350V390H548Z" fill="#1a343e" stroke="#e0a35e" stroke-width="3"/>
+    <path d="M558 340H653L665 353V382H558Z" fill="#34515a" stroke="#78908a" stroke-width="2"/>
+    <ellipse cx="608" cy="364" rx="58" ry="43" fill="url(#heat)"/>
+    <rect x="576" y="351" width="67" height="25" rx="5" fill="#8d543e" stroke="#e0a260" stroke-width="4"/>
+    <ellipse cx="609" cy="363" rx="23" ry="7" fill="#ffd781"/>
+    <path d="M610 342L603 354H619L610 373" fill="none" stroke="#fff2c1" stroke-width="4"/>
+  </g>
+
+  <!-- Faint circular metal inlays highlight tactical crossfire without restricting construction. -->
+  <g fill="none" stroke="#e5c590" stroke-width="2" stroke-dasharray="6 8" opacity=".44">
+    <circle cx="762" cy="219" r="43"/><circle cx="349" cy="357" r="43"/><circle cx="826" cy="503" r="43"/>
+    <circle cx="457" cy="362" r="40"/><circle cx="771" cy="355" r="40"/>
+  </g>
+  <g opacity=".8"><use href="#lamp" transform="translate(948 286)"/><use href="#lamp" transform="translate(917 397)"/><use href="#lamp" transform="translate(290 365)"/><use href="#lamp" transform="translate(370 121)"/><use href="#lamp" transform="translate(948 601)"/><use href="#lamp" transform="translate(208 609)"/></g>
+
+  <!-- Visible entry and exit markers, not UI overlays. -->
+  <g fill="none" stroke="#a0e3d0" stroke-width="3" stroke-linecap="round">
+    <path d="M8 76H43L33 66M43 76L33 86M8 150H43L33 140M43 150L33 160"/>
+    <path d="M1272 350H1237L1247 340M1237 350L1247 360"/>
+  </g>
+  <path d="M44 579H6L16 569M6 579L16 589" fill="none" stroke="#ffca74" stroke-width="3"/>
+  <g font-family="sans-serif" font-size="12" font-weight="800" letter-spacing="1" fill="#c1e3d5">
+    <text x="12" y="51">II · ВХОД</text><text x="12" y="126">I · ВХОД</text>
+    <text x="1191" y="329">III · ВХОД</text><text x="14" y="550" fill="#ffce86">ВЫХОД</text>
+  </g>
+  <g font-family="sans-serif" font-size="11" font-weight="800" letter-spacing="1.4" fill="#edbd79" text-anchor="middle">
+    <text x="611" y="319">КУЗНЯ</text><text x="1109" y="18">ЛИТЕЙНЫЙ ЦЕХ</text><text x="1135" y="715">КОЛОКОЛЬНЫЙ ЦЕХ</text>
+  </g>
+</svg>
