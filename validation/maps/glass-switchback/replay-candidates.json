@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "mapId": "glass-switchback",
+  "seed": 521501,
+  "difficulty": "hard",
+  "rounds": 80,
+  "players": [{"id":"solo","name":"Защитник","color":"#ecd18a","connected":true}],
+  "availableAtFirstArrival": ["needle","cannon","frost","beacon","scatter","ember","saw","venom","rail","tesla","mortar","observatory","mint","orchard","drone","rocket","resonator","forge","harbor","tide","coral","chrono","gravity","prism","mirror"],
+  "candidates": [
+    {
+      "id":"standard-ledge-economy","modeId":"standard","status":"unverified",
+      "startingCredits":850,"startingLives":100,
+      "goal":"Buy strong first-wave coverage before a modest orchard; reveal stealth and reinforce the final straight.",
+      "actions":[
+        {"beforeWave":1,"tick":0,"type":"place","key":"opening","tower":"needle","pos":{"x":640,"y":184},"baseHardCost":275},
+        {"beforeWave":1,"tick":0,"type":"place","key":"hairpin","tower":"scatter","pos":{"x":483,"y":295},"baseHardCost":468},
+        {"beforeWave":7,"tick":0,"type":"place","key":"cold","tower":"frost","pos":{"x":711,"y":292},"baseHardCost":550},
+        {"beforeWave":12,"tick":0,"type":"place","key":"cannon","tower":"cannon","pos":{"x":931,"y":316},"baseHardCost":605},
+        {"beforeWave":14,"tick":0,"type":"place","key":"eyes","tower":"observatory","pos":{"x":787,"y":291},"baseHardCost":715},
+        {"beforeWave":18,"tick":0,"type":"upgrade","target":"opening","path":1},
+        {"beforeWave":21,"tick":0,"type":"place","key":"economy","tower":"orchard","pos":{"x":190,"y":247},"baseHardCost":770},
+        {"beforeWave":24,"tick":0,"type":"place","key":"current","tower":"tesla","pos":{"x":570,"y":401},"baseHardCost":880},
+        {"beforeWave":29,"tick":0,"type":"place","key":"rail","tower":"rail","pos":{"x":700,"y":509},"baseHardCost":1045},
+        {"beforeWave":36,"tick":0,"type":"upgrade","target":"eyes","path":0},
+        {"beforeWave":42,"tick":0,"type":"place","key":"sky","tower":"mortar","pos":{"x":990,"y":625},"baseHardCost":880},
+        {"beforeWave":48,"tick":0,"type":"place","key":"prism","tower":"prism","pos":{"x":1077,"y":620},"baseHardCost":1210},
+        {"beforeWave":54,"tick":0,"type":"upgrade","target":"rail","path":0},
+        {"beforeWave":60,"tick":0,"type":"place","key":"toxin","tower":"venom","pos":{"x":448,"y":184},"baseHardCost":715},
+        {"beforeWave":68,"tick":0,"type":"upgrade","target":"prism","path":0},
+        {"beforeWave":75,"tick":0,"type":"upgrade","target":"sky","path":2}
+      ]
+    },
+    {
+      "id":"half-cash-lean-defense","modeId":"half-cash","status":"unverified",
+      "startingCredits":425,"startingLives":100,
+      "goal":"One opening needle on 425 credits; postpone every extra purchase until paid for by actual half-cash income.",
+      "actions":[
+        {"beforeWave":1,"tick":0,"type":"place","key":"opening","tower":"needle","pos":{"x":640,"y":184},"baseHardCost":275},
+        {"beforeWave":10,"tick":0,"type":"place","key":"hairpin","tower":"scatter","pos":{"x":483,"y":295},"baseHardCost":468},
+        {"beforeWave":17,"tick":0,"type":"place","key":"cold","tower":"frost","pos":{"x":711,"y":292},"baseHardCost":550},
+        {"beforeWave":26,"tick":0,"type":"place","key":"cannon","tower":"cannon","pos":{"x":931,"y":316},"baseHardCost":605},
+        {"beforeWave":33,"tick":0,"type":"place","key":"eyes","tower":"observatory","pos":{"x":787,"y":291},"baseHardCost":715},
+        {"beforeWave":44,"tick":0,"type":"place","key":"current","tower":"tesla","pos":{"x":570,"y":401},"baseHardCost":880},
+        {"beforeWave":52,"tick":0,"type":"upgrade","target":"opening","path":1},
+        {"beforeWave":58,"tick":0,"type":"place","key":"rail","tower":"rail","pos":{"x":700,"y":509},"baseHardCost":1045},
+        {"beforeWave":69,"tick":0,"type":"place","key":"sky","tower":"mortar","pos":{"x":990,"y":625},"baseHardCost":880},
+        {"beforeWave":78,"tick":0,"type":"upgrade","target":"sky","path":2}
+      ]
+    },
+    {
+      "id":"iron-oath-no-economy","modeId":"iron-oath","status":"unverified",
+      "startingCredits":850,"startingLives":1,
+      "goal":"One life: retain both opening guns, add detection and boss damage; use no selling, knowledge or passive-income tower.",
+      "actions":[
+        {"beforeWave":1,"tick":0,"type":"place","key":"opening","tower":"needle","pos":{"x":640,"y":184},"baseHardCost":275},
+        {"beforeWave":1,"tick":0,"type":"place","key":"hairpin","tower":"scatter","pos":{"x":483,"y":295},"baseHardCost":468},
+        {"beforeWave":6,"tick":0,"type":"place","key":"backup","tower":"needle","pos":{"x":448,"y":184},"baseHardCost":275},
+        {"beforeWave":12,"tick":0,"type":"place","key":"cold","tower":"frost","pos":{"x":711,"y":292},"baseHardCost":550},
+        {"beforeWave":16,"tick":0,"type":"place","key":"eyes","tower":"observatory","pos":{"x":787,"y":291},"baseHardCost":715},
+        {"beforeWave":19,"tick":0,"type":"place","key":"cannon","tower":"cannon","pos":{"x":931,"y":316},"baseHardCost":605},
+        {"beforeWave":24,"tick":0,"type":"place","key":"current","tower":"tesla","pos":{"x":570,"y":401},"baseHardCost":880},
+        {"beforeWave":32,"tick":0,"type":"place","key":"rail","tower":"rail","pos":{"x":700,"y":509},"baseHardCost":1045},
+        {"beforeWave":38,"tick":0,"type":"upgrade","target":"eyes","path":0},
+        {"beforeWave":43,"tick":0,"type":"place","key":"sky","tower":"mortar","pos":{"x":990,"y":625},"baseHardCost":880},
+        {"beforeWave":48,"tick":0,"type":"place","key":"prism","tower":"prism","pos":{"x":1077,"y":620},"baseHardCost":1210},
+        {"beforeWave":58,"tick":0,"type":"upgrade","target":"rail","path":0},
+        {"beforeWave":63,"tick":0,"type":"place","key":"toxin","tower":"venom","pos":{"x":828,"y":509},"baseHardCost":715},
+        {"beforeWave":69,"tick":0,"type":"place","key":"rocket","tower":"rocket","pos":{"x":220,"y":185},"baseHardCost":1100},
+        {"beforeWave":74,"tick":0,"type":"upgrade","target":"rocket","path":1},
+        {"beforeWave":79,"tick":0,"type":"upgrade","target":"prism","path":0}
+      ]
+    }
+  ]
+}
