@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "mapId": "freight-yard",
+  "difficulty": "normal",
+  "rounds": 60,
+  "status": "unverified",
+  "evidence": null,
+  "knowledge": [],
+  "firstArrivalTowers": ["needle", "cannon", "frost", "beacon", "scatter", "ember", "saw", "venom", "rail", "tesla", "mortar", "observatory", "mint", "orchard"],
+  "actionTuple": ["wave", "tickInBuildPhase", "kind", "key", "towerOrPath", "siteIfPlace"],
+  "budgetAssumptions": "Normal mode has 900 start credits and 80+4n wave reward; half-cash multiplies both by 0.5. Upgrade estimates assume pathFactor=1, real factors and bounty are unknown. No hidden income is applied by runner.",
+  "scenarios": [
+    {
+      "id": "standard", "seed": 430601, "mode": "standard", "startCredits": 900, "incomeMultiplier": 1,
+      "composition": "Dual-center needle/scatter, orchard, beacon, northern rail and southern mortar",
+      "risk": "Bosses at 40/60 require sufficient shield and phase DPS; still unverified.",
+      "countermeasures": ["Frost at eastern merge slows fast southern groups", "Rail at north gantry targets armor/boss", "Tesla and mortar distribute splash and shield damage", "Orchard is only a tentative economy investment"],
+      "actions": [
+        [1,0,"place","n-center","needle","central-west"],
+        [1,0,"place","s-center","scatter","central-east"],
+        [4,0,"place","n-west","needle","west-gate"],
+        [8,0,"place","f-east","frost","east-interlock"],
+        [13,0,"place","garden","orchard","south-watch"],
+        [18,0,"place","rail","rail","north-gantry"],
+        [22,0,"upgrade","n-center",0],
+        [24,0,"upgrade","rail",1],
+        [27,0,"place","signal","beacon","signal-tower"],
+        [30,0,"upgrade","s-center",0],
+        [33,0,"place","m-south","mortar","south-yard"],
+        [35,0,"upgrade","f-east",2],
+        [37,0,"upgrade","rail",1],
+        [40,0,"upgrade","rail",1],
+        [43,0,"upgrade","n-center",0],
+        [46,0,"place","tesla","tesla","west-relay"],
+        [49,0,"upgrade","m-south",0],
+        [52,0,"upgrade","tesla",1],
+        [55,0,"upgrade","rail",1],
+        [58,0,"upgrade","m-south",0]
+      ]
+    },
+    {
+      "id": "half-cash", "seed": 430602, "mode": "half-cash", "startCredits": 450, "incomeMultiplier": 0.5,
+      "composition": "Cheap needle opener on two fronts, delayed scatter/frost, boss rail, rear mortar",
+      "risk": "Requires real cash payouts from enemy layers; opening second needle on wave 2 depends on wave 1 bounty.",
+      "countermeasures": ["Distribute cheap needle damage before scaling", "Use frost to buy firing time at merge", "Save for rail penetration instead of farm income", "Mortar covers southern split groups"],
+      "actions": [
+        [1,0,"place","n-center","needle","central-west"],
+        [2,0,"place","n-west","needle","west-gate"],
+        [12,0,"place","s-center","scatter","central-east"],
+        [19,0,"place","f-east","frost","east-interlock"],
+        [24,0,"upgrade","n-center",0],
+        [30,0,"place","rail","rail","north-gantry"],
+        [35,0,"upgrade","rail",1],
+        [40,0,"upgrade","rail",1],
+        [44,0,"place","m-south","mortar","south-yard"],
+        [48,0,"upgrade","rail",1],
+        [52,0,"upgrade","m-south",0],
+        [56,0,"upgrade","n-center",0]
+      ]
+    },
+    {
+      "id": "iron-oath", "seed": 430603, "mode": "iron-oath", "startCredits": 900, "incomeMultiplier": 1,
+      "composition": "No selling, farms or knowledge; early central defense, detection, frost and separate shield rail",
+      "risk": "One life; any leak loses immediately, target timings require a live engine replay.",
+      "countermeasures": ["Observatory at north yard detects cloaked enemies", "Frost on the merge slows fast entrants", "Rail pierces armor while Tesla damages shields", "No farm, sale or knowledge assumptions"],
+      "actions": [
+        [1,0,"place","n-center","needle","central-west"],
+        [1,0,"place","s-center","scatter","central-east"],
+        [4,0,"place","n-west","needle","west-gate"],
+        [7,0,"place","f-east","frost","east-interlock"],
+        [15,0,"place","eyes","observatory","north-yard"],
+        [21,0,"place","rail","rail","north-gantry"],
+        [26,0,"place","tesla","tesla","west-relay"],
+        [30,0,"upgrade","f-east",0],
+        [34,0,"upgrade","rail",1],
+        [38,0,"upgrade","rail",1],
+        [40,0,"upgrade","rail",1],
+        [45,0,"upgrade","n-center",1],
+        [48,0,"upgrade","tesla",1],
+        [52,0,"place","m-south","mortar","south-yard"],
+        [56,0,"upgrade","rail",1],
+        [58,0,"upgrade","m-south",0]
+      ]
+    }
+  ]
+}

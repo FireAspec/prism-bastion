@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Миниатюра Грузового двора, две линии к одному ангару">
+ <defs>
+  <linearGradient id="background" x2="1" y2="1"><stop stop-color="#172c38"/><stop offset="1" stop-color="#354852"/></linearGradient>
+  <linearGradient id="roof" x2="0" y2="1"><stop stop-color="#9d7953"/><stop offset="1" stop-color="#54423e"/></linearGradient>
+  <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#9bb9b6" stroke-opacity=".12"/></pattern>
+  <radialGradient id="halo"><stop stop-color="#e6bf7b" stop-opacity=".52"/><stop offset="1" stop-color="#e6bf7b" stop-opacity="0"/></radialGradient>
+ </defs>
+ <rect width="640" height="360" rx="16" fill="url(#background)"/><rect width="640" height="360" fill="url(#grid)"/>
+ <g fill="#194352" stroke="#69a2a8" stroke-width="3"><path d="M0 242H96L120 260L112 354H0Z"/><path d="M526 265L619 261L637 294V357H523L513 313Z"/></g>
+ <g fill="url(#roof)" stroke="#d4aa78" stroke-width="3"><path d="M15 8H162V57H15Z"/><path d="M364 8H552V53H364Z"/></g>
+ <g fill="#314651" stroke="#adbbb5" stroke-width="2"><rect x="18" y="171" width="83" height="36" rx="3"/><rect x="545" y="77" width="81" height="50" rx="4"/></g>
+ <g fill="none" stroke-linejoin="round" stroke-linecap="square">
+  <path d="M0 82H74L110 107H166L200 77H260L293 107H348L375 80H416L446 124H485L505 163L535 190H640" stroke="#101e29" stroke-width="34"/>
+  <path d="M471 360V320L423 306H374L336 270H278L247 292H186L153 262V229L202 214H262L314 238H381L434 206H490L535 190H640" stroke="#101e29" stroke-width="34"/>
+  <path d="M0 82H74L110 107H166L200 77H260L293 107H348L375 80H416L446 124H485L505 163L535 190H640" stroke="#758482" stroke-width="24"/>
+  <path d="M471 360V320L423 306H374L336 270H278L247 292H186L153 262V229L202 214H262L314 238H381L434 206H490L535 190H640" stroke="#758482" stroke-width="24"/>
+  <path d="M0 82H74L110 107H166L200 77H260L293 107H348L375 80H416L446 124H485L505 163L535 190H640" stroke="#efbe80" stroke-width="3" stroke-dasharray="10 10"/>
+  <path d="M471 360V320L423 306H374L336 270H278L247 292H186L153 262V229L202 214H262L314 238H381L434 206H490L535 190H640" stroke="#efbe80" stroke-width="3" stroke-dasharray="10 10"/>
+ </g>
+ <ellipse cx="324" cy="177" rx="96" ry="58" fill="url(#halo)"/>
+ <rect x="258" y="147" width="129" height="57" rx="10" fill="#5b7277" stroke="#f9c679" stroke-width="5"/>
+ <path d="M271 161H374M271 190H374" fill="none" stroke="#f4d298" stroke-width="2" stroke-dasharray="9 5"/>
+ <text x="323" y="181" font-family="DejaVu Sans,sans-serif" text-anchor="middle" font-size="18" fill="#ffead2" font-weight="800">06</text>
+ <g fill="#e9ba7b"><circle cx="100" cy="82" r="5"/><circle cx="155" cy="229" r="5"/><circle cx="534" cy="190" r="6"/></g>
+ <rect x="16" y="15" width="238" height="42" rx="7" fill="#132d37" stroke="#cca16a" stroke-width="2"/>
+ <text x="28" y="43" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="800" letter-spacing="1" fill="#f4e3c8">ГРУЗОВОЙ ДВОР</text>
+ <rect x="502" y="142" width="131" height="29" rx="6" fill="#345746" stroke="#bbe9b1" stroke-width="2"/>
+ <text x="516" y="162" font-family="DejaVu Sans,sans-serif" font-size="13" font-weight="800" fill="#e3f8d7">АНГАР →</text>
+ <text x="8" y="70" font-family="DejaVu Sans,sans-serif" font-size="12" font-weight="800" fill="#abebf6">A →</text>
+ <text x="474" y="343" font-family="DejaVu Sans,sans-serif" font-size="12" font-weight="800" fill="#ffe0a3">↑ B</text>
+ <rect x="3" y="3" width="634" height="354" rx="14" fill="none" stroke="#bbd0bd" stroke-opacity=".55" stroke-width="6"/>
+</svg>
