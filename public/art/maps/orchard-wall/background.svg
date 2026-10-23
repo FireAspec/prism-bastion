@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Садовая стена, каменная ограда, плодовые сады и южный пруд">
+ <defs>
+  <linearGradient id="grass" x2="0" y2="1"><stop stop-color="#325f51"/><stop offset=".52" stop-color="#356d59"/><stop offset="1" stop-color="#1d4c49"/></linearGradient>
+  <linearGradient id="lake" x2="0" y2="1"><stop stop-color="#479fa1"/><stop offset="1" stop-color="#174961"/></linearGradient>
+  <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#c3b895"/><stop offset="1" stop-color="#596e67"/></linearGradient>
+  <radialGradient id="orchard"><stop stop-color="#79a96f"/><stop offset="1" stop-color="#296554"/></radialGradient>
+  <radialGradient id="amber"><stop stop-color="#ffde99" stop-opacity=".72"/><stop offset="1" stop-color="#ffde99" stop-opacity="0"/></radialGradient>
+  <pattern id="leaves" width="60" height="60" patternUnits="userSpaceOnUse"><path d="m8 12 7 3m25 22 7-5m-19 19 4 3" stroke="#a9c99a" opacity=".25" stroke-width="2"/><circle cx="48" cy="17" r="2" fill="#d9bf79" opacity=".35"/></pattern>
+  <pattern id="masonry" width="94" height="23" patternUnits="userSpaceOnUse"><path d="M0 12H94M28 0V12M67 12V23" stroke="#435c57" stroke-width="2" opacity=".37"/></pattern>
+  <pattern id="ripples" width="100" height="48" patternUnits="userSpaceOnUse"><path d="M8 23q14-10 30 0m31 18q14-10 28 0" fill="none" stroke="#a9e4d7" stroke-width="2" opacity=".25"/></pattern>
+  <clipPath id="left-bed"><path d="M248 307 260 284 330 289 354 319 338 347 267 347Z"/></clipPath>
+  <clipPath id="right-bed"><path d="M885 315 902 299 962 298 992 327 980 356 913 357Z"/></clipPath>
+ </defs>
+ <rect width="1280" height="720" fill="url(#grass)"/><rect width="1280" height="720" fill="url(#leaves)"/>
+ <g opacity=".25" fill="none" stroke="#add29d" stroke-width="3">
+  <path d="M18 467q213 88 440-7t369 34 443-46"/><path d="M18 493q213 88 440-7t369 34 443-46"/>
+  <path d="M24 526q208 95 434-7t369 34 429-44"/><path d="M53 572q170 42 406 0t354 4 410 0"/>
+ </g>
+ <!-- Exact south-bank polygon shared with MapDef.water; no hidden water collision. -->
+ <path d="M0 624 146 611 283 622 419 605 566 625 750 604 901 625 1071 611 1199 622 1280 605V720H0Z" fill="url(#lake)"/>
+ <path d="M0 624 146 611 283 622 419 605 566 625 750 604 901 625 1071 611 1199 622 1280 605V720H0Z" fill="url(#ripples)"/>
+ <path d="M0 624 146 611 283 622 419 605 566 625 750 604 901 625 1071 611 1199 622 1280 605" fill="none" stroke="#c1d19c" stroke-linejoin="round" stroke-width="8"/>
+ <path d="M0 631 146 618 283 629 419 612 566 632 750 611 901 632 1071 618 1199 629 1280 612" fill="none" stroke="#b1e3d3" opacity=".52" stroke-width="2"/>
+ <g fill="#c9c58e" stroke="#b5b985" stroke-width="3"><path d="M80 610v-30m6 30v-18m995 16v-28m6 28v-18M729 603v-25m7 25v-17" fill="none"/><ellipse cx="80" cy="579" rx="4" ry="8"/><ellipse cx="1081" cy="580" rx="4" ry="8"/><ellipse cx="729" cy="577" rx="4" ry="8"/></g>
+ <!-- Only wall / buildings / orchard beds below are blocking geometry. -->
+ <rect width="1280" height="46" fill="url(#stone)"/><rect width="1280" height="46" fill="url(#masonry)"/><path d="M0 46H1280" stroke="#274a49" stroke-width="7"/>
+ <g fill="#c8bf9b" stroke="#526d66" stroke-width="3"><path d="M0 0h26v18H0zm121 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25zm120 0h25v18h-25z"/></g>
+ <g stroke="#b0b99a" stroke-width="5" fill="#526b60"><path d="M45 80 92 80 95 130 49 142Z"/><path d="M594 69 641 65 656 110 603 121Z"/><path d="M1155 82 1220 80 1235 140 1180 151Z"/></g>
+ <g stroke="#d5c696" stroke-width="2" fill="#315651"><path d="M56 90h25l7 29-28 9Z"/><path d="M611 80 632 78 643 102 612 110Z"/><path d="M1172 94 1209 92 1218 129 1186 136Z"/></g>
+ <g fill="#315b45" stroke="#a1a76e" stroke-width="4"><path d="M248 307 260 284 330 289 354 319 338 347 267 347Z"/><path d="M885 315 902 299 962 298 992 327 980 356 913 357Z"/></g>
+ <g clip-path="url(#left-bed)"><circle cx="282" cy="313" r="19" fill="url(#orchard)" stroke="#1a4c48" stroke-width="3"/><circle cx="316" cy="320" r="22" fill="url(#orchard)" stroke="#1a4c48" stroke-width="3"/><circle cx="277" cy="307" r="7" fill="#b5cc8d"/><circle cx="310" cy="315" r="8" fill="#b5cc8d"/><circle cx="323" cy="330" r="4" fill="#f1c875"/></g>
+ <g clip-path="url(#right-bed)"><circle cx="923" cy="325" r="22" fill="url(#orchard)" stroke="#1a4c48" stroke-width="3"/><circle cx="960" cy="333" r="22" fill="url(#orchard)" stroke="#1a4c48" stroke-width="3"/><circle cx="916" cy="318" r="8" fill="#b5cc8d"/><circle cx="953" cy="327" r="8" fill="#b5cc8d"/><circle cx="969" cy="339" r="4" fill="#f1c875"/></g>
+ <g fill="#f4cb79" opacity=".67"><circle cx="91" cy="410" r="3"/><circle cx="251" cy="498" r="3"/><circle cx="536" cy="470" r="3"/><circle cx="595" cy="544" r="3"/><circle cx="706" cy="454" r="3"/><circle cx="820" cy="518" r="3"/><circle cx="988" cy="510" r="3"/><circle cx="1160" cy="497" r="3"/></g>
+ <!-- Different colored architectural thresholds mark the entrance and exit. -->
+ <g transform="translate(12 206)"><ellipse rx="49" ry="72" fill="url(#amber)"/><path d="M-12-32V-50Q11-65 31-49v84" fill="none" stroke="#f3c677" stroke-width="8"/><path d="M-8-21v45M25-22v46" stroke="#725b42" stroke-width="5"/><circle cx="11" cy="-44" r="6" fill="#ffe6a9"/></g>
+ <g transform="translate(1271 355)"><ellipse rx="52" ry="70" fill="#84e3dd" opacity=".21"/><path d="M-39-35Q-4-78 16-32v67" fill="none" stroke="#a0e4ce" stroke-width="9"/><path d="M-32-30v67M11-29v66" fill="none" stroke="#496b64" stroke-width="5"/><circle cx="-13" cy="-51" r="9" fill="#a3ebd5"/></g>
+</svg>
