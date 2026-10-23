@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Павшая обсерватория — предпросмотр карты</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#0a1a22;color:#f4eaca;font:14px system-ui,-apple-system,Segoe UI,sans-serif}
+body{display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at center,#30463f,#0b1721)}
+.frame{width:min(100vw,177.77778vh);height:min(100vh,56.25vw);position:relative;overflow:hidden;box-shadow:0 0 50px #0008}
+.frame img,.frame svg{position:absolute;inset:0;width:100%;height:100%}.frame svg{pointer-events:none}
+.road-shadow{fill:none;stroke:#182b34;stroke-width:64;stroke-linejoin:round}.road-edge{fill:none;stroke:#bdac89;stroke-width:54;stroke-linejoin:round}
+.road-fill{fill:none;stroke:#819a8c;stroke-width:42;stroke-linejoin:round}.road-dash{fill:none;stroke:#fff2c7;stroke-width:2.5;stroke-dasharray:11 21;opacity:.65}
+.top,.bottom{position:absolute;left:16px;right:16px;display:flex;justify-content:space-between;gap:16px;pointer-events:none;align-items:flex-start}.top{top:14px}.bottom{bottom:14px;align-items:flex-end}
+.panel{padding:12px 17px;border:1px solid #e8c89170;border-radius:13px;background:#0e2530e9;backdrop-filter:blur(8px);box-shadow:0 10px 35px #0009}
+.eyebrow{color:#e2bf7a;font-size:11px;letter-spacing:2.6px;text-transform:uppercase}h1{font:600 clamp(17px,2.3vw,31px) Georgia,serif;margin:3px 0 5px}p{margin:0;color:#b8d6c9;font-size:clamp(11px,1.15vw,14px)}
+button{pointer-events:auto;cursor:pointer;border:1px solid #b2c7a9a0;background:#284a50;color:#eff1db;padding:9px 13px;border-radius:9px;font-weight:700}button[aria-pressed=true]{background:#d0b27d;color:#172f39}button:hover{filter:brightness(1.1)}.actions{display:flex;gap:8px;flex-wrap:wrap}
+.site circle:first-child{fill:none;stroke:#d4edc6;stroke-dasharray:5 5;stroke-width:2}.site circle:nth-child(2){fill:#173540;stroke:#ffdfa0;stroke-width:3}.site.water circle:nth-child(2){stroke:#9be4f0}.site text{font-size:13px;font-weight:700;text-anchor:middle;fill:#fff4d1;stroke:#16343a;stroke-width:4;paint-order:stroke}
+.hidden{display:none}@media(max-width:700px){.panel{padding:7px 10px}.bottom .panel:first-child{max-width:205px}.actions{gap:5px}button{font-size:11px;padding:5px}}
+</style></head><body>
+<main class="frame">
+ <img src="./background.svg" alt="Заросшие руины обсерватории, разбитый телескоп и водоёмы">
+ <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" aria-label="Маршрут и позиции строительства">
+  <g id="road"><polyline class="road-shadow" points="0,170 335,170 408,248 785,248 862,390 1280,390"/><polyline class="road-edge" points="0,170 335,170 408,248 785,248 862,390 1280,390"/><polyline class="road-fill" points="0,170 335,170 408,248 785,248 862,390 1280,390"/><polyline class="road-dash" points="0,170 335,170 408,248 785,248 862,390 1280,390"/><path d="M22 154l19 16-19 16M1251 371l19 19-19 19" stroke="#fbe8ac" stroke-width="6" fill="none"/></g>
+  <g id="exclusions" class="hidden" fill="#fa8c71" fill-opacity=".2" stroke="#ffc18d" stroke-width="3" stroke-dasharray="11 8">
+   <polygon points="214,28 370,38 400,85 368,121 232,118 190,73"/><polygon points="80,244 250,243 283,318 240,370 104,350 54,294"/><polygon points="520,41 715,39 756,98 715,175 530,178 488,120"/><polygon points="505,326 676,324 733,370 710,460 557,478 477,413"/><polygon points="940,86 1130,81 1180,141 1151,253 955,255 920,179"/><polygon points="976,481 1180,466 1224,531 1187,632 996,615 945,557"/>
+  </g>
+  <g id="sites" class="hidden"></g>
+ </svg>
+ <div class="top"><div class="panel"><div class="eyebrow">Prism Bastion · Кампания 12</div><h1>Павшая обсерватория</h1><p>Поднять гравитационную линзу · Геометрия III</p></div><div class="panel"><div class="eyebrow">Рекомендуется</div><p style="color:#ffe5a4;font-size:18px;font-weight:700">Сложно / 80 волн</p></div></div>
+ <div class="bottom"><div class="panel"><div class="eyebrow">Тактическое поле</div><p>Один вход · три прямых · шесть крупных обломков<br>Зелёные площадки, водный резерв и видимый выход</p></div><div class="panel actions"><button id="toggleRoad" aria-pressed="true">Маршрут</button><button id="toggleSites" aria-pressed="false">Башни</button><button id="toggleExclusions" aria-pressed="false">Запреты</button></div></div>
+</main>
+<script>
+const ns='http://www.w3.org/2000/svg';const land=[['A',70,94],['B',438,164],['C',358,344],['D',800,165],['E',735,312],['F',450,317],['G',913,316],['H',1050,326],['I',1233,319],['J',1224,462],['K',912,446]];const water=[['W1',145,566],['W2',831,575],['W3',1230,110]];
+for(const [label,x,y] of [...land,...water]){const g=document.createElementNS(ns,'g');g.classList.add('site');if(label.startsWith('W'))g.classList.add('water');g.innerHTML=`<circle cx="${x}" cy="${y}" r="34"/><circle cx="${x}" cy="${y}" r="21"/><text x="${x}" y="${y+5}">${label}</text>`;document.getElementById('sites').append(g);}
+for(const [buttonId,layerId] of [['toggleRoad','road'],['toggleSites','sites'],['toggleExclusions','exclusions']]){const b=document.getElementById(buttonId),layer=document.getElementById(layerId);b.addEventListener('click',()=>{const on=b.getAttribute('aria-pressed')==='true';b.setAttribute('aria-pressed',String(!on));layer.classList.toggle('hidden',on);});}
+</script></body></html>

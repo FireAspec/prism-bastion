@@ -1,0 +1,36 @@
+{
+  "mapId": "fallen-observatory",
+  "baseCommit": "65ae156626cab219a9d8a6e7e6a63f8b4663d1f7",
+  "geometry": {
+    "status": "passed",
+    "command": "node validation/maps/fallen-observatory/smoke.mjs",
+    "laneLengthPx": 1398.3649215574842,
+    "landSites": 11,
+    "waterSites": 3,
+    "zeroSegments": 0,
+    "invalidPlacements": 0,
+    "polygonOverlaps": 0,
+    "assetPolygonParity": true
+  },
+  "art": {
+    "background": "rasterized and inspected at 1366x768",
+    "thumbnail": "rasterized and inspected at 640x360",
+    "previewHtml": "script syntax parsed, interactive browser execution not verified",
+    "screenshot": "validation/maps/fallen-observatory/qa-field-1366x768.png"
+  },
+  "replays": {
+    "standard": "unverified",
+    "half-cash": "unverified",
+    "iron-oath": "unverified"
+  },
+  "fullCheck": {
+    "status": "blocked",
+    "command": "npm run check",
+    "reason": "tsc: not found; dependencies unavailable in execution environment"
+  },
+  "integrationIssues": [
+    "Global 41-59 multi-lane wave groups need explicit single-lane overrides once defined",
+    "Real engine and combat are pending in the chosen base commit",
+    "Placement radii and actual upgrade budgets must be verified against completed tower content"
+  ]
+}

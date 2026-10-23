@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Заросшие руины обсерватории с упавшим телескопом, лунными водоёмами и светящейся линзой">
+ <defs>
+  <linearGradient id="grass" x2="0" y2="1"><stop stop-color="#304f44"/><stop offset=".54" stop-color="#2a4944"/><stop offset="1" stop-color="#16343a"/></linearGradient>
+  <radialGradient id="moon"><stop stop-color="#b4e9b4" stop-opacity=".17"/><stop offset="1" stop-color="#a2e8b8" stop-opacity="0"/></radialGradient>
+  <linearGradient id="water" x2=".8" y2="1"><stop stop-color="#163d4d"/><stop offset=".5" stop-color="#29626a"/><stop offset="1" stop-color="#183148"/></linearGradient>
+  <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#758b83"/><stop offset=".5" stop-color="#4d6361"/><stop offset="1" stop-color="#273d44"/></linearGradient>
+  <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#fae4aa"/><stop offset=".6" stop-color="#c3a46f"/><stop offset="1" stop-color="#685946"/></linearGradient>
+  <radialGradient id="orb"><stop stop-color="#fffed3"/><stop offset=".25" stop-color="#b8f6db"/><stop offset=".56" stop-color="#74adad"/><stop offset=".82" stop-color="#475684"/><stop offset="1" stop-color="#263047"/></radialGradient>
+  <pattern id="blades" width="82" height="71" patternUnits="userSpaceOnUse"><path d="M16 29l-5-12m5 12 4-9m30 40-4-9m4 9 5-6M64 15l-4-9" fill="none" stroke="#a9cca5" stroke-width="2" stroke-linecap="round" opacity=".2"/><circle cx="29" cy="44" r="1.4" fill="#e0d4ac" opacity=".22"/></pattern>
+  <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse" patternTransform="rotate(-20)"><path d="M0 0H52M0 0V52" fill="none" stroke="#def5d5" opacity=".08"/></pattern>
+  <filter id="soft"><feGaussianBlur stdDeviation="16"/></filter>
+  <g id="petal"><path d="M-9 0Q-7-10 0-5Q7-11 9 0Q4 7 0 4Q-4 8-9 0" fill="#afd1a3"/><circle r="2" fill="#e7d397"/></g>
+  <g id="twig"><path d="M0 12Q0-1-8-5M0 12Q3-7 13-9M0 12Q5 0 17 4" stroke="#80ae86" stroke-width="2.5" fill="none"/><path d="M-8-5q10-5 11 5q-10 3-11-5M13-9q-3 11 4 12q5-9-4-12M17 4q-10-6-11 4q9 4 11-4" fill="#7eb786"/></g>
+  <g id="chip"><path d="M-19 12l7-24 19-8 19 19-10 16z" fill="#526765" stroke="#aeb19b" stroke-width="2"/><path d="M-12-12l19-8 19 19-26 1z" fill="#d4c69b" opacity=".25"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#grass)"/><rect width="1280" height="720" fill="url(#blades)"/><rect width="1280" height="720" fill="url(#grid)"/>
+ <ellipse cx="610" cy="150" rx="420" ry="320" fill="url(#moon)"/><ellipse cx="950" cy="530" rx="410" ry="300" fill="url(#moon)"/>
+ <!-- Three pools: polygons exactly match map.water; no collision from ripples. -->
+ <g fill="url(#water)" stroke="#80b8ad" stroke-width="6" stroke-linejoin="round">
+  <polygon points="40,475 252,477 303,548 248,666 45,678"/>
+  <polygon points="760,505 899,481 921,555 910,656 739,676 700,601"/>
+  <polygon points="1193,16 1266,14 1268,241 1206,242 1191,201"/>
+ </g>
+ <g fill="none" stroke="#b9ecdb" stroke-width="2.4" stroke-linecap="round" opacity=".38">
+  <path d="M83 522q56-19 113 0M120 559q60-20 109 0M92 607q48 18 99 4M212 630q29-11 52-5"/>
+  <path d="M772 546q62-22 132 3M748 587q77 24 137-4M783 636q56-17 108-8"/>
+  <path d="M1204 64q20-9 49-3M1204 110q27 15 51 0M1201 157q31-12 55-3"/>
+ </g>
+ <!-- Six forbidden debris fields: their outer edges exactly match map.blocked. -->
+ <g fill="url(#stone)" stroke="#b5ad92" stroke-width="4" stroke-linejoin="round">
+  <polygon points="214,28 370,38 400,85 368,121 232,118 190,73"/>
+  <polygon points="80,244 250,243 283,318 240,370 104,350 54,294"/>
+  <polygon points="520,41 715,39 756,98 715,175 530,178 488,120"/>
+  <polygon points="505,326 676,324 733,370 710,460 557,478 477,413"/>
+  <polygon points="940,86 1130,81 1180,141 1151,253 955,255 920,179"/>
+  <polygon points="976,481 1180,466 1224,531 1187,632 996,615 945,557"/>
+ </g>
+ <!-- Fragment of the west astronomical ring. -->
+ <g transform="translate(292 75)"><ellipse rx="77" ry="33" fill="#253e45" stroke="#c9ba96" stroke-width="7"/><ellipse rx="60" ry="22" fill="none" stroke="#768c85" stroke-width="5"/><path d="M-65 1Q-37-29-12-15M24-14Q49-13 66 7M-43 24Q3 40 35 19" fill="none" stroke="#e2d1a9" stroke-width="8" stroke-linecap="round"/><circle r="17" fill="#263b4e" stroke="url(#gold)" stroke-width="5"/><path d="M-11 0h22M0-11v22" stroke="#b7d7b4" stroke-width="2"/></g>
+ <!-- Broken foundation with readable column remnants. -->
+ <g transform="translate(165 305) rotate(-12)"><rect x="-71" y="-34" width="143" height="69" rx="8" fill="#294448" stroke="#9cab9c" stroke-width="6"/><path d="M-55-25h110v50H-55z" stroke="#c8b794" stroke-width="6" stroke-dasharray="34 14" fill="none"/><path d="M-20-33l10 68M18-33L5 34" stroke="#bba376" stroke-width="7"/><use href="#chip" x="-42" y="-5"/><use href="#chip" x="42" y="6"/></g>
+ <!-- Hero object: the fallen telescope and bright gravitational lens. -->
+ <g transform="translate(617 108) rotate(-9)">
+  <ellipse rx="105" ry="55" fill="#203944" stroke="#8ea79f" stroke-width="8"/>
+  <ellipse rx="89" ry="40" fill="none" stroke="#c6b480" stroke-width="4" stroke-dasharray="7 8"/>
+  <path d="M-91-29L-40-43 0 36-81 40z" fill="#506d70" stroke="#dbca9f" stroke-width="7"/>
+  <path d="M-55-34L55-42 81 23-26 36z" fill="#36515b" stroke="url(#gold)" stroke-width="11"/>
+  <path d="M-44-19l89-11 19 44-90 12z" fill="#8caba0" opacity=".52"/>
+  <path d="M-45-32l19 66M48-40l26 64" stroke="#f5dda5" stroke-width="7"/>
+  <circle cx="40" cy="-1" r="39" fill="url(#orb)" stroke="#efd7a0" stroke-width="7"/>
+  <ellipse cx="40" cy="-1" rx="57" ry="19" transform="rotate(31 40 -1)" stroke="#a0e8db" stroke-width="3" fill="none"/>
+  <ellipse cx="40" cy="-1" rx="18" ry="54" transform="rotate(-20 40 -1)" stroke="#e4eab4" stroke-width="2" fill="none" opacity=".78"/>
+  <circle cx="40" cy="-1" r="11" fill="#f7ffd6"/>
+  <path d="M-23 45l-23 8-15-18M-12 42l-6 16 25 1M5-32l-14-22-19 9" stroke="#b5c6b0" stroke-width="5" fill="none" stroke-linecap="round"/>
+ </g>
+ <ellipse cx="658" cy="112" rx="70" ry="60" fill="#a6f8d5" opacity=".22" filter="url(#soft)"/>
+ <!-- Lower orrery broken into separate concentric arcs. -->
+ <g transform="translate(604 399) rotate(7)"><ellipse rx="105" ry="61" fill="#2c4146" stroke="#9eaaa0" stroke-width="7"/><ellipse rx="73" ry="40" stroke="#d1b987" stroke-width="11" stroke-dasharray="68 15 40 16" fill="none" transform="rotate(-17)"/><ellipse rx="36" ry="21" stroke="#e2c795" stroke-width="6" fill="none" transform="rotate(30)"/><circle cx="-10" cy="-4" r="15" fill="#5b777b" stroke="#e7d9b2" stroke-width="4"/><use href="#chip" x="-75" y="-17"/><use href="#chip" x="70" y="25"/><path d="M-20 12L-61 41M16-12L49-38" stroke="#e8d4ad" stroke-width="3"/></g>
+ <!-- Broken northern dome, all ribs inside its collision polygon. -->
+ <g transform="translate(1045 170)"><ellipse rx="103" ry="77" fill="#354d50" stroke="#afb19c" stroke-width="8"/><path d="M-95 2Q-73-63-15-64M14-60Q73-58 98 0M-78 49Q-9 74 48 53" stroke="#dbc798" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M0-60V56M-68-38l105 86M74-39L-46 61" stroke="#839d95" stroke-width="6" stroke-dasharray="38 12"/><path d="M-61-5l45-33 28 47-47 19zM38-26l35 10-6 42-39-13z" fill="#243e4a" stroke="#d2b786" stroke-width="5"/><circle r="21" fill="#1c2c3d" stroke="url(#gold)" stroke-width="7"/></g>
+ <!-- Southeast colonnade rubble. -->
+ <g transform="translate(1085 548) rotate(-4)"><path d="M-100-33H87l27 74-35 17H-80l-31-54z" fill="#2e484b" stroke="#9aa79b" stroke-width="6"/><path d="M-87-28H86M-98 5h198M-68 51H77" stroke="#d5c59d" stroke-width="9" stroke-dasharray="27 15 43 19" fill="none"/><path d="M-62-32l24 83M0-31l-16 83M53-31l13 81" stroke="#6f8e87" stroke-width="6"/><use href="#chip" x="-64" y="-6"/><use href="#chip" x="75" y="25"/></g>
+ <!-- Ground plants only: no extra collision geometry. -->
+ <g opacity=".85"><use href="#twig" x="68" y="67"/><use href="#twig" x="161" y="406"/><use href="#twig" x="368" y="527"/><use href="#twig" x="446" y="41"/><use href="#twig" x="810" y="76"/><use href="#twig" x="869" y="684"/><use href="#twig" x="1017" y="682"/><use href="#twig" x="1252" y="680"/><use href="#twig" x="352" y="641"/><use href="#twig" x="773" y="420"/><use href="#twig" x="1188" y="282"/>
+  <use href="#petal" x="52" y="37"/><use href="#petal" x="379" y="592"/><use href="#petal" x="454" y="479"/><use href="#petal" x="824" y="32"/><use href="#petal" x="1018" y="333"/><use href="#petal" x="1246" y="609"/>
+ </g>
+ <g fill="#fff0bc" opacity=".65"><circle cx="51" cy="136" r="2"/><circle cx="311" cy="415" r="2"/><circle cx="455" cy="63" r="2"/><circle cx="743" cy="430" r="2"/><circle cx="934" cy="328" r="2"/><circle cx="1191" cy="286" r="2"/></g>
+ <rect width="1280" height="720" fill="none" stroke="#122930" stroke-width="22" opacity=".38"/>
+</svg>
