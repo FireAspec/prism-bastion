@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="Glass switchback: glowing tidal basins, slate ledges, glass crystals and a copper survey station">
+ <defs>
+  <linearGradient id="land" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#285c5c"/><stop offset=".42" stop-color="#214a4d"/><stop offset="1" stop-color="#102e3b"/></linearGradient>
+  <linearGradient id="pool" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#086173"/><stop offset=".54" stop-color="#167e84"/><stop offset="1" stop-color="#0c425c"/></linearGradient>
+  <linearGradient id="cliff" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#9caaa0"/><stop offset=".32" stop-color="#617f7b"/><stop offset="1" stop-color="#264450"/></linearGradient>
+  <linearGradient id="crystal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d4fff1"/><stop offset=".48" stop-color="#6bdacb"/><stop offset="1" stop-color="#226c91"/></linearGradient>
+  <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8daa1"/><stop offset=".55" stop-color="#ac8054"/><stop offset="1" stop-color="#633e35"/></linearGradient>
+  <radialGradient id="atmosphere"><stop stop-color="#93efc5" stop-opacity=".2"/><stop offset="1" stop-color="#60dccb" stop-opacity="0"/></radialGradient>
+  <filter id="halo" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="9"/></filter>
+  <filter id="shadow" x="-30%" y="-30%" width="170%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="11" flood-color="#071b27" flood-opacity=".55"/></filter>
+  <pattern id="terrain" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(29)"><path d="M0 0V24" stroke="#b0d2c5" stroke-opacity=".065" stroke-width="2"/></pattern>
+  <pattern id="specks" width="43" height="43" patternUnits="userSpaceOnUse"><circle cx="3" cy="6" r="1.4" fill="#c1d9c7" opacity=".2"/><circle cx="27" cy="30" r="1" fill="#f4dba9" opacity=".28"/></pattern>
+  <g id="shard" stroke="#e1fff1" stroke-width="1.5" stroke-linejoin="round"><path d="M0 -28L12 -6 4 20 -10 12Z" fill="url(#crystal)"/><path d="M0 -28L4 20 12 -6" stroke="#e0fff4" fill="none" opacity=".45"/></g>
+  <g id="reeds" stroke-linecap="round" fill="none" stroke="#aeb88a" stroke-width="2.5"><path d="M0 0Q-6 -12 -4 -24M0 0Q5 -10 10 -27M0 0V-31"/><path d="M-4 -24l-3 -5M10 -27l4 -7M0 -31l-2 -8" stroke="#e2c88c"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#land)"/>
+ <ellipse cx="692" cy="360" rx="690" ry="400" fill="url(#atmosphere)"/>
+ <path d="M0 36Q195 -22 404 27T866 13T1280 35V720H0Z" fill="#7bbba1" opacity=".075"/>
+ <path d="M0 608C203 599 284 637 445 652S735 650 900 627 1151 617 1280 651V720H0Z" fill="#001f30" opacity=".17"/>
+ <rect width="1280" height="720" fill="url(#terrain)"/><rect width="1280" height="720" fill="url(#specks)"/>
+ <g fill="none" stroke="#d2dec1" stroke-width="2" stroke-opacity=".12">
+  <path d="M-15 78Q131 63 247 52M605 49Q796 14 941 67M977 52Q1099 35 1290 62"/>
+  <path d="M-25 179Q142 155 303 183M912 166Q966 96 1033 117"/>
+  <path d="M-16 278Q137 264 305 305M1021 322Q1142 300 1296 341"/>
+  <path d="M-16 593Q148 570 308 612M942 574Q1130 596 1305 597"/>
+  <path d="M63 703Q260 626 401 700M964 700Q1126 651 1290 669"/>
+ </g>
+ <!-- Exact pool outlines correspond to MapDef.water, all beyond the road envelope. -->
+ <g stroke="#63cfc9" stroke-width="17" stroke-opacity=".15" fill="none" stroke-linejoin="round">
+  <path d="M948 74L1218 64 1263 116 1253 286 1160 309 980 273 946 195Z"/>
+  <path d="M40 338L255 330 307 365 295 517 217 550 49 535Z"/>
+  <path d="M973 355L1200 356 1265 403 1235 500 1060 519 964 468Z"/>
+  <path d="M632 628L812 623 860 697 585 700Z"/>
+ </g>
+ <g fill="url(#pool)" stroke="#9ce2d1" stroke-opacity=".6" stroke-width="2.8" stroke-linejoin="round">
+  <path d="M948 74L1218 64 1263 116 1253 286 1160 309 980 273 946 195Z"/>
+  <path d="M40 338L255 330 307 365 295 517 217 550 49 535Z"/>
+  <path d="M973 355L1200 356 1265 403 1235 500 1060 519 964 468Z"/>
+  <path d="M632 628L812 623 860 697 585 700Z"/>
+ </g>
+ <g fill="none" stroke="#befcf0" stroke-opacity=".18" stroke-width="2">
+  <path d="M987 117Q1105 88 1217 122M998 155Q1134 121 1218 160M1029 196Q1120 169 1204 206M1048 244Q1129 225 1198 251"/>
+  <path d="M65 379Q175 350 283 382M63 417Q174 400 273 424M89 468Q177 452 262 482M104 508Q181 492 237 517"/>
+  <path d="M995 395Q1098 371 1212 410M992 436Q1129 419 1233 454M1036 483Q1126 464 1191 484"/>
+  <path d="M633 656Q722 635 809 657M664 683Q737 667 815 682"/>
+ </g>
+ <!-- The rocky outcrops align with blocked placement polygons. -->
+ <g filter="url(#shadow)" stroke="#bcc4a3" stroke-width="2.5" stroke-opacity=".7" stroke-linejoin="round" fill="url(#cliff)">
+  <path d="M270 24L556 15 592 73 494 91 302 76Z"/>
+  <path d="M545 282L592 278 617 299 581 317 544 310Z"/>
+  <path d="M460 643L550 633 571 691 426 703Z"/>
+  <path d="M1096 12L1240 16 1264 52 1084 57Z"/>
+ </g>
+ <g fill="none" stroke="#173440" stroke-width="2.5" stroke-opacity=".55">
+  <path d="M302 76L382 36 494 91M382 36L556 15M503 45L592 73M556 15L494 91"/>
+  <path d="M545 282L581 317 592 278M617 299L592 278"/>
+  <path d="M426 703L500 656 571 691M550 633L500 656"/>
+  <path d="M1084 57L1178 27 1264 52"/>
+ </g>
+ <!-- Disused copper survey mechanism on the northern forbidden shelf. -->
+ <g transform="translate(448 47)"><circle r="32" fill="#172e3b" stroke="url(#copper)" stroke-width="6"/><circle r="18" fill="#22464b" stroke="#eecb8a" stroke-width="3"/><path d="M-31 0H31M0 -31V31" stroke="#bd9567" stroke-width="4"/><circle r="6" fill="#ffe4a2"/></g>
+ <!-- Unearthed glass shards and old mines signal the restoration objective. -->
+ <g opacity=".75">
+  <use href="#shard" transform="translate(177 56) rotate(-17) scale(.75)"/><use href="#shard" transform="translate(224 51) rotate(20) scale(.62)"/>
+  <use href="#shard" transform="translate(721 56) rotate(-4) scale(.9)"/><use href="#shard" transform="translate(908 48) rotate(16) scale(.64)"/>
+  <use href="#shard" transform="translate(105 298) rotate(21) scale(.7)"/><use href="#shard" transform="translate(233 289) rotate(-20) scale(.6)"/>
+  <use href="#shard" transform="translate(1123 333) rotate(12) scale(.8)"/><use href="#shard" transform="translate(1228 603) rotate(-14) scale(.8)"/>
+  <use href="#shard" transform="translate(292 632) rotate(24) scale(.7)"/><use href="#shard" transform="translate(973 595) rotate(-18) scale(.85)"/>
+ </g>
+ <g transform="translate(579 301)"><ellipse rx="49" ry="30" fill="#a4ffdc" opacity=".22" filter="url(#halo)"/><use href="#shard" transform="translate(-21 -5) rotate(-17) scale(.98)"/><use href="#shard" transform="translate(5 -10) rotate(16) scale(.82)"/><use href="#shard" transform="translate(28 2) rotate(35) scale(.56)"/></g>
+ <g opacity=".64">
+  <use href="#reeds" transform="translate(68 335) scale(.75)"/><use href="#reeds" transform="translate(180 337) scale(.66)"/><use href="#reeds" transform="translate(277 539) scale(.75)"/>
+  <use href="#reeds" transform="translate(991 351) scale(.8)"/><use href="#reeds" transform="translate(1166 317) scale(.76)"/><use href="#reeds" transform="translate(1253 314) scale(.83)"/>
+  <use href="#reeds" transform="translate(859 695) scale(.75)"/><use href="#reeds" transform="translate(612 706) scale(.83)"/>
+ </g>
+ <rect x="1.5" y="1.5" width="1277" height="717" rx="8" stroke="#f3d5a4" stroke-opacity=".22" stroke-width="3" fill="none"/>
+</svg>
