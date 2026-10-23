@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Миниатюра: Старый акведук, извилистый тракт, две арки, водохранилище">
+ <defs>
+  <linearGradient id="bg" x2=".9" y2="1"><stop stop-color="#8aaa79"/><stop offset="1" stop-color="#466c60"/></linearGradient>
+  <linearGradient id="lake" x2="1" y2="1"><stop stop-color="#52b9bf"/><stop offset="1" stop-color="#20617a"/></linearGradient>
+  <linearGradient id="shade" x2="0" y2="1"><stop stop-color="#0d2630" stop-opacity="0"/><stop offset=".6" stop-color="#0d2630" stop-opacity=".06"/><stop offset="1" stop-color="#0d2630" stop-opacity=".94"/></linearGradient>
+  <path id="road" d="M0 220 L80 220 L150 234 L215 267 L276 310 L340 338 L402 346 L465 339 L520 317 L570 285 L622 260 L680 259 L740 279 L796 314 L846 357 L892 398 L941 422 L995 424 L1050 413 L1103 387 L1149 355 L1202 338 L1280 338"/>
+ </defs>
+ <rect width="640" height="360" fill="url(#bg)"/>
+ <g transform="scale(.5)">
+  <path d="M-30 38C235 120 318 -13 536 41S982 116 1310 24M-30 615C265 509 447 620 647 562S1080 620 1304 509" stroke="#cbd39f" stroke-width="9" opacity=".26" fill="none"/>
+  <path d="M920 98L980 72L1071 65L1151 78L1217 115L1234 172L1210 218L1151 251L1073 244L1003 222L951 183L915 136Z" fill="url(#lake)" stroke="#e1d7ae" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M961 120q111 -51 217 6M983 167q103 -37 221 1" stroke="#c8ecdf" stroke-width="5" fill="none" opacity=".6"/>
+  <g fill="#3c7455"><circle cx="87" cy="90" r="33"/><circle cx="242" cy="72" r="29"/><circle cx="608" cy="93" r="35"/><circle cx="797" cy="98" r="32"/><circle cx="127" cy="634" r="34"/><circle cx="534" cy="642" r="39"/><circle cx="815" cy="620" r="34"/><circle cx="1228" cy="628" r="34"/></g>
+  <use xlink:href="#road" fill="none" stroke="#65746a" stroke-width="76" stroke-linejoin="round"/>
+  <use xlink:href="#road" fill="none" stroke="#e4d1a6" stroke-width="64" stroke-linejoin="round"/>
+  <use xlink:href="#road" fill="none" stroke="#fff4ce" stroke-width="3" stroke-dasharray="5 17" stroke-linejoin="round" opacity=".75"/>
+  <path d="M353 231L395 230L415 280L363 291Z M357 406L412 412L427 468L360 478Z M886 294L926 292L952 354L902 359Z M892 487L954 482L973 554L908 558Z" fill="#d6c6a5" stroke="#697d72" stroke-width="5"/>
+  <path d="M389 289Q408 351 389 409M925 354Q956 418 930 484" fill="none" stroke="#6e8a7a" stroke-width="11" opacity=".6"/>
+  <path d="M72 499L185 499L195 616L60 615Z" fill="#345963" stroke="#d1cba8" stroke-width="8"/><circle cx="128" cy="560" r="32" fill="#36949b" stroke="#ebdfba" stroke-width="6"/><path d="M128 538L136 566L117 571Z" fill="#fff1b9"/>
+ </g>
+ <rect width="640" height="360" fill="url(#shade)"/>
+ <rect x="23" y="23" width="66" height="30" rx="15" fill="#e6d8ab"/><text x="56" y="44" font-size="14" font-weight="900" fill="#2c5553" font-family="system-ui,sans-serif" text-anchor="middle">04</text>
+ <text x="24" y="296" font-size="39" font-weight="850" fill="#fff3d4" font-family="system-ui,sans-serif">Старый акведук</text>
+ <text x="25" y="325" font-size="15" fill="#d2e7d7" letter-spacing=".8" font-family="system-ui,sans-serif">ДВЕ АРКИ · НАВИГАЦИОННАЯ СТАНЦИЯ</text>
+ <rect x="1" y="1" width="638" height="358" fill="none" rx="15" stroke="#d5cda5" stroke-opacity=".42" stroke-width="2"/>
+</svg>

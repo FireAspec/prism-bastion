@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Старый акведук — карта 04</title>
+ <style>
+  *{box-sizing:border-box}html{color-scheme:dark}body{margin:0;min-height:100vh;background:#142d35;color:#f1efde;font:14px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif}
+  header{max-width:1280px;min-height:88px;padding:12px 20px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .identity{display:flex;align-items:center;gap:14px}.tag{background:#e1d4aa;color:#23484a;font-weight:900;border-radius:11px;padding:9px 13px;font-size:22px}.identity h1{margin:0;font-size:23px;line-height:1.1}.identity p{margin:3px 0 0;color:#adc7b8;font-size:12px}
+  nav{display:flex;gap:7px;flex-wrap:wrap}button{background:#29484e;color:#dbece0;border:1px solid #6c8b83;border-radius:99px;padding:8px 13px;font:inherit;font-weight:650;cursor:pointer}button:hover{border-color:#d6e7c7}button[aria-pressed="true"]{background:#e2d4ad;color:#1c3e42;border-color:#e2d4ad}
+  .stage{position:relative;width:calc(100vw - 36px);max-width:1120px;aspect-ratio:16/9;margin:auto;border-radius:14px;overflow:hidden;box-shadow:0 20px 70px #07191f99,0 0 0 1px #d2dfc544}.stage img,.stage svg{position:absolute;inset:0;width:100%;height:100%}.stage img{object-fit:fill}.stage svg{pointer-events:none}
+  .restricted polygon{fill:#eb7870;fill-opacity:.28;stroke:#ffdfbc;stroke-width:3;stroke-dasharray:7 5}.reservoir polygon{fill:#5dcce0;fill-opacity:.2;stroke:#c1f6ed;stroke-width:2;stroke-dasharray:6 6}.route{fill:none;stroke:#fff4d0;stroke-width:4;stroke-dasharray:8 10}
+  .site circle{fill:#19383d;fill-opacity:.94;stroke:#ffefd1;stroke-width:3}.site text{text-anchor:middle;dominant-baseline:central;font-size:18px;font-weight:bold;fill:#fff4d2}
+  .stage[data-view="art"] .overlay{display:none}.stage[data-view="zones"] .route,.stage[data-view="zones"] .site{display:none}.stage[data-view="path"] .restricted,.stage[data-view="path"] .reservoir,.stage[data-view="path"] .site{display:none}
+  .stage[data-view="west"] .restricted,.stage[data-view="west"] .reservoir,.stage[data-view="west"] .route,.stage[data-view="west"] .east{display:none}
+  .stage[data-view="east"] .restricted,.stage[data-view="east"] .reservoir,.stage[data-view="east"] .route,.stage[data-view="east"] .west{display:none}
+  footer{max-width:1120px;margin:10px auto;padding:0 12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#bcd1c2;font-size:12px}strong{color:#f7e6bc}
+  @media(max-width:700px){header{padding:12px}.identity h1{font-size:18px}nav{gap:5px}button{padding:7px 10px}.stage{width:calc(100vw - 12px);border-radius:7px}}
+ </style>
+</head>
+<body>
+ <header><div class="identity"><span class="tag">04</span><div><h1>Старый акведук</h1><p>Кампания · garden · easy · 1280 × 720</p></div></div>
+  <nav aria-label="Режим просмотра"><button data-view="art" aria-pressed="false">Арт</button><button data-view="zones" aria-pressed="true">Границы</button><button data-view="path" aria-pressed="false">Маршрут</button><button data-view="west" aria-pressed="false">Оборона A</button><button data-view="east" aria-pressed="false">Оборона B</button></nav>
+ </header>
+ <main class="stage" data-view="zones">
+  <img src="./background.svg" alt="Старая извилистая дорога проходит через две каменные арки, вверху справа водохранилище, внизу слева навигационная станция">
+  <svg class="overlay" viewBox="0 0 1280 720" aria-hidden="true">
+   <g class="restricted"><polygon points="353,231 395,230 415,280 363,291"/><polygon points="357,406 412,412 427,468 360,478"/><polygon points="886,294 926,292 952,354 902,359"/><polygon points="892,487 954,482 973,554 908,558"/><polygon points="72,499 185,499 195,616 60,615"/></g>
+   <g class="reservoir"><polygon points="920,98 980,72 1071,65 1151,78 1217,115 1234,172 1210,218 1151,251 1073,244 1003,222 951,183 915,136"/></g>
+   <path class="route" d="M0 220 L80 220 L150 234 L215 267 L276 310 L340 338 L402 346 L465 339 L520 317 L570 285 L622 260 L680 259 L740 279 L796 314 L846 357 L892 398 L941 422 L995 424 L1050 413 L1103 387 L1149 355 L1202 338 L1280 338"/>
+   <g class="site west"><circle cx="210" cy="147" r="21"/><text x="210" y="147">1</text><circle cx="272" cy="407" r="21"/><text x="272" y="407">2</text><circle cx="683" cy="365" r="21"/><text x="683" y="365">3</text><circle cx="829" cy="449" r="21"/><text x="829" y="449">4</text></g>
+   <g class="site east"><circle cx="490" cy="188" r="21"/><text x="490" y="188">1</text><circle cx="830" cy="209" r="21"/><text x="830" y="209">2</text><circle cx="1028" cy="305" r="21"/><text x="1028" y="305">3</text><circle cx="1086" cy="515" r="21"/><text x="1086" y="515">4</text></g>
+  </svg>
+ </main>
+ <footer><span>Зоны красным — <strong>строительство запрещено</strong>; бирюзовым — <strong>вода</strong>.</span><span><strong>Цель:</strong> восстановить станцию · <strong>Награда:</strong> mortar, observatory</span></footer>
+ <script>
+  const stage=document.querySelector('.stage');
+  for(const b of document.querySelectorAll('button[data-view]'))b.addEventListener('click',()=>{
+   stage.dataset.view=b.dataset.view;
+   for(const item of document.querySelectorAll('button[data-view]'))item.setAttribute('aria-pressed',String(item===b));
+  });
+ </script>
+</body>
+</html>
