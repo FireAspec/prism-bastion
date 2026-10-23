@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Грузовой двор: западный и южный грузовые пути сходятся у восточного транспортного ангара">
+ <defs>
+  <linearGradient id="floor" x2=".8" y2="1"><stop stop-color="#28434c"/><stop offset="1" stop-color="#192b35"/></linearGradient>
+  <linearGradient id="roof" x2="0" y2="1"><stop stop-color="#916e4e"/><stop offset=".5" stop-color="#625046"/><stop offset="1" stop-color="#3c343a"/></linearGradient>
+  <linearGradient id="iron" x2="0" y2="1"><stop stop-color="#6c8187"/><stop offset="1" stop-color="#2c414a"/></linearGradient>
+  <linearGradient id="water" x2="0" y2="1"><stop stop-color="#387787"/><stop offset="1" stop-color="#1a3d50"/></linearGradient>
+  <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M56 0H0V56" fill="none" stroke="#c4c3ab" stroke-opacity=".08" stroke-width="2"/></pattern>
+  <pattern id="deck" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M0 18V0H18" fill="none" stroke="#bbc7ba" stroke-opacity=".14"/><circle cx="9" cy="9" r="1" fill="#dde9cf" fill-opacity=".16"/></pattern>
+  <pattern id="hazard" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V14" stroke="#e3a758" stroke-opacity=".3" stroke-width="5"/></pattern>
+  <radialGradient id="lamp"><stop stop-color="#efb260" stop-opacity=".55"/><stop offset="1" stop-color="#f49040" stop-opacity="0"/></radialGradient>
+  <g id="lamp-node"><circle r="49" fill="url(#lamp)"/><circle r="6" fill="#f7c477" stroke="#182b35" stroke-width="4"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#floor)"/><rect width="1280" height="720" fill="url(#grid)"/>
+ <g fill="none" stroke="#92a7a1" opacity=".11" stroke-width="8"><path d="M0 290H1280M0 620H1280M280 0V720M706 0V720M1024 0V720"/></g>
+ <!-- Actual MapDef water polygons; these areas are not a required first-visit build zone. -->
+ <g fill="url(#water)" stroke="#b49a67" stroke-width="8"><path d="M8 480H197L239 519L224 704H8Z"/><path d="M1053 526L1237 522L1272 562V705H1050L1029 628Z"/></g>
+ <g fill="none" stroke="#78c5c2" stroke-width="3" opacity=".27"><path d="M25 525Q96 507 216 535M30 591Q120 566 210 590M30 658Q114 638 208 663"/><path d="M1069 574Q1158 549 1245 574M1067 628Q1173 600 1251 630M1076 680Q1158 659 1251 685"/></g>
+ <g stroke="#b2ccc5" stroke-width="3" opacity=".35"><path d="M49 549v103M178 552v101M1080 561v120M1224 567v105"/></g>
+ <!-- Low-contrast permanent track bed. Canvas owns active route, collisions and enemies. -->
+ <g fill="none" stroke-linejoin="round" stroke-linecap="butt">
+  <path d="M0 164H148L220 213H332L399 154H519L586 213H697L749 160H833L892 247L969 248L1009 326L1070 380H1280" stroke="#0f212b" stroke-width="70"/>
+  <path d="M941 720V640L845 612H748L672 540H555L493 584H372L305 524V458L403 428H523L627 476H762L868 413H981L1070 380H1280" stroke="#0f212b" stroke-width="70"/>
+  <path d="M0 164H148L220 213H332L399 154H519L586 213H697L749 160H833L892 247L969 248L1009 326L1070 380H1280" stroke="#56666c" stroke-width="56"/>
+  <path d="M941 720V640L845 612H748L672 540H555L493 584H372L305 524V458L403 428H523L627 476H762L868 413H981L1070 380H1280" stroke="#56666c" stroke-width="56"/>
+  <path d="M0 164H148L220 213H332L399 154H519L586 213H697L749 160H833L892 247L969 248L1009 326L1070 380H1280" stroke="#c9a071" stroke-opacity=".45" stroke-width="37" stroke-dasharray="4 17"/>
+  <path d="M941 720V640L845 612H748L672 540H555L493 584H372L305 524V458L403 428H523L627 476H762L868 413H981L1070 380H1280" stroke="#c9a071" stroke-opacity=".45" stroke-width="37" stroke-dasharray="4 17"/>
+  <path d="M0 164H148L220 213H332L399 154H519L586 213H697L749 160H833L892 247L969 248L1009 326L1070 380H1280" stroke="#c5c7b3" stroke-opacity=".5" stroke-width="2" stroke-dasharray="27 16"/>
+  <path d="M941 720V640L845 612H748L672 540H555L493 584H372L305 524V458L403 428H523L627 476H762L868 413H981L1070 380H1280" stroke="#c5c7b3" stroke-opacity=".5" stroke-width="2" stroke-dasharray="27 16"/>
+ </g>
+ <!-- Five collidable factory and container silhouettes, matching blocked. -->
+ <g stroke-width="4">
+  <path d="M34 12H326V92L240 100H34Z" fill="url(#roof)" stroke="#c39257"/>
+  <path d="M727 10H1110V102L918 108L880 100L727 96Z" fill="url(#roof)" stroke="#c39257"/>
+  <path d="M36 335H192L209 409H36Z" fill="url(#iron)" stroke="#a8b6b4"/>
+  <path d="M1085 150H1236L1244 257L1102 262Z" fill="url(#iron)" stroke="#c08b5b"/>
+  <path d="M365 656L572 642L583 704L366 711Z" fill="url(#iron)" stroke="#a8b6b4"/>
+ </g>
+ <g fill="#27323b" stroke="#b49b77" stroke-width="2"><rect x="58" y="35" width="78" height="43" rx="3"/><rect x="150" y="35" width="67" height="43" rx="3"/><rect x="229" y="35" width="72" height="43" rx="3"/><rect x="745" y="30" width="144" height="52" rx="3"/><rect x="904" y="31" width="185" height="52" rx="3"/></g>
+ <g font-family="DejaVu Sans,sans-serif" font-size="12" letter-spacing="2" font-weight="700" fill="#edc78b"><text x="69" y="62">C-01</text><text x="158" y="62">C-02</text><text x="236" y="62">C-03</text><text x="758" y="61">ЦЕХ ЛИТЬЯ</text><text x="918" y="62">ТЕРМИЧЕСКИЙ УЗЕЛ</text></g>
+ <g fill="#1c3440" stroke="#93a6ab" stroke-width="5"><circle cx="1139" cy="191" r="27"/><circle cx="1197" cy="190" r="27"/><circle cx="1145" cy="232" r="20"/><circle cx="1196" cy="234" r="20"/></g>
+ <g fill="#f0ad6b"><circle cx="1139" cy="191" r="5"/><circle cx="1197" cy="190" r="5"/><circle cx="1145" cy="232" r="4"/><circle cx="1196" cy="234" r="4"/></g>
+ <path d="M49 348H184V398H49Z" fill="url(#hazard)"/><path d="M378 664L567 654L572 694L378 702Z" fill="url(#hazard)"/>
+ <!-- Unblocked, intentionally useful dual-lane central platform. -->
+ <rect x="525" y="279" width="243" height="104" rx="14" fill="#10222c" stroke="#d8a661" stroke-width="5"/>
+ <rect x="539" y="293" width="215" height="76" rx="8" fill="#536a70" stroke="#bbc8be" stroke-width="3"/>
+ <rect x="544" y="298" width="205" height="66" rx="5" fill="url(#deck)"/>
+ <g fill="none" stroke="#f4c376" stroke-width="3" stroke-dasharray="14 12"><path d="M552 307H742M552 358H742M647 306V359"/></g>
+ <g fill="#e4eecf" font-family="DejaVu Sans,sans-serif" font-weight="800" text-anchor="middle"><text x="647" y="323" font-size="11" letter-spacing="1">ЦЕНТРАЛЬНЫЙ ПЕРРОН</text><text x="647" y="346" font-size="14">ТРАНЗИТ • 06</text></g>
+ <g fill="#253941" stroke="#cfbb8e" stroke-width="2"><circle cx="546" cy="300" r="4"/><circle cx="747" cy="300" r="4"/><circle cx="546" cy="363" r="4"/><circle cx="747" cy="363" r="4"/></g>
+ <!-- Structural gantries stand behind the route and buildable floor. -->
+ <g fill="none" stroke="#ab7851" stroke-width="8" opacity=".72"><path d="M351 269V115H638V268"/><path d="M793 343V551H999V472"/></g>
+ <g fill="none" stroke="#d0a276" stroke-width="3" stroke-dasharray="7 7" opacity=".55"><path d="M495 116V250M984 347V478"/></g>
+ <g fill="#f1bd74" stroke="#162e38" stroke-width="4"><circle cx="449" cy="292" r="6"/><circle cx="1049" cy="294" r="6"/><circle cx="309" cy="626" r="6"/><circle cx="103" cy="449" r="6"/></g>
+ <g font-family="DejaVu Sans,sans-serif" font-weight="800" text-anchor="middle">
+  <rect x="3" y="126" width="120" height="25" rx="5" fill="#164758" stroke="#67c8d9" stroke-width="2"/><text x="63" y="144" font-size="12" fill="#c9f6fa">ВХОД A →</text>
+  <rect x="873" y="687" width="138" height="26" rx="5" fill="#604b38" stroke="#e5b67b" stroke-width="2"/><text x="942" y="705" font-size="12" fill="#ffe1b0">ВХОД B ↑</text>
+  <rect x="1132" y="329" width="144" height="28" rx="5" fill="#385a47" stroke="#b7e2af" stroke-width="2"/><text x="1204" y="348" font-size="14" fill="#edffe3">АНГАР →</text>
+ </g>
+ <path d="M1260 357L1275 380L1260 403" fill="none" stroke="#b4e6bb" stroke-width="6"/>
+ <rect x="5" y="5" width="1270" height="710" fill="none" stroke="#b8c5ad" stroke-opacity=".2" stroke-width="8"/>
+</svg>

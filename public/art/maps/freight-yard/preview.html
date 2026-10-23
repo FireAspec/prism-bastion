@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+ <meta name="color-scheme" content="dark"/><title>Грузовой двор • карта 06</title>
+ <style>
+  :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#e5eee9;background:#111e27}
+  *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 40% -20%,#365662,transparent 55%),#111e27}
+  header{padding:16px 3vw;background:#152832c9;border-bottom:1px solid #48616a;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  h1{font-size:clamp(19px,2vw,29px);color:#f7d39a;margin:0}h1 small{color:#a4cfda;font-size:.6em;margin-right:14px}
+  p{font-size:13px;color:#a4bec1;margin:6px 0}.status{border:1px solid #75a58e;border-radius:22px;background:#255044;padding:7px 12px;color:#e0fbdc;white-space:nowrap;font-size:13px}
+  main{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:18px;padding:18px;max-width:1600px;margin:auto}
+  .stage{position:relative;aspect-ratio:16/9;border:3px solid #869b9b;border-radius:12px;overflow:hidden;background:#20323a;box-shadow:0 15px 40px #0009}
+  .stage img,.stage svg{position:absolute;inset:0;width:100%;height:100%}.stage svg{pointer-events:none}.stage img{object-fit:fill}
+  .lane{fill:none;stroke-width:4;stroke-dasharray:9 11;stroke-linejoin:round}.lane.a{stroke:#8be5ef}.lane.b{stroke:#ffd08b}
+  .zone{fill:#ffd18a;fill-opacity:.1;stroke:#f6c176;stroke-width:3;stroke-dasharray:8 8}
+  .site circle{r:28;fill:#1a5660;stroke:#e0fbf3;stroke-width:2.5}.site.core circle{fill:#805936;stroke:#ffd08c}
+  .site text{fill:white;text-anchor:middle;font:800 13px system-ui;paint-order:stroke;stroke:#152c35;stroke-width:3}
+  .hide-routes .lane,.hide-sites .site,.hide-zone .zone{display:none}
+  aside section{padding:13px;background:#1c333d;border:1px solid #52636d;border-radius:9px;margin-bottom:12px}h2{margin:0 0 10px;color:#edc791;font-size:16px}
+  label{display:flex;gap:10px;align-items:center;padding:6px 0;cursor:pointer;font-size:14px}input{accent-color:#d8a65c;width:16px;height:16px}
+  .legend p{line-height:1.55;margin-bottom:10px}.mini{width:100%;display:block;border-radius:5px;border:1px solid #6b8d8f}
+  footer{max-width:1600px;margin:auto;padding:0 18px 14px;color:#a3bac0;font-size:13px}
+  @media(max-width:960px){main{grid-template-columns:1fr}aside{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}aside section{margin:0}}
+  @media(max-width:570px){header{display:block}.status{display:inline-block;margin-top:12px}aside{display:block}aside section{margin-bottom:12px}}
+ </style>
+</head>
+<body>
+ <header><div><h1><small>06 / FOUNDRY</small>Грузовой двор</h1><p>Два входа, общий восточный выход, сильный центральный перегрузочный перрон</p></div><span class="status">Геометрический предпросмотр</span></header>
+ <main>
+  <div><div class="stage" id="stage">
+   <img src="background.svg" alt="Фон Грузового двора"/>
+   <svg viewBox="0 0 1280 720" role="img" aria-label="Точные полилинии и посадочные места">
+    <rect class="zone" x="525" y="279" width="243" height="104" rx="14"/>
+    <polyline class="lane a" points="0,164 148,164 220,213 332,213 399,154 519,154 586,213 697,213 749,160 833,160 892,247 969,248 1009,326 1070,380 1176,380 1280,380"/>
+    <polyline class="lane b" points="941,720 941,640 845,612 748,612 672,540 555,540 493,584 372,584 305,524 305,458 403,428 523,428 627,476 762,476 868,413 981,413 1070,380 1176,380 1280,380"/>
+    <g class="site" transform="translate(166 273)"><circle r="28"/><text y="4">W1</text></g>
+    <g class="site" transform="translate(273 330)"><circle r="28"/><text y="4">W2</text></g>
+    <g class="site" transform="translate(344 321)"><circle r="28"/><text y="4">W3</text></g>
+    <g class="site" transform="translate(581 82)"><circle r="28"/><text y="4">N1</text></g>
+    <g class="site" transform="translate(451 307)"><circle r="28"/><text y="4">N2</text></g>
+    <g class="site core" transform="translate(599 330)"><circle r="28"/><text y="4">C1</text></g>
+    <g class="site core" transform="translate(699 331)"><circle r="28"/><text y="4">C2</text></g>
+    <g class="site" transform="translate(792 326)"><circle r="28"/><text y="4">S1</text></g>
+    <g class="site" transform="translate(883 322)"><circle r="28"/><text y="4">E1</text></g>
+    <g class="site" transform="translate(436 506)"><circle r="28"/><text y="4">B1</text></g>
+    <g class="site" transform="translate(642 638)"><circle r="28"/><text y="4">B2</text></g>
+    <g class="site" transform="translate(737 680)"><circle r="28"/><text y="4">B3</text></g>
+    <g class="site" transform="translate(1115 476)"><circle r="28"/><text y="4">E2</text></g>
+   </svg>
+  </div><p>Мир 1280×720. Круг = 28 px корпуса, анализатор дополнительно проверяет 8 px зазора. Игра рисует реальные маршруты и существ в Canvas поверх этой подложки.</p></div>
+  <aside>
+   <section><h2>Показать слои</h2><label><input type="checkbox" data-layer="routes" checked/>Обе линии</label><label><input type="checkbox" data-layer="sites" checked/>Посадочные места</label><label><input type="checkbox" data-layer="zone" checked/>Центральная площадка</label></section>
+   <section class="legend"><h2>Зоны</h2><p style="color:#a6edf3">A — западный вход, 1476 px</p><p style="color:#ffd08b">B — южный вход, 1865 px</p><p>С1/С2 — перекрёстный огонь; W — запад; N — север; B — юг; E — перехват; S — поддержка. Оба водоёма резервируются для будущих водных башен.</p></section>
+   <section><h2>Миниатюра выбора</h2><img class="mini" src="thumbnail.svg" alt="Миниатюра Грузового двора"/></section>
+  </aside>
+ </main>
+ <footer>Это проверка расположения, а не боевой replay. Три набора действий для normal хранятся отдельно со статусом unverified.</footer>
+ <script>const s=document.getElementById('stage');for(const i of document.querySelectorAll('[data-layer]'))i.addEventListener('change',()=>s.classList.toggle('hide-'+i.dataset.layer,!i.checked));</script>
+</body>
+</html>
