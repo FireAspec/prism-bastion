@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 320 180" role="img" aria-label="Two raised causeways through three Salt Marsh islands">
+ <defs>
+  <linearGradient id="land" x2=".75" y2="1"><stop stop-color="#5c7660"/><stop offset="1" stop-color="#294e4b"/></linearGradient>
+  <linearGradient id="sea" x2="1" y2="1"><stop stop-color="#1a475b"/><stop offset=".5" stop-color="#328b8b"/><stop offset="1" stop-color="#123949"/></linearGradient>
+  <linearGradient id="shade" x2="0" y2="1"><stop stop-color="#061d27" stop-opacity=".06"/><stop offset="1" stop-color="#061d27" stop-opacity=".83"/></linearGradient>
+  <pattern id="waterLines" width="23" height="25" patternUnits="userSpaceOnUse"><path d="M2 6q6 -3 12 0 M9 17q5 -3 11 0" stroke="#bce8d5" stroke-opacity=".25" fill="none" stroke-width=".7"/></pattern>
+ </defs>
+ <rect width="320" height="180" fill="url(#land)"/>
+ <path d="M0 24Q56 3 90 27T190 13Q259 -2 320 25V0H0Z" fill="#bbba83" opacity=".12"/>
+ <path d="M86 0H121L118 25L125 52L118 72L126 99L120 132L123 180H89L92 148L86 117L92 81L86 58L92 28Z" fill="url(#sea)" stroke="#c5c18e" stroke-width="2.5"/>
+ <path d="M198 0H231L227 25L235 52L229 72L237 99L230 132L232 180H198L201 148L196 117L202 81L196 58L202 28Z" fill="url(#sea)" stroke="#c5c18e" stroke-width="2.5"/>
+ <rect width="320" height="180" fill="url(#waterLines)" opacity=".4"/>
+ <g fill="#2c554c" stroke="#9eac7f" stroke-width="1.8"><path d="M17 78 46 70 73 81 69 103 33 107 17 95Z"/><path d="M139 83 156 74 175 80 185 96 171 104 143 101 134 93Z"/><path d="M284 139 310 136 314 158 280 161 274 148Z"/></g>
+ <!-- The catalog thumbnail depicts the exact two gameplay routes. -->
+ <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M2 46 25 45 49 44 72 51 90 61 107 66 128 65 147 54 167 51 187 55 204 66 225 70 244 73 260 80 278 90 298 90 318 90" stroke="#142e38" stroke-width="13"/>
+  <path d="M2 138 24 138 45 127 66 120 85 118 104 110 124 110 144 120 167 126 187 121 209 113 228 110 245 105 261 99 278 90 298 90 318 90" stroke="#142e38" stroke-width="13"/>
+  <path d="M2 46 25 45 49 44 72 51 90 61 107 66 128 65 147 54 167 51 187 55 204 66 225 70 244 73 260 80 278 90 298 90 318 90" stroke="#c6ad7b" stroke-width="9"/>
+  <path d="M2 138 24 138 45 127 66 120 85 118 104 110 124 110 144 120 167 126 187 121 209 113 228 110 245 105 261 99 278 90 298 90 318 90" stroke="#c6ad7b" stroke-width="9"/>
+  <path d="M2 46 25 45 49 44 72 51 90 61 107 66 128 65 147 54 167 51 187 55 204 66 225 70 244 73 260 80 278 90 298 90 318 90" stroke="#e8dcb1" stroke-width="1.6" stroke-dasharray="4 5" opacity=".7"/>
+  <path d="M2 138 24 138 45 127 66 120 85 118 104 110 124 110 144 120 167 126 187 121 209 113 228 110 245 105 261 99 278 90 298 90 318 90" stroke="#e8dcb1" stroke-width="1.6" stroke-dasharray="4 5" opacity=".7"/>
+ </g>
+ <g fill="#d3b376" opacity=".92"><circle cx="60" cy="19" r="3"/><circle cx="154" cy="22" r="3"/><circle cx="269" cy="43" r="3"/><circle cx="280" cy="126" r="3"/></g>
+ <g transform="translate(293 148)"><circle r="11" fill="#163c46" stroke="#ddad72" stroke-width="2.5"/><path d="M0 -8V8M-8 0H8" stroke="#dfb579" stroke-width="3"/><circle r="3.5" fill="#f4cb83"/></g>
+ <rect width="320" height="180" fill="url(#shade)"/>
+ <path d="M0 141H320V180H0Z" fill="#102c35" opacity=".8"/>
+ <text x="16" y="160" fill="#f6e8c6" font-family="sans-serif" font-weight="700" font-size="14" letter-spacing=".8">СОЛЁНЫЕ БОЛОТА</text>
+ <text x="17" y="174" fill="#c6dcce" font-family="sans-serif" font-size="7" letter-spacing="1.4">09  /  ПРИЛИВНОЙ ЭСТУАРИЙ</text>
+ <rect x="1.5" y="1.5" width="317" height="177" rx="9" fill="none" stroke="#e9d5a1" stroke-opacity=".38" stroke-width="3"/>
+</svg>

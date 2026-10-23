@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width,initial-scale=1"/>
+ <title>Солёные болота — просмотр карты 09</title>
+ <style>
+  :root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#0b1e28;color:#e8eee4}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:radial-gradient(ellipse 80% 100% at 50% 20%,#173f48 0,#0a1b26 72%);display:flex;flex-direction:column}
+  header{height:57px;flex:0 0 57px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 24px;border-bottom:1px solid #52716e60;background:#0c2631dd}
+  h1{font-size:19px;letter-spacing:.02em;line-height:1;margin:0;color:#f6e4bc}
+  .subtitle{font-size:11px;color:#9cbdaf;letter-spacing:.14em;margin-top:5px}
+  .controls{display:flex;flex-wrap:wrap;gap:7px}
+  .controls label{user-select:none;cursor:pointer;display:flex;align-items:center;gap:7px;background:#1c3b43;border:1px solid #53766e80;border-radius:7px;padding:7px 11px;font-size:12px;color:#deeadf}
+  .controls input{accent-color:#d9b97b;cursor:pointer}
+  main{flex:1;min-height:0;display:grid;place-items:center;padding:14px}
+  .frame{aspect-ratio:16/9;width:min(calc(100vw - 36px),calc((100vh - 107px)*16/9));max-width:1280px;position:relative;overflow:hidden;border:1px solid #91a99376;border-radius:12px;box-shadow:0 0 0 4px #15343b,0 24px 64px #0009}
+  #world{display:block;width:100%;height:100%}
+  .frame::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 45px #09293445}
+  .corner{position:absolute;pointer-events:none;top:14px;left:16px;font-size:10px;font-weight:800;letter-spacing:.15em;color:#e5d2ac;background:#142e38d9;border:1px solid #dcbd7a66;padding:8px 11px;border-radius:5px;box-shadow:0 5px 13px #11242c88}
+  .corner small{display:block;color:#bcd2c6;font-size:9px;letter-spacing:.06em;margin-top:4px;font-weight:500}
+  footer{height:36px;display:flex;align-items:center;justify-content:center;gap:23px;color:#a5bdb6;font-size:11px;letter-spacing:.025em;border-top:1px solid #54716c3b}
+  footer strong{color:#e8d7ad}
+  .lane{fill:none;stroke-linejoin:round;stroke-linecap:round}
+  .footprint{fill:#d9c89113;stroke:#e2c688;stroke-width:2;stroke-dasharray:5 6}
+  .wetFootprint{fill:#6bd8ce22;stroke:#8ad9ce;stroke-width:2;stroke-dasharray:5 6}
+  .site-label{font:14px system-ui,sans-serif;fill:#fff1c7;paint-order:stroke;stroke:#102b35;stroke-width:4}
+  @media(max-width:820px){header{padding:8px 12px;height:auto;min-height:57px;align-items:flex-start;flex-wrap:wrap}h1{font-size:16px}.controls{gap:4px}.controls label{padding:5px 7px}footer{height:auto;padding:10px;flex-wrap:wrap;gap:10px}main{min-height:220px}}
+ </style>
+</head>
+<body>
+ <header>
+  <div><h1>Солёные болота <span style="color:#e7c487">/ 09</span></h1><div class="subtitle">PRISM BASTION · КАРТА КАМПАНИИ · ЭСТУАРИЙ</div></div>
+  <div class="controls">
+   <label><input id="showLanes" type="checkbox" checked/>Дорожки</label>
+   <label><input id="showSites" type="checkbox"/>Сухие позиции</label>
+   <label><input id="showWater" type="checkbox"/>Водные позиции</label>
+  </div>
+ </header>
+ <main><div class="frame">
+  <svg id="world" viewBox="0 0 1280 720" aria-label="Карта двух путей на трёх болотных островах">
+   <image href="background.svg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+   <g id="lanes"></g><g id="drySites" display="none"></g><g id="wetSites" display="none"></g>
+  </svg>
+  <div class="corner">09 · ESTUARY<small>Восстановить насосную станцию</small></div>
+ </div></main>
+ <footer><span>Геометрия <strong>1280 × 720</strong></span><span>Два входа <strong>→</strong> один выход</span><span>Рекомендуется <strong>Normal · 60 волн</strong></span><span>Награда <strong>Tide</strong> после победы</span></footer>
+ <script type="application/json" id="geometry">
+ {
+  "lanes":[
+   [[10,182],[100,178],[196,176],[290,202],[358,242],[427,265],[510,262],[587,218],[670,202],[749,220],[815,264],[900,281],[975,292],[1040,320],[1112,361],[1195,361],[1270,361]],
+   [[10,552],[94,551],[178,510],[263,479],[340,471],[415,439],[497,438],[577,480],[667,503],[751,484],[835,450],[912,438],[981,421],[1044,396],[1112,361],[1195,361],[1270,361]]
+  ],
+  "sites":{"northApproach":[244,91],"southApproach":[248,586],"northMiddle":[606,110],"southMiddle":[614,594],"northConfluence":[1065,244],"southConfluence":[1070,478],"exitCrossfire":[1180,466],"exitOverlook":[1197,253]},
+  "waterSites":{"westernChannel":[420,356],"easternChannel":[861,363]}
+ }
+ </script>
+ <script>
+  (()=>{
+   'use strict';
+   const data=JSON.parse(document.getElementById('geometry').textContent);
+   const NS='http://www.w3.org/2000/svg';
+   const create=(name,attributes,parent)=>{
+    const element=document.createElementNS(NS,name);
+    for(const [key,value] of Object.entries(attributes))element.setAttribute(key,String(value));
+    parent.appendChild(element);return element;
+   };
+   const pathGroup=document.getElementById('lanes');
+   data.lanes.forEach((lane,index)=>{
+    const d=lane.map(([x,y],i)=>`${i?'L':'M'}${x},${y}`).join(' ');
+    create('path',{d,class:'lane',stroke:'#153643','stroke-width':48},pathGroup);
+    create('path',{d,class:'lane',stroke:index===0?'#bca977':'#c8b481','stroke-width':40},pathGroup);
+    create('path',{d,class:'lane',stroke:'#f3e3ae','stroke-opacity':'.64','stroke-width':2,'stroke-dasharray':'5 11'},pathGroup);
+    const [sx,sy]=lane[0];
+    create('circle',{cx:sx,cy:sy,r:14,fill:index?'#e8d8aa':'#bde9df',stroke:'#17434a','stroke-width':4},pathGroup);
+   });
+   create('circle',{cx:1268,cy:361,r:13,fill:'#f4cd8d',stroke:'#18434a','stroke-width':4},pathGroup);
+   const mark=(group,points,radius,cls)=>Object.entries(points).forEach(([id,[x,y]])=>{
+    create('circle',{cx:x,cy:y,r:radius,class:cls},group);
+    const label=create('text',{x:x+radius+5,y:y-5,class:'site-label'},group);
+    label.textContent=id.replace(/[A-Z]/g,m=>' '+m.toLowerCase());
+   });
+   mark(document.getElementById('drySites'),data.sites,40,'footprint');
+   mark(document.getElementById('wetSites'),data.waterSites,25,'wetFootprint');
+   [['showLanes','lanes'],['showSites','drySites'],['showWater','wetSites']].forEach(([input,id])=>{
+    document.getElementById(input).addEventListener('change',event=>{
+     document.getElementById(id).setAttribute('display',event.currentTarget.checked?'inline':'none');
+    });
+   });
+  })();
+ </script>
+</body>
+</html>
