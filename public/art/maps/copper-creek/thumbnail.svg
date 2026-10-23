@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Миниатюра карты Медный ручей">
+ <defs>
+  <linearGradient id="grass" x2=".7" y2="1"><stop stop-color="#b0c390"/><stop offset="1" stop-color="#567c69"/></linearGradient>
+  <linearGradient id="blue" x2="1" y2=".6"><stop stop-color="#286b7b"/><stop offset="1" stop-color="#54a5a2"/></linearGradient>
+  <linearGradient id="fade" x2="0" y2="1"><stop stop-color="#122d30" stop-opacity="0"/><stop offset="1" stop-color="#102a2f" stop-opacity=".96"/></linearGradient>
+  <pattern id="leaves" width="37" height="37" patternUnits="userSpaceOnUse"><circle cx="8" cy="13" r="5" fill="#3b725a" opacity=".25"/><path d="M23 27l7 -6" stroke="#cdd4a1" opacity=".24" stroke-width="2"/></pattern>
+  <clipPath id="frame"><rect width="640" height="360" rx="22"/></clipPath>
+ </defs>
+ <g clip-path="url(#frame)"><rect width="640" height="360" fill="url(#grass)"/><rect width="640" height="360" fill="url(#leaves)"/>
+  <g transform="scale(.5)">
+   <polygon points="619,243 644,232 683,255 705,290 720,339 712,398 705,444 679,486 647,508 608,488 593,441 604,397 606,344 598,293" fill="url(#blue)" stroke="#cee0b5" stroke-width="14"/>
+   <polygon points="42,260 84,250 113,275 120,317 105,369 72,408 32,400 22,365 30,310" fill="url(#blue)" stroke="#cee0b5" stroke-width="12"/>
+   <polygon points="1016,645 1070,632 1130,637 1173,657 1185,707 1014,707" fill="url(#blue)" stroke="#cee0b5" stroke-width="10"/>
+   <polyline points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591" fill="none" stroke="#4a6852" stroke-width="88" stroke-linejoin="round" stroke-linecap="round" opacity=".4"/>
+   <polyline points="0,152 82,150 210,151 300,174 350,225 358,315 351,380 308,433 236,452 165,459 132,500 140,546 181,583 270,602 387,602 471,574 525,512 534,423 528,321 548,248 598,198 672,177 785,178 864,213 899,272 903,353 880,420 821,462 781,501 781,546 820,578 927,592 1070,592 1170,593 1280,591" fill="none" stroke="#eed5a1" stroke-width="58" stroke-linejoin="round" stroke-linecap="round"/>
+   <g fill="#4f8959" stroke="#315e51" stroke-width="5"><circle cx="420" cy="358" r="30"/><circle cx="465" cy="400" r="18"/><circle cx="814" cy="331" r="30"/><circle cx="811" cy="391" r="19"/></g>
+   <g transform="translate(1065 295)"><rect y="27" width="130" height="85" rx="6" fill="#c79d64" stroke="#664d36" stroke-width="5"/><path d="M-13 35L65 -15L145 35Z" fill="#a55e3e" stroke="#704936" stroke-width="7"/><rect x="50" y="62" width="34" height="50" fill="#704d3b"/></g>
+   <g fill="#2d644f" opacity=".85"><circle cx="22" cy="30" r="60"/><circle cx="194" cy="-6" r="45"/><circle cx="550" cy="0" r="51"/><circle cx="888" cy="20" r="45"/><circle cx="1224" cy="15" r="65"/><circle cx="37" cy="668" r="53"/><circle cx="454" cy="707" r="48"/><circle cx="847" cy="700" r="49"/><circle cx="1250" cy="694" r="48"/></g>
+  </g>
+  <rect y="180" width="640" height="180" fill="url(#fade)"/>
+  <g font-family="system-ui,sans-serif" fill="#fbe7be"><text x="28" y="293" font-size="16" letter-spacing="3" fill="#b4e3d3" font-weight="800">КАРТА 02  ·  САДЫ</text><text x="25" y="333" font-size="38" font-weight="800">Медный ручей</text><rect x="480" y="282" width="132" height="48" rx="24" fill="#f4d39b"/><text x="546" y="313" fill="#375448" font-size="20" font-weight="800" text-anchor="middle">40 ВОЛН</text></g>
+  <rect x="2" y="2" width="636" height="356" rx="20" fill="none" stroke="#dce7b9" stroke-width="4" opacity=".66"/>
+ </g>
+</svg>
