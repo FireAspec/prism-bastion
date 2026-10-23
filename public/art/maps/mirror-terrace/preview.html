@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Зеркальные террасы — обзор поля</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#071922;color:#e8ead6}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -10%,#2f5757,#071923 80%)}
+.shell{max-width:1366px;margin:auto;padding:12px clamp(12px,2.5vw,34px)}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:64px}
+.identity{display:flex;align-items:center;gap:14px}.identity img{width:94px;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1px solid #86aaa0}
+h1{font-size:clamp(18px,2.2vw,27px);margin:0;line-height:1.15;letter-spacing:.4px}small{color:#a9c9bf}
+.control{display:flex;align-items:center;gap:13px;white-space:nowrap;cursor:pointer;font-size:14px;color:#f6d89a}
+.control input{width:18px;height:18px;accent-color:#dabc7e;cursor:pointer}
+.frame{position:relative;width:min(100%,calc((100vh - 108px)*16/9));margin:auto;aspect-ratio:16/9;background:#183b42;border:2px solid #9db8a0;border-radius:12px;overflow:hidden;box-shadow:0 18px 60px #0009,inset 0 0 0 1px #fcdda955}
+.frame img{display:block;width:100%;height:100%;object-fit:fill}
+.overlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:1;transition:opacity .16s}
+body:has(#show:not(:checked)) .frame .overlay{opacity:0}
+body:has(#pads:not(:checked)) .frame .pads{opacity:0}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin:6px 0 12px}
+.legend{font-size:12px;color:#c2d5ca;display:flex;gap:14px;flex-wrap:wrap}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:#d6b172}.dot.b{background:#84c9da}.dot.c{background:#f0df9c}
+footer{max-width:1280px;margin:9px auto 0;color:#92b6af;font-size:12px}
+@media(max-width:680px){header{align-items:flex-start}.identity img{display:none}.toolbar{gap:8px}.legend{gap:9px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+ <div class="identity"><img src="./thumbnail.svg" alt="Миниатюра зеркальных террас"><div><h1>Зеркальные террасы</h1><small>Карта 14 / сад / рекомендуемая сложность: высокая</small></div></div>
+ <small>1280 × 720 · 2 независимых маршрута</small>
+</header>
+<div class="toolbar">
+ <div class="legend"><span><i class="dot"></i>Маршрут А</span><span><i class="dot b"></i>Маршрут Б</span><span><i class="dot c"></i>Сухие позиции</span><span>◈ — позиции на воде</span></div>
+ <div style="display:flex;gap:18px"><label class="control" for="show">Пути <input type="checkbox" checked id="show"></label><label class="control" for="pads">Позиции <input type="checkbox" checked id="pads"></label></div>
+</div>
+<div class="frame">
+ <img src="./background.svg" alt="Три открытые каменные террасы и отражающие водоёмы">
+ <svg class="overlay" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" aria-label="Наложение игровых маршрутов и площадок">
+  <defs><filter id="aura"><feGaussianBlur stdDeviation="7"/></filter></defs>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+   <polyline points="0,164 118,164 190,208 308,208 386,164 492,164 572,240 572,332 650,360 726,405 726,522 842,570 972,570 1058,522 1164,522 1280,526" stroke="#152731" opacity=".9" stroke-width="51"/>
+   <polyline points="0,560 100,560 180,508 284,508 354,560 450,560 530,468 530,398 650,360 758,308 758,184 858,140 986,140 1082,192 1180,192 1280,192" stroke="#152731" opacity=".9" stroke-width="51"/>
+   <polyline points="0,164 118,164 190,208 308,208 386,164 492,164 572,240 572,332 650,360 726,405 726,522 842,570 972,570 1058,522 1164,522 1280,526" stroke="#d4b17b" stroke-width="44" opacity=".69"/>
+   <polyline points="0,560 100,560 180,508 284,508 354,560 450,560 530,468 530,398 650,360 758,308 758,184 858,140 986,140 1082,192 1180,192 1280,192" stroke="#8ac5ca" stroke-width="44" opacity=".67"/>
+   <polyline points="0,164 118,164 190,208 308,208 386,164 492,164 572,240 572,332 650,360 726,405 726,522 842,570 972,570 1058,522 1164,522 1280,526" stroke="#fff0be" stroke-width="2.5" stroke-dasharray="12 22" opacity=".75"/>
+   <polyline points="0,560 100,560 180,508 284,508 354,560 450,560 530,468 530,398 650,360 758,308 758,184 858,140 986,140 1082,192 1180,192 1280,192" stroke="#e0fff9" stroke-width="2.5" stroke-dasharray="12 22" opacity=".75"/>
+  </g>
+  <g class="pads">
+   <g fill="#ffe1a4" fill-opacity=".32" stroke="#fff0bd" stroke-width="3">
+    <circle cx="444" cy="292" r="40"/><circle cx="642" cy="266" r="40"/><circle cx="640" cy="487" r="40"/>
+    <circle cx="862" cy="271" r="40"/><circle cx="882" cy="456" r="40"/><circle cx="895" cy="335" r="40"/>
+    <circle cx="344" cy="342" r="40"/><circle cx="436" cy="442" r="40"/>
+   </g>
+   <g fill="#092b36" stroke="#a4eaf6" stroke-width="3"><circle cx="183" cy="366" r="24"/><circle cx="1062" cy="381" r="24"/></g>
+   <g fill="#d6f3fa" font-family="sans-serif" font-size="20" text-anchor="middle"><text x="183" y="373">◈</text><text x="1062" y="388">◈</text></g>
+  </g>
+  <g fill="#fff4d1" font-family="sans-serif" font-size="21" font-weight="700">
+   <text x="13" y="145">A →</text><text x="13" y="542">Б →</text><text x="1211" y="505">ВЫХОД</text><text x="1211" y="172">ВЫХОД</text>
+  </g>
+ </svg>
+</div>
+<footer>Цветные полосы показываются только в этом проверочном просмотре. В самой игре путь рисует единый рендерер. Башни и противники отсутствуют намеренно.</footer>
+</div>
+</body>
+</html>
