@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Квартал хранилищ · просмотр карты 17</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#07101a;color:#e8e6d8}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+.stage{position:absolute;inset:0;display:grid;place-items:center;padding:0;background:#0a1521}
+.map{position:relative;width:min(100vw,177.777vh);aspect-ratio:16/9;box-shadow:0 15px 80px #000a}
+.map img,.map svg{position:absolute;inset:0;width:100%;height:100%}
+.map img{object-fit:fill}.map svg{pointer-events:none}
+.bar,.bottom{position:absolute;z-index:4;backdrop-filter:blur(16px);background:#091622d9;border:1px solid #b28d5866;border-radius:14px;box-shadow:0 6px 32px #0008}
+.bar{top:16px;left:18px;padding:14px 17px;max-width:355px}
+.bar h1{font-size:18px;letter-spacing:.05em;margin:0 0 5px;color:#f0dab2}
+.bar p{font-size:12px;color:#b8c6c6;margin:0 0 11px;line-height:1.45}
+.bar label{font-size:12px;margin-right:14px;white-space:nowrap;display:inline-block}
+.bar input{accent-color:#d9ad73;vertical-align:middle}
+.bottom{bottom:17px;right:20px;padding:10px 12px;max-width:352px;font-size:12px}
+.bottom button{cursor:pointer;background:#192c39;border:1px solid #92774e;color:#e6e3d6;padding:9px 12px;border-radius:8px;font-weight:700;margin:4px 4px 7px 0}
+.bottom button.active{background:#c49d62;color:#0d1720}
+.bottom p{margin:3px 2px 2px;line-height:1.45;color:#b8c9ce}
+footer{position:absolute;z-index:2;bottom:15px;left:20px;background:#07121ccc;padding:6px 12px;font-size:11px;letter-spacing:.12em;color:#b1c2c6}
+@media(max-width:850px){.bar{transform:scale(.77);transform-origin:top left}.bottom{transform:scale(.77);transform-origin:bottom right}footer{display:none}}
+</style>
+</head>
+<body>
+<div class="stage"><div class="map">
+<img src="./background.svg" alt="Промышленный квартал, три дороги вокруг сейфа">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" aria-label="Слои анализа карты">
+<g id="lanes"><g data-lane="0"><polyline points="0,136 178,136 178,220 320,220 320,146 846,146 846,230 1038,230 1038,124 1280,124" fill="none" stroke="#ffd18e" stroke-width="7" stroke-linejoin="round" stroke-opacity=".87"/><circle cx="24" cy="136" r="11" fill="#ffd18e"/><circle cx="1250" cy="124" r="11" fill="#ffd18e"/></g><g data-lane="1"><polyline points="0,358 174,358 174,469 406,469 406,530 814,530 814,375 1280,375" fill="none" stroke="#8df1e4" stroke-width="7" stroke-linejoin="round" stroke-opacity=".87"/><circle cx="24" cy="358" r="11" fill="#8df1e4"/><circle cx="1250" cy="375" r="11" fill="#8df1e4"/></g><g data-lane="2"><polyline points="0,627 136,627 136,554 284,554 284,657 907,657 907,550 1080,550 1080,630 1280,630" fill="none" stroke="#dfaeff" stroke-width="7" stroke-linejoin="round" stroke-opacity=".87"/><circle cx="24" cy="627" r="11" fill="#dfaeff"/><circle cx="1250" cy="630" r="11" fill="#dfaeff"/></g></g>
+<g id="blocked" opacity=".65"><polygon points="558,282 596,266 688,266 728,286 752,330 741,411 706,447 579,447 539,411 527,333" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/><polygon points="49,244 127,244 127,312 49,312" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/><polygon points="448,35 537,35 537,93 448,93" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/><polygon points="915,275 997,275 997,316 915,316" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/><polygon points="39,466 108,466 108,516 39,516" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/><polygon points="1113,444 1190,444 1190,516 1113,516" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/><polygon points="456,565 511,565 511,599 456,599" fill="#ee786b" fill-opacity=".32" stroke="#ffada0" stroke-width="3" stroke-dasharray="7 5"/></g>
+<g id="water" opacity=".75"><polygon points="55,28 151,28 157,78 139,97 67,97 45,73" fill="#3bb4dc" fill-opacity=".2" stroke="#8ae8ff" stroke-width="3" stroke-dasharray="5 6"/><polygon points="266,333 343,328 357,359 348,403 274,402 250,376" fill="#3bb4dc" fill-opacity=".2" stroke="#8ae8ff" stroke-width="3" stroke-dasharray="5 6"/><polygon points="1004,441 1119,435 1147,463 1134,519 1019,519 988,484" fill="#3bb4dc" fill-opacity=".2" stroke="#8ae8ff" stroke-width="3" stroke-dasharray="5 6"/></g>
+<g id="towers"></g></svg>
+</div></div>
+<section class="bar"><h1>17 / КВАРТАЛ ХРАНИЛИЩ</h1><p>Три самостоятельных входа и выхода. Центральный сейф — запретная территория; четыре латунных двора доступны для строительства.</p>
+<label><input id="showLanes" type="checkbox" checked>Маршруты</label>
+<label><input id="showBlocked" type="checkbox">Запретные зоны</label>
+<label><input id="showWater" type="checkbox">Вода</label></section>
+<section class="bottom"><div><button id="planA" class="active" type="button">План А · перекрёстный огонь</button><button id="planB" type="button">План Б · замедление</button></div><p>Метки обозначают допустимые геометрические позиции, а не доказательство победы. Реальные стоимости и волны проверяются игровым движком.</p></section>
+<footer>PRISM BASTION · ТОПОГРАФИЧЕСКИЙ ПРОСМОТР · 1280 × 720</footer>
+<script>
+'use strict';
+const plans={"a":[["needle",635,205],["frost",453,357],["rail",875,313],["mortar",634,592],["observatory",1150,304],["harbor",1056,480],["cannon",736,593]],"b":[["needle",388,377],["scatter",453,357],["mine",634,592],["frost",635,205],["cannon",875,313],["tesla",1150,304],["coral",301,366]]};
+function toggle(id,group){document.getElementById(group).style.display=document.getElementById(id).checked?'':'none';}
+for(const [id,g] of [['showLanes','lanes'],['showBlocked','blocked'],['showWater','water']]){
+ document.getElementById(id).addEventListener('change',()=>toggle(id,g));toggle(id,g);
+}
+function showPlan(which){
+ const target=document.getElementById('towers');
+ target.replaceChildren();
+ const ns='http://www.w3.org/2000/svg';
+ for(const [tower,x,y] of plans[which]){
+  const g=document.createElementNS(ns,'g');g.setAttribute('transform','translate('+x+' '+y+')');
+  const circle=document.createElementNS(ns,'circle');circle.setAttribute('r','24');circle.setAttribute('fill','#10212dcc');circle.setAttribute('stroke',which==='a'?'#f2c37d':'#8ae7dc');circle.setAttribute('stroke-width','3');
+  const label=document.createElementNS(ns,'text');label.setAttribute('text-anchor','middle');label.setAttribute('y','5');label.setAttribute('font-size','12');label.setAttribute('font-family','system-ui,sans-serif');label.setAttribute('font-weight','800');label.setAttribute('fill','#fff4db');label.textContent=tower.substring(0,3).toUpperCase();
+  g.append(circle,label);target.append(g);
+ }
+ document.getElementById('planA').classList.toggle('active',which==='a');
+ document.getElementById('planB').classList.toggle('active',which==='b');
+}
+document.getElementById('planA').addEventListener('click',()=>showPlan('a'));
+document.getElementById('planB').addEventListener('click',()=>showPlan('b'));
+showPlan('a');
+</script>
+</body></html>

@@ -1,0 +1,173 @@
+{
+  "mapId": "vault-district",
+  "checkedAt": "2026-10-23",
+  "status": "pass",
+  "scope": "static computational geometry, not engine or victory replay",
+  "world": {
+    "width": 1280,
+    "height": 720
+  },
+  "pathWidth": 44,
+  "routeLengths": [
+    1628,
+    1607,
+    1643
+  ],
+  "routes": [
+    {
+      "lane": 0,
+      "entry": {
+        "x": 0,
+        "y": 136
+      },
+      "exit": {
+        "x": 1280,
+        "y": 124
+      },
+      "length": 1628,
+      "minBlockedCenterline": 45,
+      "minWaterCenterline": 39
+    },
+    {
+      "lane": 1,
+      "entry": {
+        "x": 0,
+        "y": 358
+      },
+      "exit": {
+        "x": 1280,
+        "y": 375
+      },
+      "length": 1607,
+      "minBlockedCenterline": 35,
+      "minWaterCenterline": 60
+    },
+    {
+      "lane": 2,
+      "entry": {
+        "x": 0,
+        "y": 627
+      },
+      "exit": {
+        "x": 1280,
+        "y": 630
+      },
+      "length": 1643,
+      "minBlockedCenterline": 47.20169488482378,
+      "minWaterCenterline": 31
+    }
+  ],
+  "siteChecks": {
+    "north": {
+      "valid": true,
+      "type": "land",
+      "clearance": 37
+    },
+    "west": {
+      "valid": true,
+      "type": "land",
+      "clearance": 76.79
+    },
+    "east": {
+      "valid": true,
+      "type": "land",
+      "clearance": 40
+    },
+    "south": {
+      "valid": true,
+      "type": "land",
+      "clearance": 40
+    },
+    "westReserve": {
+      "valid": true,
+      "type": "land",
+      "clearance": 33.98
+    },
+    "southReserve": {
+      "valid": true,
+      "type": "land",
+      "clearance": 41
+    },
+    "exit": {
+      "valid": true,
+      "type": "land",
+      "clearance": 49
+    },
+    "southExit": {
+      "valid": true,
+      "type": "land",
+      "clearance": 33
+    },
+    "waterWest": {
+      "valid": true,
+      "type": "water",
+      "clearance": 35.2
+    },
+    "waterEast": {
+      "valid": true,
+      "type": "water",
+      "clearance": 39
+    },
+    "waterNorth": {
+      "valid": true,
+      "type": "water",
+      "clearance": 33
+    },
+    "north2": {
+      "valid": true,
+      "type": "land",
+      "clearance": 37
+    },
+    "north3": {
+      "valid": true,
+      "type": "land",
+      "clearance": 36
+    },
+    "north4": {
+      "valid": true,
+      "type": "land",
+      "clearance": 45
+    },
+    "east2": {
+      "valid": true,
+      "type": "land",
+      "clearance": 26
+    },
+    "east3": {
+      "valid": true,
+      "type": "land",
+      "clearance": 40
+    },
+    "east4": {
+      "valid": true,
+      "type": "land",
+      "clearance": 45
+    },
+    "south2": {
+      "valid": true,
+      "type": "land",
+      "clearance": 35
+    },
+    "south3": {
+      "valid": true,
+      "type": "land",
+      "clearance": 40
+    },
+    "west2": {
+      "valid": true,
+      "type": "land",
+      "clearance": 57.2
+    },
+    "lowerWest": {
+      "valid": true,
+      "type": "land",
+      "clearance": 31.54
+    },
+    "lowerCorner": {
+      "valid": true,
+      "type": "land",
+      "clearance": 24
+    }
+  },
+  "errors": []
+}

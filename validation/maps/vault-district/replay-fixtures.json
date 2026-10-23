@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": 1,
+  "mapId": "vault-district",
+  "status": "unverified",
+  "runConditions": {
+    "solo": true,
+    "metaBonus": false,
+    "noHiddenFunds": true,
+    "startingCreditsExtreme": 850,
+    "towerCostMultiplier": 1.2,
+    "reward": "50 + 2 × wave, once; half-cash multiplies by 0.5",
+    "selectedWaveCount": 100
+  },
+  "allowedOnFirstVisit": [
+    "needle",
+    "cannon",
+    "frost",
+    "beacon",
+    "scatter",
+    "ember",
+    "saw",
+    "venom",
+    "rail",
+    "tesla",
+    "mortar",
+    "observatory",
+    "mint",
+    "orchard",
+    "drone",
+    "rocket",
+    "resonator",
+    "forge",
+    "harbor",
+    "tide",
+    "coral",
+    "chrono",
+    "gravity",
+    "prism",
+    "mirror",
+    "mine",
+    "portal"
+  ],
+  "lockedUntilClear": [
+    "bank",
+    "storm",
+    "bastion"
+  ],
+  "note": "Candidate scripts only. No combat simulations were possible on the frozen base; do not mark any victorious without the engine's replay report.",
+  "plans": [
+    {
+      "id": "standard-crossfire",
+      "modeId": "standard",
+      "difficulty": "extreme",
+      "seed": 17005401,
+      "status": "unverified",
+      "knowledge": [],
+      "unlockedTowers": [
+        "needle",
+        "cannon",
+        "frost",
+        "beacon",
+        "scatter",
+        "ember",
+        "saw",
+        "venom",
+        "rail",
+        "tesla",
+        "mortar",
+        "observatory",
+        "mint",
+        "orchard",
+        "drone",
+        "rocket",
+        "resonator",
+        "forge",
+        "harbor",
+        "tide",
+        "coral",
+        "chrono",
+        "gravity",
+        "prism",
+        "mirror",
+        "mine",
+        "portal"
+      ],
+      "description": "Обстрел всех трёх подходов, массовый урон и обнаружение скрытых с поздним доходом.",
+      "countermeasures": {
+        "boss-carapace": "rail path 1 и cannon path 0 против брони",
+        "boss-brood": "mortar path 0 и scatter path 0 против групп",
+        "boss-mirror": "observatory path 0 обнаруживает скрытых; tesla снимает щиты",
+        "boss-chrono": "frost + chrono снижают темп, rail держит босса",
+        "boss-tempest": "tesla path 1 против щитов и разнесённый урон",
+        "boss-eclipse": "rail path 0 плюс prism и поддержка beacon"
+      },
+      "actions": [
+        {
+          "wave": 1,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nNorth",
+          "pos": {
+            "x": 635,
+            "y": 205
+          }
+        },
+        {
+          "wave": 1,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nWest",
+          "pos": {
+            "x": 453,
+            "y": 357
+          }
+        },
+        {
+          "wave": 4,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nSouth",
+          "pos": {
+            "x": 634,
+            "y": 592
+          }
+        },
+        {
+          "wave": 6,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "nNorth",
+          "path": 1
+        },
+        {
+          "wave": 8,
+          "tick": 0,
+          "type": "place",
+          "tower": "cannon",
+          "alias": "cEast",
+          "pos": {
+            "x": 875,
+            "y": 313
+          }
+        },
+        {
+          "wave": 10,
+          "tick": 0,
+          "type": "place",
+          "tower": "rail",
+          "alias": "rNorth",
+          "pos": {
+            "x": 749,
+            "y": 205
+          }
+        },
+        {
+          "wave": 13,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "rNorth",
+          "path": 1
+        },
+        {
+          "wave": 16,
+          "tick": 0,
+          "type": "place",
+          "tower": "observatory",
+          "alias": "obsExit",
+          "pos": {
+            "x": 1150,
+            "y": 304
+          }
+        },
+        {
+          "wave": 19,
+          "tick": 0,
+          "type": "place",
+          "tower": "mortar",
+          "alias": "mSouth",
+          "pos": {
+            "x": 736,
+            "y": 593
+          }
+        },
+        {
+          "wave": 23,
+          "tick": 0,
+          "type": "place",
+          "tower": "frost",
+          "alias": "fWest",
+          "pos": {
+            "x": 388,
+            "y": 377
+          }
+        },
+        {
+          "wave": 25,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "mSouth",
+          "path": 0
+        },
+        {
+          "wave": 28,
+          "tick": 0,
+          "type": "place",
+          "tower": "orchard",
+          "alias": "econ",
+          "pos": {
+            "x": 1185,
+            "y": 575
+          }
+        },
+        {
+          "wave": 32,
+          "tick": 0,
+          "type": "place",
+          "tower": "tesla",
+          "alias": "tEast",
+          "pos": {
+            "x": 862,
+            "y": 428
+          }
+        },
+        {
+          "wave": 36,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "tEast",
+          "path": 1
+        },
+        {
+          "wave": 41,
+          "tick": 0,
+          "type": "place",
+          "tower": "scatter",
+          "alias": "sEast",
+          "pos": {
+            "x": 1037,
+            "y": 294
+          }
+        },
+        {
+          "wave": 48,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "sEast",
+          "path": 0
+        },
+        {
+          "wave": 54,
+          "tick": 0,
+          "type": "place",
+          "tower": "chrono",
+          "alias": "slowSouth",
+          "pos": {
+            "x": 850,
+            "y": 590
+          }
+        },
+        {
+          "wave": 61,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "rNorth",
+          "path": 0
+        },
+        {
+          "wave": 67,
+          "tick": 0,
+          "type": "place",
+          "tower": "harbor",
+          "alias": "hWater",
+          "pos": {
+            "x": 1056,
+            "y": 480
+          }
+        },
+        {
+          "wave": 73,
+          "tick": 0,
+          "type": "place",
+          "tower": "prism",
+          "alias": "pNorth",
+          "pos": {
+            "x": 528,
+            "y": 204
+          }
+        },
+        {
+          "wave": 82,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "pNorth",
+          "path": 0
+        },
+        {
+          "wave": 92,
+          "tick": 0,
+          "type": "place",
+          "tower": "beacon",
+          "alias": "bWest",
+          "pos": {
+            "x": 469,
+            "y": 421
+          }
+        }
+      ]
+    },
+    {
+      "id": "half-cash-control",
+      "modeId": "half-cash",
+      "difficulty": "extreme",
+      "seed": 17005402,
+      "status": "unverified",
+      "knowledge": [],
+      "unlockedTowers": [
+        "needle",
+        "cannon",
+        "frost",
+        "beacon",
+        "scatter",
+        "ember",
+        "saw",
+        "venom",
+        "rail",
+        "tesla",
+        "mortar",
+        "observatory",
+        "mint",
+        "orchard",
+        "drone",
+        "rocket",
+        "resonator",
+        "forge",
+        "harbor",
+        "tide",
+        "coral",
+        "chrono",
+        "gravity",
+        "prism",
+        "mirror",
+        "mine",
+        "portal"
+      ],
+      "description": "Открытие дешёвыми башнями, затем замедление и щитолом; без ранней дорогой экономики.",
+      "countermeasures": {
+        "boss-carapace": "needle бронебойная ветка; rail по накоплении средств",
+        "boss-brood": "scatter и mortar поддерживают площадь",
+        "boss-mirror": "observatory + tesla на скрытность и щиты",
+        "boss-chrono": "frost и chrono против рывков",
+        "boss-tempest": "tesla path 1 и rail",
+        "boss-eclipse": "дальний rail/prism, изолированный урон по выходам"
+      },
+      "actions": [
+        {
+          "wave": 1,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nNorth",
+          "pos": {
+            "x": 635,
+            "y": 205
+          }
+        },
+        {
+          "wave": 8,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nWest",
+          "pos": {
+            "x": 453,
+            "y": 357
+          }
+        },
+        {
+          "wave": 10,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "nNorth",
+          "path": 1
+        },
+        {
+          "wave": 11,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nSouth",
+          "pos": {
+            "x": 634,
+            "y": 592
+          }
+        },
+        {
+          "wave": 14,
+          "tick": 0,
+          "type": "place",
+          "tower": "scatter",
+          "alias": "sEast",
+          "pos": {
+            "x": 1037,
+            "y": 294
+          }
+        },
+        {
+          "wave": 17,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "sEast",
+          "path": 0
+        },
+        {
+          "wave": 19,
+          "tick": 0,
+          "type": "place",
+          "tower": "frost",
+          "alias": "fWest",
+          "pos": {
+            "x": 388,
+            "y": 377
+          }
+        },
+        {
+          "wave": 24,
+          "tick": 0,
+          "type": "place",
+          "tower": "cannon",
+          "alias": "cEast",
+          "pos": {
+            "x": 875,
+            "y": 313
+          }
+        },
+        {
+          "wave": 30,
+          "tick": 0,
+          "type": "place",
+          "tower": "observatory",
+          "alias": "obsExit",
+          "pos": {
+            "x": 1150,
+            "y": 304
+          }
+        },
+        {
+          "wave": 37,
+          "tick": 0,
+          "type": "place",
+          "tower": "mortar",
+          "alias": "mSouth",
+          "pos": {
+            "x": 736,
+            "y": 593
+          }
+        },
+        {
+          "wave": 41,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "mSouth",
+          "path": 0
+        },
+        {
+          "wave": 46,
+          "tick": 0,
+          "type": "place",
+          "tower": "tesla",
+          "alias": "tEast",
+          "pos": {
+            "x": 862,
+            "y": 428
+          }
+        },
+        {
+          "wave": 51,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "tEast",
+          "path": 1
+        },
+        {
+          "wave": 57,
+          "tick": 0,
+          "type": "place",
+          "tower": "rail",
+          "alias": "rNorth",
+          "pos": {
+            "x": 749,
+            "y": 205
+          }
+        },
+        {
+          "wave": 65,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "rNorth",
+          "path": 1
+        },
+        {
+          "wave": 72,
+          "tick": 0,
+          "type": "place",
+          "tower": "coral",
+          "alias": "water",
+          "pos": {
+            "x": 301,
+            "y": 366
+          }
+        },
+        {
+          "wave": 79,
+          "tick": 0,
+          "type": "place",
+          "tower": "chrono",
+          "alias": "cSouth",
+          "pos": {
+            "x": 850,
+            "y": 590
+          }
+        },
+        {
+          "wave": 87,
+          "tick": 0,
+          "type": "place",
+          "tower": "prism",
+          "alias": "pNorth",
+          "pos": {
+            "x": 528,
+            "y": 204
+          }
+        },
+        {
+          "wave": 95,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "pNorth",
+          "path": 0
+        }
+      ]
+    },
+    {
+      "id": "iron-oath-static",
+      "modeId": "iron-oath",
+      "difficulty": "extreme",
+      "seed": 17005403,
+      "status": "unverified",
+      "knowledge": [],
+      "unlockedTowers": [
+        "needle",
+        "cannon",
+        "frost",
+        "beacon",
+        "scatter",
+        "ember",
+        "saw",
+        "venom",
+        "rail",
+        "tesla",
+        "mortar",
+        "observatory",
+        "mint",
+        "orchard",
+        "drone",
+        "rocket",
+        "resonator",
+        "forge",
+        "harbor",
+        "tide",
+        "coral",
+        "chrono",
+        "gravity",
+        "prism",
+        "mirror",
+        "mine",
+        "portal"
+      ],
+      "description": "Без ферм, знаний, продажи или денежных способностей: рассеянные атаки и долгосрочные апгрейды.",
+      "countermeasures": {
+        "boss-carapace": "needle бронебойная + cannon",
+        "boss-brood": "mortar массово снимает слои",
+        "boss-mirror": "observatory обнаружение + tesla щиты",
+        "boss-chrono": "frost + chrono замедление",
+        "boss-tempest": "tesla щиты, rail фокус",
+        "boss-eclipse": "rail + prism под beacon без одноразовой продажи"
+      },
+      "actions": [
+        {
+          "wave": 1,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nNorth",
+          "pos": {
+            "x": 635,
+            "y": 205
+          }
+        },
+        {
+          "wave": 1,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nWest",
+          "pos": {
+            "x": 453,
+            "y": 357
+          }
+        },
+        {
+          "wave": 4,
+          "tick": 0,
+          "type": "place",
+          "tower": "needle",
+          "alias": "nSouth",
+          "pos": {
+            "x": 634,
+            "y": 592
+          }
+        },
+        {
+          "wave": 6,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "nNorth",
+          "path": 1
+        },
+        {
+          "wave": 8,
+          "tick": 0,
+          "type": "place",
+          "tower": "cannon",
+          "alias": "cEast",
+          "pos": {
+            "x": 875,
+            "y": 313
+          }
+        },
+        {
+          "wave": 11,
+          "tick": 0,
+          "type": "place",
+          "tower": "rail",
+          "alias": "rNorth",
+          "pos": {
+            "x": 749,
+            "y": 205
+          }
+        },
+        {
+          "wave": 16,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "rNorth",
+          "path": 1
+        },
+        {
+          "wave": 19,
+          "tick": 0,
+          "type": "place",
+          "tower": "mortar",
+          "alias": "mSouth",
+          "pos": {
+            "x": 736,
+            "y": 593
+          }
+        },
+        {
+          "wave": 22,
+          "tick": 0,
+          "type": "place",
+          "tower": "observatory",
+          "alias": "obsExit",
+          "pos": {
+            "x": 1150,
+            "y": 304
+          }
+        },
+        {
+          "wave": 28,
+          "tick": 0,
+          "type": "place",
+          "tower": "frost",
+          "alias": "fWest",
+          "pos": {
+            "x": 388,
+            "y": 377
+          }
+        },
+        {
+          "wave": 34,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "mSouth",
+          "path": 0
+        },
+        {
+          "wave": 38,
+          "tick": 0,
+          "type": "place",
+          "tower": "tesla",
+          "alias": "tEast",
+          "pos": {
+            "x": 862,
+            "y": 428
+          }
+        },
+        {
+          "wave": 43,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "tEast",
+          "path": 1
+        },
+        {
+          "wave": 49,
+          "tick": 0,
+          "type": "place",
+          "tower": "scatter",
+          "alias": "sEast",
+          "pos": {
+            "x": 1037,
+            "y": 294
+          }
+        },
+        {
+          "wave": 54,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "sEast",
+          "path": 0
+        },
+        {
+          "wave": 60,
+          "tick": 0,
+          "type": "place",
+          "tower": "chrono",
+          "alias": "slowSouth",
+          "pos": {
+            "x": 850,
+            "y": 590
+          }
+        },
+        {
+          "wave": 68,
+          "tick": 0,
+          "type": "place",
+          "tower": "prism",
+          "alias": "pNorth",
+          "pos": {
+            "x": 528,
+            "y": 204
+          }
+        },
+        {
+          "wave": 77,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "pNorth",
+          "path": 0
+        },
+        {
+          "wave": 85,
+          "tick": 0,
+          "type": "place",
+          "tower": "beacon",
+          "alias": "bWest",
+          "pos": {
+            "x": 469,
+            "y": 421
+          }
+        },
+        {
+          "wave": 92,
+          "tick": 0,
+          "type": "upgrade",
+          "alias": "rNorth",
+          "path": 0
+        }
+      ]
+    }
+  ]
+}
