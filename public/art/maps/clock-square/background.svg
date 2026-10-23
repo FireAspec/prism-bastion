@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Часовая площадь: медные часовые механизмы, освещённая мостовая, литейные цеха и два бассейна охлаждения">
+<defs>
+ <linearGradient id="ground" x2=".8" y2="1"><stop stop-color="#173841"/><stop offset=".55" stop-color="#24504d"/><stop offset="1" stop-color="#0c2935"/></linearGradient>
+ <linearGradient id="roof" x2=".4" y2="1"><stop stop-color="#617f72"/><stop offset=".46" stop-color="#395550"/><stop offset="1" stop-color="#18343c"/></linearGradient>
+ <linearGradient id="pool" x2="1" y2=".8"><stop stop-color="#176779"/><stop offset=".6" stop-color="#27939a"/><stop offset="1" stop-color="#123d5b"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#ffeeb4" stop-opacity=".57"/><stop offset=".45" stop-color="#eab86b" stop-opacity=".2"/><stop offset="1" stop-color="#e5a45f" stop-opacity="0"/></radialGradient>
+ <radialGradient id="aura"><stop stop-color="#a8e0d1" stop-opacity=".14"/><stop offset="1" stop-color="#a8e0d1" stop-opacity="0"/></radialGradient>
+ <pattern id="cobble" width="64" height="42" patternUnits="userSpaceOnUse"><path d="M0 1H64M0 22H64M32 1V22M0 22V42M64 22V42" fill="none" stroke="#a8c1a7" stroke-opacity=".14" stroke-width="1.5"/></pattern>
+ <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M2 0V14" stroke="#082d35" stroke-width="4" opacity=".55"/></pattern>
+ <pattern id="ripples" width="33" height="26" patternUnits="userSpaceOnUse"><path d="M5 17Q12 12 23 17M22 5Q28 2 33 5" fill="none" stroke="#d4f5dc" stroke-width="1.7" opacity=".32"/></pattern>
+ <g id="gear"><circle r="27" fill="#233e42" stroke="#c6a164" stroke-width="5"/><circle r="18" fill="none" stroke="#dfbd7e" stroke-width="3" stroke-dasharray="7 7"/><circle r="7" fill="#e9c585" stroke="#344746" stroke-width="2"/><path d="M-32 0H-24M24 0H32M0 -32V-24M0 24V32" stroke="#d3aa69" stroke-width="7"/></g>
+</defs>
+<!-- Architectural backdrop: the game renderer paints paths and enemies above this layer. -->
+<rect width="1280" height="720" fill="url(#ground)"/><rect width="1280" height="720" fill="url(#cobble)"/>
+<path d="M0 26H1280M0 693H1280M24 0V720M1258 0V720" fill="none" stroke="#d8aa6d" stroke-width="4" opacity=".23"/>
+<circle cx="634" cy="360" r="213" fill="none" stroke="#deba7e" stroke-dasharray="9 20" stroke-width="3" opacity=".15"/>
+<circle cx="634" cy="360" r="169" fill="none" stroke="#e4bd83" stroke-dasharray="2 18" opacity=".23"/>
+<circle cx="330" cy="356" r="165" fill="url(#aura)"/><circle cx="900" cy="356" r="166" fill="url(#aura)"/>
+<g><path d="M806 31L989 31L1014 56L1014 91L982 119L812 119L787 94L787 54Z" fill="#092630" stroke="#c5a56a" stroke-width="10" stroke-linejoin="round"/><path d="M806 31L989 31L1014 56L1014 91L982 119L812 119L787 94L787 54Z" fill="url(#pool)" stroke="#488b86" stroke-width="3" stroke-linejoin="round"/><path d="M806 31L989 31L1014 56L1014 91L982 119L812 119L787 94L787 54Z" fill="url(#ripples)"/>
+<path d="M435 625L581 625L611 646L611 681L582 699L430 699L408 677L408 647Z" fill="#092630" stroke="#c5a56a" stroke-width="10" stroke-linejoin="round"/><path d="M435 625L581 625L611 646L611 681L582 699L430 699L408 677L408 647Z" fill="url(#pool)" stroke="#488b86" stroke-width="3" stroke-linejoin="round"/><path d="M435 625L581 625L611 646L611 681L582 699L430 699L408 677L408 647Z" fill="url(#ripples)"/></g>
+<!-- Blocked facades exactly trace the collision polygons. -->
+<g stroke-linejoin="round"><path d="M557 93L702 93L724 112L724 191L705 211L557 211L539 192L539 113Z" fill="url(#roof)" stroke="#c7a06a" stroke-width="6" stroke-linejoin="round"/><path d="M557 93L702 93L724 112L724 191L705 211L557 211L539 192L539 113Z" fill="url(#hatch)" opacity=".46"/>
+<path d="M550 554L572 536L710 536L731 554L731 628L710 647L568 647L550 628Z" fill="url(#roof)" stroke="#c7a06a" stroke-width="6" stroke-linejoin="round"/><path d="M550 554L572 536L710 536L731 554L731 628L710 647L568 647L550 628Z" fill="url(#hatch)" opacity=".46"/>
+<path d="M119 301L251 301L267 317L267 399L251 415L119 415L103 399L103 317Z" fill="url(#roof)" stroke="#c7a06a" stroke-width="6" stroke-linejoin="round"/><path d="M119 301L251 301L267 317L267 399L251 415L119 415L103 399L103 317Z" fill="url(#hatch)" opacity=".46"/>
+<path d="M1094 73L1211 73L1223 85L1223 212L1211 224L1094 224L1082 212L1082 85Z" fill="url(#roof)" stroke="#c7a06a" stroke-width="6" stroke-linejoin="round"/><path d="M1094 73L1211 73L1223 85L1223 212L1211 224L1094 224L1082 212L1082 85Z" fill="url(#hatch)" opacity=".46"/>
+<path d="M1103 476L1228 476L1242 490L1242 613L1228 627L1103 627L1089 613L1089 490Z" fill="url(#roof)" stroke="#c7a06a" stroke-width="6" stroke-linejoin="round"/><path d="M1103 476L1228 476L1242 490L1242 613L1228 627L1103 627L1089 613L1089 490Z" fill="url(#hatch)" opacity=".46"/></g>
+<g>
+ <path d="M561 109H700V194H561Z" fill="#203f44" stroke="#8ea294" stroke-width="3" opacity=".65"/>
+ <circle cx="631" cy="151" r="45" fill="#1a363d" stroke="#e3c184" stroke-width="7"/>
+ <circle cx="631" cy="151" r="35" fill="#3c615f" stroke="#e4c58d" stroke-width="3"/>
+ <circle cx="631" cy="151" r="29" fill="none" stroke="#fae3ad" stroke-width="3" stroke-dasharray="2 11" stroke-linecap="round"/>
+ <path d="M631 151V124M631 151L650 163" fill="none" stroke="#ffe5ac" stroke-width="5" stroke-linecap="round"/><circle cx="631" cy="151" r="5" fill="#fff0c4"/>
+ <text x="632" y="203" fill="#f3d8a5" font-family="sans-serif" font-weight="700" font-size="12" letter-spacing="2" text-anchor="middle">АРХИВ ВРЕМЕНИ</text>
+ <path d="M567 553H713V629H567Z" fill="#183a42" stroke="#9b855d" stroke-width="4" opacity=".78"/>
+ <path d="M582 546V639M698 546V639" stroke="#c2a06b" stroke-width="11"/>
+ <use href="#gear" transform="translate(639 589) scale(1.15)"/>
+ <text x="638" y="638" fill="#ecd39e" font-family="sans-serif" font-size="11" letter-spacing="2" text-anchor="middle">ЦЕХ МЕХАНИЗМОВ</text>
+ <path d="M123 327H247M123 386H247" stroke="#d2ac73" stroke-width="7" opacity=".7"/>
+ <use href="#gear" transform="translate(185 357) scale(.95)"/>
+ <text x="185" y="406" fill="#ead0a2" font-family="sans-serif" font-size="11" letter-spacing="2" text-anchor="middle">ЛИТЕЙНАЯ</text>
+ <rect x="1110" y="106" width="86" height="71" rx="6" fill="#1b363d" stroke="#e3b479" stroke-width="4"/>
+ <path d="M1121 120H1186M1121 134H1186M1121 148H1186M1121 162H1186" stroke="#c69b61" stroke-width="6" opacity=".7"/>
+ <path d="M1153 72L1135 101H1171Z" fill="#e0ae73" stroke="#29444c" stroke-width="4"/>
+ <text x="1152" y="203" fill="#e8c18a" font-family="sans-serif" font-size="11" letter-spacing="2" text-anchor="middle">ПАРОВОЙ УЗЕЛ</text>
+ <use href="#gear" transform="translate(1165 546) scale(1.2)"/>
+ <path d="M1117 591H1214" stroke="#d3a773" stroke-width="7" stroke-dasharray="13 9"/>
+ <text x="1165" y="615" fill="#e8cb91" font-family="sans-serif" font-size="11" letter-spacing="2" text-anchor="middle">СЧЁТНЫЙ ЗАЛ</text>
+</g>
+<!-- Open buildable courts: faint motifs only, no hidden blockers. -->
+<g stroke="#edc78e" stroke-width="3" fill="none" opacity=".32"><circle cx="634" cy="267" r="41"/><circle cx="634" cy="267" r="33" stroke-dasharray="4 10"/><circle cx="634" cy="457" r="41"/><circle cx="634" cy="457" r="33" stroke-dasharray="4 10"/><circle cx="766" cy="360" r="32" stroke-dasharray="5 8"/></g>
+<g transform="translate(46 52)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(398 64)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(1051 49)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(1242 275)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(1241 670)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(787 674)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(327 671)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g><g transform="translate(44 680)"><circle r="45" fill="url(#halo)"/><circle r="8" fill="#d5ad6f" stroke="#28373a" stroke-width="3"/><circle r="3" fill="#fff7bf"/></g>
+</svg>

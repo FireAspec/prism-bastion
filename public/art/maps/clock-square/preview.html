@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Часовая площадь — карта 11</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:#faeacb;background:#071d29;display:flex;flex-direction:column}
+header,footer{padding:12px 24px;background:#11303a;border-bottom:1px solid #87694f;display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between}
+footer{border-top:1px solid #87694f;border-bottom:0;font-size:13px;color:#dcc197}
+h1{font-size:clamp(17px,2vw,24px);margin:0}small{color:#bbab89}
+.controls{display:flex;gap:8px;flex-wrap:wrap}
+button{border:1px solid #aa855e;background:#254550;color:#faeacb;border-radius:9px;padding:8px 13px;font:inherit;cursor:pointer}
+button[aria-pressed="false"]{opacity:.45}
+button:focus-visible{outline:3px solid #ffe1a1;outline-offset:2px}
+main{margin:auto;width:min(100%,calc((100vh - 140px)*16/9))}
+svg{display:block;width:100%;height:auto;background:#123841;box-shadow:0 9px 34px #0008}
+.road-halo{fill:none;stroke:#17393d;stroke-width:54;stroke-linejoin:round;stroke-linecap:round}
+.road{fill:none;stroke-width:44;stroke-linejoin:round;stroke-linecap:round;opacity:.86}
+.north{stroke:#e9b780}.south{stroke:#8fd9cb}
+.road-mid{fill:none;stroke:#f8f0d1;stroke-width:2;stroke-dasharray:7 15}
+.blocked{stroke:#ffb69f;fill:#a34a42;fill-opacity:.12;stroke-width:3;stroke-dasharray:8 7}
+.water{stroke:#8df1e0;fill:#24b9bd;fill-opacity:.13;stroke-width:3;stroke-dasharray:8 7}
+.site{fill:#163940;stroke:#f7d18a;stroke-width:3;cursor:pointer}
+.site.water-site{fill:#18546a;stroke:#8af4e3}
+.site:focus-visible,.site:hover{stroke-width:5;outline:none}
+@media(max-width:800px){header,footer{padding:8px 12px}main{width:100%}}
+</style></head><body>
+<header><div><h1>11 · Часовая площадь</h1><small>FOUNDRY / мир 1280×720 · два входа · один выход</small></div>
+<div class="controls"><button data-layer="roads" aria-pressed="true">Маршруты</button><button data-layer="collisions" aria-pressed="true">Зоны запрета</button><button data-layer="sites" aria-pressed="true">Позиции</button></div></header>
+<main><svg viewBox="0 0 1280 720" role="img" aria-label="Карта с двумя переплетающимися полосами и местами для построек">
+<image href="./background.svg" width="1280" height="720"/>
+<g id="roads"><path class="road-halo" d="M0 156L95 156L155 115L265 105L354 143L389 218L355 278L438 338L555 372L654 361L745 414L788 498L875 525L965 500L1010 436L1028 379L1100 360L1280 360"/><path class="road north" d="M0 156L95 156L155 115L265 105L354 143L389 218L355 278L438 338L555 372L654 361L745 414L788 498L875 525L965 500L1010 436L1028 379L1100 360L1280 360"/><path class="road-mid" d="M0 156L95 156L155 115L265 105L354 143L389 218L355 278L438 338L555 372L654 361L745 414L788 498L875 525L965 500L1010 436L1028 379L1100 360L1280 360"/>
+<path class="road-halo" d="M0 563L100 563L163 607L270 613L358 565L387 492L351 435L437 379L555 344L654 361L748 310L786 225L878 196L962 225L1009 291L1028 350L1100 360L1280 360"/><path class="road south" d="M0 563L100 563L163 607L270 613L358 565L387 492L351 435L437 379L555 344L654 361L748 310L786 225L878 196L962 225L1009 291L1028 350L1100 360L1280 360"/><path class="road-mid" d="M0 563L100 563L163 607L270 613L358 565L387 492L351 435L437 379L555 344L654 361L748 310L786 225L878 196L962 225L1009 291L1028 350L1100 360L1280 360"/><g fill="#fff0c4" stroke="#244f59" stroke-width="5"><circle cx="10" cy="156" r="14"/><circle cx="10" cy="563" r="14"/><circle cx="1263" cy="360" r="19"/></g></g>
+<g id="collisions"><path class="blocked" d="M557 93L702 93L724 112L724 191L705 211L557 211L539 192L539 113Z"/>
+<path class="blocked" d="M550 554L572 536L710 536L731 554L731 628L710 647L568 647L550 628Z"/>
+<path class="blocked" d="M119 301L251 301L267 317L267 399L251 415L119 415L103 399L103 317Z"/>
+<path class="blocked" d="M1094 73L1211 73L1223 85L1223 212L1211 224L1094 224L1082 212L1082 85Z"/>
+<path class="blocked" d="M1103 476L1228 476L1242 490L1242 613L1228 627L1103 627L1089 613L1089 490Z"/><path class="water" d="M806 31L989 31L1014 56L1014 91L982 119L812 119L787 94L787 54Z"/>
+<path class="water" d="M435 625L581 625L611 646L611 681L582 699L430 699L408 677L408 647Z"/></g><g id="sites"></g></svg></main>
+<footer><span>Янтарная линия — север; бирюзовая — юг. Радиусы меток — проверенные collision footprints.</span><span id="detail" role="status" aria-live="polite">Выберите площадку на карте.</span></footer>
+<script>
+'use strict';
+const sites=[["north-gate",70,252,29,"land","North spawn"],["south-gate",72,476,29,"land","South spawn"],["west-high",292,245,28,"land","North western arc"],["west-low",289,471,28,"land","South western arc"],["cross-north",634,267,30,"land","Time Archive crossing"],["cross-south",634,457,30,"land","Lower crossing"],["east-fork",766,360,30,"land","Eastern fork"],["east-high",887,282,28,"land","North eastern arc"],["east-low",893,448,28,"land","South eastern arc"],["exit-guard",1146,288,28,"land","Shared exit"],["upper-coolant",895,76,28,"water","Upper coolant basin"],["lower-coolant",508,660,24,"water","Lower coolant basin"]];
+const ns='http://www.w3.org/2000/svg', group=document.getElementById('sites');
+for(const [id,x,y,r,terrain,role] of sites){
+ const el=document.createElementNS(ns,'circle');
+ el.setAttribute('cx',x);el.setAttribute('cy',y);el.setAttribute('r',r);
+ el.setAttribute('class','site'+(terrain==='water'?' water-site':''));
+ el.setAttribute('tabindex','0');el.setAttribute('role','button');el.setAttribute('aria-label',role);
+ const title=document.createElementNS(ns,'title');title.textContent=role;el.append(title);
+ const select=()=>document.getElementById('detail').textContent=id+' ('+x+', '+y+'), радиус '+r+'px — '+role;
+ el.addEventListener('click',select);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select()}});
+ group.append(el);
+}
+for(const button of document.querySelectorAll('[data-layer]'))button.addEventListener('click',()=>{
+ const on=button.getAttribute('aria-pressed')!=='true';
+ document.getElementById(button.dataset.layer).style.display=on?'':'none';
+ button.setAttribute('aria-pressed',String(on));
+});
+</script></body></html>
