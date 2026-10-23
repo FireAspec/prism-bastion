@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Миниатюра карты Садовая стена">
+ <defs><linearGradient id="field" x2="0" y2="1"><stop stop-color="#3b755e"/><stop offset="1" stop-color="#183d41"/></linearGradient><linearGradient id="pond" x2="0" y2="1"><stop stop-color="#53a9aa"/><stop offset="1" stop-color="#154b69"/></linearGradient><linearGradient id="panel" x2="1" y2="0"><stop stop-color="#082f36" stop-opacity=".97"/><stop offset="1" stop-color="#082f36" stop-opacity=".16"/></linearGradient></defs>
+ <rect width="640" height="360" fill="url(#field)"/><path d="M0 0H640V23H0Z" fill="#b0ad8c"/><path d="M0 23H640" stroke="#244c4b" stroke-width="5"/>
+ <g transform="scale(.5)">
+  <path d="M0 624 146 611 283 622 419 605 566 625 750 604 901 625 1071 611 1199 622 1280 605V720H0Z" fill="url(#pond)" stroke="#afc897" stroke-width="8"/>
+  <g fill="#356b50" stroke="#9cac70" stroke-width="7"><path d="M248 307 260 284 330 289 354 319 338 347 267 347Z"/><path d="M885 315 902 299 962 298 992 327 980 356 913 357Z"/></g>
+  <path d="M0 206 105 206 155 153 340 127 484 173 519 245 487 350 350 403 202 374 132 314 181 248 300 222 456 249 570 315 683 209 778 144 957 128 1101 177 1130 272 1086 377 935 413 772 385 716 319 757 259 928 240 1091 310 1190 355 1280 355" fill="none" stroke="#173d43" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M0 206 105 206 155 153 340 127 484 173 519 245 487 350 350 403 202 374 132 314 181 248 300 222 456 249 570 315 683 209 778 144 957 128 1101 177 1130 272 1086 377 935 413 772 385 716 319 757 259 928 240 1091 310 1190 355 1280 355" fill="none" stroke="#dfcfa1" stroke-width="42" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M0 206 105 206 155 153 340 127 484 173 519 245 487 350 350 403 202 374 132 314 181 248 300 222 456 249 570 315 683 209 778 144 957 128 1101 177 1130 272 1086 377 935 413 772 385 716 319 757 259 928 240 1091 310 1190 355 1280 355" fill="none" stroke="#ffedc3" stroke-dasharray="6 18" stroke-width="2"/>
+  <g fill="#75b078" stroke="#265b4c" stroke-width="3"><circle cx="282" cy="318" r="15"/><circle cx="317" cy="319" r="15"/><circle cx="926" cy="326" r="15"/><circle cx="960" cy="331" r="15"/></g>
+  <circle cx="615" cy="356" r="34" fill="#d4bc6a" fill-opacity=".35" stroke="#f6d48b" stroke-dasharray="4 6" stroke-width="3"/><circle cx="615" cy="356" r="8" fill="#f7df9b"/>
+  <circle cx="18" cy="206" r="21" fill="#f2bc65" stroke="#ffebc7" stroke-width="7"/><circle cx="1261" cy="355" r="21" fill="#7cdad8" stroke="#caf6e6" stroke-width="7"/>
+ </g>
+ <path d="M0 272H442l58 88H0Z" fill="url(#panel)"/><text x="20" y="303" fill="#e7d7ad" font-family="Arial,sans-serif" letter-spacing="3" font-weight="700" font-size="17">05 / GARDEN</text><text x="20" y="337" fill="#fff2d0" font-family="Arial,sans-serif" font-weight="700" font-size="30">САДОВАЯ СТЕНА</text><rect x="2" y="2" width="636" height="356" rx="11" fill="none" stroke="#d9c38e" stroke-width="4"/>
+</svg>

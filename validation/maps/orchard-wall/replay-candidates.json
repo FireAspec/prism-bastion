@@ -1,0 +1,61 @@
+{
+ "mapId":"orchard-wall","status":"unverified","reason":"Engine, wave catalog and combat modules are pending at the frozen base commit; no victory is asserted.",
+ "tickRate":60,"maxTicksPerWave":36000,
+ "allowedFirstArrivalTowers":["needle","cannon","frost","beacon","scatter","ember","saw","venom","rail","tesla","mortar","observatory"],
+ "scenarios":[
+  {"id":"standard-easy-crossfire","modeId":"standard","difficulty":"easy","seed":420501,"startingCredits":1000,
+   "guaranteedRoundRewardFloor":{"10":1275,"20":3050,"40":8100},
+   "counterplay":"Frost holds fast layers at the neck; cannon/rail tackle armor; venom/tesla/mortar control clusters and late splits.",
+   "actions":[
+    {"wave":1,"tick":0,"type":"place","ref":"westNeedle","tower":"needle","site":"west-inner"},
+    {"wave":1,"tick":0,"type":"place","ref":"neckFrost","tower":"frost","site":"central"},
+    {"wave":3,"tick":0,"type":"place","ref":"eastCannon","tower":"cannon","site":"east-inner"},
+    {"wave":6,"tick":0,"type":"place","ref":"bendScatter","tower":"scatter","site":"west-south"},
+    {"wave":9,"tick":0,"type":"place","ref":"eastVenom","tower":"venom","site":"east-reserve"},
+    {"wave":10,"tick":0,"type":"upgrade","ref":"eastCannon","path":0},
+    {"wave":13,"tick":0,"type":"place","ref":"auraBeacon","tower":"beacon","site":"central-reserve"},
+    {"wave":16,"tick":0,"type":"place","ref":"centralTesla","tower":"tesla","site":"south-reserve"},
+    {"wave":20,"tick":0,"type":"upgrade","ref":"neckFrost","path":1},
+    {"wave":23,"tick":0,"type":"place","ref":"exitMortar","tower":"mortar","site":"east-south"},
+    {"wave":28,"tick":0,"type":"place","ref":"exitRail","tower":"rail","site":"exit-reserve"},
+    {"wave":32,"tick":0,"type":"upgrade","ref":"centralTesla","path":0},
+    {"wave":36,"tick":0,"type":"upgrade","ref":"eastCannon","path":0},
+    {"wave":39,"tick":0,"type":"upgrade","ref":"exitMortar","path":1}
+   ]},
+  {"id":"half-cash-easy-lean-control","modeId":"half-cash","difficulty":"easy","seed":420502,"startingCredits":500,
+   "guaranteedRoundRewardFloor":{"10":637,"20":1525,"40":4050},
+   "counterplay":"Start with one inexpensive needle, delay waves by frost, buy low-tier area damage only after banking round rewards.",
+   "actions":[
+    {"wave":1,"tick":0,"type":"place","ref":"westNeedle","tower":"needle","site":"west-inner"},
+    {"wave":4,"tick":0,"type":"place","ref":"neckFrost","tower":"frost","site":"central"},
+    {"wave":7,"tick":0,"type":"place","ref":"bendScatter","tower":"scatter","site":"west-south"},
+    {"wave":10,"tick":0,"type":"upgrade","ref":"westNeedle","path":0},
+    {"wave":13,"tick":0,"type":"place","ref":"eastVenom","tower":"venom","site":"east-inner"},
+    {"wave":17,"tick":0,"type":"place","ref":"midTesla","tower":"tesla","site":"east-reserve"},
+    {"wave":20,"tick":0,"type":"upgrade","ref":"neckFrost","path":1},
+    {"wave":24,"tick":0,"type":"place","ref":"exitCannon","tower":"cannon","site":"east-south"},
+    {"wave":28,"tick":0,"type":"upgrade","ref":"exitCannon","path":0},
+    {"wave":32,"tick":0,"type":"place","ref":"backMortar","tower":"mortar","site":"south-reserve"},
+    {"wave":36,"tick":0,"type":"upgrade","ref":"bendScatter","path":0},
+    {"wave":39,"tick":0,"type":"upgrade","ref":"midTesla","path":1}
+   ]},
+  {"id":"iron-oath-easy-no-leak-screen","modeId":"iron-oath","difficulty":"easy","seed":420503,"startingCredits":1000,
+   "guaranteedRoundRewardFloor":{"10":1275,"20":3050,"40":8100},
+   "counterplay":"One life: slow at central meadow; keep durable damage in both loops and reserve a final screen. No sale, farm, interest, harvest, monetary abilities or knowledge.",
+   "actions":[
+    {"wave":1,"tick":0,"type":"place","ref":"neckFrost","tower":"frost","site":"central"},
+    {"wave":1,"tick":0,"type":"place","ref":"eastCannon","tower":"cannon","site":"east-inner"},
+    {"wave":4,"tick":0,"type":"place","ref":"westNeedle","tower":"needle","site":"west-inner"},
+    {"wave":7,"tick":0,"type":"place","ref":"bendScatter","tower":"scatter","site":"west-south"},
+    {"wave":10,"tick":0,"type":"upgrade","ref":"eastCannon","path":0},
+    {"wave":13,"tick":0,"type":"place","ref":"eastVenom","tower":"venom","site":"east-reserve"},
+    {"wave":17,"tick":0,"type":"place","ref":"exitTesla","tower":"tesla","site":"east-south"},
+    {"wave":19,"tick":0,"type":"upgrade","ref":"neckFrost","path":1},
+    {"wave":22,"tick":0,"type":"place","ref":"backMortar","tower":"mortar","site":"south-reserve"},
+    {"wave":27,"tick":0,"type":"place","ref":"auraBeacon","tower":"beacon","site":"central-reserve"},
+    {"wave":30,"tick":0,"type":"place","ref":"exitRail","tower":"rail","site":"exit-reserve"},
+    {"wave":34,"tick":0,"type":"upgrade","ref":"eastCannon","path":0},
+    {"wave":38,"tick":0,"type":"upgrade","ref":"backMortar","path":1}
+   ]}
+ ]
+}

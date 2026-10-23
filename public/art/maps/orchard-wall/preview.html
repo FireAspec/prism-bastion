@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Садовая стена — геометрия карты</title>
+ <style>
+ :root{color-scheme:dark;font-family:system-ui,Arial,sans-serif;color:#f5edcf;background:#0b2630}*{box-sizing:border-box}
+ body{margin:0;background:radial-gradient(ellipse at top,#264e4c,#071e28 75%)}
+ main{max-width:1320px;margin:auto;padding:10px 14px 20px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+ h1{margin:0;font-size:24px}small{display:block;font-size:11px;letter-spacing:.25em;color:#ceb98a;margin-bottom:3px}
+ nav{display:flex;gap:8px;flex-wrap:wrap}button{font:600 13px system-ui;background:#153e43;color:#f0efdc;border:1px solid #71928c;border-radius:10px;padding:10px 13px;cursor:pointer}
+ button[aria-pressed="true"]{background:#e5cb8f;color:#1a3e40;border-color:#f7e8b1}button:focus-visible{outline:3px solid #ffde8e;outline-offset:3px}
+ .board{aspect-ratio:16/9;overflow:hidden;border:2px solid #739782;border-radius:14px;box-shadow:0 22px 55px #0009;background:#2c6053}
+ svg{width:100%;height:100%;display:block}.road-shadow{fill:none;stroke:#173e43;stroke-width:54;stroke-linecap:round;stroke-linejoin:round}
+ .road{fill:none;stroke:#cebd94;stroke-width:42;stroke-linecap:round;stroke-linejoin:round}.road-mid{fill:none;stroke:#f0e5c3;stroke-width:2;stroke-dasharray:1 13}
+ .marker circle{fill:#f6d997;stroke:#19464a;stroke-width:4}.marker.support circle{fill:#9cdecf}.marker.reserve circle{fill:none;stroke:#e2e9cc;stroke-width:3;stroke-dasharray:5 5}
+ .marker text{font-size:17px;fill:#1d4546;font-weight:800;text-anchor:middle;dominant-baseline:central}.marker.reserve text{fill:#f9e9b1}
+ .labels text{font-size:19px;font-weight:800;paint-order:stroke fill;stroke:#164446;stroke-width:5}
+ footer{padding:10px 3px;font-size:13px;color:#c5d6c8;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+ @media(max-width:700px){h1{font-size:20px}button{font-size:12px;padding:8px}}
+ </style>
+</head>
+<body><main><header><h1><small>PRISM BASTION / MAP 05</small>Садовая стена</h1><nav aria-label="Композиции">
+ <button data-mode="crossfire" aria-pressed="true">Перекрёстный огонь</button><button data-mode="control" aria-pressed="false">Контроль и усиление</button><button data-mode="bare" aria-pressed="false">Без меток</button>
+ </nav></header>
+ <div class="board"><svg viewBox="0 0 1280 720" role="img" aria-label="Двойная петля садовой стены; вход слева, выход справа, пруд снизу">
+  <image href="./background.svg" x="0" y="0" width="1280" height="720"/>
+  <g id="road"><polyline class="road-shadow"/><polyline class="road"/><polyline class="road-mid"/></g>
+  <g aria-label="Два мостовых пересечения"><g transform="translate(509 278) rotate(30)"><rect x="-27" y="-21" width="54" height="42" rx="4" fill="#ddc699" stroke="#716747" stroke-width="3"/><path d="M-24-15h48M-24 15h48M-10-17v34M10-17v34" stroke="#fff0c5" stroke-width="3"/></g><g transform="translate(1111 319) rotate(24)"><rect x="-27" y="-21" width="54" height="42" rx="4" fill="#ddc699" stroke="#716747" stroke-width="3"/><path d="M-24-15h48M-24 15h48M-10-17v34M10-17v34" stroke="#fff0c5" stroke-width="3"/></g></g>
+  <g class="labels"><text x="25" y="267" fill="#ffe6a9">ВХОД</text><text x="1188" y="414" fill="#b8f2dc">ВЫХОД</text></g><g id="markers"/>
+ </svg></div><footer><span id="summary">Западная и восточная петли — единый маршрут. Центр простреливает оба перехода.</span><span>Жёлтый — атака · бирюзовый — поддержка · пунктир — резерв</span></footer>
+ </main>
+ <script type="application/json" id="geometry">{"lanes":[[[0,206],[105,206],[155,153],[340,127],[484,173],[519,245],[487,350],[350,403],[202,374],[132,314],[181,248],[300,222],[456,249],[570,315],[683,209],[778,144],[957,128],[1101,177],[1130,272],[1086,377],[935,413],[772,385],[716,319],[757,259],[928,240],[1091,310],[1190,355],[1280,355]]],"pathWidth":42}</script>
+ <script>
+ 'use strict';
+ const geom=JSON.parse(document.getElementById('geometry').textContent);
+ const points=geom.lanes[0].map(([x,y])=>`${x},${y}`).join(' ');
+ document.querySelectorAll('#road polyline').forEach(el=>el.setAttribute('points',points));
+ const arrangements={
+  crossfire:{caption:'Композиция A: две внутренние дуги, центральный узел и защита выхода.',sites:[[400,316,'1',''],[615,356,'2',''],[850,325,'3',''],[1050,460,'4',''],[636,462,'R','reserve'],[219,463,'R','reserve']]},
+  control:{caption:'Композиция B: замедление в центре, дальний огонь и поддержка.',sites:[[219,463,'1',''],[615,356,'2','support'],[778,479,'3',''],[1050,460,'4',''],[400,316,'R','reserve'],[850,325,'R','reserve']]},
+  bare:{caption:'Чистая геометрия с обозначенными пересечениями; никакие башни не установлены.',sites:[]}
+ };
+ function show(mode){
+  document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));
+  const root=document.getElementById('markers');root.replaceChildren();const ns='http://www.w3.org/2000/svg';
+  for(const [x,y,label,cls] of arrangements[mode].sites){const g=document.createElementNS(ns,'g');g.setAttribute('class',`marker ${cls}`);g.setAttribute('transform',`translate(${x} ${y})`);
+   const c=document.createElementNS(ns,'circle');c.setAttribute('r',cls==='reserve'?'27':'25');const t=document.createElementNS(ns,'text');t.textContent=label;g.append(c,t);root.append(g);}
+  document.getElementById('summary').textContent=arrangements[mode].caption;
+ }
+ document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.mode)));show('crossfire');
+ </script>
+</body></html>
