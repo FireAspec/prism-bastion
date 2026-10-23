@@ -103,8 +103,13 @@ describe('map 17 / vault district',()=>{
     for(const lane of map.lanes){
       const line=lane.map(p=>p.x+' '+p.y).join(' L ');
       const overlay=lane.map(p=>p.x+','+p.y).join(' ');
+      const start=lane[0],end=lane[lane.length-1];
       expect(background).toContain('M '+line);
       expect(preview).toContain('points="'+overlay+'"');
+      expect(preview).toContain('<circle cx="24" cy="'+start.y+'" r="11"');
+      expect(preview).toContain('<circle cx="1250" cy="'+end.y+'" r="11"');
+      expect(background).toContain('M1245 '+end.y+'h15');
+      expect(thumbnail).toContain('M1245 '+end.y+'h15');
     }
   });
 });
