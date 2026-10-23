@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Приливные доки — контроль сцены</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#071d27;color:#f1e1bd;font:14px/1.5 system-ui,sans-serif}
+    main{display:grid;min-height:100svh;place-items:center}.stage{position:relative;width:min(100vw,177.7778svh);aspect-ratio:16/9;overflow:hidden;box-shadow:0 0 100px #03121d}
+    .stage img,.stage svg{position:absolute;inset:0;display:block;width:100%;height:100%}.stage img{object-fit:fill}.stage svg{pointer-events:none}
+    .overlay{opacity:0;transition:opacity .18s ease}body.markers .overlay{opacity:1}
+    .toolbar{position:fixed;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:12px;background:#0b2634ec;border:1px solid #b39d6f;border-radius:10px;padding:8px 12px;box-shadow:0 6px 16px #061521ae}
+    input{accent-color:#e8c382}label{cursor:pointer;white-space:nowrap}button{background:#1e5663;border:1px solid #8ccdc3;color:#ffe5ad;padding:5px 9px;cursor:pointer;border-radius:6px}
+    .note{position:fixed;left:15px;bottom:12px;background:#0b2634ee;padding:5px 12px;border-radius:7px;pointer-events:none}
+    .thumbnail{position:fixed;left:15px;top:15px;width:320px;aspect-ratio:16/9;border:2px solid #d3b888;border-radius:8px;box-shadow:0 10px 35px #041622ab;z-index:2;display:none}body.thumb .thumbnail{display:block}
+    @media(max-width:800px){.toolbar{top:4px;right:4px;font-size:12px}.thumbnail{width:180px;top:58px}.note{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){.overlay{transition:none}}
+  </style>
+</head>
+<body>
+  <main><div class="stage" aria-label="Игровое поле 1280 на 720">
+    <img src="background.svg" width="1280" height="720" alt="Извилистый сухой причал между приливными бассейнами">
+    <svg class="overlay" viewBox="0 0 1280 720" aria-hidden="true">
+      <path d="M0 355L136 355 174 332 209 270 250 246 365 246 412 270 435 316 435 400 462 441 520 466 610 466 659 442 684 400 684 320 711 271 759 242 855 242 894 265 912 315 912 395 940 441 980 468 1051 468 1092 439 1110 400 1110 352 1150 334 1280 334" stroke="#ffeab2" fill="none" stroke-width="2" stroke-dasharray="7 6"/>
+      <g fill="#39d4ba" fill-opacity=".3" stroke="#a7f6e0" stroke-width="3"><circle cx="244" cy="362" r="24"/><circle cx="325" cy="345" r="24"/><circle cx="612" cy="356" r="24"/><circle cx="815" cy="349" r="24"/><circle cx="1032" cy="362" r="24"/><circle cx="558" cy="526" r="24"/></g>
+      <g fill="#e5fff7" font-size="15" font-family="system-ui,sans-serif" text-anchor="middle" font-weight="bold"><text x="244" y="367">W1</text><text x="325" y="350">W2</text><text x="612" y="361">C1</text><text x="815" y="354">E1</text><text x="1032" y="367">E2</text><text x="558" y="531">S1</text></g>
+      <g fill="#87dbef" fill-opacity=".35" stroke="#a3e8e8" stroke-width="3"><circle cx="560" cy="257" r="26"/><circle cx="280" cy="657" r="26"/></g>
+    </svg>
+  </div></main>
+  <div class="toolbar"><label><input id="pads" type="checkbox"> Позиции и ось пути</label><button id="mini" type="button" aria-pressed="false">Миниатюра</button></div>
+  <img class="thumbnail" src="thumbnail.svg" alt="Миниатюра карты 08">
+  <div class="note">Карта 08 · 1280×720 · клавиша P — позиции</div>
+  <script>
+    const pads=document.querySelector('#pads'),mini=document.querySelector('#mini');
+    pads.addEventListener('change',()=>document.body.classList.toggle('markers',pads.checked));
+    mini.addEventListener('click',()=>{const shown=document.body.classList.toggle('thumb');mini.setAttribute('aria-pressed',String(shown))});
+    window.addEventListener('keydown',event=>{if(event.key.toLowerCase()==='p'&&event.target===document.body){pads.checked=!pads.checked;document.body.classList.toggle('markers',pads.checked)}});
+  </script>
+</body>
+</html>

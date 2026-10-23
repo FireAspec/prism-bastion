@@ -1,2 +1,59 @@
-import type {MapDef} from '../../contracts';
-export function getMap():MapDef{throw new Error('tidal-docks map pending');}
+import type {MapDef, Vec} from '../../contracts';
+
+/** A continuous dry timber quay, with generous land on both sides of its bends. */
+const LANE:Vec[] = [
+  {x:0,y:355},{x:136,y:355},{x:174,y:332},{x:209,y:270},
+  {x:250,y:246},{x:365,y:246},{x:412,y:270},{x:435,y:316},
+  {x:435,y:400},{x:462,y:441},{x:520,y:466},{x:610,y:466},
+  {x:659,y:442},{x:684,y:400},{x:684,y:320},{x:711,y:271},
+  {x:759,y:242},{x:855,y:242},{x:894,y:265},{x:912,y:315},
+  {x:912,y:395},{x:940,y:441},{x:980,y:468},{x:1051,y:468},
+  {x:1092,y:439},{x:1110,y:400},{x:1110,y:352},{x:1150,y:334},
+  {x:1280,y:334},
+];
+
+// Shorelines match the shapes in background.svg, including three sheltered basins.
+const WATER:Vec[][] = [
+  [{x:0,y:0},{x:1280,y:0},{x:1280,y:210},{x:1220,y:196},
+    {x:1164,y:198},{x:1125,y:180},{x:1078,y:199},{x:1000,y:191},
+    {x:940,y:183},{x:884,y:199},{x:838,y:186},{x:785,y:190},
+    {x:735,y:174},{x:680,y:187},{x:628,y:182},{x:582,y:193},
+    {x:530,y:188},{x:474,y:196},{x:421,y:179},{x:377,y:187},
+    {x:318,y:174},{x:259,y:190},{x:208,y:183},{x:160,y:194},
+    {x:96,y:181},{x:0,y:201}],
+  [{x:0,y:585},{x:86,y:578},{x:153,y:594},{x:211,y:579},
+    {x:281,y:590},{x:350,y:571},{x:418,y:585},{x:478,y:566},
+    {x:541,y:584},{x:607,y:574},{x:676,y:589},{x:742,y:575},
+    {x:812,y:588},{x:883,y:571},{x:944,y:587},{x:1012,y:576},
+    {x:1077,y:589},{x:1145,y:573},{x:1209,y:590},{x:1280,y:582},
+    {x:1280,y:720},{x:0,y:720}],
+  [{x:497,y:198},{x:628,y:197},{x:642,y:226},{x:639,y:298},
+    {x:621,y:313},{x:509,y:313},{x:490,y:292},{x:490,y:226}],
+  [{x:190,y:513},{x:222,y:503},{x:372,y:503},{x:404,y:524},
+    {x:404,y:554},{x:364,y:565},{x:225,y:564},{x:187,y:547}],
+  [{x:751,y:512},{x:789,y:497},{x:853,y:497},{x:883,y:521},
+    {x:882,y:552},{x:748,y:553}],
+  [{x:1166,y:525},{x:1205,y:519},{x:1253,y:531},{x:1280,y:520},
+    {x:1280,y:563},{x:1175,y:560}],
+];
+
+const BLOCKED:Vec[][] = [
+  [{x:60,y:220},{x:135,y:220},{x:135,y:289},{x:60,y:289}],
+  [{x:294,y:137},{x:371,y:137},{x:371,y:192},{x:294,y:192}],
+  [{x:520,y:351},{x:568,y:351},{x:568,y:384},{x:520,y:384}],
+  [{x:770,y:402},{x:822,y:402},{x:822,y:439},{x:770,y:439}],
+  [{x:1008,y:230},{x:1082,y:230},{x:1082,y:289},{x:1008,y:289}],
+  [{x:1168,y:442},{x:1237,y:442},{x:1237,y:500},{x:1168,y:500}],
+];
+
+export function getMap():MapDef {
+  const clone=(poly:Vec[])=>poly.map(p=>({...p}));
+  return {
+    id:'tidal-docks',name:'Приливные доки',
+    description:'Освободите порт. Удерживайте извилистый сухой причал между приливными бассейнами — несколько широких пирсов дают перекрёстные сектора огня.',
+    difficulty:2,campaignIndex:8,recommendedDifficulty:'normal',theme:'estuary',
+    pathWidth:52,lanes:[clone(LANE)],water:WATER.map(clone),blocked:BLOCKED.map(clone),
+    // No enemy/technology overrides: all normal groups are evaluated on lane 0.
+    waveOverrides:{},background:'art/maps/tidal-docks/background.svg',
+  };
+}

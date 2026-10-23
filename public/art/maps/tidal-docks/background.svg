@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Приливные доки — извилистый деревянный причал, эстуарий, сухие пирсы и медные портовые механизмы">
+  <defs>
+    <linearGradient id="earth" x2="0" y2="1"><stop stop-color="#536b64"/><stop offset=".55" stop-color="#69766a"/><stop offset="1" stop-color="#384e50"/></linearGradient>
+    <linearGradient id="sea" x2=".8" y2="1"><stop stop-color="#173d51"/><stop offset=".5" stop-color="#17687a"/><stop offset="1" stop-color="#0b3448"/></linearGradient>
+    <linearGradient id="deck" x2="0" y2="1"><stop stop-color="#c7a16b"/><stop offset=".6" stop-color="#a6784d"/><stop offset="1" stop-color="#806047"/></linearGradient>
+    <radialGradient id="lamp"><stop stop-color="#ffdf9c" stop-opacity=".9"/><stop offset=".3" stop-color="#edb867" stop-opacity=".35"/><stop offset="1" stop-color="#c68d58" stop-opacity="0"/></radialGradient>
+    <pattern id="silt" patternUnits="userSpaceOnUse" width="85" height="73"><path d="M5 16q15 -9 33 -2m22 35q-13 -8 -30 1M14 67q17 -6 27 0" fill="none" stroke="#c7cfa9" stroke-width="1.5" opacity=".13"/><circle cx="56" cy="19" r="2" fill="#d7c99b" opacity=".25"/></pattern>
+    <pattern id="ripple" patternUnits="userSpaceOnUse" width="80" height="48"><path d="M8 17q14 -5 29 0m14 11q9 -3 21 0M19 42q11 -3 23 0" fill="none" stroke="#9de8df" stroke-width="1.7" opacity=".22"/></pattern>
+    <pattern id="planks" patternUnits="userSpaceOnUse" width="26" height="25"><rect width="26" height="25" fill="url(#deck)"/><path d="M0 1H26M0 24H26M13 0V12M4 12V25" fill="none" stroke="#544740" stroke-width="1.7" opacity=".56"/><path d="M2 6H24M1 17H24" stroke="#f0d3a0" opacity=".2"/><circle cx="3" cy="3" r="1" fill="#edd3a1"/><circle cx="23" cy="22" r="1" fill="#edd3a1"/></pattern>
+    <g id="bollard"><ellipse cx="0" cy="5" rx="12" ry="7" fill="#0b303e" opacity=".5"/><rect x="-5" y="-8" width="10" height="15" rx="3" fill="#614c3e" stroke="#d0ac76" stroke-width="2"/><ellipse cy="-8" rx="8" ry="4" fill="#e2bf86" stroke="#644a3b" stroke-width="2"/></g>
+    <g id="lantern"><circle r="42" fill="url(#lamp)"/><circle r="7" fill="#705342"/><circle r="3.5" fill="#fff1bf"/></g>
+    <g id="crystal"><path d="M0 -22 12 -8 8 16 -6 20 -15 5 -10 -10Z" fill="#7cddcc" stroke="#225d6d" stroke-width="3"/><path d="M0 -22 1 5 -6 20M1 5 12 -8" fill="none" stroke="#e0fff5" stroke-width="2" opacity=".65"/></g>
+    <path id="route" d="M0 355L136 355 174 332 209 270 250 246 365 246 412 270 435 316 435 400 462 441 520 466 610 466 659 442 684 400 684 320 711 271 759 242 855 242 894 265 912 315 912 395 940 441 980 468 1051 468 1092 439 1110 400 1110 352 1150 334 1280 334" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    <path id="north" d="M0 0H1280V210L1220 196 1164 198 1125 180 1078 199 1000 191 940 183 884 199 838 186 785 190 735 174 680 187 628 182 582 193 530 188 474 196 421 179 377 187 318 174 259 190 208 183 160 194 96 181 0 201Z"/>
+    <path id="south" d="M0 585L86 578 153 594 211 579 281 590 350 571 418 585 478 566 541 584 607 574 676 589 742 575 812 588 883 571 944 587 1012 576 1077 589 1145 573 1209 590 1280 582V720H0Z"/>
+    <path id="inlet-a" d="M497 198L628 197 642 226 639 298 621 313 509 313 490 292 490 226Z"/>
+    <path id="inlet-b" d="M190 513L222 503 372 503 404 524 404 554 364 565 225 564 187 547Z"/>
+    <path id="inlet-c" d="M751 512L789 497 853 497 883 521 882 552 748 553Z"/>
+    <path id="inlet-d" d="M1166 525L1205 519 1253 531 1280 520V563L1175 560Z"/>
+  </defs>
+  <rect width="1280" height="720" fill="url(#earth)"/>
+  <rect width="1280" height="720" fill="url(#silt)"/>
+  <path d="M0 214Q210 170 450 213T950 211T1280 202V551Q1130 589 940 544T451 552T0 566Z" fill="#b5ab7b" opacity=".11"/>
+  <g fill="url(#sea)" stroke="#bbb88b" stroke-width="7" stroke-linejoin="round">
+    <use xlink:href="#north"/><use xlink:href="#south"/><use xlink:href="#inlet-a"/><use xlink:href="#inlet-b"/><use xlink:href="#inlet-c"/><use xlink:href="#inlet-d"/>
+  </g>
+  <g fill="url(#ripple)"><use xlink:href="#north"/><use xlink:href="#south"/><use xlink:href="#inlet-a"/><use xlink:href="#inlet-b"/><use xlink:href="#inlet-c"/><use xlink:href="#inlet-d"/></g>
+  <g fill="none" stroke="#a4e5dc" opacity=".22" stroke-width="2"><path d="M0 78q125 -25 250 2t260 -1t270 9t270 -7t230 12M0 138q140 -20 260 6t236 -9t270 4t255 -12t259 9M0 647q150 -21 280 1t280 -1t245 10t260 -5t215 6"/><path d="M516 255q55 -17 112 4M218 540q76 -24 161 0M765 531q42 -16 103 1"/></g>
+  <!-- Layered boardwalk exactly follows the navigable lane; all entities render above it. -->
+  <use xlink:href="#route" stroke="#203d46" stroke-width="68" transform="translate(0 4)" opacity=".5"/>
+  <use xlink:href="#route" stroke="#293e43" stroke-width="66"/>
+  <use xlink:href="#route" stroke="#d1b384" stroke-width="60"/>
+  <use xlink:href="#route" stroke="#4d3b36" stroke-width="56"/>
+  <use xlink:href="#route" stroke="url(#planks)" stroke-width="52"/>
+  <use xlink:href="#route" stroke="#ffe4ab" stroke-width="2" stroke-dasharray="2 23" opacity=".48"/>
+  <!-- Collision footprints of six warehouses / equipment bases. -->
+  <g stroke="#2c4549" stroke-width="4" stroke-linejoin="round">
+    <rect x="60" y="220" width="75" height="69" rx="5" fill="#9c7854"/>
+    <path d="M55 231 97 206 141 231V246H55Z" fill="#556d6c" stroke="#d8b987"/>
+    <path d="M82 234V287M111 234V287" stroke="#e0c392" stroke-width="3"/>
+    <rect x="294" y="137" width="77" height="55" rx="5" fill="#80654b"/>
+    <circle cx="333" cy="164" r="19" fill="#d1ad73" stroke="#384b4d" stroke-width="5"/>
+    <circle cx="333" cy="164" r="5" fill="#304b53"/><path d="M333 140V188M309 164H357" stroke="#385158" stroke-width="3"/>
+    <rect x="520" y="351" width="48" height="33" rx="3" fill="#84674f"/><path d="M522 359H566M522 369H566M540 351V384" stroke="#e0b578" stroke-width="3"/>
+    <rect x="770" y="402" width="52" height="37" rx="3" fill="#587078"/><path d="M780 409H814M780 420H814M780 430H814" stroke="#d2ae83" stroke-width="3"/>
+    <rect x="1008" y="230" width="74" height="59" rx="4" fill="#87724e"/>
+    <path d="M1003 237 1045 212 1087 237V248H1003Z" fill="#51696c" stroke="#dcb786"/>
+    <rect x="1023" y="251" width="12" height="16" fill="#f3d28e"/><rect x="1052" y="251" width="12" height="16" fill="#f3d28e"/>
+    <rect x="1168" y="442" width="69" height="58" rx="3" fill="#776b58"/><path d="M1177 445V495M1192 445V495M1206 445V495M1221 445V495" stroke="#c6a279" stroke-width="3"/>
+  </g>
+  <g fill="none" stroke="#2b5157" stroke-width="3" opacity=".65"><path d="M174 183 153 145V87M153 87 204 117M153 98 106 119M1172 206 1204 164V99M1204 99 1248 117M1204 110 1154 134M567 184V126L618 116M567 126 532 116"/></g>
+  <g fill="#e0b974"><circle cx="153" cy="87" r="5"/><circle cx="1204" cy="99" r="5"/><circle cx="567" cy="126" r="5"/></g>
+  <g fill="#225765" stroke="#c8b28c" stroke-width="4" opacity=".88"><path d="M814 103q39 -18 80 0l-17 32h-50Z"/><path d="M265 648q51 -17 96 0l-22 30h-52Z"/><path d="M840 97V53L868 92Z" fill="#c8d9c6"/><path d="M311 645V606L338 639Z" fill="#b0d3c8"/></g>
+  <g opacity=".9"><use xlink:href="#crystal" x="101" y="646"/><use xlink:href="#crystal" x="989" y="97"/><use xlink:href="#bollard" x="249" y="206"/><use xlink:href="#bollard" x="390" y="230"/><use xlink:href="#bollard" x="471" y="427"/><use xlink:href="#bollard" x="651" y="472"/><use xlink:href="#bollard" x="730" y="236"/><use xlink:href="#bollard" x="950" y="469"/><use xlink:href="#bollard" x="1084" y="470"/><use xlink:href="#bollard" x="1150" y="298"/></g>
+  <g><use xlink:href="#lantern" x="182" y="299"/><use xlink:href="#lantern" x="408" y="431"/><use xlink:href="#lantern" x="708" y="419"/><use xlink:href="#lantern" x="880" y="273"/><use xlink:href="#lantern" x="1091" y="324"/><use xlink:href="#lantern" x="1261" y="301"/></g>
+  <g fill="none" stroke="#ffe1a7" stroke-width="5" stroke-linecap="round"><path d="M16 335 35 355 16 376M47 344l12 11 -12 11M1220 312l21 22 -21 21M1251 322l12 12 -12 12"/></g>
+  <rect x="2" y="2" width="1276" height="716" rx="8" fill="none" stroke="#d2c490" stroke-opacity=".34" stroke-width="4"/>
+</svg>
