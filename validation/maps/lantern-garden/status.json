@@ -1,0 +1,47 @@
+{
+  "module": "lantern-garden",
+  "baseCommit": "65ae156626cab219a9d8a6e7e6a63f8b4663d1f7",
+  "contractVersion": 1,
+  "geometry": {
+    "status": "checked",
+    "command": "node --import tsx validation/maps/lantern-garden/geometry.ts",
+    "valid": true,
+    "world": [1280, 720],
+    "lanes": 1,
+    "vertices": 34,
+    "turnbacks": 2,
+    "pathLengthPixels": 3248.24,
+    "pathWidthPixels": 46,
+    "minimumPathSegmentPixels": 35.06,
+    "minimumPolygonCenterlineClearancePixels": 44.18,
+    "landSitesValidated": 10,
+    "alternativeWaterSitesValidated": 3,
+    "fastTransitAt115PxPerSecond": 28.25,
+    "slowTransitAt52PxPerSecond": 62.47
+  },
+  "art": {
+    "status": "rendered-and-viewed",
+    "resolution": [1366, 768],
+    "backgroundScreenshot": "validation/maps/lantern-garden/background-1366x768.png",
+    "thumbnailScreenshot": "validation/maps/lantern-garden/thumbnail-1366x768.png",
+    "browserPreviewStatus": "html-structure-tested; browser-screenshot-unavailable",
+    "browserPreviewReason": "Playwright Chromium was absent; attempted download returned an invalid/empty archive."
+  },
+  "replays": {
+    "status": "unverified",
+    "seed": 380101,
+    "difficulty": "easy",
+    "modes": ["standard", "half-cash", "iron-oath"],
+    "actualEngineRun": false,
+    "reason": "The base commit still contains pending implementations for the game engine, waves, enemies, modes and starting towers.",
+    "executableFixture": "validation/maps/lantern-garden/replay.fixture.ts",
+    "claimedVictory": false
+  },
+  "tests": {
+    "command": "npm run check",
+    "status": "passed",
+    "testFiles": 4,
+    "passingTests": 18,
+    "strictValidationCompile": "passed"
+  }
+}

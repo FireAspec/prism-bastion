@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="color-scheme" content="dark">
+ <title>Сад фонарей · просмотр карты 01</title>
+ <style>
+  *{box-sizing:border-box}body{margin:0;color:#e7f4e7;background:#0d2029;font:15px/1.45 system-ui,Arial,sans-serif}
+  header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:13px 24px;background:#102d35;border-bottom:1px solid #416056;flex-wrap:wrap}
+  header strong{font-size:21px;color:#ffe4ae;letter-spacing:.04em}header small{display:block;color:#a9c7bf}
+  button{cursor:pointer;color:#f6e5b8;border:1px solid #719786;background:#214647;padding:9px 15px;border-radius:9px;font:inherit}
+  button[aria-pressed=true]{color:#102b2e;background:#e2bc77;border-color:#fce3ae;font-weight:700}
+  .controls{display:flex;flex-wrap:wrap;gap:8px}.stage{position:relative;width:min(100vw,calc((100vh - 148px)*1280/720),1366px);aspect-ratio:16/9;margin:14px auto 0;border:2px solid #668474;border-radius:11px;overflow:hidden;box-shadow:0 12px 40px #05151c}
+  .stage img,.stage svg{position:absolute;inset:0;width:100%;height:100%}.stage img{object-fit:fill}.stage svg{pointer-events:none}
+  .road-border{fill:none;stroke:#294546;stroke-width:65;stroke-linejoin:round;stroke-linecap:round}
+  .road{fill:none;stroke:#baa985;stroke-width:46;stroke-linejoin:round;stroke-linecap:round}
+  .road-trim{fill:none;stroke:#f6e3a8;stroke-width:1.7;stroke-dasharray:9 19;opacity:.4}
+  .site circle{stroke:#f8e8be;stroke-width:3;fill:#23383d;fill-opacity:.92}.site text{font-family:system-ui,sans-serif;text-anchor:middle;dominant-baseline:central;fill:#ffedbe;font-size:20px;font-weight:800}
+  .site.is-support circle{fill:#426e7b}.site.is-control circle{fill:#507b78}.site.is-damage circle{fill:#8a6548}
+  .site-water circle{fill:#154c6e;stroke:#98e2e1;stroke-width:2}
+  [data-layer]{transition:opacity .15s ease}.hidden{opacity:0}
+  .edge{font:700 17px system-ui,sans-serif;fill:#fff3c3;paint-order:stroke;stroke:#234b4c;stroke-width:4px}
+  .legend{margin:9px auto 14px;width:min(1200px,96vw);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:15px;color:#b2d0c6}
+  .swatch{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle;background:#f3c46d}
+  .legend p{margin:0}.note{color:#e5c597}
+  @media(max-width:700px){header{padding:10px}header strong{font-size:18px}button{padding:7px}.stage{margin-top:8px}.legend{padding:0 7px}}
+ </style>
+</head>
+<body>
+ <header>
+  <div><strong>01 / Сад фонарей</strong><small>Отдельный просмотр подложки и геометрии. 1280 × 720; внешний предпросмотр рассчитан на 1366 × 768.</small></div>
+  <div class="controls" role="group" aria-label="Слои карты">
+   <button id="route" type="button" aria-pressed="true">Маршрут</button>
+   <button id="sites" type="button" aria-pressed="true">Позиции</button>
+   <button id="zones" type="button" aria-pressed="false">Запретные зоны</button>
+   <button id="build" type="button" aria-pressed="false">Композиция Б</button>
+  </div>
+ </header>
+ <main>
+  <div class="stage" aria-label="Карта, маршрут, позиции, декорации">
+   <img src="./background.svg" alt="Тёмно-зелёный сад с небольшим прудом, цветниками и фундаментом сторожевого поста">
+   <svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g id="route-layer" data-layer>
+     <polyline class="road-border" points="0,170 115,170 252,169 395,165 540,166 686,171 823,180 932,191 1015,216 1067,250 1091,291 1094,331 1073,373 1034,397 974,409 869,410 740,413 610,419 485,422 367,432 286,450 233,477 206,515 208,550 229,580 273,601 347,610 482,612 624,613 769,611 910,607 1050,603 1170,600 1280,600"/>
+     <polyline class="road" points="0,170 115,170 252,169 395,165 540,166 686,171 823,180 932,191 1015,216 1067,250 1091,291 1094,331 1073,373 1034,397 974,409 869,410 740,413 610,419 485,422 367,432 286,450 233,477 206,515 208,550 229,580 273,601 347,610 482,612 624,613 769,611 910,607 1050,603 1170,600 1280,600"/>
+     <polyline class="road-trim" points="0,170 115,170 252,169 395,165 540,166 686,171 823,180 932,191 1015,216 1067,250 1091,291 1094,331 1073,373 1034,397 974,409 869,410 740,413 610,419 485,422 367,432 286,450 233,477 206,515 208,550 229,580 273,601 347,610 482,612 624,613 769,611 910,607 1050,603 1170,600 1280,600"/>
+     <text class="edge" x="10" y="132">ВХОД →</text><text class="edge" x="1155" y="562">→ ВЫХОД</text>
+    </g>
+    <g id="zones-layer" data-layer class="hidden" fill="#ed6853" fill-opacity=".28" stroke="#ff947e" stroke-width="3" stroke-dasharray="7 4">
+     <polygon points="73,54 183,54 197,113 65,113"/><polygon points="1120,57 1242,57 1242,127 1120,127"/>
+     <polygon points="27,357 125,350 140,421 27,421"/><polygon points="1108,463 1238,469 1238,532 1105,534"/><polygon points="492,662 598,657 616,696 484,696"/>
+     <polygon points="550,291 564,264 591,245 628,237 670,240 708,251 733,271 740,296 731,320 704,340 665,349 626,350 588,340 561,321" fill="#22b6c8" stroke="#7febf0"/>
+    </g>
+    <g id="sites-layer" data-layer>
+     <g class="site is-damage" transform="translate(398 296)"><circle r="23"/><text y="1">A</text></g>
+     <g class="site is-control" transform="translate(939 306)"><circle r="23"/><text y="1">B</text></g>
+     <g class="site is-damage" transform="translate(420 515)"><circle r="23"/><text y="1">C</text></g>
+     <g class="site is-support" transform="translate(805 514)"><circle r="23"/><text y="1">D</text></g>
+     <g class="site is-damage" transform="translate(84 269)"><circle r="18"/><text y="1">E</text></g>
+     <g class="site is-damage" transform="translate(1162 332)"><circle r="18"/><text y="1">F</text></g>
+     <g class="site is-control" transform="translate(100 540)"><circle r="18"/><text y="1">G</text></g>
+     <g class="site is-support" transform="translate(1135 678)"><circle r="18"/><text y="1">H</text></g>
+     <g class="site is-damage" transform="translate(845 292)"><circle r="18"/><text y="1">I</text></g>
+     <g class="site is-damage" transform="translate(550 516)"><circle r="18"/><text y="1">J</text></g>
+     <g class="site-water" transform="translate(635 296)"><circle r="12"/></g>
+    </g>
+   </svg>
+  </div>
+  <div class="legend"><p><span class="swatch"></span> A–J — сухие позиции; пруд — водная башня при повторном заходе.</p><p class="note" id="legend-plan">Композиция А: игломёты на A/C, пушка на B, мороз на D, маяк у A.</p></div>
+ </main>
+ <script>
+  for(const [button,layer] of [['route','route-layer'],['sites','sites-layer'],['zones','zones-layer']]){
+   document.getElementById(button).addEventListener('click',()=>{
+    const b=document.getElementById(button),shown=b.getAttribute('aria-pressed')!=='true';
+    b.setAttribute('aria-pressed',String(shown));document.getElementById(layer).classList.toggle('hidden',!shown);
+   });
+  }
+  document.getElementById('build').addEventListener('click',()=>{
+   const b=document.getElementById('build'),alternative=b.getAttribute('aria-pressed')!=='true';
+   b.setAttribute('aria-pressed',String(alternative));
+   document.getElementById('legend-plan').textContent=alternative
+    ?'Композиция Б: ранний контроль B/I, две пушки C/J, игломёт E, маяк D. Восстановить пост после волны 40.'
+    :'Композиция А: игломёты на A/C, пушка на B, мороз на D, маяк у A.';
+   document.querySelectorAll('.site').forEach(g=>g.style.opacity=alternative&&['A','F','G','H'].includes(g.querySelector('text')?.textContent)?'.34':'1');
+  });
+ </script>
+</body>
+</html>
