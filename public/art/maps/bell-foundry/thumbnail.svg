@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360" role="img" aria-label="Миниатюра Колокольной литейной">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#27515a"/><stop offset="1" stop-color="#0d2330"/></linearGradient><radialGradient id="fire"><stop stop-color="#ffda92" stop-opacity=".9"/><stop offset="1" stop-color="#e77838" stop-opacity="0"/></radialGradient><pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M0 0H26M0 13H26M13 0V13" stroke="#a5bbae" stroke-opacity=".08" fill="none"/></pattern></defs>
+  <rect width="640" height="360" rx="12" fill="url(#bg)"/><rect width="640" height="360" fill="url(#grid)"/>
+  <circle cx="306" cy="184" r="124" fill="url(#fire)" opacity=".7"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 75H444V143.5H127.5V215.5H467.5V289.5H0" stroke="#09232f" stroke-width="35"/>
+    <path d="M0 38H96.5V75M640 175H525L467.5 215.5" stroke="#09232f" stroke-width="35"/>
+    <path d="M0 75H444V143.5H127.5V215.5H467.5V289.5H0" stroke="#b88454" stroke-width="28"/>
+    <path d="M0 38H96.5V75M640 175H525L467.5 215.5" stroke="#b88454" stroke-width="28"/>
+    <path d="M0 75H444V143.5H127.5V215.5H467.5V289.5H0" stroke="#39505a" stroke-width="23"/>
+    <path d="M0 38H96.5V75M640 175H525L467.5 215.5" stroke="#39505a" stroke-width="23"/>
+    <path d="M0 75H444V143.5H127.5V215.5H467.5V289.5H0" stroke="#f0c78a" stroke-width="1.5" stroke-dasharray="6 8"/>
+  </g>
+  <g fill="#304e56" stroke="#d19b63" stroke-width="2.5"><rect x="488" y="13" width="138" height="130" rx="5"/><rect x="506" y="239" width="122" height="110" rx="5"/><rect x="19" y="167" width="65" height="88" rx="5"/><rect x="204" y="14" width="94" height="31" rx="4"/></g>
+  <g fill="none" stroke="#a98763" stroke-width="5"><path d="M497 29H617V127H497Z"/><path d="M518 254H617V335H518Z"/></g>
+  <circle cx="556" cy="81" r="34" fill="#1d343b" stroke="#e1ac6f" stroke-width="7"/><circle cx="556" cy="81" r="21" fill="#ef914e"/><circle cx="556" cy="81" r="12" fill="#ffdd89"/>
+  <g stroke="#d9a76e" stroke-width="4" fill="#193841"><circle cx="554" cy="294" r="23"/><circle cx="598" cy="294" r="23"/><circle cx="554" cy="294" r="9" fill="#e3a461"/><circle cx="598" cy="294" r="9" fill="#e3a461"/></g>
+  <path d="M201 321L277 315L300 324L295 351L206 350Z" fill="#196778" stroke="#6ac2c1" stroke-width="2"/><path d="M327 316L402 317L411 338L397 352L324 348Z" fill="#196778" stroke="#6ac2c1" stroke-width="2"/>
+  <path d="M274 166H327L337 175V196H274Z" fill="#1a353c" stroke="#e2ae70" stroke-width="3"/><rect x="289" y="176" width="34" height="12" rx="3" fill="#ffcc7a"/>
+  <g fill="none" stroke="#d8b17d" opacity=".6" stroke-dasharray="4 5"><circle cx="381" cy="109" r="23"/><circle cx="175" cy="179" r="23"/><circle cx="413" cy="251" r="23"/></g>
+  <path d="M9 75H33L24 66M33 75L24 84M630 175H606L615 166M606 175L615 184M32 289H8L17 280M8 289L17 298" fill="none" stroke="#ace9d4" stroke-width="3"/>
+  <rect x="12" y="11" width="190" height="32" rx="6" fill="#0c2730" stroke="#b88554"/><text x="23" y="32" font-family="sans-serif" font-size="15" font-weight="800" letter-spacing="1" fill="#ffd698">07 · ЛИТЕЙНАЯ</text>
+  <rect x="12" y="323" width="157" height="25" rx="5" fill="#0b2530"/><text x="23" y="340" font-family="sans-serif" font-size="11" letter-spacing="1" fill="#c1dcd4">ЗАЖЕЧЬ КУЗНЮ</text>
+</svg>

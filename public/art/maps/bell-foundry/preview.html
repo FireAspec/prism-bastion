@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>07 · Колокольная литейная · Preview</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 45% 0,#24434a,#091924 75%);font:15px system-ui,sans-serif;color:#e9e9dc}main{max-width:1510px;margin:auto;padding:22px}.eyebrow{color:#e8b977;font-size:12px;letter-spacing:.2em;font-weight:800}h1{font-size:clamp(28px,3vw,42px);margin:6px 0 8px;letter-spacing:-.035em}p{color:#a9c2c0;line-height:1.5;margin:0 0 18px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:18px}.frame,.aside{background:#102b36;border:1px solid #51716d;border-radius:15px;overflow:hidden;box-shadow:0 16px 50px #021018}.map{position:relative;aspect-ratio:16/9}.map img,.map svg{width:100%;height:100%;position:absolute;inset:0}.toolbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:13px;background:#0e2530}button{background:#23414a;border:1px solid #577973;border-radius:8px;color:#d6e8df;font-weight:700;padding:9px 11px;cursor:pointer}button[aria-pressed=true]{background:#795734;border-color:#f0b97c;color:#ffefce}button:focus-visible{outline:3px solid #f4c17f}.aside{padding:15px;display:flex;flex-direction:column;gap:14px}.aside img{width:100%;border:1px solid #72958c;border-radius:10px}h2{font-size:16px;color:#f1cb92;margin:0}.caption{font-size:12px;color:#a5c6c1;line-height:1.5}.legend{display:grid;gap:9px;color:#cbded5;font-size:13px}.key{display:inline-block;width:12px;height:12px;margin-right:8px;border-radius:3px}.box{padding:12px;border:1px solid #49665f;background:#0b2430;border-radius:10px;font-size:13px;line-height:1.5}a{color:#f0be83}footer{font-size:12px;color:#94aaa6;margin-top:13px}@media(max-width:950px){.layout{grid-template-columns:1fr}.aside{display:block}.aside img{max-width:320px;float:right;margin-left:20px}}@media(max-width:550px){main{padding:10px}.aside img{float:none}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">PRISM BASTION / КАМПАНИЯ · 07</div>
+<h1>Колокольная литейная</h1><p>Три глубоких разворота, входы I–III, цеха, центральная кузня и бассейны охлаждения.</p>
+<div class="layout"><section class="frame" aria-label="Интерактивное поле">
+<div class="map"><img src="background.svg" alt="Игровое поле литейной"><svg id="overlay" viewBox="0 0 1280 720" aria-label="Отладочные границы"></svg></div>
+<div class="toolbar"><div><button id="lanes" aria-pressed="false">Полосы</button> <button id="terrain" aria-pressed="false">Запреты и вода</button> <button id="sites" aria-pressed="false">Площадки</button></div>
+<div><button id="blank" aria-pressed="true">Чистое поле</button> <button id="crossfire" aria-pressed="false">Перекрёстный огонь</button> <button id="reserve" aria-pressed="false">Резерв у выхода</button></div></div>
+</section><aside class="aside">
+<img src="thumbnail.svg" alt="Отдельная миниатюра 640 на 360">
+<h2>Карта 07 · Foundry</h2>
+<div class="legend"><div><span class="key" style="background:#f4ca83"></span>Путь шириной 46 px</div><div><span class="key" style="background:#e87468"></span>Цеха и кузня — запрет</div><div><span class="key" style="background:#4ec1d5"></span>Водные бассейны</div><div><span class="key" style="background:#b4e6aa"></span>Удобные сухие площадки</div></div>
+<div class="box">Задача: <strong>зажечь центральную кузню</strong>. После победы открываются resonator и forge. До неё эти башни недоступны.</div>
+<div class="caption">Пути: 3565 / 3639 / 1453,7 px. Правый служебный вход заметно короче: усиление третьего разворота важно. Примеры композиций — схемы, а не подтверждённые победы.</div>
+<div><a href="background.svg">Фон SVG</a> · <a href="thumbnail.svg">Миниатюра SVG</a></div>
+</aside></div>
+<footer>Preview работает локально без внешних ресурсов. Отладочный слой в игровом рендере не используется.</footer>
+</main>
+<script>
+'use strict';
+const lanes=[[[0,150],[888,150],[888,287],[255,287],[255,431],[935,431],[935,579],[0,579]],[[0,76],[193,76],[193,150],[888,150],[888,287],[255,287],[255,431],[935,431],[935,579],[0,579]],[[1280,350],[1050,350],[935,431],[935,579],[0,579]]];
+const blocked=[[[976,25],[1251,25],[1251,287],[976,287]],[[1012,477],[1257,477],[1257,699],[1012,699]],[[37,334],[167,334],[167,511],[37,511]],[[548,332],[655,332],[675,350],[675,390],[548,390]],[[408,28],[595,28],[595,90],[408,90]]];
+const water=[[[402,642],[554,631],[601,648],[591,702],[412,701]],[[653,632],[805,635],[822,675],[795,704],[648,696]]];
+const pads=[['north-anvil',762,219,32],['west-bell',349,357,32],['east-crucible',826,503,32],['hearth-west',457,362,32],['hearth-east',771,355,32],['feed-station',410,215,32],['early-platform',130,213,32],['coal-station',600,218,32],['slag-platform',705,503,32],['south-platform',381,504,32],['west-exit',210,659,32],['east-exit',912,660,32],['cooling-west',495,671,25],['cooling-east',744,669,25]];
+const compositions={blank:[],crossfire:[['early-platform','needle'],['west-bell','frost'],['north-anvil','needle'],['east-crucible','cannon'],['hearth-east','tesla'],['slag-platform','venom']],reserve:[['early-platform','needle'],['hearth-west','mortar'],['west-bell','venom'],['east-crucible','frost'],['west-exit','rail'],['east-exit','rocket']]};
+const mode={lanes:false,terrain:false,sites:false,composition:'blank'};const svg=document.getElementById('overlay'),ns='http://www.w3.org/2000/svg';
+function put(tag,attr,content){const el=document.createElementNS(ns,tag);for(const [key,value] of Object.entries(attr))el.setAttribute(key,value);if(content!==undefined)el.textContent=content;svg.appendChild(el);}
+const path=(a,close=false)=>a.map(([x,y],i)=>`${i?'L':'M'}${x} ${y}`).join(' ')+(close?'Z':'');
+function paint(){svg.replaceChildren();if(mode.lanes)lanes.forEach((pts,i)=>put('path',{d:path(pts),fill:'none',stroke:i?'#a8eadc':'#ffd58b','stroke-opacity':'.47','stroke-width':46,'stroke-linejoin':'round','stroke-linecap':'round'}));
+if(mode.terrain){blocked.forEach(p=>put('path',{d:path(p,true),fill:'#ea6967','fill-opacity':'.35',stroke:'#ff8882','stroke-width':3}));water.forEach(p=>put('path',{d:path(p,true),fill:'#3bbed0','fill-opacity':'.36',stroke:'#8de4e2','stroke-width':3}));}
+if(mode.sites)pads.forEach(([id,x,y,r])=>{put('circle',{cx:x,cy:y,r,fill:id.startsWith('cooling')?'#4dd5ed':'#aff6a8','fill-opacity':'.2',stroke:'#e4f4ba','stroke-width':2});});
+compositions[mode.composition].forEach(([id,tower])=>{const p=pads.find(s=>s[0]===id);if(!p)return;put('circle',{cx:p[1],cy:p[2],r:23,fill:'#15313e',stroke:'#ffcc89','stroke-width':3});put('text',{x:p[1],y:p[2]-32,fill:'#fff5d7','font-size':17,'font-weight':800,'text-anchor':'middle','paint-order':'stroke',stroke:'#15313e','stroke-width':4},tower.toUpperCase());});
+['lanes','terrain','sites','blank','crossfire','reserve'].forEach(id=>document.getElementById(id).setAttribute('aria-pressed',String(id in compositions?mode.composition===id:mode[id])));}
+for(const id of ['lanes','terrain','sites'])document.getElementById(id).addEventListener('click',()=>{mode[id]=!mode[id];paint();});for(const id of Object.keys(compositions))document.getElementById(id).addEventListener('click',()=>{mode.composition=id;paint();});paint();
+</script></body></html>
