@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Мост через светящийся разлом, два литейных тракта">
+  <defs>
+    <linearGradient id="field" x2="0.8" y2="1"><stop stop-color="#284b4c"/><stop offset=".52" stop-color="#215046"/><stop offset="1" stop-color="#112e3a"/></linearGradient>
+    <linearGradient id="chasm" x2="1" y2="0"><stop stop-color="#071e31"/><stop offset=".49" stop-color="#2b7e80"/><stop offset="1" stop-color="#08263b"/></linearGradient>
+    <linearGradient id="road" x2="0" y2="1"><stop stop-color="#d5aa77"/><stop offset=".55" stop-color="#996d50"/><stop offset="1" stop-color="#755345"/></linearGradient>
+    <linearGradient id="roof" x2="0" y2="1"><stop stop-color="#8a6850"/><stop offset=".52" stop-color="#52555b"/><stop offset="1" stop-color="#293d49"/></linearGradient>
+    <linearGradient id="deck" x2="0" y2="1"><stop stop-color="#8da3a3"/><stop offset="1" stop-color="#2c4853"/></linearGradient>
+    <radialGradient id="amber"><stop stop-color="#fff1bb"/><stop offset=".23" stop-color="#ffb96b"/><stop offset="1" stop-color="#ff983c" stop-opacity="0"/></radialGradient>
+    <pattern id="ore" width="44" height="42" patternUnits="userSpaceOnUse"><path d="M4 8l8-3M21 33l11-5M39 13l-5 4" stroke="#a3b393" opacity=".21" stroke-width="1.5"/><circle cx="18" cy="16" r="1.4" fill="#e4b77a" opacity=".3"/></pattern>
+    <pattern id="rivet" width="26" height="68" patternUnits="userSpaceOnUse"><path d="M2 0V68M24 0V68M0 10H26M0 58H26" stroke="#d6c0a0" opacity=".3" stroke-width="2"/><circle cx="13" cy="8" r="2" fill="#fbd099"/><circle cx="13" cy="60" r="2" fill="#fbd099"/></pattern>
+    <filter id="soft"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#field)"/><rect width="1280" height="720" fill="url(#ore)"/>
+  <path d="M0 0H647L611 170 576 285 613 478 582 720H0Z" fill="#648363" opacity=".13"/>
+  <path d="M982 0H1280V720H974L1020 523 991 272Z" fill="#7ba077" opacity=".11"/>
+  <g fill="none" stroke="#7f9d8f" opacity=".20" stroke-width="3"><path d="M8 294Q101 252 187 306T460 326"/><path d="M19 388Q145 345 238 381T476 394"/><path d="M26 484Q110 445 187 468"/><path d="M318 569Q442 545 535 593"/><path d="M1006 299Q1157 283 1269 319"/><path d="M1001 477Q1134 450 1270 500"/></g>
+
+  <!-- Water polygon edges exactly match MapDef.water[0]. -->
+  <path d="M698 0L687 74 707 131 690 206 705 273 687 326 691 414 712 483 688 549 707 632 700 720H947L932 632 949 560 934 479 951 414 944 326 957 271 934 203 952 133 936 66 946 0Z" fill="url(#chasm)" stroke="#bc8b60" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M741-15L763 103 744 192 785 267 748 350 789 455 753 555 799 740" fill="none" stroke="#54e9e9" stroke-width="19" opacity=".40" filter="url(#soft)"/>
+  <path d="M741-15L763 103 744 192 785 267 748 350 789 455 753 555 799 740" fill="none" stroke="#99fff0" stroke-width="3" stroke-dasharray="34 13 18 16"/>
+  <path d="M891-12L859 88 901 168 857 252 897 332 858 421 903 531 868 629 904 739" fill="none" stroke="#54dfe4" stroke-width="3" stroke-dasharray="22 11" opacity=".8"/>
+  <g fill="#77e3dc" opacity=".6"><path d="M801 73l19-53 18 62-21 36Z"/><path d="M818 543l-16-52 39 34-2 59Z"/><path d="M869 688l-23-29 21-31 11 43Z"/></g>
+
+  <!-- Underpainted route: renderer can draw its authoritative 48px path over this. -->
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M-20 174H140L214 230H318L392 294H476L560 360H680H940H1040L1110 420H1300" stroke="#102d38" stroke-width="72"/>
+    <path d="M-20 566H140L214 502H330L406 428H486L560 360" stroke="#102d38" stroke-width="72"/>
+    <path d="M-20 174H140L214 230H318L392 294H476L560 360H680H940H1040L1110 420H1300" stroke="#ddba85" stroke-opacity=".55" stroke-width="63"/>
+    <path d="M-20 566H140L214 502H330L406 428H486L560 360" stroke="#ddba85" stroke-opacity=".55" stroke-width="63"/>
+    <path d="M-20 174H140L214 230H318L392 294H476L560 360H680H940H1040L1110 420H1300" stroke="url(#road)" stroke-width="54"/>
+    <path d="M-20 566H140L214 502H330L406 428H486L560 360" stroke="url(#road)" stroke-width="54"/>
+    <path d="M-20 174H140L214 230H318L392 294H476L560 360H680H940H1040L1110 420H1300" stroke="#f0cea0" stroke-width="2" stroke-dasharray="3 18" opacity=".53"/>
+    <path d="M-20 566H140L214 502H330L406 428H486L560 360" stroke="#f0cea0" stroke-width="2" stroke-dasharray="3 18" opacity=".53"/>
+  </g>
+
+  <rect x="677" y="318" width="273" height="84" rx="4" fill="#112e3d" stroke="#d9a26b" stroke-width="5"/>
+  <rect x="684" y="327" width="259" height="65" fill="url(#deck)"/>
+  <rect x="684" y="327" width="259" height="65" fill="url(#rivet)"/>
+  <path d="M677 320H951M677 400H951" stroke="#f0bc79" stroke-width="6"/>
+  <path d="M678 334H950M678 388H950" stroke="#203c48" stroke-width="4" stroke-dasharray="18 7"/>
+  <g stroke="#132d3b" stroke-width="4"><path d="M697 318V402M729 318V402M761 318V402M793 318V402M825 318V402M857 318V402M889 318V402M921 318V402"/></g>
+  <path d="M685 360H944" stroke="#99725e" stroke-width="44" stroke-opacity=".82"/>
+
+  <!-- Roof silhouettes are congruent with the thirteen hard blockers. -->
+  <g fill="url(#roof)" stroke="#c49262" stroke-width="5" stroke-linejoin="round">
+    <polygon points="38,18 222,18 232,88 50,105"/><polygon points="327,27 476,22 492,95 331,101"/>
+    <polygon points="48,624 214,618 236,700 46,704"/><polygon points="319,625 476,630 484,709 307,702"/>
+    <polygon points="526,31 636,41 637,146 520,139"/><polygon points="659,213 735,208 741,285 663,287"/>
+    <polygon points="659,436 741,436 737,514 665,509"/><polygon points="908,213 975,209 979,285 907,288"/>
+    <polygon points="910,437 976,434 976,516 904,512"/><polygon points="998,23 1186,34 1196,132 999,129"/>
+    <polygon points="1072,171 1236,166 1241,251 1070,251"/>
+    <polygon points="969,590 1037,588 1041,700 963,705"/><polygon points="1177,544 1265,541 1265,705 1171,705"/>
+  </g>
+  <g fill="none" stroke="#e1b278" stroke-width="4" opacity=".62">
+    <path d="M60 39L218 77M215 32L57 92M331 40L482 83M473 37L338 92"/>
+    <path d="M57 636L220 688M212 632L54 691M329 637L470 697M473 641L321 692"/>
+    <path d="M534 42L627 131M630 51L526 128"/><path d="M1010 32L1183 121M1175 43L1005 119"/>
+    <path d="M1079 181L1230 241M1229 180L1081 241"/>
+    <path d="M1190 564H1255M1190 590H1255M1190 616H1255M1190 642H1255M1190 668H1255"/>
+  </g>
+  <g fill="#102d3a" stroke="#e2b373" stroke-width="3"><circle cx="581" cy="88" r="39"/><circle cx="700" cy="249" r="18"/><circle cx="700" cy="473" r="18"/><circle cx="941" cy="249" r="18"/><circle cx="941" cy="474" r="18"/></g>
+  <g fill="#68e9df"><circle cx="581" cy="88" r="9"/><circle cx="700" cy="249" r="5"/><circle cx="700" cy="473" r="5"/><circle cx="941" cy="249" r="5"/><circle cx="941" cy="474" r="5"/></g>
+
+  <g fill="none" stroke="#e7b87b" stroke-width="2" stroke-opacity=".38" stroke-dasharray="3 9">
+    <circle cx="365" cy="362" r="42"/><circle cx="363" cy="148" r="43"/><circle cx="364" cy="580" r="41"/>
+    <circle cx="523" cy="218" r="43"/><circle cx="528" cy="512" r="43"/>
+    <circle cx="613" cy="254" r="38"/><circle cx="611" cy="475" r="37"/><circle cx="1096" cy="512" r="38"/>
+  </g>
+  <g fill="url(#amber)"><circle cx="253" cy="122" r="22"/><circle cx="502" cy="160" r="22"/><circle cx="243" cy="589" r="22"/><circle cx="511" cy="565" r="22"/><circle cx="634" cy="320" r="22"/><circle cx="636" cy="406" r="22"/><circle cx="1003" cy="312" r="22"/><circle cx="999" cy="468" r="22"/><circle cx="1154" cy="492" r="22"/></g>
+  <g fill="#f5cc8e" stroke="#32434b" stroke-width="3" stroke-linejoin="round"><path d="M7 124H42L63 138 42 152H7Z"/><path d="M7 615H42L63 600 42 586H7Z"/><path d="M1212 465l30-19v9h25v19h-25v9Z"/></g>
+</svg>
