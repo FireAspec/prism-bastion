@@ -1,4 +1,4 @@
-import type {Difficulty, EnemyDef, SpawnGroup, WaveDef} from '../contracts';
+import type {Difficulty, DifficultyDef, EnemyDef, SpawnGroup, WaveDef} from '../contracts';
 
 /** Seconds are used for at/every. Lane indices are nonnegative, mapped modulo
  * the current map's lane count by the simulation. No round-robin sentinel. */
@@ -183,7 +183,10 @@ export function getEndlessWave(wave: number, seed: number, enemies: EnemyDef[]):
  * The frozen contract provides no generation limit: cycles are rejected, not
  * silently truncated to a made-up depth.
  */
-export function getWaveLayerBudget(wave: WaveDef, enemies: EnemyDef[]): number {
+function layerValue(wave: WaveDef, enemies: EnemyDef[], centsFactor?: number): number {
+  if (centsFactor !== undefined && (!Number.isFinite(centsFactor) || centsFactor < 0)) {
+    throw new RangeError('Invalid income factor');
+  }
   const catalog = new Map(enemies.map(enemy => [enemy.id, enemy]));
   if (catalog.size !== enemies.length) throw new Error('Duplicate enemy IDs');
   const memo = new Map<string, number>();
@@ -195,12 +198,18 @@ export function getWaveLayerBudget(wave: WaveDef, enemies: EnemyDef[]): number {
     if (!enemy) throw new Error(`Missing enemy definition: ${id}`);
     if (active.has(id)) throw new Error(`Cyclic descendant/phase income: ${id}`);
     active.add(id);
-    const own = enemy.layers.reduce((sum, layer) => {
+    let totalHp = 0;
+    let ownCash = 0;
+    let own = 0;
+    for (const layer of enemy.layers) {
       if (!Number.isSafeInteger(layer.cash) || layer.cash < 0 ||
         !(layer.hp > 0) || !Number.isFinite(layer.hp)) throw new Error(`Invalid layer: ${id}`);
-      return sum + layer.cash;
-    }, 0);
-    if (own !== enemy.bounty) throw new Error(`Layer cash mismatch: ${id}`);
+      totalHp += layer.hp;
+      ownCash += layer.cash;
+      own += centsFactor === undefined ? layer.cash : Math.round(layer.cash * centsFactor * 100);
+    }
+    if (ownCash !== enemy.bounty) throw new Error(`Layer cash mismatch: ${id}`);
+    if (Math.abs(totalHp - enemy.hp) > 1e-6) throw new Error(`Layer HP mismatch: ${id}`);
     let value = own;
     for (const child of enemy.children) {
       if (!Number.isSafeInteger(child.count) || child.count < 0) throw new Error(`Invalid child count: ${id}`);
@@ -215,7 +224,59 @@ export function getWaveLayerBudget(wave: WaveDef, enemies: EnemyDef[]): number {
     memo.set(id, value);
     return value;
   };
-  const budget = wave.groups.reduce((sum, group) => sum + group.count * total(group.enemy), 0);
+  const budget = wave.groups.reduce((sum, group) => {
+    if (!Number.isSafeInteger(group.count) || group.count < 0) throw new Error('Invalid spawn group count');
+    return sum + group.count * total(group.enemy);
+  }, 0);
   if (!Number.isSafeInteger(budget)) throw new Error('Invalid wave layer budget');
   return budget;
+}
+
+export function getWaveLayerBudget(wave: WaveDef, enemies: EnemyDef[]): number {
+  return layerValue(wave, enemies);
+}
+
+/** Theoretical maximum cash: all payable layers/descendants/phase summons
+ * destroyed, no spending, sales, farm, interest, leaks or harvest effects.
+ * The fixed-point ledger deliberately rounds each individual layer payment
+ * before accumulating, matching runtime.credit's hundredths convention. */
+export interface WaveBudgetRow {
+  wave: number;
+  beforeCredits: number;
+  beforeSubunits: number;
+  layerCash: number;
+  roundReward: number;
+  afterCredits: number;
+  afterSubunits: number;
+}
+
+/**
+ * A reproducible 40/60/80/100-row budget report for a REAL enemy catalogue.
+ * Accepts the difficulty owner’s DifficultyDef, avoiding duplicate rules.
+ * Half-cash halves starting money, each layer event, and each round reward;
+ * only whole credits can be spent, the remainder carries into later waves.
+ */
+export function getWaveBudgetLedger(difficulty: DifficultyDef, enemies: EnemyDef[], halfCash = false): WaveBudgetRow[] {
+  const count = ROUNDS[difficulty.id];
+  if (!count || count !== difficulty.rounds) throw new RangeError('Invalid difficulty round count');
+  const values = [difficulty.startCredits, difficulty.roundRewardBase, difficulty.roundRewardStep,
+    difficulty.popCashMul];
+  if (values.some(value => !Number.isFinite(value) || value < 0)) throw new RangeError('Invalid economy rules');
+  const factor = halfCash ? 0.5 : 1;
+  let cents = Math.round(difficulty.startCredits * factor * 100);
+  if (!Number.isSafeInteger(cents)) throw new RangeError('Invalid starting cash');
+  const rows: WaveBudgetRow[] = [];
+  for (const wave of getWaveSet(difficulty.id)) {
+    const beforeCredits = Math.floor(cents / 100);
+    const beforeSubunits = cents % 100;
+    const layerCash = layerValue(wave, enemies);
+    const layerCents = layerValue(wave, enemies, factor * difficulty.popCashMul);
+    const roundReward = (difficulty.roundRewardBase + difficulty.roundRewardStep * wave.number) * factor;
+    const rewardCents = Math.round(roundReward * 100);
+    cents += layerCents + rewardCents;
+    if (!Number.isSafeInteger(cents)) throw new RangeError('Wave cash exceeds safe integer range');
+    rows.push({wave: wave.number, beforeCredits, beforeSubunits, layerCash, roundReward,
+      afterCredits: Math.floor(cents / 100), afterSubunits: cents % 100});
+  }
+  return rows;
 }
