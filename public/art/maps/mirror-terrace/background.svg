@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Mirror terraces garden with reflecting pools and workshop ruins">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Mirror terraces garden with reflecting pools and workshop ruins">
 <defs>
  <linearGradient id="base" x2="0" y2="1"><stop stop-color="#1b3a43"/><stop offset="1" stop-color="#0b2631"/></linearGradient>
  <linearGradient id="top" x2="0" y2="1"><stop stop-color="#41655e"/><stop offset="1" stop-color="#2a514e"/></linearGradient>
@@ -15,8 +15,8 @@
 <path d="M0 0H1280V242Q974 264 652 246T0 254Z" fill="url(#top)"/>
 <path d="M0 258Q337 231 650 254T1280 244V490Q986 481 650 502T0 486Z" fill="url(#mid)"/>
 <path d="M0 501Q321 477 650 504T1280 490V720H0Z" fill="url(#low)"/>
-<path d="M0 253Q310 229 651 249T1280 244 M0 497Q338 474 650 504T1280 490" fill="none" stroke="#102d34" stroke-width="17" opacity=".55"/>
-<path d="M0 251Q310 230 651 247T1280 242 M0 495Q338 472 650 502T1280 488" fill="none" stroke="#c5a573" stroke-width="4" opacity=".82"/>
+<path d="M0 253Q310 229 651 249T1280 244 M0 497Q338 474 650 504T1280 490" fill="none" stroke="#102d34" stroke-width="7" opacity=".25"/>
+<path d="M0 251Q310 230 651 247T1280 242 M0 495Q338 472 650 502T1280 488" fill="none" stroke="#c5a573" stroke-width="2.2" opacity=".36"/>
 <rect width="1280" height="720" fill="url(#mosaic)"/>
 <!-- Decorative axial garden rails stay outside the traffic corridors. -->
 <g fill="none" stroke="#a3ad82" stroke-width="5" opacity=".54">
@@ -56,17 +56,17 @@
 </g>
 <!-- A discreet geometric garden grid and warm anchor lights leave tower pads readable. -->
 <g opacity=".88">
- <use href="#shrub" x="70" y="82"/><use href="#shrub" x="108" y="88"/><use href="#shrub" x="143" y="66"/><use href="#shrub" x="257" y="91"/>
- <use href="#shrub" x="442" y="83"/><use href="#shrub" x="483" y="93"/><use href="#shrub" x="771" y="74"/><use href="#shrub" x="802" y="84"/>
- <use href="#shrub" x="1178" y="74"/><use href="#shrub" x="1225" y="92"/><use href="#shrub" x="1240" y="295"/>
- <use href="#shrub" x="1232" y="449"/><use href="#shrub" x="1185" y="462"/><use href="#shrub" x="60" y="475"/>
- <use href="#shrub" x="58" y="616"/><use href="#shrub" x="106" y="642"/><use href="#shrub" x="200" y="651"/>
- <use href="#shrub" x="335" y="650"/><use href="#shrub" x="532" y="652"/><use href="#shrub" x="799" y="659"/>
- <use href="#shrub" x="924" y="665"/><use href="#shrub" x="1003" y="654"/><use href="#shrub" x="1250" y="669"/>
+ <use xlink:href="#shrub" x="70" y="82"/><use xlink:href="#shrub" x="108" y="88"/><use xlink:href="#shrub" x="143" y="66"/><use xlink:href="#shrub" x="257" y="91"/>
+ <use xlink:href="#shrub" x="442" y="83"/><use xlink:href="#shrub" x="483" y="93"/><use xlink:href="#shrub" x="771" y="74"/><use xlink:href="#shrub" x="802" y="84"/>
+ <use xlink:href="#shrub" x="1178" y="74"/><use xlink:href="#shrub" x="1225" y="92"/><use xlink:href="#shrub" x="1240" y="295"/>
+ <use xlink:href="#shrub" x="1232" y="449"/><use xlink:href="#shrub" x="1185" y="462"/><use xlink:href="#shrub" x="60" y="475"/>
+ <use xlink:href="#shrub" x="58" y="616"/><use xlink:href="#shrub" x="106" y="642"/><use xlink:href="#shrub" x="200" y="651"/>
+ <use xlink:href="#shrub" x="335" y="650"/><use xlink:href="#shrub" x="532" y="652"/><use xlink:href="#shrub" x="799" y="659"/>
+ <use xlink:href="#shrub" x="924" y="665"/><use xlink:href="#shrub" x="1003" y="654"/><use xlink:href="#shrub" x="1250" y="669"/>
  </g>
 <g opacity=".8">
- <use href="#lamp" x="267" y="272"/><use href="#lamp" x="601" y="188"/><use href="#lamp" x="788" y="449"/>
- <use href="#lamp" x="423" y="604"/><use href="#lamp" x="981" y="628"/><use href="#lamp" x="1192" y="265"/>
+ <use xlink:href="#lamp" x="267" y="272"/><use xlink:href="#lamp" x="601" y="188"/><use xlink:href="#lamp" x="788" y="449"/>
+ <use xlink:href="#lamp" x="423" y="604"/><use xlink:href="#lamp" x="981" y="628"/><use xlink:href="#lamp" x="1192" y="265"/>
 </g>
 <!-- The central crossing is deliberately not decorated as an obstacle. -->
 <g opacity=".28" stroke="#dbe4bc" fill="none" stroke-width="2"><circle cx="650" cy="360" r="53" stroke-dasharray="3 13"/><path d="M650 299v14M650 407v14M590 360h14M696 360h14"/></g>
