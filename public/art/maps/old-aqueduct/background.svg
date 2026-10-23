@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720" role="img" aria-label="Старый акведук: зелёная долина, две древние арки, дорога, водохранилище и навигационная станция">
+ <defs>
+  <linearGradient id="meadow" x2="1" y2="1"><stop stop-color="#5e886a"/><stop offset=".48" stop-color="#88a97b"/><stop offset="1" stop-color="#476d61"/></linearGradient>
+  <radialGradient id="light" cx="38%" cy="15%" r="90%"><stop stop-color="#fff2b3" stop-opacity=".25"/><stop offset="1" stop-color="#193e48" stop-opacity=".27"/></radialGradient>
+  <linearGradient id="pool" x2="1" y2="1"><stop stop-color="#51bac0"/><stop offset=".5" stop-color="#318f9c"/><stop offset="1" stop-color="#19566e"/></linearGradient>
+  <linearGradient id="stone" x2=".8" y2="1"><stop stop-color="#f0e3ba"/><stop offset=".5" stop-color="#c9bea0"/><stop offset="1" stop-color="#899286"/></linearGradient>
+  <pattern id="grass" width="80" height="71" patternUnits="userSpaceOnUse"><path d="M12 20l4 -8m40 41 4 -7m15 -25 5 2" stroke="#294f46" stroke-width="2" opacity=".2" stroke-linecap="round"/><circle cx="36" cy="17" r="1.6" fill="#f5e9b1" opacity=".33"/></pattern>
+  <pattern id="blocks" width="27" height="23" patternUnits="userSpaceOnUse"><path d="M0 0H27M0 11H27M14 0V11M4 11V23" stroke="#65766d" stroke-width="1.4" fill="none" opacity=".55"/></pattern>
+  <pattern id="ripples" width="76" height="43" patternUnits="userSpaceOnUse"><path d="M5 12q14 -9 29 0m6 25q13 -7 29 0" fill="none" stroke="#e5f4e6" stroke-width="2.2" opacity=".27" stroke-linecap="round"/></pattern>
+  <filter id="shadow"><feGaussianBlur stdDeviation="6"/></filter>
+  <path id="lane" d="M0 220 L80 220 L150 234 L215 267 L276 310 L340 338 L402 346 L465 339 L520 317 L570 285 L622 260 L680 259 L740 279 L796 314 L846 357 L892 398 L941 422 L995 424 L1050 413 L1103 387 L1149 355 L1202 338 L1280 338"/>
+  <g id="tree"><ellipse cy="12" rx="23" ry="11" fill="#204d45" opacity=".33"/><circle cx="-9" cy="-6" r="20" fill="#376b50"/><circle cx="10" cy="-10" r="23" fill="#477b59"/><circle cx="-1" cy="-18" r="18" fill="#77a172"/><path d="M-12 -18q7 -11 20 -9" stroke="#c0cda0" stroke-width="4" opacity=".55" stroke-linecap="round" fill="none"/></g>
+  <g id="shrub"><ellipse cy="7" rx="18" ry="10" fill="#2f5448" opacity=".3"/><circle cx="-8" r="10" fill="#426e4e"/><circle cx="7" cy="-3" r="12" fill="#6e936a"/></g>
+  <g id="pad"><circle cy="5" r="37" fill="#273f40" opacity=".19"/><circle r="34" fill="#b7b595" opacity=".75" stroke="#566f64" stroke-width="3"/><circle r="28" fill="#9caf8c" stroke="#e9e2b9" stroke-width="2" stroke-dasharray="5 8"/><path d="M-12 0H12M0 -12V12" stroke="#e9e2b9" stroke-width="2" opacity=".65"/></g>
+  <g id="flower"><path d="M-5 0H5M0 -5V5" stroke="#f4edc9" stroke-width="3" stroke-linecap="round"/><circle r="2.3" fill="#d6a654"/></g>
+ </defs>
+ <rect width="1280" height="720" fill="url(#meadow)"/>
+ <path d="M-20 56C235 130 310 -23 532 32S979 116 1300 17V-10H0Z" fill="#3f6b59" opacity=".5"/>
+ <path d="M-20 625C253 526 437 620 634 567S1061 623 1300 516V740H0Z" fill="#355d57" opacity=".25"/>
+ <path d="M-15 96C246 161 360 20 571 80S1005 141 1310 57M-20 582C249 473 447 603 641 541S1081 584 1300 484M-20 642C250 534 463 653 660 596S1045 642 1308 556" fill="none" stroke="#dae0ac" stroke-width="3" opacity=".24"/>
+ <rect width="1280" height="720" fill="url(#grass)"/><rect width="1280" height="720" fill="url(#light)"/>
+
+ <!-- Separate, genuinely usable water reservoir. Its shore never touches the road. -->
+ <path d="M920 98L980 72L1071 65L1151 78L1217 115L1234 172L1210 218L1151 251L1073 244L1003 222L951 183L915 136Z" transform="translate(0 8)" fill="#163b50" opacity=".28" filter="url(#shadow)"/>
+ <path d="M920 98L980 72L1071 65L1151 78L1217 115L1234 172L1210 218L1151 251L1073 244L1003 222L951 183L915 136Z" fill="url(#pool)" stroke="#ded2a5" stroke-width="13" stroke-linejoin="round"/>
+ <path d="M920 98L980 72L1071 65L1151 78L1217 115L1234 172L1210 218L1151 251L1073 244L1003 222L951 183L915 136Z" fill="url(#ripples)"/>
+ <path d="M952 124q100 -54 222 3M980 170q116 -42 220 5M1010 210q81 -20 153 4" stroke="#bbe8dc" stroke-width="3" fill="none" opacity=".5" stroke-linecap="round"/>
+ <path d="M953 169l7 20m-1 -14 10 -14M1146 241l6 -20m-4 10 11 8M1215 170l8 -17" stroke="#e5db9b" stroke-width="4" stroke-linecap="round"/>
+ <g stroke="#cde8e6" stroke-width="3" fill="none" opacity=".42" stroke-dasharray="3 7"><circle cx="1040" cy="152" r="24"/><circle cx="1131" cy="166" r="24"/></g>
+
+ <!-- Framing vegetation outside the navigable corridor. -->
+ <g opacity=".9"><use xlink:href="#tree" x="48" y="64"/><use xlink:href="#tree" x="122" y="88"/><use xlink:href="#tree" x="296" y="66"/><use xlink:href="#tree" x="433" y="88"/><use xlink:href="#tree" x="750" y="66"/><use xlink:href="#tree" x="838" y="107"/>
+  <use xlink:href="#tree" x="36" y="357"/><use xlink:href="#tree" x="209" y="604"/><use xlink:href="#tree" x="341" y="621"/><use xlink:href="#tree" x="456" y="647"/><use xlink:href="#tree" x="601" y="624"/><use xlink:href="#tree" x="739" y="641"/><use xlink:href="#tree" x="836" y="618"/><use xlink:href="#tree" x="1206" y="608"/><use xlink:href="#tree" x="1254" y="512"/></g>
+ <g opacity=".85"><use xlink:href="#shrub" x="179" y="100"/><use xlink:href="#shrub" x="324" y="179"/><use xlink:href="#shrub" x="590" y="113"/><use xlink:href="#shrub" x="699" y="104"/><use xlink:href="#shrub" x="839" y="168"/><use xlink:href="#shrub" x="838" y="499"/><use xlink:href="#shrub" x="714" y="522"/><use xlink:href="#shrub" x="487" y="516"/><use xlink:href="#shrub" x="275" y="536"/><use xlink:href="#shrub" x="1017" y="565"/><use xlink:href="#shrub" x="1170" y="468"/></g>
+ <g opacity=".78"><use xlink:href="#flower" x="156" y="145"/><use xlink:href="#flower" x="300" y="145"/><use xlink:href="#flower" x="556" y="208"/><use xlink:href="#flower" x="741" y="173"/><use xlink:href="#flower" x="770" y="555"/><use xlink:href="#flower" x="1026" y="495"/><use xlink:href="#flower" x="1199" y="556"/><use xlink:href="#flower" x="588" y="500"/></g>
+
+ <!-- Route precisely mirrors MapDef. Road is clearly visible under both arches. -->
+ <use xlink:href="#lane" fill="none" stroke="#264b4c" stroke-width="86" opacity=".2" transform="translate(0 7)" filter="url(#shadow)" stroke-linejoin="round"/>
+ <use xlink:href="#lane" fill="none" stroke="#62736b" stroke-width="74" stroke-linejoin="round"/>
+ <use xlink:href="#lane" fill="none" stroke="#f0e2bb" stroke-width="66" stroke-linejoin="round"/>
+ <use xlink:href="#lane" fill="none" stroke="#e0cfa2" stroke-width="62" stroke-linejoin="round"/>
+ <use xlink:href="#lane" fill="none" stroke="#fff3cd" stroke-width="3" stroke-dasharray="4 17" opacity=".66" stroke-linejoin="round"/>
+
+ <!-- Pads are visual suggestions, not extra placement restrictions. -->
+ <g><use xlink:href="#pad" x="210" y="147"/><use xlink:href="#pad" x="272" y="407"/><use xlink:href="#pad" x="490" y="188"/><use xlink:href="#pad" x="535" y="455"/><use xlink:href="#pad" x="666" y="156"/><use xlink:href="#pad" x="683" y="365"/><use xlink:href="#pad" x="772" y="394"/><use xlink:href="#pad" x="830" y="209"/><use xlink:href="#pad" x="829" y="449"/><use xlink:href="#pad" x="1028" y="305"/><use xlink:href="#pad" x="1086" y="515"/></g>
+
+ <!-- Two pairs of stone supports matching all four MapDef blocker footprints. -->
+ <path d="M353 231L395 230L415 280L363 291Z M357 406L412 412L427 468L360 478Z M886 294L926 292L952 354L902 359Z M892 487L954 482L973 554L908 558Z" transform="translate(5 8)" fill="#234345" opacity=".36" filter="url(#shadow)"/>
+ <path id="piers" d="M353 231L395 230L415 280L363 291Z M357 406L412 412L427 468L360 478Z M886 294L926 292L952 354L902 359Z M892 487L954 482L973 554L908 558Z" fill="url(#stone)" stroke="#68776b" stroke-width="4" stroke-linejoin="round"/>
+ <use xlink:href="#piers" fill="url(#blocks)" stroke="none" opacity=".55"/>
+ <path d="M363 241l24 -2 16 32M365 416l39 7 14 35M896 304l20 -3 23 42M902 494l43 -3 16 50" stroke="#fff2cf" stroke-width="4" opacity=".65" fill="none"/>
+ <path d="M382 291Q402 346 386 408M407 280Q429 340 412 413M922 354Q942 417 923 483M943 352Q968 421 950 483" fill="none" stroke="#456760" stroke-width="10" opacity=".27"/>
+ <path d="M382 291Q402 346 386 408M407 280Q429 340 412 413M922 354Q942 417 923 483M943 352Q968 421 950 483" fill="none" stroke="#efe1bd" stroke-width="3.5" stroke-dasharray="10 6" opacity=".7"/>
+ <g fill="#335750" font-family="Georgia,serif" text-anchor="middle" font-weight="bold" font-size="14" opacity=".8"><text x="379" y="211">I</text><text x="915" y="274">II</text></g>
+
+ <!-- Navigation station coincides with the fifth blocked polygon. -->
+ <path d="M72 499L185 499L195 616L60 615Z" transform="translate(5 8)" fill="#203f45" opacity=".3" filter="url(#shadow)"/>
+ <path d="M72 499L185 499L195 616L60 615Z" fill="#aab098" stroke="#66796b" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M81 509L174 508L183 603L70 604Z" fill="#355967" stroke="#dbd7b2" stroke-width="3"/>
+ <path d="M84 514L142 498L177 528L161 557L97 560Z" fill="#b8b498" stroke="#536b6b" stroke-width="5"/>
+ <path d="M94 528L139 517 158 535" fill="none" stroke="#f0eac6" stroke-width="4"/>
+ <circle cx="128" cy="561" r="29" fill="#263e52" stroke="#dedab4" stroke-width="4"/><circle cx="128" cy="561" r="19" fill="#358f99" stroke="#edf0d2" stroke-width="2" stroke-dasharray="3 4"/>
+ <path d="M128 539L135 565L116 572Z" fill="#fff0b8"/><circle cx="128" cy="561" r="4" fill="#fff8c9"/>
+ <rect x="76" y="616" width="110" height="24" rx="7" fill="#25545a" stroke="#c2c7a1" stroke-width="2"/><text x="131" y="632" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="800" letter-spacing="1.2" font-size="10" fill="#e4f1dd">СТАНЦИЯ 04</text>
+
+ <!-- Distinct, unmistakable spawn and exit. -->
+ <g font-family="system-ui,sans-serif" font-weight="bold" letter-spacing="1.4"><circle cx="22" cy="220" r="19" fill="#24575c" stroke="#e1e6c1" stroke-width="4"/><path d="M14 220H31m-7 -6 7 6 -7 6" stroke="#f1f6cf" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+  <rect x="14" y="159" width="76" height="28" rx="8" fill="#24535a"/><text x="52" y="178" fill="#fff2cd" text-anchor="middle" font-size="12">ВХОД</text>
+  <circle cx="1258" cy="338" r="19" fill="#6c6652" stroke="#efe2b8" stroke-width="4"/><path d="M1250 338H1267m-7 -6 7 6 -7 6" stroke="#fff0c5" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+  <rect x="1179" y="277" width="93" height="28" rx="8" fill="#3c5558"/><text x="1225" y="296" fill="#fff1ce" text-anchor="middle" font-size="12">ВЫХОД</text>
+ </g>
+ <rect x="1" y="1" width="1278" height="718" fill="none" stroke="#153139" stroke-width="2" opacity=".45"/>
+</svg>
