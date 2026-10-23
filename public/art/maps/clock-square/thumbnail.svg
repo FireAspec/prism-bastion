@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 1280 720" role="img" aria-label="Часовая площадь: две переплетённые дороги и общий выход">
+<defs>
+ <linearGradient id="dark" x2="0" y2="1"><stop stop-color="#133b45"/><stop offset="1" stop-color="#0b2737"/></linearGradient>
+ <linearGradient id="road" x2=".3" y2="1"><stop stop-color="#dabb89"/><stop offset="1" stop-color="#907766"/></linearGradient>
+ <linearGradient id="pool"><stop stop-color="#188a91"/><stop offset="1" stop-color="#17546d"/></linearGradient>
+ <pattern id="stones" width="48" height="42" patternUnits="userSpaceOnUse"><path d="M0 0H48V42H0M24 0V21M0 21H48" fill="none" stroke="#b2ccbb" stroke-opacity=".13"/></pattern>
+</defs>
+<rect width="1280" height="720" fill="url(#dark)"/><rect width="1280" height="720" fill="url(#stones)"/>
+<circle cx="638" cy="359" r="212" fill="none" stroke="#b88b58" stroke-dasharray="12 16" stroke-width="3" opacity=".35"/>
+<path d="M806 31L989 31L1014 56L1014 91L982 119L812 119L787 94L787 54Z" fill="url(#pool)" stroke="#c2ab84" stroke-width="8"/><path d="M435 625L581 625L611 646L611 681L582 699L430 699L408 677L408 647Z" fill="url(#pool)" stroke="#c2ab84" stroke-width="8"/>
+<g stroke-linejoin="round" stroke-linecap="round" fill="none"><path d="M0 156L95 156L155 115L265 105L354 143L389 218L355 278L438 338L555 372L654 361L745 414L788 498L875 525L965 500L1010 436L1028 379L1100 360L1280 360" stroke="#323433" stroke-width="63"/><path d="M0 563L100 563L163 607L270 613L358 565L387 492L351 435L437 379L555 344L654 361L748 310L786 225L878 196L962 225L1009 291L1028 350L1100 360L1280 360" stroke="#323433" stroke-width="63"/>
+<path d="M0 156L95 156L155 115L265 105L354 143L389 218L355 278L438 338L555 372L654 361L745 414L788 498L875 525L965 500L1010 436L1028 379L1100 360L1280 360" stroke="url(#road)" stroke-width="44"/><path d="M0 563L100 563L163 607L270 613L358 565L387 492L351 435L437 379L555 344L654 361L748 310L786 225L878 196L962 225L1009 291L1028 350L1100 360L1280 360" stroke="#94d5c9" stroke-width="44"/>
+<path d="M0 156L95 156L155 115L265 105L354 143L389 218L355 278L438 338L555 372L654 361L745 414L788 498L875 525L965 500L1010 436L1028 379L1100 360L1280 360" stroke="#f8e7c4" opacity=".5" stroke-width="2.5" stroke-dasharray="6 17"/><path d="M0 563L100 563L163 607L270 613L358 565L387 492L351 435L437 379L555 344L654 361L748 310L786 225L878 196L962 225L1009 291L1028 350L1100 360L1280 360" stroke="#f8e7c4" opacity=".5" stroke-width="2.5" stroke-dasharray="6 17"/></g>
+<path d="M557 93L702 93L724 112L724 191L705 211L557 211L539 192L539 113Z" fill="#345b57" stroke="#d0a773" stroke-width="7" stroke-linejoin="round"/><path d="M550 554L572 536L710 536L731 554L731 628L710 647L568 647L550 628Z" fill="#345b57" stroke="#d0a773" stroke-width="7" stroke-linejoin="round"/><path d="M119 301L251 301L267 317L267 399L251 415L119 415L103 399L103 317Z" fill="#345b57" stroke="#d0a773" stroke-width="7" stroke-linejoin="round"/><path d="M1094 73L1211 73L1223 85L1223 212L1211 224L1094 224L1082 212L1082 85Z" fill="#345b57" stroke="#d0a773" stroke-width="7" stroke-linejoin="round"/><path d="M1103 476L1228 476L1242 490L1242 613L1228 627L1103 627L1089 613L1089 490Z" fill="#345b57" stroke="#d0a773" stroke-width="7" stroke-linejoin="round"/>
+<circle cx="631" cy="151" r="46" fill="#193a3c" stroke="#e9bd83" stroke-width="6"/>
+<circle cx="631" cy="151" r="34" fill="none" stroke="#ffe1aa" stroke-width="3" stroke-dasharray="3 7"/>
+<path d="M631 151V122M631 151L653 161" stroke="#ffe4af" stroke-width="6" stroke-linecap="round"/>
+<circle cx="639" cy="590" r="29" fill="#273e40" stroke="#edc187" stroke-width="6"/><circle cx="639" cy="590" r="13" fill="none" stroke="#cc9f67" stroke-width="4"/>
+<circle cx="185" cy="356" r="25" fill="#233d43" stroke="#cc9e65" stroke-width="6"/>
+<path d="M1117 140H1190M1117 159H1190M1119 578H1208" stroke="#ca9862" stroke-width="8"/>
+<g fill="none" stroke="#e8c18a" stroke-width="3" opacity=".55"><circle cx="634" cy="267" r="41"/><circle cx="634" cy="457" r="41"/><circle cx="766" cy="360" r="32"/></g>
+<g fill="#ffefbd" stroke="#154251" stroke-width="5"><circle cx="20" cy="156" r="15"/><circle cx="20" cy="563" r="15"/><circle cx="1258" cy="360" r="22"/></g>
+<rect x="34" y="22" width="451" height="73" rx="12" fill="#0b2a34" fill-opacity=".96" stroke="#b99163" stroke-width="2"/>
+<text x="53" y="49" font-family="sans-serif" font-size="20" fill="#edc386" letter-spacing="3" font-weight="700">11 / FOUNDRY</text>
+<text x="53" y="82" font-family="sans-serif" font-size="29" fill="#fff0c6" font-weight="700">ЧАСОВАЯ ПЛОЩАДЬ</text>
+<rect x="1010" y="645" width="240" height="48" rx="10" fill="#0c2d39" stroke="#b89a6d" stroke-width="2"/>
+<text x="1130" y="676" font-family="sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#ffe3ad">2 ВХОДА · 1 ВЫХОД</text>
+</svg>
