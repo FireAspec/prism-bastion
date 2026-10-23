@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Black Lighthouse: copper lighthouse above three incoming tides at night">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081d2f"/><stop offset=".58" stop-color="#173e47"/><stop offset="1" stop-color="#342c38"/></linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#154353"/><stop offset="1" stop-color="#0b223a"/></linearGradient>
+    <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f9d694"/><stop offset="1" stop-color="#9e5b46"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#fff1bd" stop-opacity=".94"/><stop offset=".18" stop-color="#f8be6b" stop-opacity=".59"/><stop offset="1" stop-color="#efa054" stop-opacity="0"/></radialGradient>
+    <pattern id="ripples" width="55" height="33" patternUnits="userSpaceOnUse"><path d="M5 20q10-6 21-1m16-10q7-4 13 0" stroke="#8caead" stroke-width="1.3" opacity=".24" fill="none"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#night)"/>
+  <circle cx="512" cy="129" r="235" fill="url(#halo)"/>
+  <path d="M0 32Q103 12 184 58T344 43T640 30V0H0Z" fill="#0b2236" opacity=".95"/>
+  <path d="M0 305Q90 256 151 290T294 286T452 276T640 242V360H0Z" fill="url(#water)" stroke="#749d96" stroke-opacity=".6" stroke-width="4"/>
+  <path d="M0 305Q90 256 151 290T294 286T452 276T640 242V360H0Z" fill="url(#ripples)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M0 91Q78 72 141 105T273 124Q349 112 385 174T493 233" stroke="#263b42" stroke-width="33"/>
+    <path d="M0 91Q78 72 141 105T273 124Q349 112 385 174T493 233" stroke="#c89567" stroke-opacity=".74" stroke-width="3" stroke-dasharray="6 14"/>
+    <path d="M0 186Q112 157 202 195T366 213T493 233" stroke="#243e46" stroke-width="31"/>
+    <path d="M0 186Q112 157 202 195T366 213T493 233" stroke="#ccaf7c" stroke-opacity=".72" stroke-width="3" stroke-dasharray="6 14"/>
+    <path d="M0 280Q95 254 167 269T282 249Q371 276 405 261T493 233" stroke="#304149" stroke-width="29"/>
+    <path d="M0 280Q95 254 167 269T282 249Q371 276 405 261T493 233" stroke="#c89567" stroke-opacity=".74" stroke-width="3" stroke-dasharray="6 14"/>
+    <path d="M493 233Q538 236 640 238" stroke="#28333d" stroke-width="39"/>
+    <path d="M493 233Q538 236 640 238" stroke="#f3d397" stroke-opacity=".7" stroke-width="4"/>
+  </g>
+  <g transform="translate(513 129)">
+    <path d="M-70-24L-41-72H42L74-24 63 45-13 76-76 43Z" fill="#1d2d37" stroke="#9a8873" stroke-width="5"/>
+    <circle r="62" fill="none" stroke="#d9a96d" stroke-opacity=".7" stroke-width="5" stroke-dasharray="8 9"/>
+    <circle r="42" fill="#32434a" stroke="url(#copper)" stroke-width="11"/>
+    <path d="M0-37V37M-37 0H37" stroke="#d4a171" stroke-width="7"/>
+    <circle r="25" fill="#503f41" stroke="#f4d9a3" stroke-width="4"/>
+    <circle r="15" fill="#fff2c9"/>
+    <circle r="7" fill="#fffef3"/>
+  </g>
+  <g fill="#ffb86f" stroke="#182f3d" stroke-width="3">
+    <path d="M8 77l22 14-22 14Z"/><path d="M8 172l22 14-22 14Z"/><path d="M8 266l22 14-22 14Z"/>
+  </g>
+  <g fill="#ffe4a6" opacity=".62"><circle cx="148" cy="145" r="5"/><circle cx="267" cy="177" r="4"/><circle cx="366" cy="177" r="5"/><circle cx="335" cy="267" r="5"/></g>
+  <path d="M0 0H640V360H0Z" fill="none" stroke="#d6b07d" stroke-opacity=".45" stroke-width="8"/>
+</svg>

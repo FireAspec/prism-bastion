@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Чёрный маяк — просмотр карты</title>
+  <style>
+    :root{color-scheme:dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#081b26;color:#e6e8dd}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:radial-gradient(circle at 85% 0%,#22434a,#0a1c29 47%,#071420);}
+    header{display:flex;align-items:center;gap:20px;justify-content:space-between;flex-wrap:wrap;max-width:1470px;margin:0 auto;padding:18px 20px 14px}
+    h1{font-size:clamp(25px,3vw,36px);line-height:1;margin:0;color:#f3ddb2;letter-spacing:.025em}
+    .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#98babb;margin-bottom:7px}
+    .subtitle{margin:9px 0 0;font-size:14px;color:#a8c0bd;max-width:700px}
+    .tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    button{cursor:pointer;background:#203e48;border:1px solid #527076;border-radius:9px;color:#ecdfc6;padding:9px 13px;font-size:13px;font-weight:700}
+    button[aria-pressed="true"]{background:#8a563b;border-color:#efc48c;color:#fff5e2}
+    main{max-width:1470px;margin:0 auto;padding:0 20px 22px}
+    .arena{position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border-radius:15px;border:2px solid #6b7a74;background:#0c252e;box-shadow:0 22px 65px #0008,0 0 0 7px #b08b5e18}
+    .terrain,.overlay{position:absolute;inset:0;width:100%;height:100%}
+    .terrain{object-fit:fill}
+    .overlay{pointer-events:none}
+    .route-base{stroke:#172932;stroke-width:46;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .route{stroke-width:33;fill:none;stroke-linecap:round;stroke-linejoin:round;opacity:.82}
+    .route-midline{fill:none;stroke:#fbf1ce;stroke-width:2.5;stroke-dasharray:5 15;opacity:.72;stroke-linecap:round}
+    .route-label{font-size:15px;font-weight:900;paint-order:stroke;stroke:#122734;stroke-width:6;letter-spacing:.09em;fill:#fff8dc}
+    .site{fill:#142b35dd;stroke:#f6cf93;stroke-width:2.6;stroke-dasharray:5 6}
+    .site-water{fill:#10374ad9;stroke:#9be6de;stroke-width:2.4;stroke-dasharray:5 6}
+    .site-n{fill:#f8d69d;font-size:13px;font-weight:900;text-anchor:middle;dominant-baseline:middle}
+    .site-w{fill:#adfff2;font-size:13px;font-weight:900;text-anchor:middle;dominant-baseline:middle}
+    .legend{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:15px 4px;color:#b6c8c5;font-size:13px}
+    .keys{display:flex;gap:20px;flex-wrap:wrap}
+    .swatch{width:13px;height:13px;display:inline-block;border-radius:50%;margin-right:5px;vertical-align:-2px}
+    .statistics{display:flex;gap:9px;flex-wrap:wrap}
+    .stat{border:1px solid #455f65;border-radius:8px;padding:7px 12px;background:#13303bb9}
+    .stat strong{color:#f5dca9}
+    .note{font-size:12px;color:#8eaaa9;margin:2px 4px 12px}
+    @media(max-width:700px){header{padding:16px 13px 12px}main{padding:0 10px 16px} .route-label{font-size:20px}.legend{font-size:12px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="eyebrow">Prism Bastion · локация 19 / 20 · устье</div>
+      <h1>Чёрный маяк</h1>
+      <p class="subtitle">Три постоянных входа. Один укреплённый выход. Сухие уступы ограничены прибоем и руинами.</p>
+    </div>
+    <div class="tools" aria-label="Слои предпросмотра">
+      <button id="toggle-routes" type="button" aria-pressed="true">Маршруты</button>
+      <button id="toggle-sites" type="button" aria-pressed="true">Позиции</button>
+    </div>
+  </header>
+  <main>
+    <div class="arena" aria-label="Просмотр игрового мира 1280 на 720">
+      <img class="terrain" src="./background.svg" alt="Устье реки и чёрный маяк с видимыми берегами и оборонительными уступами"/>
+      <svg class="overlay" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Маршруты врагов и места размещения обороны">
+        <g id="routes">
+          <polyline class="route-base" points="0,104 116,104 238,128 332,102 442,125 510,190 615,208 692,150 792,168 855,260 943,310 972,357"/>
+          <polyline class="route-base" points="0,336 135,336 212,310 280,330 350,380 435,398 515,355 590,312 687,337 788,345 878,350 972,357"/>
+          <polyline class="route-base" points="0,628 130,628 207,590 250,540 270,635 332,650 432,608 488,537 572,520 655,566 735,565 792,478 878,440 932,418 972,357"/>
+          <polyline class="route-base" points="972,357 1140,357 1280,357"/>
+          <polyline class="route" stroke="#75c9ce" points="0,104 116,104 238,128 332,102 442,125 510,190 615,208 692,150 792,168 855,260 943,310 972,357"/>
+          <polyline class="route" stroke="#d3ae72" points="0,336 135,336 212,310 280,330 350,380 435,398 515,355 590,312 687,337 788,345 878,350 972,357"/>
+          <polyline class="route" stroke="#c98e80" points="0,628 130,628 207,590 250,540 270,635 332,650 432,608 488,537 572,520 655,566 735,565 792,478 878,440 932,418 972,357"/>
+          <polyline class="route" stroke="#f7d08c" points="972,357 1140,357 1280,357"/>
+          <polyline class="route-midline" points="0,104 116,104 238,128 332,102 442,125 510,190 615,208 692,150 792,168 855,260 943,310 972,357"/>
+          <polyline class="route-midline" points="0,336 135,336 212,310 280,330 350,380 435,398 515,355 590,312 687,337 788,345 878,350 972,357"/>
+          <polyline class="route-midline" points="0,628 130,628 207,590 250,540 270,635 332,650 432,608 488,537 572,520 655,566 735,565 792,478 878,440 932,418 972,357"/>
+          <polyline class="route-midline" points="972,357 1140,357 1280,357"/>
+          <text class="route-label" x="32" y="75">01</text><text class="route-label" x="32" y="305">02</text><text class="route-label" x="32" y="596">03</text>
+          <text class="route-label" x="1204" y="318">ВЫХОД</text>
+        </g>
+        <g id="sites">
+          <g><circle class="site" cx="736" cy="103" r="24"/><text class="site-n" x="736" y="103">N</text></g>
+          <g><circle class="site" cx="300" cy="230" r="24"/><text class="site-n" x="300" y="230">W</text></g>
+          <g><circle class="site" cx="518" cy="276" r="24"/><text class="site-n" x="518" y="276">A</text></g>
+          <g><circle class="site" cx="690" cy="260" r="24"/><text class="site-n" x="690" y="260">S</text></g>
+          <g><circle class="site" cx="351" cy="514" r="24"/><text class="site-n" x="351" y="514">F</text></g>
+          <g><circle class="site" cx="788" cy="411" r="24"/><text class="site-n" x="788" y="411">T</text></g>
+          <g><circle class="site" cx="1012" cy="235" r="24"/><text class="site-n" x="1012" y="235">L</text></g>
+          <g><circle class="site" cx="1055" cy="463" r="24"/><text class="site-n" x="1055" y="463">R</text></g>
+          <g><circle class="site-water" cx="130" cy="224" r="22"/><text class="site-w" x="130" y="224">H</text></g>
+          <g><circle class="site-water" cx="592" cy="457" r="22"/><text class="site-w" x="592" y="457">B</text></g>
+          <g><circle class="site-water" cx="1095" cy="582" r="26"/><text class="site-w" x="1095" y="582">D</text></g>
+        </g>
+      </svg>
+    </div>
+    <div class="legend">
+      <div class="keys">
+        <span><i class="swatch" style="background:#75c9ce"></i> Север: дальний обход</span>
+        <span><i class="swatch" style="background:#d3ae72"></i> Центр: быстрый прорыв</span>
+        <span><i class="swatch" style="background:#c98e80"></i> Юг: приливная дуга</span>
+        <span><i class="swatch" style="background:#f7d08c"></i> Общий рубеж</span>
+      </div>
+      <div class="statistics">
+        <span class="stat"><strong>3</strong> входа</span>
+        <span class="stat"><strong>308 px</strong> общего пути</span>
+        <span class="stat"><strong>8 + 3</strong> позиций суша / вода</span>
+      </div>
+    </div>
+    <p class="note">Диагностический просмотр геометрии. Цветные дорожки и обозначения площадок принадлежат только этой странице: основной фон содержит декорации и не рисует поверх игровых сущностей. Проходимость требует отдельного replay на боевом движке.</p>
+  </main>
+  <script>
+    for(const [buttonId,layerId] of [['toggle-routes','routes'],['toggle-sites','sites']]){
+      const button=document.getElementById(buttonId);
+      const layer=document.getElementById(layerId);
+      button.addEventListener('click',()=>{
+        const visible=button.getAttribute('aria-pressed')!=='true';
+        button.setAttribute('aria-pressed',String(visible));
+        layer.style.display=visible?'':'none';
+      });
+    }
+  </script>
+</body>
+</html>
