@@ -51,6 +51,8 @@ describe('map 14 / mirror terrace',()=>{
   }
   expect(html).toContain('background.svg');
   expect(html).toContain('thumbnail.svg');
+  expect(html).toContain('body:has(#show:not(:checked)) .frame .overlay');
+  expect(html).toContain('body:has(#pads:not(:checked)) .frame .pads');
  });
 
  it('ships two independent local SVG assets with no external loading',()=>{
@@ -61,6 +63,10 @@ describe('map 14 / mirror terrace',()=>{
    expect(graphic).toContain('</svg>');
    expect(graphic).not.toMatch(/<script|<image|https?:\/\/[^"]+\.(?:png|jpe?g|webp)/i);
   }
+  // SVG 1.1 references also render the shrubs and lamps in older rasterizers.
+  expect(background).toContain('xmlns:xlink="http://www.w3.org/1999/xlink"');
+  expect([...background.matchAll(/<use xlink:href="#(?:shrub|lamp)"/g)]).toHaveLength(29);
+  expect(background).not.toContain('<use href=');
   expect(background).not.toEqual(thumbnail);
  });
 
