@@ -104,6 +104,7 @@ export async function startHost(
   const ready = new Set<string>();
   const audit: OwnershipChange[] = [];
   const maxPlayers = options.maxPlayers;
+  const roomName = options.name;
   let engine: GameEngine | undefined;
   let frozenRun: RunOptions | undefined;
   let finalState: GameState | null = null;
@@ -122,7 +123,7 @@ export async function startHost(
     const knowledge = knowledgeAllowed
       ? cleanKnowledge(Array.from(slots.values()).flatMap(s => s.knowledge)) : [];
     return {
-      id: roomId, name: options.name, hostId, players, ready: [...ready],
+      id: roomId, name: roomName, hostId, players, ready: [...ready],
       started: engine !== undefined, protocolVersion: PROTOCOL_VERSION,
       contentDigest: config.contentDigest,
       options: { ...structuredClone(frozenRun ?? baseRun), players,
@@ -179,6 +180,7 @@ export async function startHost(
   function pushSnapshots(): void {
     const state = snapshot();
     if (!state) return;
+    issueResult(state);
     const seq = ++snapshotSeq;
     let batch = events.splice(0);
     let payload: string;
@@ -217,7 +219,13 @@ export async function startHost(
   }
   function collectEvents(): void {
     if (!engine) return;
+    let terminal: 'victory' | 'defeat' | undefined;
     for (const event of engine.drainEvents()) {
+      if (event.kind === 'waveStart' && ready.size) {
+        ready.clear();
+        broadcastRoom();
+      }
+      if (event.kind === 'victory' || event.kind === 'defeat') terminal = event.kind;
       if (event.kind === 'waveEnd' && event.id > lastWaveEvent) {
         lastWaveEvent = event.id;
         completedWaves++;
@@ -226,14 +234,16 @@ export async function startHost(
       events.push(event);
       if (events.length > EVENT_LIMIT) events.shift();
     }
-    const state = engine.getSnapshot();
-    if (!resultIssued && (state.phase === 'victory' || state.phase === 'defeat')) {
+    if (terminal && !resultIssued) issueResult(engine.getSnapshot(), terminal);
+  }
+  function issueResult(state: GameState, terminal = state.phase): void {
+    if (!resultIssued && (terminal === 'victory' || terminal === 'defeat')) {
       resultIssued = true;
       for (const slot of slots.values()) {
         const result: RunResult = {
           runId: state.options.runId, mapId: state.options.mapId,
           modeId: state.options.modeId, difficulty: state.options.difficulty,
-          won: state.phase === 'victory', wave: state.wave, rounds: state.rules.rounds,
+          won: terminal === 'victory', wave: state.wave, rounds: state.rules.rounds,
           seed: state.options.seed, contentDigest: config.contentDigest,
           durationSeconds: state.time,
           // Roster is fixed before the first wave, so the early-presence condition holds.
@@ -245,10 +255,13 @@ export async function startHost(
     }
   }
   function command(slot: Slot, seq: number, action: GameAction): CommandResult {
-    if (!Number.isSafeInteger(seq) || seq < 0 || seq <= slot.seq) return fail('duplicate-seq');
+    const withinRate = takeRate(slot.commands, performance.now(), 30);
+    if (!Number.isSafeInteger(seq) || seq < 0 || seq <= slot.seq) {
+      return fail(withinRate ? 'duplicate-seq' : 'rate-limit');
+    }
     // Consume even rejected intentions; never let a replay become a later purchase.
     slot.seq = seq;
-    if (!takeRate(slot.commands, performance.now(), 30)) return fail('rate-limit');
+    if (!withinRate) return fail('rate-limit');
     if (!engine) return fail('not-started');
     const id = slot.player.id;
     if (action.type === 'pause' || action.type === 'speed' || action.type === 'autoStart') {
@@ -439,7 +452,7 @@ export async function startHost(
   });
 
   let last = performance.now();
-  let lastSnapshot = last;
+  let nextSnapshot = last + 100;
   clock = setInterval(() => {
     if (closing) return;
     try {
@@ -450,15 +463,20 @@ export async function startHost(
       if (engine) {
         engine.step(elapsed);
         collectEvents();
-        if (now - lastSnapshot >= 99) { lastSnapshot = now; pushSnapshots(); }
+        if (now >= nextSnapshot) {
+          nextSnapshot = now - (now - nextSnapshot) % 100 + 100;
+          pushSnapshots();
+        }
       }
     } catch { fatal(); }
   }, 1000 / 60);
   heartbeat = setInterval(() => {
     for (const peer of peers) {
-      if (!peer.alive) { peer.socket.terminate(); continue; }
-      peer.alive = false;
-      if (peer.socket.readyState === WebSocket.OPEN) peer.socket.ping();
+      try {
+        if (!peer.alive) { peer.socket.terminate(); continue; }
+        peer.alive = false;
+        if (peer.socket.readyState === WebSocket.OPEN) peer.socket.ping();
+      } catch { peer.socket.terminate(); }
     }
   }, HEARTBEAT_MS);
 
