@@ -6,7 +6,6 @@ const PATHS: PathIndex[] = [0, 1, 2];
 const LETTERS = ['A', 'B', 'C'];
 const CATEGORIES: TowerDef['category'][] = ['weapon', 'element', 'tech', 'support', 'economy', 'water'];
 const TARGETS: Targeting[] = ['first', 'last', 'strong', 'near'];
-const initial = new Set(['needle', 'cannon', 'frost', 'beacon']);
 const storyNames: Record<string, string> = {
  scatter:'Сад фонарей', ember:'Сад фонарей', saw:'Медный ручей', venom:'Медный ручей',
  rail:'Поля ветряков', tesla:'Поля ветряков', mortar:'Старый акведук', observatory:'Старый акведук',
@@ -185,7 +184,8 @@ export function createHUD(root:HTMLElement,config:GameConfig,hooks:UIHooks,local
  };
  const button=(parent:HTMLElement,key:string,label:string,run:()=>void,block='',cls='')=>{
   const b=keyed(node(doc,'button','pb-hud-button '+cls,label),key);b.type='button';b.dataset.action=key;
-  const reason=reasonText(block|| (pending.has(key)?'waiting':''));
+  const reasonKey=block|| (pending.has(key)?'waiting':'');
+  const reason=reasonKey?reasonText(reasonKey):'';
   b.setAttribute('aria-disabled',String(Boolean(reason)));if(reason)b.title=reason;
   actions.set(key,{run,reason}); parent.append(b);return b;
  };
@@ -231,7 +231,7 @@ export function createHUD(root:HTMLElement,config:GameConfig,hooks:UIHooks,local
   add(resources,'strong','pb-hud-lives','♥ '+money(s.lives)+' / '+money(s.rules.maxLives));
   const threat=node(doc,'div','pb-hud-threat');top.append(threat);
   add(threat,'strong','',tr('wave','Волна '+Math.min(number,s.rules.rounds)+' / '+s.rules.rounds,{wave:number,total:s.rules.rounds}));
-  const nextBoss=next?.boss&&config.enemies.find(e=>e.id===next.boss);
+  const nextBoss=next?.boss?config.enemies.find(e=>e.id===next.boss):undefined;
   const threatText=nextNumber>s.rules.rounds&&!s.options.endless?tr('lastWave','Последняя волна'):
    (s.phase==='wave'?tr('next','Далее: '):tr('threat','Угроза: '))+(nextBoss?.name??next?.preview??tr('unknownThreat','Нет данных о следующей волне'));
   add(threat,'span',nextBoss?'pb-hud-boss-alert':'pb-hud-muted',threatText).title=threatText;
