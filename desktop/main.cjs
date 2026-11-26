@@ -52,6 +52,7 @@ async function open(){
       if(location.protocol!=='file:')throw Error('Not file renderer');
       const script=document.querySelector('script[type="module"]');
       if(!script||!script.src.startsWith('file:'))throw Error('Missing local entry');
+      if(!performance.getEntriesByName(script.src).some(e=>e.initiatorType==='script'||e.initiatorType==='other'))throw Error('Renderer script load not observed');
       const version=await api.getVersion(), addresses=await api.getAddresses();
       if(!version||!addresses.includes('127.0.0.1'))throw Error('IPC response');
       let rejected=false;try{await api.startHost({},{});}catch{rejected=true;}

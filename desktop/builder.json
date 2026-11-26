@@ -26,15 +26,18 @@
         ]
       }
     ],
-    "signAndEditExecutable": false,
-    "artifactName": "Prism-Bastion-${version}-${arch}-${target}.${ext}"
+    "signAndEditExecutable": false
   },
   "nsis": {
     "perMachine": false,
     "oneClick": false,
     "allowElevation": false,
     "allowToChangeInstallationDirectory": true,
-    "deleteAppDataOnUninstall": false
+    "deleteAppDataOnUninstall": false,
+    "artifactName": "Prism-Bastion-${version}-${arch}-setup.${ext}"
   },
-  "publish": null
+  "publish": null,
+  "portable": {
+    "artifactName": "Prism-Bastion-${version}-${arch}-portable.${ext}"
+  }
 }
