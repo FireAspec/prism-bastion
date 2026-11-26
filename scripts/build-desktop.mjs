@@ -23,8 +23,8 @@ const policy="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-in
 if(!/<head(?:\s[^>]*)?>/i.test(html))throw Error('Missing renderer head');
 html=html.replace(/<head(?:\s[^>]*)?>/i,tag=>tag+'<meta http-equiv="Content-Security-Policy" content="'+policy+'">');
 await writeFile(htmlPath,html);
-if(mode==='dev')npm(['exec','--yes','--package=electron@45.5.0','--','electron','.']);
+if(mode==='dev')npm(['exec','--offline','--','electron','.']);
 if(mode==='pack'){
  if(process.platform!=='win32')throw Error('Windows packaging requires a Windows runner');
- npm(['exec','--yes','--package=electron-builder@26.18.0','--','electron-builder','--config','desktop/builder.json','--win','--x64','--publish','never']);
+ npm(['exec','--offline','--','electron-builder','--config','desktop/builder.json','--win','--x64','--publish','never']);
 }

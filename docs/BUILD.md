@@ -4,7 +4,7 @@
 
 Node 22.12+ (development only), npm and Windows x64. Run `npm ci`, `npm run check`, `npm run desktop:test`, then `npm run desktop:pack`. The pack command builds Vite with its existing relative base, bundles the Node host into dist/desktop/host.cjs and uses Electron Builder for x64 portable and per-user NSIS targets. The player does not need Node, npm, or internet. No updater or signing credentials are configured. Unsigned executables may trigger SmartScreen.
 
-`npm run desktop:dev` builds and opens the local renderer with Electron. It intentionally starts no dev HTTP server; rerun after source changes. The separate existing `npm run dev` is unchanged for web development. Build tools Electron 45.5.0 and electron-builder 26.18.0 are invoked via pinned npm exec packages, not added to the root dependency graph. The existing lock remains valid; transitive tooling is not locked by the root lock. A subsequent dependency-lock integration should pin the full desktop toolchain. First build requires package downloads; runtime does not.
+`npm run desktop:dev` builds and opens the local renderer with Electron. It intentionally starts no dev HTTP server; rerun after source changes. The separate existing `npm run dev` is unchanged for web development. Build tools Electron 45.5.0 and electron-builder 26.18.0 are exact development dependencies. The npm-generated package-lock.json includes their transitive dependencies. The build script invokes the local installed tools. First build requires package downloads; runtime does not.
 
 ## DesktopBridge
 
