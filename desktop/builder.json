@@ -1,0 +1,40 @@
+{
+  "appId": "com.prismbastion.game",
+  "productName": "Prism Bastion",
+  "electronVersion": "45.5.0",
+  "asar": true,
+  "npmRebuild": false,
+  "directories": {
+    "output": "release"
+  },
+  "files": [
+    "dist/**/*",
+    "package.json"
+  ],
+  "win": {
+    "target": [
+      {
+        "target": "portable",
+        "arch": [
+          "x64"
+        ]
+      },
+      {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
+    ],
+    "signAndEditExecutable": false,
+    "artifactName": "Prism-Bastion-${version}-${arch}-${target}.${ext}"
+  },
+  "nsis": {
+    "perMachine": false,
+    "oneClick": false,
+    "allowElevation": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false
+  },
+  "publish": null
+}

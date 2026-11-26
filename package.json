@@ -11,7 +11,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "npm run typecheck && npm test && npm run build"
+    "check": "npm run typecheck && npm test && npm run build",
+    "desktop:build": "node scripts/build-desktop.mjs build",
+    "desktop:dev": "node scripts/build-desktop.mjs dev",
+    "desktop:pack": "node scripts/build-desktop.mjs pack",
+    "desktop:test": "node --test desktop/*.test.cjs",
+    "content:validate": "tsx desktop/validate-content.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
@@ -27,5 +32,6 @@
   },
   "dependencies": {
     "ws": "8.22.0"
-  }
+  },
+  "main": "dist/desktop/main.cjs"
 }
