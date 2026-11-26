@@ -51,3 +51,14 @@ jobs:
           name: prism-bastion-windows-x64
           path: release/*.exe
           if-no-files-found: error
+  lock-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --package-lock-only --ignore-scripts --save-dev --save-exact electron@45.5.0 electron-builder@26.18.0
+      - name: Export generated lock candidate
+        run: node -e "const s=require('node:fs').readFileSync('package-lock.json').toString('base64'); for(let i=0;i<s.length;i+=800) console.log('LOCKCHUNK:'+s.slice(i,i+800));"

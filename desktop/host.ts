@@ -8,7 +8,7 @@ export async function launchHost(options:HostOptions,run:RunOptions){
   const config=loadContent();
   const errors=validateContent(config);
   if(errors.length)throw new Error('Content validation failed');
-  const progression=createProgression(config.economy);
+  const progression=createProgression(config);
   return startHost(options,run,{
     config,
     createEngine: selected=>createGame(progression.applyKnowledge(config,selected.knowledge,selected.modeId),selected,createCombat())
