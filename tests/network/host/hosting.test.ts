@@ -82,6 +82,9 @@ function fixture(options: RunOptions): GameEngine {
           abilityCooldowns: {}, memory: {}, damageDealt: 0, kills: 0, generated: 0,
         };
         state.towers.push(t); event('place');
+        if (command.tower === 'event-storm') {
+          for (let i = 0; i < 1000; i++) event('hit');
+        }
         return { ok: true, entity: t.id, amount: 70 };
       }
       if (command.type === 'pause') state.paused = command.value;
@@ -304,6 +307,29 @@ describe('authoritative host', () => {
     const next = await a.c.wait('snapshot', m => m.seq > before.seq + 2);
     expect(next.state.options.players).toHaveLength(2);
     await b.c.wait('snapshot', m => m.seq >= next.seq);
+  });
+
+  it('bounds event batches, increments snapshot seq and rejects binary or malformed input', async () => {
+    const { host } = await setup();
+    const a = await player(host.port); await player(host.port); await launch(a.c);
+    const before = await a.c.wait('snapshot');
+    expect((await a.c.cmd(1, { ...place, tower: 'event-storm' })).ok).toBe(true);
+    const storm = await a.c.wait('snapshot', m => m.seq > before.seq && m.events.some(e => e.kind === 'hit'));
+    expect(storm.events).toHaveLength(256);
+    expect(new Set(storm.events.map(e => e.id)).size).toBe(256);
+    expect(Buffer.byteLength(JSON.stringify(storm))).toBeLessThanOrEqual(2 * 1024 * 1024);
+    const next = await a.c.wait('snapshot', m => m.seq > storm.seq);
+    expect(next.events).toEqual([]);
+    const malformed = new Client(host.port); clients.push(malformed); await malformed.open();
+    malformed.ws.send('{');
+    expect((await malformed.wait('error')).code).toBe('invalid-message');
+    const binary = new Client(host.port); clients.push(binary); await binary.open();
+    binary.ws.send(Buffer.from('binary'));
+    expect((await binary.wait('error')).code).toBe('invalid-message');
+    const oversized = new Client(host.port); clients.push(oversized); await oversized.open();
+    const closed = new Promise<number>(resolve => oversized.ws.once('close', resolve));
+    oversized.ws.send('x'.repeat(16 * 1024 + 1));
+    expect(await closed).toBe(1009);
   });
 
   it('stops idempotently, exposes final state, and releases the TCP port', async () => {
