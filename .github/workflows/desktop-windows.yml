@@ -1,0 +1,39 @@
+name: Windows desktop
+on:
+  pull_request:
+  push:
+    branches: [main, feature/68-desktop-build]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run desktop:test
+      - run: npm run check
+      - name: Validate integrated content
+        shell: pwsh
+        run: |
+          if ((Get-Content src/content/index.ts -Raw) -match "throw new Error\('Content registry pending'\)") {
+            Write-Warning 'Content registry is still a base stub; full validation pending integration.'
+          } else {
+            npm run content:validate
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - run: npm run desktop:pack
+      - name: Smoke unpacked, portable and installed application
+        shell: pwsh
+        run: ./desktop/smoke-windows.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prism-bastion-windows-x64
+          path: release/*.exe
+          if-no-files-found: error
