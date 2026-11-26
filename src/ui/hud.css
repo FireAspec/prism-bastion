@@ -96,3 +96,8 @@
  .pb-hud-controls { width:100%; justify-content:flex-end; }
 }
 @media (prefers-reduced-motion:reduce) { .pb-hud * { scroll-behavior:auto; transition:none; animation:none; } }
+
+/* Status stays in the rail, never on top of the world. */
+.pb-hud-notice { left:auto; right:8px; bottom:8px; max-width:calc(clamp(320px,28vw,420px) - 16px); max-height:72px; overflow:auto; }
+.pb-hud:has(+ .pb-hud-notice:not(:empty)) .pb-hud-side { padding-bottom:84px; }
+@media (max-width:1050px) { .pb-hud-notice { max-width:294px; } }
