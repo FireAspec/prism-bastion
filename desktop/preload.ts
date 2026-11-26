@@ -1,0 +1,11 @@
+import {contextBridge, ipcRenderer} from 'electron';
+import type {DesktopBridge} from '../src/contracts';
+
+const api: DesktopBridge = {
+  setFullscreen: value => ipcRenderer.invoke('prism:fullscreen', value),
+  getVersion: () => ipcRenderer.invoke('prism:version'),
+  startHost: (options, run) => ipcRenderer.invoke('prism:host-start', options, run),
+  stopHost: () => ipcRenderer.invoke('prism:host-stop'),
+  getAddresses: () => ipcRenderer.invoke('prism:addresses')
+};
+contextBridge.exposeInMainWorld('prismDesktop', Object.freeze(api));

@@ -29,23 +29,9 @@ jobs:
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
       - run: npm run desktop:pack
-      - name: Smoke packaged application
+      - name: Smoke unpacked, portable and installed application
         shell: pwsh
-        run: |
-          $env:PRISM_SMOKE_REPORT = Join-Path $env:RUNNER_TEMP 'desktop-smoke.json'
-          $exe = Get-ChildItem release/win-unpacked -Filter 'Prism Bastion.exe' | Select-Object -First 1
-          if (!$exe) { throw 'Packaged executable not found' }
-          $p = Start-Process -FilePath $exe.FullName -ArgumentList '--desktop-smoke-test' -PassThru
-          try {
-            $limit = (Get-Date).AddSeconds(60)
-            while (!(Test-Path $env:PRISM_SMOKE_REPORT) -and (Get-Date) -lt $limit -and !$p.HasExited) { Start-Sleep -Milliseconds 500 }
-            if (!(Test-Path $env:PRISM_SMOKE_REPORT)) { throw 'No smoke report' }
-            $result = Get-Content $env:PRISM_SMOKE_REPORT -Raw | ConvertFrom-Json
-            if (!$result.ok) { throw ($result | ConvertTo-Json) }
-            $result | ConvertTo-Json
-          } finally {
-            if (!$p.WaitForExit(10000)) { Stop-Process -Id $p.Id -Force }
-          }
+        run: ./desktop/smoke-windows.ps1
       - uses: actions/upload-artifact@v4
         with:
           name: prism-bastion-windows-x64
