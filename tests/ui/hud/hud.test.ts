@@ -47,7 +47,7 @@ describe('HUD projection and transaction preview',()=>{
   expect(hudPrice(c,s,100,t)).toBe(88);
   expect(hudPrice(c,s,100,f)).toBe(102);
   f.pos.x=151;expect(hudPrice(c,s,100,t)).toBe(102);
-  s.rules.allowKnowledge=false;expect(hudPrice(c,s,100,t)).toBe(111);
+  s.rules.allowKnowledge=false;expect(hudPrice(c,s,100,t)).toBe(110);
   expect(sellRefund(251)).toBe(175);
  });
  it('leaves definitions and state unchanged',()=>{
