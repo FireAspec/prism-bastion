@@ -78,17 +78,19 @@ function discountSources(config:GameConfig,state:GameState,exclude?:string) {
  }
  return sources;
 }
+// Avoid an extra credit caused solely by IEEE-754 noise at an integer boundary.
+function creditCeil(value:number):number {return Math.max(1,Math.ceil(value-Number.EPSILON*Math.max(1,Math.abs(value))*4));}
 export function hudPrice(config:GameConfig,state:GameState,base:number,tower?:TowerState):number {
  const knowledge=state.rules.allowKnowledge?Math.max(0,config.knowledgeDiscount):0;
  const support=tower?Math.max(0,...discountSources(config,state,tower.id)
   .filter(e=>Math.hypot(e.pos.x-tower.pos.x,e.pos.y-tower.pos.y)<=e.radius).map(e=>e.power)):0;
- return Math.max(1,Math.ceil(base*state.rules.towerCostMul*(1-Math.min(.2,knowledge+Math.min(.15,support)))));
+ return creditCeil(base*state.rules.towerCostMul*(1-Math.min(.2,knowledge+Math.min(.15,support))));
 }
 function placementPrice(config:GameConfig,state:GameState,base:number):[number,number] {
  const max=hudPrice(config,state,base);
  const support=Math.min(.15,Math.max(0,...discountSources(config,state).map(s=>s.power)));
  const knowledge=state.rules.allowKnowledge?Math.max(0,config.knowledgeDiscount):0;
- return [Math.max(1,Math.ceil(base*state.rules.towerCostMul*(1-Math.min(.2,knowledge+support)))),max];
+ return [creditCeil(base*state.rules.towerCostMul*(1-Math.min(.2,knowledge+support))),max];
 }
 export function upgradeBlock(state:GameState,tower:TowerState,path:PathIndex,actor?:string):string {
  if(state.phase==='victory'||state.phase==='defeat')return 'ended';
@@ -192,8 +194,9 @@ export function createHUD(root:HTMLElement,config:GameConfig,hooks:UIHooks,local
  const command=(parent:HTMLElement,key:string,label:string,c:GameCommand,block='',cls='')=>button(parent,key,label,()=>send(key,c),block,cls);
  const image=(parent:HTMLElement,id:string,asset:string,overlay?:string)=>{
   const wrap=node(doc,'span','pb-hud-art');
-  const img=node(doc,'img');img.src=towerAsset(id,asset);img.alt='';img.draggable=false;wrap.append(img);
-  if(overlay){const extra=node(doc,'img','pb-hud-overlay');extra.src=towerAsset(id,overlay);extra.alt='';extra.draggable=false;wrap.append(extra);}
+  const url=(a:string)=> (doc.location?.protocol==='file:'?'.':'')+towerAsset(id,a);
+  const img=node(doc,'img');img.src=url(asset);img.alt='';img.draggable=false;wrap.append(img);
+  if(overlay){const extra=node(doc,'img','pb-hud-overlay');extra.src=url(overlay);extra.alt='';extra.draggable=false;wrap.append(extra);}
   parent.append(wrap);return wrap;
  };
  const lockedStory=(d:TowerDef)=>{
@@ -230,7 +233,7 @@ export function createHUD(root:HTMLElement,config:GameConfig,hooks:UIHooks,local
   add(resources,'span','pb-hud-muted',coop()?tr('shared','Общий кошелёк'):tr('credits','Кредиты'));
   add(resources,'strong','pb-hud-lives','♥ '+money(s.lives)+' / '+money(s.rules.maxLives));
   const threat=node(doc,'div','pb-hud-threat');top.append(threat);
-  add(threat,'strong','',tr('wave','Волна '+Math.min(number,s.rules.rounds)+' / '+s.rules.rounds,{wave:number,total:s.rules.rounds}));
+  add(threat,'strong','',tr('wave','Волна '+(s.options.endless?number:Math.min(number,s.rules.rounds))+' / '+s.rules.rounds,{wave:number,total:s.rules.rounds}));
   const nextBoss=next?.boss?config.enemies.find(e=>e.id===next.boss):undefined;
   const threatText=nextNumber>s.rules.rounds&&!s.options.endless?tr('lastWave','Последняя волна'):
    (s.phase==='wave'?tr('next','Далее: '):tr('threat','Угроза: '))+(nextBoss?.name??next?.preview??tr('unknownThreat','Нет данных о следующей волне'));
@@ -388,7 +391,8 @@ export function createHUD(root:HTMLElement,config:GameConfig,hooks:UIHooks,local
  function keydown(event:KeyboardEvent){
   if(disposed||!state||event.defaultPrevented||event.repeat||event.ctrlKey||event.altKey||event.metaKey||event.shiftKey)return;
   const target=event.target;
-  if(target instanceof HTMLElement&&(target.isContentEditable||target.closest('input,textarea,select,[role=dialog]')))return;
+  if(target instanceof HTMLElement&&(target.isContentEditable||target.closest('[role=dialog]')))return;
+  if(target instanceof HTMLElement&&target.closest('input,textarea,select')&&event.key!=='Escape')return;
   if(target instanceof HTMLElement&&!view.contains(target)&&target!==doc.body&&target.tagName!=='CANVAS'&&target!==root)return;
   if(event.key==='Escape'){
    event.preventDefault();if(placing)hooks.chooseTower(null);else if(selected)hooks.select(null);return;
