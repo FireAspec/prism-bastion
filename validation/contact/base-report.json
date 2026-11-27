@@ -1,0 +1,268 @@
+[
+  {
+    "name": "shot-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "shot-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "cone-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "cone-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "beam-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "beam-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "chain-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "chain-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "splash-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "splash-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "ring-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "ring-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "mortar-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "mortar-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "mine-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "mine-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "drone-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "drone-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "pulse-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "pulse-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "tide-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "tide-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "melee-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "melee-miss",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "fast-tunneling",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "slow-no-early-hit",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "transverse-escape",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "turn-into-path",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "melee-leaves-range",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "melee-leaves-arc",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "dead-target",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "pierce-overlap",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "splash-radius",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "shield-and-layers",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "shield-only",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "layer-regrow-no-double-pay",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "pause-speed-save-reconnect",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  },
+  {
+    "name": "freeze-contact",
+    "status": "blocked",
+    "findings": [
+      "Error: Combat module pending"
+    ]
+  }
+]
