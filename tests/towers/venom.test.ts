@@ -1,9 +1,11 @@
 import {readFileSync, existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {describe, expect, it} from 'vitest';
-import type {AttackDef, EffectDef, ResolvedTower, StatDelta, StatusSpec, Tiers, TowerDef} from '../../src/contracts';
+import type {EnemyDef, GameConfig, GameState, TowerState, AttackDef, EffectDef, ResolvedTower, StatDelta, StatusSpec, Tiers, TowerDef} from '../../src/contracts';
 import {legalTiers, canUpgrade} from '../../src/contracts/rules';
 import {getTower} from '../../src/content/towers/venom';
+import {createCombat} from '../../src/combat';
+import {spawnEnemy} from '../../src/contracts/runtime';
 
 const directory = join(process.cwd(), 'public/art/towers/venom');
 const costs = [[325,650,1625,3900,9750], [345,685,1710,4095,10240], [310,620,1545,3705,9265]];
@@ -261,3 +263,72 @@ describe('venom: vector resource inventory', () => {
 });
 
 const artPrefix='/art/towers/venom/';
+
+
+// Explicit opt-in: the default independent suite runs even with the main combat stub.
+// Run on a temporary integration checkout containing the real combat module.
+describe.skipIf(process.env.PRISM_VENOM_COMBAT_QA !== '1')('venom: real combat integration', () => {
+ function scenario(tiers:Tiers, shield=0, radius=10){
+  const combat=createCombat();
+  const tower:TowerState={id:'t1',defId:'venom',owner:'player',pos:{x:0,y:0},
+   tiers,targeting:'first',invested:650,cooldown:0,abilityCooldowns:{},memory:{},
+   damageDealt:0,kills:0,generated:0};
+  const enemy:EnemyDef={id:'foe',name:'Foe',description:'Fixture',color:'#f44',shape:'orb',
+   hp:200,speed:30,bounty:10,leak:1,radius,armor:0,shield,regen:0,
+   cloaked:false,flying:false,resist:{},children:[],layers:[{hp:200,cash:10,color:'#f44'}]};
+  const config:GameConfig={version:1,towers:[getTower()],enemies:[enemy],waves:[],
+   maps:[{id:'map',name:'Map',description:'Fixture',difficulty:1,campaignIndex:1,
+    recommendedDifficulty:'normal',waveOverrides:{},lanes:[[{x:0,y:0},{x:1000,y:0}]],
+    pathWidth:10,blocked:[],water:[],theme:'garden',background:''}],
+   modes:[],campaign:[],contentVersion:'1',contentDigest:'fixture',knowledge:[],
+   economy:{xpCurve:[200,40,5],maxRewardLevel:51,pointsPerLevel:3,mapXP:[250,400,600,900],
+    mapSeals:[80,120,180,260],modeReward:{standard:1},firstClearXP:1.5,repeatXP:.65,
+    repeatSeals:.35,defeatXP:.35,respecCost:200},
+   difficulties:[],knowledgeDiscount:0,startCredits:0,startLives:150,sellRatio:.7};
+  const state:GameState={version:1,options:{mapId:'map',difficulty:'normal',seed:1,
+   endless:false,modeId:'standard',unlockedTowers:['venom'],players:[],runId:'venom-test',knowledge:[]},
+   phase:'wave',time:0,tick:0,rng:123,nextEntity:1,nextEvent:1,credits:0,lives:150,
+   wave:1,waveTime:0,spawnCursor:[],paused:false,speed:1,autoStart:false,towers:[tower],
+   enemies:[],events:[],projectiles:[],strikes:[],
+   rules:{incomeMul:1,startingCashMul:1,enemyHpMul:1,enemySpeedMul:1,towerCostMul:1,
+    sellAllowed:true,maxLives:150,allowAbilities:true,allowPassiveIncome:true,maxTowers:60,
+    maxTier:5,weather:'none',allowKnowledge:false,rounds:60,roundRewardBase:80,roundRewardStep:4,popCashMul:1},
+   stats:{spent:0,earned:0,kills:0,damage:0,leaks:0,abilities:0,cashSubunits:0}};
+  const spawn=(x:number,y=0)=>{const e=spawnEnemy(state,config,'foe',0,x);e.pos.y=y;return e;};
+  const step=(n:number)=>{for(let i=0;i<n;i++){state.time+=1/60;state.tick++;combat.step(state,config,1/60);}};
+  return {combat,state,config,tower,spawn,step};
+ }
+ it('agrees with the independent fixture over the full tier matrix',()=>{
+  const combat=createCombat(), def=getTower();
+  for(const tiers of allTiers){
+   if(!legalTiers(tiers)){expect(()=>combat.resolveTower(def,tiers)).toThrow();continue;}
+   expect(combat.resolveTower(def,tiers)).toEqual(resolveFixture(def,tiers));
+  }
+ });
+ it.each([
+  [[0,0,0],10,false],[[2,0,0],10,true],[[0,0,2],10,false],[[0,0,2],4,true],
+ ] as const)('contact %j (enemy radius %s) affects only the actual blast', (tiers,radius,nearHit)=>{
+  const f=scenario([...tiers] as Tiers,0,radius);
+  const a=f.spawn(80),b=f.spawn(80,5),far=f.spawn(80,55);
+  f.step(5);expect(a.hp).toBe(200);expect(b.hp).toBe(200);
+  f.step(25);expect(a.hp).toBeLessThan(200);
+  expect(b.hp<200).toBe(nearHit);expect(far.hp).toBe(200);
+  expect(f.state.events.some(e=>e.kind==='projectileImpact')).toBe(true);
+  expect(a.statuses.some(s=>s.kind==='poison'&&s.source===f.tower.id)).toBe(true);
+ });
+ it('C5 poison death damages nearby targets once and leaves distant targets alone',()=>{
+  const f=scenario([0,0,5]);f.tower.cooldown=99;
+  const a=f.spawn(80),b=f.spawn(120),far=f.spawn(260);
+  a.hp=1;a.statuses=[{kind:'poison',source:'t1',power:9,duration:9,remaining:9,stacks:1,maxStacks:7}];
+  f.step(15);expect(a.hp).toBe(0);expect(b.hp).toBe(80);expect(far.hp).toBe(200);
+  expect(f.state.stats.kills).toBe(1);f.step(60);expect(b.hp).toBe(80);
+ });
+ it('B5 shield multiplier is applied on contact, and nova cannot be spammed',()=>{
+  const f=scenario([0,5,0],200);const e=f.spawn(80);
+  f.step(30);expect(e.shield).toBeCloseTo(105.836528);expect(e.hp).toBe(200);
+  const n=scenario([0,5,0]);const target=n.spawn(80);
+  expect(n.combat.activate(n.state,n.config,'t1','venom-solvent-wave').ok).toBe(true);
+  expect(target.hp).toBe(120);
+  expect(n.combat.activate(n.state,n.config,'t1','venom-solvent-wave').ok).toBe(false);
+ });
+});

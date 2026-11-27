@@ -55,7 +55,7 @@ const tower: TowerDef = {
      {addStatuses: [status('poison', 7, 8, 6)]}),
     upgrade('a', 5, 'Сердце чёрного сада', '+2 капли, радиус +20, дальность ×1,18; яд 11 / 11 с / 8 слоёв. Чёрное цветение: 46 урона в радиусе 135, откат 45 с.',
      9750, {countAdd: 2, splashAdd: 20, rangeMul: 1.18},
-     '#1fdc79', 'garden-drop-volley', 'black-garden-bloom', {
+     '#1fdc79', 'five-bulb-volley', 'black-garden-bloom', {
       addStatuses: [status('poison', 11, 11, 8)],
       abilities: [{id: 'venom-flowering', name: 'Чёрное цветение', description: 'Разовая волна: 46 кислотного урона в радиусе 135.',
        cooldown: 45, kind: 'nova', power: 46, duration: 0, radius: 135, element: 'acid'}],
