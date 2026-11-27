@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Гравитационная линза — все модели</title>
+  <style>
+    :root{color-scheme:dark;--ink:#dcebf0;--muted:#9eb3c4;--surface:#142a3a;--line:#315168}
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(ellipse at 85% -20%,#223b5b,transparent 48%),#081925;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+    main{max-width:1440px;margin:auto;padding:38px clamp(16px,3vw,50px) 70px}
+    .eyebrow{color:#93dace;text-transform:uppercase;font-size:12px;letter-spacing:.25em;font-weight:700}
+    h1{font-size:clamp(30px,4vw,56px);letter-spacing:-.04em;margin:8px 0 12px}
+    h2{font-size:24px;margin:40px 0 13px;letter-spacing:-.02em}
+    p{max-width:900px;line-height:1.6;color:var(--muted);margin:0}
+    .section-note{margin:0 0 20px}
+    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(172px,1fr));gap:14px}
+    .card{border:1px solid var(--line);background:linear-gradient(150deg,#183349,#102735 78%);border-radius:17px;overflow:hidden;position:relative}
+    .card[data-path=a]{--accent:#ba98ff}.card[data-path=b]{--accent:#8dfff6}.card[data-path=c]{--accent:#ffd096}
+    .art{height:180px;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 52%,#27475c,#102435 73%)}
+    .art::before{content:"";position:absolute;inset:0;background:linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(circle,#0009,transparent 75%)}
+    .art::after{content:"";position:absolute;width:90px;height:18px;bottom:13px;border-radius:50%;background:#020b17a9;filter:blur(10px)}
+    .art img{width:160px;height:160px;object-fit:contain;position:relative;z-index:1;image-rendering:auto;filter:drop-shadow(0 8px 10px #020d16aa)}
+    .art img.overlay{position:absolute;inset:10px;margin:auto;z-index:2;pointer-events:none}
+    .card:hover .art img:not(.overlay){transform:scale(1.11) rotate(-2deg);transition:transform .25s ease}
+    .card footer{padding:12px 14px 15px;border-top:1px solid #ffffff10}
+    .tier{display:block;color:var(--accent,#93dace);font-size:11px;letter-spacing:.15em;font-weight:800;margin-bottom:6px;text-transform:uppercase}
+    .name{font-size:14px;font-weight:700}
+    .base{max-width:230px;margin-top:18px}
+    .cross{grid-template-columns:repeat(auto-fit,minmax(235px,1fr))}
+    .cross .art{height:210px}.cross .art img{width:186px;height:186px}
+    .cross .art img.overlay{inset:12px}
+    .small{font-size:12px;opacity:.85}
+    .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .legend span{border:1px solid var(--line);border-radius:20px;padding:6px 12px;font-size:12px}
+    @media(prefers-reduced-motion:reduce){.card:hover .art img:not(.overlay){transform:none;transition:none}}
+  </style>
+</head>
+<body><main>
+  <div class="eyebrow">Prism Bastion · 19 / 30</div>
+  <h1>Гравитационная линза</h1>
+  <p>Векторная галерея всех 16 полноразмерных моделей и 6 финальных кросс-путей. Каждый SVG имеет прозрачный холст 128 × 128 пикселей; при смешанном развитии поверх основного вида накладывается небольшой узнаваемый элемент вторичной ветки.</p>
+  <div class="card base" data-path="base"><div class="art"><img src="base.svg" alt="Базовая медная гравитационная линза"></div><footer><span class="tier">Базовая постройка</span><span class="name">Открытая линза · 1200 кр.</span></footer></div>
+  <h2>А. Чёрная звезда</h2>
+  <p class="section-note">Вязкая орбита → искривление траектории → кольцо провала → горизонт событий → нулевая звезда.</p>
+  <div class="gallery">
+    <div class="card" data-path="a"><div class="art"><img src="a1.svg" alt="Вязкая орбита"></div><footer><span class="tier">А · I</span><span class="name">Вязкая орбита</span></footer></div>
+    <div class="card" data-path="a"><div class="art"><img src="a2.svg" alt="Искривление траектории"></div><footer><span class="tier">А · II</span><span class="name">Искривление траектории</span></footer></div>
+    <div class="card" data-path="a"><div class="art"><img src="a3.svg" alt="Сердце провала"></div><footer><span class="tier">А · III</span><span class="name">Сердце провала</span></footer></div>
+    <div class="card" data-path="a"><div class="art"><img src="a4.svg" alt="Горизонт событий"></div><footer><span class="tier">А · IV</span><span class="name">Горизонт событий</span></footer></div>
+    <div class="card" data-path="a"><div class="art"><img src="a5.svg" alt="Нулевая звезда"></div><footer><span class="tier">А · V</span><span class="name">Нулевая звезда</span></footer></div>
+  </div>
+  <h2>В. Отражатель</h2>
+  <p class="section-note">Отдача поля → зеркальный резонанс → толчковая диафрагма → зеркало давления → великий отражатель.</p>
+  <div class="gallery">
+    <div class="card" data-path="b"><div class="art"><img src="b1.svg" alt="Отдача поля"></div><footer><span class="tier">В · I</span><span class="name">Отдача поля</span></footer></div>
+    <div class="card" data-path="b"><div class="art"><img src="b2.svg" alt="Зеркальный резонанс"></div><footer><span class="tier">В · II</span><span class="name">Зеркальный резонанс</span></footer></div>
+    <div class="card" data-path="b"><div class="art"><img src="b3.svg" alt="Толчковая диафрагма"></div><footer><span class="tier">В · III</span><span class="name">Толчковая диафрагма</span></footer></div>
+    <div class="card" data-path="b"><div class="art"><img src="b4.svg" alt="Зеркало давления"></div><footer><span class="tier">В · IV</span><span class="name">Зеркало давления</span></footer></div>
+    <div class="card" data-path="b"><div class="art"><img src="b5.svg" alt="Великий отражатель"></div><footer><span class="tier">В · V</span><span class="name">Великий отражатель</span></footer></div>
+  </div>
+  <h2>С. Прилив массы</h2>
+  <p class="section-note">Тяжёлый изотоп → приливное разрушение → лунный молот → сжатие ядра → луна предела Роша.</p>
+  <div class="gallery">
+    <div class="card" data-path="c"><div class="art"><img src="c1.svg" alt="Тяжёлый изотоп"></div><footer><span class="tier">С · I</span><span class="name">Тяжёлый изотоп</span></footer></div>
+    <div class="card" data-path="c"><div class="art"><img src="c2.svg" alt="Приливное разрушение"></div><footer><span class="tier">С · II</span><span class="name">Приливное разрушение</span></footer></div>
+    <div class="card" data-path="c"><div class="art"><img src="c3.svg" alt="Лунный молот"></div><footer><span class="tier">С · III</span><span class="name">Лунный молот</span></footer></div>
+    <div class="card" data-path="c"><div class="art"><img src="c4.svg" alt="Сжатие ядра"></div><footer><span class="tier">С · IV</span><span class="name">Сжатие ядра</span></footer></div>
+    <div class="card" data-path="c"><div class="art"><img src="c5.svg" alt="Луна предела Роша"></div><footer><span class="tier">С · V</span><span class="name">Луна предела Роша</span></footer></div>
+  </div>
+  <h2>Шесть финальных кросс-путей</h2>
+  <p class="section-note">Основной путь имеет пятый тир. Вторичная ветка имеет второй тир; её отличительные накладки не перекрывают центральный объект.</p>
+  <div class="gallery cross">
+    <div class="card" data-path="a"><div class="art"><img src="a5.svg" alt="5A + 2B"><img class="overlay" src="b2-overlay.svg" alt=""></div><footer><span class="tier">5–2–0</span><span class="name">Чёрная звезда + Отражатель</span></footer></div>
+    <div class="card" data-path="a"><div class="art"><img src="a5.svg" alt="5A + 2C"><img class="overlay" src="c2-overlay.svg" alt=""></div><footer><span class="tier">5–0–2</span><span class="name">Чёрная звезда + Прилив массы</span></footer></div>
+    <div class="card" data-path="b"><div class="art"><img src="b5.svg" alt="2A + 5B"><img class="overlay" src="a2-overlay.svg" alt=""></div><footer><span class="tier">2–5–0</span><span class="name">Отражатель + Чёрная звезда</span></footer></div>
+    <div class="card" data-path="b"><div class="art"><img src="b5.svg" alt="5B + 2C"><img class="overlay" src="c2-overlay.svg" alt=""></div><footer><span class="tier">0–5–2</span><span class="name">Отражатель + Прилив массы</span></footer></div>
+    <div class="card" data-path="c"><div class="art"><img src="c5.svg" alt="2A + 5C"><img class="overlay" src="a2-overlay.svg" alt=""></div><footer><span class="tier">2–0–5</span><span class="name">Прилив массы + Чёрная звезда</span></footer></div>
+    <div class="card" data-path="c"><div class="art"><img src="c5.svg" alt="2B + 5C"><img class="overlay" src="b2-overlay.svg" alt=""></div><footer><span class="tier">0–2–5</span><span class="name">Прилив массы + Отражатель</span></footer></div>
+  </div>
+  <div class="legend"><span>А · фиолетовая сингулярность</span><span>В · бирюзовое зеркало</span><span>С · янтарная луна</span></div>
+  <p class="small" style="margin-top:27px">Модели масштабируются векторно. Физический footprint остаётся 26 пикселей независимо от художественного размера.</p>
+</main></body>
+</html>
