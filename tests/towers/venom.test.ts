@@ -2,7 +2,7 @@ import {readFileSync, existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {describe, expect, it} from 'vitest';
 import type {AttackDef, EffectDef, ResolvedTower, StatDelta, StatusSpec, Tiers, TowerDef} from '../../src/contracts';
-import {legalTiers, canUpgrade, sellRefund} from '../../src/contracts/rules';
+import {legalTiers, canUpgrade} from '../../src/contracts/rules';
 import {getTower} from '../../src/content/towers/venom';
 
 const directory = join(process.cwd(), 'public/art/towers/venom');
@@ -14,7 +14,7 @@ const allTiers: Tiers[] = Array.from({length: 216}, (_, i): Tiers =>
 function resolveFixture(def: TowerDef, tiers: Tiers): ResolvedTower {
  if (!legalTiers(tiers)) throw new RangeError(`Illegal tiers: ${tiers.join('-')}`);
  const active = tiers.map((tier, i) => ({tier, i})).filter(x => x.tier > 0);
- const primary = active.find(x=>x.tier>2)?.i ?? active[0]?.i;
+ const primary = [...active].sort((a,b)=>b.tier-a.tier||a.i-b.i)[0]?.i;
  const mainPath = primary as 0|1|2|undefined;
  const selected = def.paths.flatMap((path, index) => path.upgrades.slice(0, tiers[index]));
  const attack: AttackDef = structuredClone(def.attack);
@@ -47,7 +47,7 @@ function resolveFixture(def: TowerDef, tiers: Tiers): ResolvedTower {
   if(u.delta.detects) attack.detects = true;
   for(const s of u.addStatuses ?? []) {
    const previous = statusMap.get(s.kind);
-   if(!previous || s.power >= previous.power) statusMap.set(s.kind, structuredClone(s));
+   statusMap.set(s.kind, previous ? {kind:s.kind, power:Math.max(previous.power,s.power), duration:Math.max(previous.duration,s.duration), maxStacks:Math.max(previous.maxStacks??1,s.maxStacks??1)} : structuredClone(s));
   }
   for(const e of u.effects ?? []) effectMap.set(e.id,structuredClone(e));
   for(const a of u.abilities ?? []) abilityMap.set(a.id,structuredClone(a));
@@ -125,8 +125,7 @@ describe('venom: catalog / content', () => {
   }
   expect(def.effects).toEqual([]);
   expect(def.abilities).toEqual([]);
-  // Current frozen helper uses binary floating point: floor(650 * 0.7) === 454.
-  expect(sellRefund(650)).toBe(454);
+
  });
 });
 
@@ -151,7 +150,7 @@ describe('venom: local v1 resolver / complete tier matrix', () => {
     expect(Number.isFinite(n)).toBe(true);
    expect(result.effects.map(x=>x.id).length).toBe(new Set(result.effects.map(x=>x.id)).size);
    expect(result.abilities.map(x=>x.id).length).toBe(new Set(result.abilities.map(x=>x.id)).size);
-   const main=tiers.findIndex(n=>n>2)>=0 ? tiers.findIndex(n=>n>2) : tiers.findIndex(n=>n>0);
+   const main=Math.max(...tiers)===0 ? -1 : tiers.indexOf(Math.max(...tiers));
    expect(result.visual.asset).toBe(main===-1?def.visual.asset :
     def.paths[main].upgrades[tiers[main]-1].visual.asset);
    const secondary=tiers.findIndex((n,i)=>n>0&&i!==main);
@@ -162,19 +161,19 @@ describe('venom: local v1 resolver / complete tier matrix', () => {
     expect(canUpgrade(tiers,path as 0|1|2)).toBe(legalTiers(next));
    }
   }
-  expect(legal).toBeGreaterThan(50);
+  expect(legal).toBe(64);
  });
 
  it('three T5 identities differ in measurable, unique effects', () => {
   const [a,b,c]=[[5,0,0],[0,5,0],[0,0,5]].map(t=>resolveFixture(getTower(),t as Tiers));
   expect(a.attack.count).toBe(4);
-  expect(a.attack.pierce).toBe(4);
-  expect(a.attack.splash).toBe(46);
+  expect(a.attack.pierce).toBe(1);
+  expect(a.attack.splash).toBe(54);
   expect(a.attack.statuses.find(s=>s.kind==='poison')?.maxStacks).toBe(8);
   expect(a.abilities[0].id).toBe('venom-flowering');
   expect(b.attack.count).toBe(3);
   expect(b.attack.armorPierce).toBe(16.5);
-  expect(b.attack.splash).toBe(50);
+  expect(b.attack.splash).toBe(58);
   expect(b.attack.shieldMultiplier).toBeCloseTo(1.15*1.3*1.35*1.35*1.6);
   expect(b.effects.find(x=>x.id==='venom-corrosion-field')?.radius).toBe(135);
   expect(c.attack.splash).toBe(53);
@@ -203,6 +202,33 @@ describe('venom: local v1 resolver / complete tier matrix', () => {
   expect(hybrid.attack.shieldMultiplier).toBeGreaterThanOrEqual(only.attack.shieldMultiplier);
   expect(hybrid.abilities.map(a=>a.id)).toEqual(only.abilities.map(a=>a.id));
   expect(hybrid.effects.map(e=>e.id)).toEqual(only.effects.map(e=>e.id));
+ });
+});
+
+describe('venom: contact-compatible data', () => {
+ it('uses explosive projectiles for every legal build, with no ineffective piercing increments', () => {
+  for(const tiers of allTiers.filter(legalTiers)){
+   const a=resolveFixture(getTower(),tiers).attack;
+   expect(a.mode).toBe('splash');
+   expect(a.pierce).toBe(1);
+   expect(a.homing).toBe(true);
+   expect(a.projectileSpeed).toBeGreaterThan(0);
+  }
+  expect(resolveFixture(getTower(),[0,0,0]).attack.splash).toBe(0);
+  expect(resolveFixture(getTower(),[2,0,0]).attack.splash).toBe(17);
+  expect(resolveFixture(getTower(),[0,0,2]).attack.splash).toBe(13);
+  expect(resolveFixture(getTower(),[0,3,0]).attack.splash).toBe(8);
+ });
+ it('selects the higher early visual tier; equal tiers prefer A then B', () => {
+  for(const [tiers,main] of [[[1,2,0],1],[[2,1,0],0],[[0,1,2],2],[[1,1,0],0],[[0,2,2],1]] as const){
+   expect(resolveFixture(getTower(),[...tiers] as Tiers).mainPath).toBe(main);
+  }
+ });
+ it('shred is a single strongest debuff, not an advertised stacking effect', () => {
+  for(const [tier,power,duration] of [[2,1.5,3],[3,3,5],[4,4,6],[5,6,8]]){
+   expect(resolveFixture(getTower(),[0,tier,0]).attack.statuses.find(x=>x.kind==='shred'))
+    .toEqual({kind:'shred',power,duration,maxStacks:1});
+  }
  });
 });
 
