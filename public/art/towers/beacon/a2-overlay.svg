@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Signal beacon illustration">
+<defs>
+ <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffdd9d"/><stop offset=".28" stop-color="#d29357"/><stop offset=".68" stop-color="#855040"/><stop offset="1" stop-color="#382f41"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe3a2" stop-opacity=".98"/><stop offset=".45" stop-color="#f5ad47"/><stop offset="1" stop-color="#a5542d"/></linearGradient>
+ <radialGradient id="core"><stop stop-color="#fffef2"/><stop offset=".26" stop-color="#ffe3a2"/><stop offset=".66" stop-color="#f5ad47" stop-opacity=".88"/><stop offset="1" stop-color="#f5ad47" stop-opacity=".04"/></radialGradient>
+ <linearGradient id="plinth" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#597989"/><stop offset=".5" stop-color="#365260"/><stop offset="1" stop-color="#233b4b"/></linearGradient>
+ <filter id="glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs><path d="M48 32L26 19L30 40L46 49Z" fill="url(#bronze)" stroke="#563537" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M80 32L102 19L98 40L82 49Z" fill="url(#bronze)" stroke="#563537" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M60 15L64 6L68 15Z" fill="url(#glass)" stroke="#563537" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
