@@ -149,6 +149,7 @@ function oneHit(s:GameState,c:GameConfig,id:string,p:DamagePacket,queue:Hit[]):v
 
 /** The sole HP/shield/layer accounting entry point, including DoT and ability damage. */
 export function damageEnemy(s:GameState,c:GameConfig,id:string,packet:DamagePacket):void {
+  if(s.phase!=='wave'||s.paused)return;
   const queue:Hit[]=[{id,packet}];
   // Death explosions are queued, never recursive. A dying enemy can queue a burst once only.
   for(let i=0;i<queue.length && i<MAX_ENEMIES*16;i++)oneHit(s,c,queue[i].id,queue[i].packet,queue);

@@ -18,7 +18,7 @@ The source `TowerDef` is always cloned. The highest T3+ replacement on the main 
 | Mode | Simulation contact |
 | --- | --- |
 | `shot` | Simulated projectile, swept collision along each tick's segment; `pierce` unique victims |
-| `cone` | Multiple independent pellets distributed in a frontal 0.7 radian sector |
+| `cone` | Multiple independent pellets distributed across the configured arc (40 degrees if unspecified) |
 | `beam` | Straight geometric ray, exact segment radius, limited unique pierce victims |
 | `chain` | First aimed enemy followed by up to `chains` new unique nearest victims within `chainRadius` |
 | `splash` | Moving shell, one impact and one radial damage application per victim |
@@ -71,4 +71,4 @@ At the frozen base commit all actual thirty tower content exports and the engine
 
 ## Run configuration and contact invariants
 
-Knowledge is already applied by progression to the immutable run config. Combat consumes those resolved values and adds only in-run auras/overclock; it never reads selected knowledge IDs as additional multipliers. Beam and chain contact immediately; melee uses a single fixed-tick contact window after its saved windup. Mortar preserves the original ground aim, homing turns at most 360 degrees/s, and projectiles report the first geometric intersection along the swept segment. A missed direct projectile emits `miss`, not a fake impact. Echo schedules at most one copy per firing, choosing the strongest eligible effect.
+Knowledge is already applied by progression to the immutable run config. Combat consumes those resolved values and adds only in-run auras/overclock; it never reads selected knowledge IDs as additional multipliers. Beam and chain resolve instantaneously on their contact tick after any configured windup; melee uses a single fixed-tick contact window with its original facing. Projectile modes wait for the saved windup before launch, and may retarget if their original victim has moved; newly launched projectiles do not advance until the next tick. Mortar preserves the original ground aim, homing turns at most 360 degrees/s, and projectiles report the first geometric intersection along the swept segment. A missed direct projectile emits `miss`, not a fake impact. Echo schedules at most one copy per firing, choosing the strongest eligible effect.

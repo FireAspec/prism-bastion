@@ -1,5 +1,5 @@
 import type {AbilityDef,AttackDef,DamagePacket,EffectDef,EnemyState,GameConfig,GameState,ProjectileState,ResolvedTower,StatusSpec,TowerState,Vec} from '../contracts';
-import {distance,distanceToSegment} from '../contracts/geometry';
+import {distance} from '../contracts/geometry';
 import {credit,emit} from '../contracts/runtime';
 import {damageEnemy} from './damage';
 import {resolveTower} from './resolve';
@@ -120,11 +120,11 @@ function rewindEnemy(s:GameState,c:GameConfig,e:EnemyState,amount:number,source:
   emit(s,{kind:'hit',source,target:e.id,pos:{...e.pos},amount:0});
 }
 
-function area(s:GameState,c:GameConfig,center:Vec,radius:number,a:AttackDef,source:string,cap=Infinity):void {
+function area(s:GameState,c:GameConfig,center:Vec,radius:number,a:AttackDef,source:string,cap=Infinity,directId?:string):void {
   let hits=0;
   for(const e of [...s.enemies].sort((x,y)=>distance(center,x.pos)-distance(center,y.pos)||x.id.localeCompare(y.id))){
     if(hits>=cap)break;
-    if(canSee(s,c,e,a)&&!(a.mode==='mine'&&c.enemies.find(d=>d.id===e.defId)?.flying)&&distance(center,e.pos)<=radius+EPS){strikeEnemy(s,c,e,a,source);hits++;}
+    if(canSee(s,c,e,a)&&!(a.mode==='mine'&&c.enemies.find(d=>d.id===e.defId)?.flying)&&(e.id===directId||distance(center,e.pos)<=radius+EPS)){strikeEnemy(s,c,e,a,source);hits++;}
   }
 }
 
@@ -154,10 +154,10 @@ function contactFraction(from:Vec,to:Vec,center:Vec,radius:number):number {
 
 function lineHit(s:GameState,c:GameConfig,origin:Vec,dir:Vec,a:AttackDef,source:string,width=12):void {
   const end=add(origin,scale(normalize(dir),a.range));
-  const matches=s.enemies.filter(e=>canSee(s,c,e,a)&&distanceToSegment(e.pos,origin,end)<=width+(c.enemies.find(d=>d.id===e.defId)?.radius??0))
-    .filter(e=>{const v=sub(e.pos,origin);return v.x*dir.x+v.y*dir.y>=0 && distance(e.pos,origin)<=a.range+width;})
-    .sort((x,y)=>distance(origin,x.pos)-distance(origin,y.pos)||x.id.localeCompare(y.id));
-  for(const e of matches.slice(0,Math.max(1,Math.ceil(a.pierce))))strikeEnemy(s,c,e,a,source);
+  const matches=s.enemies.filter(e=>canSee(s,c,e,a))
+    .map(e=>({e,fraction:contactFraction(origin,end,e.pos,width+(c.enemies.find(d=>d.id===e.defId)?.radius??0))}))
+    .filter(x=>Number.isFinite(x.fraction)).sort((x,y)=>x.fraction-y.fraction||x.e.id.localeCompare(y.e.id));
+  for(const {e} of matches.slice(0,Math.max(1,Math.ceil(a.pierce))))strikeEnemy(s,c,e,a,source);
 }
 
 function contact(s:GameState,c:GameConfig,pos:Vec,dir:Vec,a:AttackDef,source:string):void {
@@ -177,10 +177,11 @@ function contact(s:GameState,c:GameConfig,pos:Vec,dir:Vec,a:AttackDef,source:str
       area(s,c,pos,a.range,a,source);break;
     case 'cone':{
       const pellets=Math.max(1,Math.ceil(a.count));
-      for(let i=0;i<pellets;i++)lineHit(s,c,pos,rotate(dir,(i-(pellets-1)/2)*(.7/Math.max(1,pellets-1))),a,source,12);
+      const arc=minMax(a.arc||40,0,360)*Math.PI/180;
+      for(let i=0;i<pellets;i++)lineHit(s,c,pos,rotate(dir,(i-(pellets-1)/2)*(arc/Math.max(1,pellets-1))),a,source,Math.max(0,a.projectileRadius));
       break;
     }
-    case 'beam':lineHit(s,c,pos,dir,a,source,8);break;
+    case 'beam':lineHit(s,c,pos,dir,a,source,Math.max(0,a.projectileRadius));break;
     case 'chain':{
       const first=s.enemies.filter(e=>canSee(s,c,e,a)&&distance(e.pos,pos)<=a.range)
         .sort((x,y)=>distance(x.pos,pos)-distance(y.pos,pos)||x.id.localeCompare(y.id))[0];
@@ -210,9 +211,15 @@ function launch(s:GameState,source:string,pos:Vec,aim:Vec,a:AttackDef,visual:str
   emit(s,{kind:'projectileSpawn',source,target:target??undefined,pos:{...pos},to:{...aim},element:a.element,visual});
 }
 
+const launchAfterWindup=(a:AttackDef)=>a.mode==='shot'||a.mode==='splash'||a.mode==='mortar'||a.mode==='drone'||a.mode==='beam'||a.mode==='chain';
+
 function fire(s:GameState,c:GameConfig,t:TowerState,a:AttackDef,e:EnemyState,visual:string):void {
+  if(a.windup>EPS&&launchAfterWindup(a)){
+    addStrike(s,t.id,t.pos,normalize(sub(e.pos,t.pos)),a,visual);
+    return;
+  }
   emit(s,{kind:'shot',source:t.id,target:e.id,pos:{...t.pos},to:{...e.pos},element:a.element,visual});
-  const count=Math.min(32,Math.max(1,Math.ceil(a.count)));
+  const count=Math.max(1,Math.ceil(a.count));
   if(a.mode==='cone'||a.mode==='beam'||a.mode==='ring'||a.mode==='pulse'||a.mode==='tide'||a.mode==='melee'||a.mode==='mine'||a.mode==='chain'){
     const choices=orderTarget(candidates(s,c,t.pos,a),t);
     const pulses=a.mode==='cone'?1:count;
@@ -234,7 +241,8 @@ function fire(s:GameState,c:GameConfig,t:TowerState,a:AttackDef,e:EnemyState,vis
   const choices=orderTarget(candidates(s,c,t.pos,a),t);
   for(let i=0;i<count;i++){
     const selected=choices[i%choices.length]??e;
-    const angle=(i-(count-1)/2)*(.12/Math.max(1,count-1));
+    const spread=a.mode==='shot'&&a.arc>0?minMax(a.arc,0,360)*Math.PI/180:.12;
+    const angle=(i-(count-1)/2)*(spread/Math.max(1,count-1));
     const origin=a.mode==='drone'?add(t.pos,{x:Math.cos(i*Math.PI*2/count)*20,y:Math.sin(i*Math.PI*2/count)*20}):t.pos;
     const destination=add(origin,scale(rotate(normalize(sub(selected.pos,origin)),angle),distance(origin,selected.pos)));
     launch(s,t.id,origin,destination,a,visual,selected.id);
@@ -321,23 +329,32 @@ export function stepTowers(s:GameState,c:GameConfig,dt:number):void {
         repeated.mode='chain';repeated.chains=Math.max(0,Math.floor(e.cap)-1);
         repeated.chainRadius=e.radius;
         repeated.range=e.radius;
-        addStrike(s,t.id,target.pos,normalize(sub(target.pos,t.pos)),repeated,`echo:${e.id}`,Math.max(.05,e.interval));
+        repeated.windup=0;
+        addStrike(s,t.id,target.pos,normalize(sub(target.pos,t.pos)),repeated,`echo:${e.id}`,Math.max(.05,e.interval)+a.windup);
       }
     }
   }
 }
 
 export function stepOrdnance(s:GameState,c:GameConfig,dt:number):void {
+  const flyingAtStart=[...s.projectiles];
   for(const st of [...s.strikes]){
     st.remainingWindup-=dt;
     if(st.remainingWindup>EPS)continue;
     // One fixed-tick contact window: the saved strike is consumed exactly once.
     st.remainingActive=dt;
-    contact(s,c,st.pos,st.direction,st.attack,st.source);
+    if(st.attack.windup>EPS&&launchAfterWindup(st.attack)){
+      const tower=s.towers.find(t=>t.id===st.source);
+      if(tower){
+        const target=orderTarget(candidates(s,c,tower.pos,st.attack),tower)[0];
+        if(target)fire(s,c,tower,{...st.attack,windup:0},target,st.visual);
+        else emit(s,{kind:'miss',source:st.source,pos:{...st.pos},visual:st.visual});
+      }
+    }else contact(s,c,st.pos,st.direction,st.attack,st.source);
     st.remainingActive=0;
     s.strikes=s.strikes.filter(x=>x.id!==st.id);
   }
-  for(const p of [...s.projectiles]){
+  for(const p of flyingAtStart){
     p.previous={...p.pos};
     const enemy=s.enemies.find(e=>e.id===p.target);
     if(p.attack.mode!=='mortar'&&p.attack.homing&&enemy&&living(enemy)){
@@ -363,7 +380,9 @@ export function stepOrdnance(s:GameState,c:GameConfig,dt:number):void {
         emit(s,{kind:'projectileImpact',source:p.source,pos:impact,target:e.id,visual:p.visual,element:p.attack.element});
         contactEmitted=true;
         if(p.attack.mode==='splash'){
-          area(s,c,impact,Math.max(1,p.attack.splash),p.attack,p.source);
+          const radius=Math.max(1,p.attack.splash);
+          // A shell directly colliding with a body always damages it, even for a tiny blast.
+          area(s,c,impact,radius,p.attack,p.source,Infinity,e.id);
           hitNow=true;p.pos=impact;
           expired=true;break;
         }

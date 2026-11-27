@@ -390,3 +390,38 @@ describe('contact and integration regressions',()=>{
     state.towers.push(placed('g'));const e=spawn();step(state,config);expect(e.hp).toBe(60);
   });
 });
+
+
+describe('content parameters and saved windup',()=>{
+  it('launches a shell only after its windup and does not move it in the launch tick',()=>{
+    const d=tower('g','shot',[],[],attack('shot',{damage:40,windup:.1,interval:10,projectileSpeed:6000}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('g'));const e=spawn();
+    step(state,config);expect(state.strikes).toHaveLength(1);expect(state.projectiles).toHaveLength(0);
+    const saved=structuredClone(state);
+    step(state,config,6);expect(state.projectiles).toHaveLength(1);expect(state.projectiles[0].pos.x).toBe(0);expect(e.hp).toBe(100);
+    step(state,config);expect(e.hp).toBe(60);
+    step(saved,config,7);expect(saved.enemies[0].hp).toBe(60);expect(saved.events).toEqual(state.events);
+  });
+  it('uses the declared cone arc rather than a fixed spread',()=>{
+    const d=tower('g','cone',[],[],attack('cone',{damage:20,arc:120,count:3,projectileRadius:1,range:150,interval:10}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('g'));
+    const front=spawn('foe',100), side=spawn('foe',80);side.pos={x:50,y:Math.sqrt(7500)};
+    step(state,config);expect(front.hp).toBe(80);expect(side.hp).toBe(80);
+  });
+  it('a tiny splash still damages the body directly contacted',()=>{
+    const d=tower('g','splash',[],[],attack('splash',{damage:40,splash:1,projectileRadius:8,projectileSpeed:6000,interval:10,push:18}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('g'));const e=spawn();
+    step(state,config,8);expect(e.hp).toBe(60);
+  });
+  it('beam pierce orders bodies by first contact rather than centre distance',()=>{
+    const d=tower('g','beam',[],[],attack('beam',{damage:40,pierce:1,projectileRadius:0,interval:10}));
+    const {config,state,spawn}=fixture([d],[enemy('small',{radius:5}),enemy('large',{radius:35})]);state.towers.push(placed('g'));
+    const small=spawn('small',60),large=spawn('large',80);
+    step(state,config);expect(small.hp).toBe(100);expect(large.hp).toBe(60);
+  });
+  it('direct damage does not mutate a paused or defeated run',()=>{
+    const {config,state,spawn}=fixture();const e=spawn();state.paused=true;
+    damageEnemy(state,config,e.id,packet('x',100));expect(e.hp).toBe(100);
+    state.paused=false;state.phase='defeat';damageEnemy(state,config,e.id,packet('x',100));expect(e.hp).toBe(100);expect(state.credits).toBe(0);
+  });
+});

@@ -18,7 +18,7 @@ function combineStatuses(current:StatusSpec[], incoming:StatusSpec[]):StatusSpec
 
 function deltaAttack(a:AttackDef,d:StatDelta):void {
   a.damage*=d.damageMul??1;
-  a.interval=Math.max(.05,a.interval*(d.intervalMul??1));
+  a.interval*=d.intervalMul??1;
   a.range*=d.rangeMul??1;
   a.pierce=Math.max(1,a.pierce+(d.pierceAdd??0));
   a.count=Math.max(1,a.count+(d.countAdd??0));
@@ -61,6 +61,7 @@ export function resolveTower(def:TowerDef,tiers:Tiers):ResolvedTower {
       for(const ability of upgrade.abilities??[])abilities.set(ability.id,copy(ability));
     }
   }
+  attack.interval=Math.max(.05,attack.interval);
   const visual=primary===undefined?copy(def.visual):copy(def.paths[primary].upgrades[tiers[primary]-1].visual);
   const secondary=selected.find(p=>p!==primary);
   return {attack,effects:[...effects.values()],abilities:[...abilities.values()],visual,
