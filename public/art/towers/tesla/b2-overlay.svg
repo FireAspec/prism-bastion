@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Tesla tower illustration">
+<defs>
+<linearGradient id="bronze" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#fff0bb"/><stop offset=".27" stop-color="#c77a4d"/><stop offset=".64" stop-color="#83544d"/><stop offset="1" stop-color="#412e43"/></linearGradient>
+<linearGradient id="brass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff6c7"/><stop offset=".36" stop-color="#f0ae65"/><stop offset="1" stop-color="#8d503e"/></linearGradient>
+<linearGradient id="stone" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#679e9a"/><stop offset=".45" stop-color="#2d6674"/><stop offset="1" stop-color="#173446"/></linearGradient>
+<linearGradient id="core" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1c5260"/><stop offset=".45" stop-color="#a5c1b1"/><stop offset="1" stop-color="#244755"/></linearGradient>
+<radialGradient id="glass"><stop stop-color="#ffffff"/><stop offset=".33" stop-color="#b6faff"/><stop offset=".72" stop-color="#55c8d5"/><stop offset="1" stop-color="#27899f"/></radialGradient>
+<radialGradient id="halo"><stop stop-color="#e5ffff" stop-opacity=".72"/><stop offset="1" stop-color="#3cdbff" stop-opacity="0"/></radialGradient>
+<filter id="soft" x="-35%" y="-35%" width="170%" height="170%"><feGaussianBlur stdDeviation=".65"/></filter>
+</defs>
+<polygon points="33,98 29,83 33,68 38,83 37,98" fill="url(#bronze)" stroke="#164456" stroke-width="2" stroke-linejoin="round"/><polygon points="91,98 90,83 95,68 99,83 95,98" fill="url(#bronze)" stroke="#164456" stroke-width="2" stroke-linejoin="round"/><path d="M29 76 Q64 55 99 76" stroke="#e5fdff" fill="none" stroke-width="2.4" filter="url(#soft)"/><g transform="translate(33 67) rotate(0)" filter="url(#soft)"><path d="M0 -5 L1.1 -0.8999999999999999 L3.9000000000000004 0 L0.8999999999999999 0.7000000000000001 L0 5 L-0.8999999999999999 0.65 L-3.9000000000000004 0 L-0.75 -0.8 Z" fill="#f7ffff"/></g><g transform="translate(95 67) rotate(0)" filter="url(#soft)"><path d="M0 -5 L1.1 -0.8999999999999999 L3.9000000000000004 0 L0.8999999999999999 0.7000000000000001 L0 5 L-0.8999999999999999 0.65 L-3.9000000000000004 0 L-0.75 -0.8 Z" fill="#f7ffff"/></g>
+</svg>
