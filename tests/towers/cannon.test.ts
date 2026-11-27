@@ -163,6 +163,35 @@ describe('Cannon tower catalog', () => {
     ]);
   });
 
+  it('makes the first grapeshot cross-upgrade useful even when splash ignores direct pierce', () => {
+    const tower = getTower();
+    for (const main of [[3,0,0],[0,0,3],[5,0,0],[0,0,5]] as Tiers[]) {
+      const first: Tiers = [...main];
+      const second: Tiers = [...main];
+      first[1] = 1;
+      second[1] = 2;
+      const initial = fixtureResolve(tower,main).attack;
+      const b1 = fixtureResolve(tower,first).attack;
+      const b2 = fixtureResolve(tower,second).attack;
+      expect(b1.mode).toBe('splash');
+      expect(b1.range).toBeCloseTo(initial.range * 1.06);
+      expect(b1.projectileSpeed).toBeCloseTo(initial.projectileSpeed * 1.12);
+      expect(b1.interval).toBe(initial.interval);
+      expect(b2.range).toBe(b1.range);
+      expect(b2.interval).toBeCloseTo(initial.interval * 0.82);
+      expect(b2.statuses).toEqual(initial.statuses);
+    }
+  });
+
+  it('keeps cumulative grapeshot count, pierce and authored arc through replacements', () => {
+    const tower = getTower();
+    const attacks = [3,4,5].map(tier => fixtureResolve(tower,[0,tier,0]).attack);
+    expect(attacks.map(a=>a.count)).toEqual([3,5,7]);
+    expect(attacks.map(a=>a.pierce)).toEqual([3,3,4]);
+    expect(attacks.map(a=>a.arc)).toEqual([38,50,68]);
+    expect(attacks.map(a=>a.mode)).toEqual(['cone','cone','cone']);
+  });
+
   it('uses semantic attack mode changes at T3 and stronger T5 effects beyond plain damage', () => {
     const tower = getTower();
     const before = [fixtureResolve(tower,[2,0,0]).attack, fixtureResolve(tower,[0,2,0]).attack, fixtureResolve(tower,[0,0,2]).attack];
