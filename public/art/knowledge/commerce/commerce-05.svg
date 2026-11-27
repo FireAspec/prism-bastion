@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 72 72" role="img" aria-label="Первый резерв">
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#22454a"/><stop offset="1" stop-color="#10272e"/></linearGradient></defs>
+  <path d="M36 2 66 16v40L36 70 6 56V16z" fill="url(#bg)" stroke="#936f43" stroke-width="2"/>
+  <path d="M36 6 62 19v34L36 66 10 53V19z" fill="none" stroke="#dfb777" stroke-opacity=".35"/>
+  <path d="M17 28h38v28H17z M17 37h38 M32 37v10h8V37 M22 28v-7h28v7" fill="none" stroke="#08191e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M17 28h38v28H17z M17 37h38 M32 37v10h8V37 M22 28v-7h28v7" fill="none" stroke="#dfb777" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="m36 3 3 4-3 4-3-4z" fill="#fff0b3"/>
+</svg>

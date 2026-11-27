@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 72 72" role="img" aria-label="Золотой пресс">
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#22454a"/><stop offset="1" stop-color="#10272e"/></linearGradient></defs>
+  <path d="M36 2 66 16v40L36 70 6 56V16z" fill="url(#bg)" stroke="#936f43" stroke-width="2"/>
+  <path d="M36 6 62 19v34L36 66 10 53V19z" fill="none" stroke="#f9e8ac" stroke-opacity=".35"/>
+  <path d="M16 19h40v11H16z M25 30h22v14H25z M18 49h36v10H18z M29 44h14 M36 12v7" fill="none" stroke="#08191e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M16 19h40v11H16z M25 30h22v14H25z M18 49h36v10H18z M29 44h14 M36 12v7" fill="none" stroke="#f9e8ac" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  
+</svg>

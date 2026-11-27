@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 72 72" role="img" aria-label="Запас семян">
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#22454a"/><stop offset="1" stop-color="#10272e"/></linearGradient></defs>
+  <path d="M36 2 66 16v40L36 70 6 56V16z" fill="url(#bg)" stroke="#936f43" stroke-width="2"/>
+  <path d="M36 6 62 19v34L36 66 10 53V19z" fill="none" stroke="#91d4e4" stroke-opacity=".35"/>
+  <path d="M20 34h32l-4 24H24z M36 34V19 M36 29q-13-2-13-13 13 0 13 13 M36 24q13-2 13-13-13 0-13 13 M29 46l7-6 7 6" fill="none" stroke="#08191e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M20 34h32l-4 24H24z M36 34V19 M36 29q-13-2-13-13 13 0 13 13 M36 24q13-2 13-13-13 0-13 13 M29 46l7-6 7 6" fill="none" stroke="#91d4e4" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  
+</svg>

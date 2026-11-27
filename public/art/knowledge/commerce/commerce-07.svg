@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 72 72" role="img" aria-label="Общий склад">
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#22454a"/><stop offset="1" stop-color="#10272e"/></linearGradient></defs>
+  <path d="M36 2 66 16v40L36 70 6 56V16z" fill="url(#bg)" stroke="#936f43" stroke-width="2"/>
+  <path d="M36 6 62 19v34L36 66 10 53V19z" fill="none" stroke="#9ed5ba" stroke-opacity=".35"/>
+  <path d="M14 34l22-17 22 17v23H14z M25 57V39h22v18 M25 45h22 M36 39v18" fill="none" stroke="#08191e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M14 34l22-17 22 17v23H14z M25 57V39h22v18 M25 45h22 M36 39v18" fill="none" stroke="#9ed5ba" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+  
+</svg>
