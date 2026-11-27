@@ -158,6 +158,7 @@ describe('mirror / Зеркальная галерея', () => {
     const a5 = fixtureResolve(tower, [5, 0, 0]);
     expect(a3.effects.find(e => e.kind === 'copy')?.power).toBe(0.42);
     expect(a5.effects.find(e => e.kind === 'copy')?.power).toBe(0.90);
+    expect([a3, fixtureResolve(tower, [4, 0, 0]), a5].map(r => r.effects.find(e => e.kind === 'copy')?.interval)).toEqual([1.2, 1, 0.85]);
     expect(a5.effects.find(e => e.kind === 'echo')?.cap).toBe(2);
     expect(a5.attack.count).toBe(3);
     expect(a5.attack.bossMultiplier).toBeCloseTo(1.15);
@@ -165,6 +166,9 @@ describe('mirror / Зеркальная галерея', () => {
     const b5 = fixtureResolve(tower, [0, 5, 0]);
     expect([b3.attack.mode, b3.attack.count, b3.attack.arc]).toEqual(['cone', 5, 60]);
     expect([b5.attack.mode, b5.attack.count, b5.attack.arc]).toEqual(['cone', 12, 110]);
+    expect(b5.attack.shieldMultiplier).toBeCloseTo(1.38);
+    expect(b5.attack.range).toBeCloseTo(225.5);
+    expect(b5.attack.splash).toBe(0);
     expect(b5.attack.statuses).toEqual([{kind: 'mark', power: 0.1, duration: 1.8}]);
     const c3 = fixtureResolve(tower, [0, 0, 3]);
     const c5 = fixtureResolve(tower, [0, 0, 5]);
@@ -176,6 +180,25 @@ describe('mirror / Зеркальная галерея', () => {
     expect(c5.effects.filter(e => e.kind === 'aura').length).toBe(3);
     expect([...a5.effects, ...b5.effects, ...c5.effects].every(e =>
       !['income', 'interest', 'harvest'].includes(e.kind))).toBe(true);
+  });
+
+  it('keeps copy cadence bounded and B2 useful on every main attack mode', () => {
+    const tower = getTower();
+    for (const tiers of [[3, 0, 0], [4, 2, 0], [5, 0, 2]] as Tiers[]) {
+      const resolved = fixtureResolve(tower, tiers);
+      const copies = resolved.effects.filter(e => e.kind === 'copy');
+      expect(copies).toHaveLength(1);
+      expect(copies[0].interval).toBeGreaterThanOrEqual(0.85);
+      expect(copies[0].power / copies[0].interval).toBeLessThanOrEqual(1.1);
+    }
+    for (const [plain, cross] of [[[5, 0, 0], [5, 2, 0]], [[0, 0, 5], [0, 2, 5]]] as [Tiers, Tiers][]) {
+      const before = fixtureResolve(tower, plain).attack;
+      const after = fixtureResolve(tower, cross).attack;
+      expect(after.mode).toBe(before.mode);
+      expect(after.count).toBe(before.count + 1);
+      expect(after.pierce).toBe(before.pierce + 1);
+      expect(after.shieldMultiplier).toBeCloseTo(before.shieldMultiplier * 1.15);
+    }
   });
 
   it('provides 16 fully embedded illustrations, six overlays, and an HTML contact sheet', () => {

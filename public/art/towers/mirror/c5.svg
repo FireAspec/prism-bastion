@@ -70,7 +70,7 @@
     <path d="M -8 6 L -9 -4 L 0 -12 L 9 -4 L 8 6 Z" fill="url(#metal)" stroke="#4a3c37" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     <polygon points="0,-10 7,-2 0,6 -7,-2" fill="url(#gem)" stroke="#fff0b3" stroke-width="1" stroke-linejoin="round"/>
     <circle cx="0" cy="-2" r="2" fill="#fffefa" stroke="none" stroke-width="0" opacity="1"/>
-  </g><circle cx="64" cy="7" r="2" fill="#fff5be" stroke="none" stroke-width="0" opacity="1"/><g transform="translate(64 10) scale(0.94)">
+  </g><circle cx="64" cy="7" r="2" fill="#fff5be" stroke="none" stroke-width="0" opacity="1"/><g transform="translate(64 18) scale(0.94)">
     <path d="M -8 6 L -9 -4 L 0 -12 L 9 -4 L 8 6 Z" fill="url(#metal)" stroke="#4a3c37" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
     <polygon points="0,-10 7,-2 0,6 -7,-2" fill="url(#gem)" stroke="#fff0b3" stroke-width="1" stroke-linejoin="round"/>
     <circle cx="0" cy="-2" r="2" fill="#fffefa" stroke="none" stroke-width="0" opacity="1"/>
