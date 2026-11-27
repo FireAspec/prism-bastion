@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Observatory illustration">
+<defs>
+ <linearGradient id="copper" x1="0" y1="0" x2=".9" y2="1"><stop stop-color="#f6dc9b"/><stop offset=".38" stop-color="#b7834f"/><stop offset=".72" stop-color="#6b4d43"/><stop offset="1" stop-color="#ba9262"/></linearGradient>
+ <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#365f6d"/><stop offset=".5" stop-color="#173946"/><stop offset="1" stop-color="#0b2638"/></linearGradient>
+ <radialGradient id="glass"><stop stop-color="#eaffff"/><stop offset=".27" stop-color="#ffd17d"/><stop offset=".72" stop-color="#a7d9f4"/><stop offset="1" stop-color="#253e62"/></radialGradient>
+ <linearGradient id="beam" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffd17d" stop-opacity=".65"/><stop offset="1" stop-color="#ffd17d" stop-opacity="0"/></linearGradient>
+ <filter id="halo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.5"/></filter>
+</defs>
+<path d="M94 83L110 66L118 72L102 91Z" fill="url(#copper)" stroke="#ffe2a9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><circle cx="108" cy="75" r="5" fill="url(#glass)" stroke="#ffe2a4" stroke-width="1.5" /><path d="M93 70Q105 59 118 67M91 91Q107 100 121 87" fill="none" stroke="#ffd58d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M105 61L105 99" stroke="#ffdf93" stroke-width="1.2" /></svg>
