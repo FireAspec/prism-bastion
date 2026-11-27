@@ -103,7 +103,7 @@ describe('storm tower data',()=>{
       expect(fixture(d,next).invested-r.invested).toBe(d.paths[p].upgrades[t[p]].cost);
     }
   }
-  expect(legal).toBeGreaterThan(40);
+  expect(legal).toBe(64);
  });
  it('preserves each main tier-five attack and applies all six tier-two overlays',()=>{
   const d=getTower();
@@ -112,7 +112,7 @@ describe('storm tower data',()=>{
     {t:[5,0,2],mode:'ring',useful:a=>a.interval<.6&&a.statuses.some(s=>s.kind==='wet')},
     {t:[2,5,0],mode:'chain',useful:a=>a.push===11&&a.chains===11},
     {t:[0,5,2],mode:'chain',useful:a=>a.interval<1.05&&a.statuses.some(s=>s.kind==='wet')},
-    {t:[2,0,5],mode:'pulse',useful:a=>a.push===11&&a.splash===124},
+    {t:[2,0,5],mode:'pulse',useful:a=>a.push===11&&a.splash===0&&a.range>330},
     {t:[0,2,5],mode:'pulse',useful:a=>a.armorPierce===4&&a.shieldMultiplier===1.15}
   ];
   for(const {t,mode,useful} of cases){
@@ -151,5 +151,55 @@ describe('storm visuals',()=>{
     expect(html).toContain('src="'+q+'2-overlay.svg"');
   }
   expect(html).not.toMatch(/<script|https?:\/\/|@import/i);
+ });
+});
+
+describe('storm combat integration parameters',()=>{
+ it('uses the full targeting radius for both local attack families',()=>{
+  const d=getTower();
+  for(const tiers of [[3,0,0],[4,0,0],[5,0,0],[0,0,3],[0,0,4],[0,0,5],[2,0,5],[0,2,5]] as Tiers[]){
+   const {attack}=fixture(d,tiers);
+   expect(attack.splash).toBe(0);
+   expect(attack.range).toBeGreaterThanOrEqual(200);
+  }
+  expect(fixture(d,[0,0,5]).attack.range).toBeCloseTo(305.592,3);
+ });
+ it('gives the rain crosspath wet that the pure hurricane does not have',()=>{
+  const d=getTower();
+  expect(fixture(d,[5,0,0]).attack.statuses.some(s=>s.kind==='wet')).toBe(false);
+  expect(fixture(d,[5,0,1]).attack.statuses.find(s=>s.kind==='wet')?.duration).toBe(2.8);
+  expect(fixture(d,[0,5,1]).attack.statuses.find(s=>s.kind==='wet')?.duration).toBe(2.8);
+  expect(fixture(d,[0,0,5]).attack.statuses.find(s=>s.kind==='wet')?.duration).toBe(6);
+ });
+ it('provides a positive echo reach, finite cap, and a fractional overclock bonus',()=>{
+  const d=getTower();
+  for(const [tiers,radius,cap] of [
+   [[4,0,0],85,8],[[5,0,0],115,12],[[0,0,4],95,7],[[0,0,5],130,10]
+  ] as [Tiers,number,number][]){
+   const {effects}=fixture(d,tiers);
+   const echoes=effects.filter(e=>e.kind==='echo');
+   expect(echoes).toHaveLength(1);
+   expect(echoes[0].radius).toBe(radius);
+   expect(echoes[0].cap).toBe(cap);
+   expect(echoes[0].interval).toBeGreaterThan(0);
+   expect(echoes[0].power).toBeGreaterThan(0);
+   expect(echoes[0].power).toBeLessThan(1);
+  }
+  const {abilities}=fixture(d,[0,5,0]);
+  const overclock=abilities.find(a=>a.kind==='overclock');
+  expect(overclock?.power).toBe(.5);
+  expect(overclock?.duration).toBe(7);
+  expect(overclock?.cooldown).toBe(55);
+ });
+ it('distinguishes attack visual families and every upgrade has its own impact and muzzle keys',()=>{
+  const d=getTower();
+  expect(d.visual.projectile).toBe('chain');
+  const all=d.paths.flatMap(p=>p.upgrades);
+  expect(new Set(all.map(u=>u.visual.muzzle)).size).toBe(15);
+  expect(new Set(all.map(u=>u.visual.impact)).size).toBe(15);
+  for(const tiers of [[5,2,0],[2,5,0],[2,0,5]] as Tiers[]){
+   const r=fixture(d,tiers);
+   expect(r.visual.projectile).toBe(r.attack.mode);
+  }
  });
 });

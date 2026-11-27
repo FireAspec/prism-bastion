@@ -39,7 +39,7 @@ const definition: TowerDef = {
     "asset": "/art/towers/storm/base.svg",
     "accent": "#6ce8ef",
     "muzzle": "storm-charge",
-    "projectile": "storm-bolt",
+    "projectile": "chain",
     "impact": "storm-flash",
     "scale": 1,
     "glow": 0.55,
@@ -64,11 +64,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/a1.svg",
             "accent": "#7dfae9",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-a1-charge",
+            "projectile": "chain",
+            "impact": "storm-a1-impact",
             "scale": 1,
-            "glow": 0.55,
+            "glow": 0.65,
             "motion": "rotate"
           }
         },
@@ -86,11 +86,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/a2.svg",
             "accent": "#7dfae9",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-a2-charge",
+            "projectile": "chain",
+            "impact": "storm-a2-impact",
             "scale": 1,
-            "glow": 0.55,
+            "glow": 0.8,
             "motion": "rotate"
           }
         },
@@ -104,11 +104,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/a3.svg",
             "accent": "#7dfae9",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-a3-charge",
+            "projectile": "ring",
+            "impact": "storm-a3-impact",
             "scale": 1,
-            "glow": 1.05,
+            "glow": 1,
             "motion": "rotate"
           },
           "replaceAttack": {
@@ -146,7 +146,7 @@ const definition: TowerDef = {
         {
           "id": "storm-a4",
           "name": "Двойная буря",
-          "description": "Кольцо: урон ×1,30, интервал ×0,84, радиус ×1,12, толчок +8; эхо 35% через 0,38 с до 8 целей.",
+          "description": "Кольцо: урон ×1,30, интервал ×0,84, радиус ×1,12, толчок +8; эхо 35% через 0,38 с до 8 целей, радиус цепи 85.",
           "cost": 6600,
           "tier": 4,
           "delta": {
@@ -158,11 +158,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/a4.svg",
             "accent": "#7dfae9",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-a4-charge",
+            "projectile": "ring",
+            "impact": "storm-a4-impact",
             "scale": 1,
-            "glow": 1.05,
+            "glow": 1.2,
             "motion": "rotate"
           },
           "effects": [
@@ -170,7 +170,7 @@ const definition: TowerDef = {
               "id": "storm-gale-echo",
               "kind": "echo",
               "power": 0.35,
-              "radius": 0,
+              "radius": 85,
               "interval": 0.38,
               "duration": 0,
               "cap": 8
@@ -180,16 +180,16 @@ const definition: TowerDef = {
         {
           "id": "storm-a5",
           "name": "Сердце сверхурагана",
-          "description": "Ядро воронки до дельт: кольцо 76 урона каждые 0,86 с, радиус 255, толчок 28, slow 32%/2,2 с, wet 3 с; эхо 50%, нова 160/46 с.",
+          "description": "Ядро воронки до дельт: кольцо 76 урона каждые 0,86 с, радиус 255, толчок 28, slow 32%/2,2 с; эхо 50% до 12 целей, радиус цепи 115, нова 160/46 с.",
           "cost": 16500,
           "tier": 5,
           "delta": {},
           "visual": {
             "asset": "/art/towers/storm/a5.svg",
             "accent": "#7dfae9",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-a5-charge",
+            "projectile": "ring",
+            "impact": "storm-a5-impact",
             "scale": 1,
             "glow": 1.45,
             "motion": "rotate"
@@ -217,12 +217,6 @@ const definition: TowerDef = {
                 "power": 0.32,
                 "duration": 2.2,
                 "maxStacks": 1
-              },
-              {
-                "kind": "wet",
-                "power": 1,
-                "duration": 3,
-                "maxStacks": 1
               }
             ],
             "projectileSpeed": 0,
@@ -236,7 +230,7 @@ const definition: TowerDef = {
               "id": "storm-gale-echo",
               "kind": "echo",
               "power": 0.5,
-              "radius": 0,
+              "radius": 115,
               "interval": 0.28,
               "duration": 0,
               "cap": 12
@@ -276,11 +270,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/b1.svg",
             "accent": "#ffe59c",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-b1-charge",
+            "projectile": "chain",
+            "impact": "storm-b1-impact",
             "scale": 1,
-            "glow": 0.55,
+            "glow": 0.65,
             "motion": "pulse"
           }
         },
@@ -298,11 +292,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/b2.svg",
             "accent": "#ffe59c",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-b2-charge",
+            "projectile": "chain",
+            "impact": "storm-b2-impact",
             "scale": 1,
-            "glow": 0.55,
+            "glow": 0.8,
             "motion": "pulse"
           }
         },
@@ -316,11 +310,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/b3.svg",
             "accent": "#ffe59c",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-b3-charge",
+            "projectile": "chain",
+            "impact": "storm-b3-impact",
             "scale": 1,
-            "glow": 1.05,
+            "glow": 1,
             "motion": "pulse"
           },
           "replaceAttack": {
@@ -362,11 +356,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/b4.svg",
             "accent": "#ffe59c",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-b4-charge",
+            "projectile": "chain",
+            "impact": "storm-b4-impact",
             "scale": 1,
-            "glow": 1.05,
+            "glow": 1.2,
             "motion": "pulse"
           },
           "effects": [
@@ -391,9 +385,9 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/b5.svg",
             "accent": "#ffe59c",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-b5-charge",
+            "projectile": "chain",
+            "impact": "storm-b5-impact",
             "scale": 1,
             "glow": 1.45,
             "motion": "pulse"
@@ -440,7 +434,7 @@ const definition: TowerDef = {
               "description": "Форсаж ×1,5 на семь секунд; перезарядка 55 с.",
               "cooldown": 55,
               "kind": "overclock",
-              "power": 1.5,
+              "power": 0.5,
               "duration": 7,
               "radius": 0,
               "element": "electric"
@@ -464,11 +458,11 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/c1.svg",
             "accent": "#b9e4ff",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-c1-charge",
+            "projectile": "chain",
+            "impact": "storm-c1-impact",
             "scale": 1,
-            "glow": 0.55,
+            "glow": 0.65,
             "motion": "breathe"
           },
           "addStatuses": [
@@ -493,29 +487,29 @@ const definition: TowerDef = {
           "visual": {
             "asset": "/art/towers/storm/c2.svg",
             "accent": "#b9e4ff",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-c2-charge",
+            "projectile": "chain",
+            "impact": "storm-c2-impact",
             "scale": 1,
-            "glow": 0.55,
+            "glow": 0.8,
             "motion": "breathe"
           }
         },
         {
           "id": "storm-c3",
           "name": "Ливневой купол",
-          "description": "Ядро до дельт: импульсы 28 урона /1,08 с /210, splash 58, wet 4,5 с, slow 12% на 1,5 с.",
+          "description": "Ядро до дельт: локальный импульс 28 урона /1,08 с /210, wet 4,5 с, slow 12% на 1,5 с. Поражает весь радиус атаки.",
           "cost": 2615,
           "tier": 3,
           "delta": {},
           "visual": {
             "asset": "/art/towers/storm/c3.svg",
             "accent": "#b9e4ff",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-c3-charge",
+            "projectile": "pulse",
+            "impact": "storm-c3-impact",
             "scale": 1,
-            "glow": 1.05,
+            "glow": 1,
             "motion": "breathe"
           },
           "replaceAttack": {
@@ -526,7 +520,7 @@ const definition: TowerDef = {
             "range": 210,
             "pierce": 1,
             "count": 1,
-            "splash": 58,
+            "splash": 0,
             "chains": 0,
             "chainRadius": 0,
             "detects": false,
@@ -559,23 +553,22 @@ const definition: TowerDef = {
         {
           "id": "storm-c4",
           "name": "Небесный водосброс",
-          "description": "Урон ×1,28, интервал ×0,90, радиус ×1,12, splash +24; эхо 28% через 0,40 с до 7 целей.",
+          "description": "Урон ×1,28, интервал ×0,90, радиус ×1,12; эхо 28% через 0,40 с до 7 целей, радиус цепи 95.",
           "cost": 6270,
           "tier": 4,
           "delta": {
             "damageMul": 1.28,
             "intervalMul": 0.9,
-            "rangeMul": 1.12,
-            "splashAdd": 24
+            "rangeMul": 1.12
           },
           "visual": {
             "asset": "/art/towers/storm/c4.svg",
             "accent": "#b9e4ff",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-c4-charge",
+            "projectile": "pulse",
+            "impact": "storm-c4-impact",
             "scale": 1,
-            "glow": 1.05,
+            "glow": 1.2,
             "motion": "breathe"
           },
           "effects": [
@@ -583,7 +576,7 @@ const definition: TowerDef = {
               "id": "storm-rain-echo",
               "kind": "echo",
               "power": 0.28,
-              "radius": 0,
+              "radius": 95,
               "interval": 0.4,
               "duration": 0,
               "cap": 7
@@ -593,16 +586,16 @@ const definition: TowerDef = {
         {
           "id": "storm-c5",
           "name": "Владыка проливня",
-          "description": "Ядро зонта до дельт: импульсы 58 /0,78 с /255, splash 100, wet 6 с, slow 22%/2 с; эхо 45%, нова 115 каждые 44 с.",
+          "description": "Ядро зонта до дельт: локальный импульс 58 /0,78 с /255, wet 6 с, slow 22%/2 с; эхо 45% до 10 целей, радиус цепи 130, нова 115 каждые 44 с.",
           "cost": 15675,
           "tier": 5,
           "delta": {},
           "visual": {
             "asset": "/art/towers/storm/c5.svg",
             "accent": "#b9e4ff",
-            "muzzle": "storm-charge",
-            "projectile": "storm-bolt",
-            "impact": "storm-flash",
+            "muzzle": "storm-c5-charge",
+            "projectile": "pulse",
+            "impact": "storm-c5-impact",
             "scale": 1,
             "glow": 1.45,
             "motion": "breathe"
@@ -615,7 +608,7 @@ const definition: TowerDef = {
             "range": 255,
             "pierce": 1,
             "count": 1,
-            "splash": 100,
+            "splash": 0,
             "chains": 0,
             "chainRadius": 0,
             "detects": false,
@@ -649,7 +642,7 @@ const definition: TowerDef = {
               "id": "storm-rain-echo",
               "kind": "echo",
               "power": 0.45,
-              "radius": 0,
+              "radius": 130,
               "interval": 0.28,
               "duration": 0,
               "cap": 10
