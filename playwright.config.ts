@@ -19,6 +19,7 @@ export default defineConfig({
   },
   projects: [
     {name:'network', testMatch:'network.pw.ts'},
+    {name:'windows-desktop', testMatch:'desktop.pw.ts', timeout:90_000},
     {name:'1366x768', testMatch:['ui.pw.ts','art.pw.ts'], use:{browserName:'chromium',viewport:{width:1366,height:768},deviceScaleFactor:1}},
     {name:'1920x1080', testMatch:['ui.pw.ts','art.pw.ts'], use:{browserName:'chromium',viewport:{width:1920,height:1080},deviceScaleFactor:1}}
   ]
