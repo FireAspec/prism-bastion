@@ -110,11 +110,11 @@ function canPlace(map:MapDef,def:TowerDef,pos:Vec,towers:TowerState[],catalog:To
  });
 }
 
-function withoutForbiddenEconomy(config:GameConfig,rules:RuleModifiers):GameConfig {
- if(rules.allowPassiveIncome&&rules.maxLives>1)return config;
+function withoutForbiddenEconomy(config:GameConfig,rules:RuleModifiers,omitPassiveBarrier=false):GameConfig {
+ if(rules.allowPassiveIncome&&rules.maxLives>1&&!omitPassiveBarrier)return config;
  const permitted=(e:EffectDef):boolean=>
   (rules.allowPassiveIncome||!MONEY_EFFECTS.has(e.kind))&&
-  (rules.maxLives>1||e.kind!=='barrier');
+  ((rules.maxLives>1&&!omitPassiveBarrier)||e.kind!=='barrier');
  return {
   ...config,
   towers:config.towers.map(t=>({
@@ -177,7 +177,7 @@ function validateSnapshot(s:GameState,rules:RuleModifiers,map:MapDef,config:Game
    throw new Error('Invalid spawn cursor');
  }
  if(s.towers.some(t=>!config.towers.some(d=>d.id===t.defId)||
-  !s.options.players.some(p=>p.id===t.owner)||!legalTiers(t.tiers)||
+  !s.options.players.some(p=>p.id===t.owner)||!Array.isArray(t.tiers)||t.tiers.length!==3||!legalTiers(t.tiers)||
   t.tiers.some(tier=>tier>rules.maxTier)||
   !s.options.unlockedTowers.includes(t.defId)||
   !count(t.invested)||t.invested===0||!finite(t.pos.x)||!finite(t.pos.y)))
@@ -207,6 +207,7 @@ function validateSnapshot(s:GameState,rules:RuleModifiers,map:MapDef,config:Game
 class Simulation implements GameEngine {
  private readonly config:GameConfig;
  private readonly combatConfig:GameConfig;
+ private readonly combatStepConfig:GameConfig;
  private readonly combat:CombatModule;
  private readonly map:MapDef;
  private state:GameState;
@@ -223,12 +224,17 @@ class Simulation implements GameEngine {
   this.lengths=map.lanes.map(l=>laneLength(l));
   if(!this.lengths.every(n=>n>0))throw new Error('Zero-length lane');
   this.combatConfig=withoutForbiddenEconomy(this.config,rules);
+  // Progression has already resolved knowledge into the run definitions. Do not
+  // let combat apply the same catalog nodes again. Wave-end barrier belongs here.
+  this.combatStepConfig=withoutForbiddenEconomy({...this.combatConfig,knowledge:[]},rules,true);
   if(snapshot){
    this.state=copy(snapshot);
+   if(!rules.allowKnowledge){opts.knowledge=[];this.state.options.knowledge=[];}
    if(!sameValue(this.state.options,opts)||!sameValue(this.state.rules,rules))
     throw new Error('Saved run does not match selected options/rules');
    validateSnapshot(this.state,rules,map,this.config);
   }else{
+   if(!rules.allowKnowledge)opts.knowledge=[];
    const initial=difficulty.startCredits*rules.startingCashMul*
     PLAYER_MULTIPLIER[opts.players.length-1];
    if(!nonnegative(initial)||initial>Number.MAX_SAFE_INTEGER/100)throw new Error('Invalid starting credits');
@@ -343,7 +349,10 @@ class Simulation implements GameEngine {
   if(!ability)return {ok:false,reason:'unknown-ability'};
   if((!this.state.rules.allowPassiveIncome&&ability.kind==='mint')||
    (this.state.rules.maxLives===1&&ability.kind==='barrier'))return {ok:false,reason:'ability-prohibited'};
-  return this.combat.activate(this.state,this.combatConfig,tower.id,id);
+  const result=this.combat.activate(this.state,this.combatStepConfig,tower.id,id);
+  this.state.lives=Math.min(this.state.rules.maxLives,Math.floor(this.state.lives));
+  if(this.state.lives<=0)this.defeat();
+  return result;
  }
  private startWave():CommandResult {
   if(this.state.phase!=='build')return {ok:false,reason:'not-building'};
@@ -400,12 +409,15 @@ class Simulation implements GameEngine {
   return {ok:true,amount:transferred};
  }
  private spawn(wave:WaveDef):void {
+  // Combat may retain dead parents until all deferred children have spawned.
+  let living=this.state.enemies.filter(e=>e.hp>0&&!e.memory['combat:dead']).length;
   wave.groups.forEach((g,i)=>{
-   while(this.state.spawnCursor[i]<g.count&&this.state.enemies.length<MAX_ENEMIES&&
+   while(this.state.spawnCursor[i]<g.count&&living<MAX_ENEMIES&&
     g.at+g.every*this.state.spawnCursor[i]<=this.state.waveTime+EPSILON){
     spawnEnemy(this.state,this.combatConfig,g.enemy,g.lane%this.map.lanes.length,0,
      this.state.rules.enemyHpMul*(g.hpMul??1),this.state.rules.enemySpeedMul*(g.speedMul??1));
     this.state.spawnCursor[i]++;
+    living++;
    }
   });
  }
@@ -414,11 +426,19 @@ class Simulation implements GameEngine {
    const enemy=this.state.enemies[i];
    const def=this.config.enemies.find(d=>d.id===enemy.defId);
    if(!def)throw new Error(`Unknown active enemy: ${enemy.defId}`);
+   // A dead parent is a deferred-spawn record, not a moving or leaking unit.
+   if(enemy.hp<=0||enemy.memory['combat:dead'])continue;
    const hardStopped=enemy.statuses.some(st=>(st.kind==='freeze'||st.kind==='stun')&&st.remaining>0);
    const slow=enemy.statuses.reduce((v,st)=>st.kind==='slow'&&st.remaining>0?
-    Math.max(v,bounded(st.power,0,0.75)):v,0);
-   const speed=hardStopped?0:def.speed*(enemy.memory.speedMul??1)*
-    (enemy.memory.phaseSpeedMul??1)*(1-slow);
+    Math.max(v,st.power):v,0);
+   const control=def.boss?bounded(def.boss.controlFactor,0.15,1):1;
+   const slowFactor=Math.max(0.25,1-Math.max(0,slow)*control);
+   const hardFactor=hardStopped?(def.boss?Math.max(0.15,1-control):0):1;
+   const phase=def.boss?Math.max(0.1,enemy.memory['combat:phaseSpeed']??enemy.memory.phaseSpeedMul??1):1;
+   // Scheduled groups already carry the global speed coefficient. Combat's
+   // child/summon runtime supplies its own local speed multiplier (currently 1).
+   const childModeSpeed=enemy.generation>0?this.state.rules.enemySpeedMul:1;
+   const speed=def.speed*(enemy.memory.speedMul??1)*childModeSpeed*phase*slowFactor*hardFactor;
    enemy.progress+=Math.max(0,speed)*dt;
    enemy.pos=pointOnLane(this.map.lanes[enemy.lane],enemy.progress);
    if(enemy.progress+EPSILON<this.lengths[enemy.lane])continue;
@@ -460,6 +480,7 @@ class Simulation implements GameEngine {
    tower.generated+=paid;
   }
   if(s.rules.maxLives>1&&healing>0)s.lives=Math.min(s.rules.maxLives,s.lives+Math.floor(healing));
+  this.waveCache.delete(s.wave);
   s.phase='build';s.waveTime=0;s.spawnCursor=[];
   if(s.wave===s.rules.rounds){
    emit(s,{kind:'victory',amount:s.wave});
@@ -478,8 +499,8 @@ class Simulation implements GameEngine {
   s.tick++;s.time=s.tick*dt;s.waveTime+=dt;
   const wave=this.waveDefinition(s.wave);
   this.spawn(wave);
-  this.combat.step(s,this.combatConfig,dt);
-  s.lives=Math.min(s.rules.maxLives,s.lives);
+  this.combat.step(s,this.combatStepConfig,dt);
+  s.lives=Math.min(s.rules.maxLives,Math.floor(s.lives));
   if(s.lives<=0){this.defeat();return;}
   this.moveAndLeak(dt);
   if(s.lives<=0)return;

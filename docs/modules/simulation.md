@@ -77,7 +77,10 @@ cash and enemy health ×1/1.25/1.50/1.75 for one through four players.
 The engine validates and locks these rules at creation. The caller must
 pass an already resolved content configuration from the progression service;
 when a mode forbids knowledge, it must not preapply knowledge-derived attack
-bonuses to that configuration.
+bonuses to that configuration. The engine retains the selected knowledge IDs
+for the snapshot but passes an empty knowledge catalog to combat, so a combat
+implementation that consults node IDs cannot multiply already resolved
+bonuses again. Strict modes also clear selected knowledge IDs.
 
 Round `n` pays only
 `(roundRewardBase + n * roundRewardStep) * incomeMul`.
@@ -98,7 +101,10 @@ In iron-oath, the engine disables sell, knowledge discount, passive economy
 and one-life barrier. It supplies combat with a private filtered catalog
 where no base/upgrade `income`, `interest`, `harvest`, `barrier`,
 `mint` or barrier ability is accessible. In no-leaks, farms remain legal,
-but barrier cannot add lives beyond one. Active ability enforcement otherwise
+but barrier cannot add lives beyond one. Passive barrier is owned by the
+engine at wave completion: the configuration supplied to combat ticks and
+ability execution omits passive barrier, while the engine retains it in its
+own resolved definitions. The active barrier ability is separate. Active ability enforcement otherwise
 belongs to `combat.activate`, using the same immutable filtered catalog.
 Weather interpretation (`blackout`, alternating wet/dry every five waves)
 is a combat/render concern: `state.rules.weather` and `state.wave` are
@@ -146,3 +152,15 @@ not the pending combat module. Coverage includes:
 Integration acceptance still requires the real combat, content, mode,
 progression, network and UI modules; tests here intentionally do not
 claim projectile-contact, full-map balance or multiplayer socket QA.
+
+## Cross-module compatibility
+
+The combat implementation may retain defeated parents in the enemy array until
+their deferred child or phase-summon quotas are served. Such records are not
+counted as living units by the spawn limit and are not moved or leaked; they
+still keep the wave open. The movement adapter recognizes
+`combat:phaseSpeed` (and the legacy `phaseSpeedMul`), applies the boss control
+factor to slow and hard control, and uses the global mode speed for children
+whose local speed multiplier is supplied by combat. The completed-wave
+definition is evicted from the cache, including endless runs. Regression tests
+exercise these boundaries with small combat doubles.

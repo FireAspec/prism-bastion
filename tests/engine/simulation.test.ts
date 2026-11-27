@@ -1,7 +1,7 @@
 import {describe,it,expect} from 'vitest';
 import type {Difficulty,GameCommand,GameConfig,GameState,PathIndex} from '../../src/contracts';
 import {createGame,restoreGame} from '../../src/engine';
-import {credit} from '../../src/contracts/runtime';
+import {credit,spawnEnemy} from '../../src/contracts/runtime';
 import {combat,effect,fixture,options,players} from './fixtures';
 
 const tick=1/60;
@@ -394,5 +394,89 @@ describe('accounting and challenge boundaries',()=>{
     invested:100,cooldown:0,abilityCooldowns:{},memory:{},damageDealt:0,kills:0,generated:0},
   ];
   expect(()=>restoreGame(cfg,s5,combat())).toThrow('Duplicate saved tier-five specialization');
+ });
+});
+
+describe('published combat integration boundaries',()=>{
+ it('uses the published boss phase key and attenuates hard and soft control',()=>{
+  const cfg=fixture();cfg.enemies[0].speed=60;cfg.enemies[0].boss={controlFactor:0.25,phases:[]};
+  const original=createGame(cfg,options(),combat('idle'));
+  original.dispatch({type:'startWave'});original.step(tick);
+  const saved=original.getSnapshot(),e=saved.enemies[0];
+  e.memory['combat:phaseSpeed']=2;
+  e.statuses=[
+   {kind:'slow',power:0.8,duration:10,remaining:10,source:'test',stacks:1},
+   {kind:'stun',power:1,duration:10,remaining:10,source:'test',stacks:1},
+  ];
+  const restored=restoreGame(cfg,saved,combat('idle'));
+  next(restored,60);
+  expect(restored.getSnapshot().enemies[0].progress-e.progress).toBeCloseTo(72,6);
+ });
+ it('does not move or leak a defeated parent retained for a deferred summon',()=>{
+  const cfg=fixture(),game=createGame(cfg,options(),combat('idle'));
+  game.dispatch({type:'startWave'});game.step(tick);
+  const saved=game.getSnapshot(),e=saved.enemies[0];
+  e.hp=0;e.progress=200;e.pos=pos(300,300);e.memory['combat:dead']=1;
+  e.memory['combat:child:0']=1;
+  const restored=restoreGame(cfg,saved,combat('idle'));next(restored,3);
+  const s=restored.getSnapshot();
+  expect(s.enemies[0].progress).toBe(200);expect(s.lives).toBe(150);
+  expect(s.phase).toBe('wave');expect(s.stats.leaks).toBe(0);
+  expect(restored.drainEvents().some(e=>e.kind==='leak')).toBe(false);
+ });
+ it('counts only living enemies against the scheduled spawn limit',()=>{
+  const cfg=fixture();cfg.waves[0].groups=[{enemy:'orb',count:2,at:0,every:1,lane:0}];
+  const game=createGame(cfg,options(),combat('idle'));
+  game.dispatch({type:'startWave'});game.step(tick);
+  const saved=game.getSnapshot(),dead=saved.enemies[0];
+  dead.hp=0;dead.memory['combat:dead']=1;dead.memory['combat:child:0']=1;
+  saved.enemies=Array.from({length:1800},(_,i)=>({...structuredClone(dead),id:'e'+(i+1)}));
+  saved.nextEntity=1801;
+  const restored=restoreGame(cfg,saved,combat('idle'));next(restored,59);
+  const s=restored.getSnapshot();
+  expect(s.spawnCursor).toEqual([2]);expect(s.enemies.filter(e=>e.hp>0)).toHaveLength(1);
+ });
+ it('applies overdrive to combat-spawned children without doubling scheduled group speed',()=>{
+  const cfg=fixture(),base=combat('idle');
+  const module={...base,step(s:GameState,c:GameConfig){
+   if(s.tick===1)spawnEnemy(s,c,'orb',0,0,s.rules.enemyHpMul,1,1);
+  }};
+  const game=createGame(cfg,options({modeId:'overdrive'}),module);
+  game.dispatch({type:'startWave'});game.step(tick);
+  const enemies=game.getSnapshot().enemies;
+  expect(enemies).toHaveLength(2);
+  for(const e of enemies)expect(e.progress).toBeCloseTo(2.7,8);
+ });
+ it('owns passive barrier at wave end and prevents combat from healing a second time',()=>{
+  const cfg=fixture();cfg.towers[1].effects=[effect('barrier',5)];
+  const base=combat('clear');
+  const module={...base,step(s:GameState,c:GameConfig,dt:number){
+   expect(c.towers[1].effects.some(e=>e.kind==='barrier')).toBe(false);
+   expect(c.towers[1].abilities.some(a=>a.kind==='barrier')).toBe(true);
+   base.step(s,c,dt);
+  }};
+  const game=createGame(cfg,options(),module);game.dispatch(place('bank'));
+  const saved=game.getSnapshot();saved.lives=100;
+  const restored=restoreGame(cfg,saved,module);
+  restored.dispatch({type:'startWave'});restored.step(tick);
+  expect(restored.getSnapshot().lives).toBe(105);
+ });
+ it('passes resolved knowledge bonuses only once and clears strict-mode loadouts',()=>{
+  const cfg=fixture();cfg.knowledge=[{
+   id:'test-knowledge',branch:'ballistics',index:1,name:'test',description:'',requires:[],
+   minLevel:1,pointCost:1,sealCost:0,effects:[{stat:'weaponDamage',value:0.1}],icon:''
+  }];
+  cfg.towers[0].attack.damage=11;
+  const base=combat('clear');
+  const module={...base,step(s:GameState,c:GameConfig,dt:number){
+   expect(c.knowledge).toEqual([]);
+   expect(c.towers[0].attack.damage).toBe(11);
+   base.step(s,c,dt);
+  }};
+  const game=createGame(cfg,options({knowledge:['test-knowledge']}),module);
+  game.dispatch({type:'startWave'});game.step(tick);
+  expect(game.getSnapshot().options.knowledge).toEqual(['test-knowledge']);
+  const strict=createGame(fixture(),options({modeId:'iron-oath',knowledge:['test-knowledge']}),base);
+  expect(strict.getSnapshot().options.knowledge).toEqual([]);
  });
 });
