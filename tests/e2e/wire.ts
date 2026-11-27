@@ -63,6 +63,7 @@ export class Peer {
   }
   async open(){
     if(this.socket.readyState===WebSocket.OPEN)return;
+    if(this.socket.readyState!==WebSocket.CONNECTING)throw new Error('Socket is not connecting');
     await bounded(new Promise<void>((resolve,reject)=>{
       this.socket.addEventListener('open',()=>resolve(),{once:true});
       this.socket.addEventListener('error',()=>reject(new Error('WebSocket open failed')),{once:true});
