@@ -45,7 +45,7 @@ export function optionsFor(cell,seed){
 const terminal=s=>s.phase==='victory'||s.phase==='defeat';
 export function safeState(engine){
  const s=engine.getSnapshot();
- if(!Number.isSafeInteger(s.tick)||s.tick<0||!Number.isSafeInteger(s.credits)||s.credits<0||!Number.isFinite(s.lives)||s.lives<0) throw Error('Invalid engine state');
+ if(!Number.isSafeInteger(s.tick)||s.tick<0||!Number.isSafeInteger(s.credits)||s.credits<0||!Number.isSafeInteger(s.lives)||s.lives<0||s.lives>s.rules.maxLives) throw Error('Invalid engine state');
  return s;
 }
 export function advance(engine,from,limit=MAX_TICKS){
@@ -56,13 +56,24 @@ export function advance(engine,from,limit=MAX_TICKS){
  if(next.tick<=from.tick||next.tick>from.tick+STEP) throw Error('Engine failed fixed-step progress');
  return next;
 }
+function checkpoint(s){
+ return [10,20,40,60,80,100].includes(s.wave)?{wave:s.wave,credits:s.credits,t5:s.towers.filter(t=>Math.max(...t.tiers)===5).map(t=>({id:t.defId,tiers:t.tiers})),spent:s.stats.spent}:null;
+}
 export function initial(engine,options){
  const s=safeState(engine);
  if(s.tick!==0||s.phase!=='build'||s.options.knowledge.length||canonical(s.options.unlockedTowers)!==canonical(options.unlockedTowers)||s.options.players.length!==options.players.length) throw Error('Unexpected initial state/profile');
  if(s.rules.maxLives===1&&s.lives!==1) throw Error('One-life rule violated');
+ if(['no-leaks','iron-oath'].includes(options.modeId)&&s.rules.maxLives!==1)throw Error('Strict life limit violated');
+ if(options.modeId==='iron-oath'&&(s.rules.allowPassiveIncome||s.rules.allowKnowledge||s.rules.sellAllowed))throw Error('Iron oath rules violated');
+ if(options.modeId==='half-cash'&&(s.rules.incomeMul!==.5||s.rules.startingCashMul!==.5))throw Error('Half-cash rules violated');
+ if(options.modeId==='short-supply'&&s.rules.maxTowers!==12)throw Error('Tower limit violated');
+ if(options.modeId==='low-tech'&&s.rules.maxTier!==3)throw Error('Tier limit violated');
+ if(options.modeId==='no-actives'&&s.rules.allowAbilities)throw Error('Ability limit violated');
  return s;
 }
 export function outcome(s){
+ if(s.phase==='victory'&&(s.wave!==s.rules.rounds||s.lives<=0))throw Error('Invalid victory state');
+ if(s.phase==='defeat'&&s.lives!==0)throw Error('Invalid defeat state');
  return {won:s.phase==='victory',phase:s.phase,wave:s.wave,tick:s.tick,lives:s.lives,credits:s.credits,stats:s.stats,
  towers:s.towers.map(t=>({defId:t.defId,tiers:t.tiers,invested:t.invested,damage:t.damageDealt,generated:t.generated,kills:t.kills}))};
 }
@@ -76,7 +87,7 @@ export function recordRun(config,cell,seed,strategy,makeEngine,policy,limit=MAX_
   if(result.ok&&!result.pending){
    actions.push({tick:s.tick,time:s.time,wave:s.wave,command,result:{entity:result.entity??null,amount:result.amount??null}});
    s=safeState(engine);
-   if(command.type==='startWave'&&[10,20,40,60,80,100].includes(s.wave)) bossCheckpoints.push({wave:s.wave,credits:s.credits,t5:s.towers.filter(t=>Math.max(...t.tiers)===5).map(t=>({id:t.defId,tiers:t.tiers})),spent:s.stats.spent});
+   if(command.type==='startWave'){const cp=checkpoint(s);if(cp)bossCheckpoints.push(cp);}
    return true;
   }
   if(result.pending) throw Error('Headless engine returned pending command');
@@ -98,7 +109,7 @@ export function replay(config,record,makeEngine,limit=MAX_TICKS){
  if(record.schema!==1||record.contentDigest!==config.contentDigest) throw Error('Replay content mismatch');
  const expected=optionsFor(record.cell,record.seed);
  if(canonical(expected)!==canonical(record.options)) throw Error('Replay profile mismatch');
- const engine=makeEngine(expected);let s=initial(engine,expected);
+ const engine=makeEngine(expected);let s=initial(engine,expected);const bossCheckpoints=[];
  for(const item of record.actions){
   if(!Number.isSafeInteger(item.tick)||item.tick<s.tick) throw Error('Invalid action order');
   while(s.tick<item.tick){
@@ -109,11 +120,12 @@ export function replay(config,record,makeEngine,limit=MAX_TICKS){
   const result=engine.dispatch(item.command);
   if(!result.ok||result.pending||canonical({entity:result.entity??null,amount:result.amount??null})!==canonical(item.result)) throw Error('Replay command rejected or changed');
   s=safeState(engine);
+  if(item.command.type==='startWave'){const cp=checkpoint(s);if(cp)bossCheckpoints.push(cp);}
  }
  while(!terminal(s)){
   if(s.phase==='build') throw Error('Replay missing wave start');
   s=advance(engine,s,limit);
  }
- if(canonical(outcome(s))!==canonical(record.result)||stateDigest(s)!==record.digest) throw Error('Replay outcome/digest mismatch');
+ if(canonical(bossCheckpoints)!==canonical(record.bossCheckpoints)||canonical(outcome(s))!==canonical(record.result)||stateDigest(s)!==record.digest) throw Error('Replay outcome/digest mismatch');
  return outcome(s);
 }
