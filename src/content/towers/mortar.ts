@@ -4,7 +4,7 @@ const art = '/art/towers/mortar/';
 
 function visual(asset: string, accent: string, projectile: string, impact: string, scale = 1, glow = 0.3): VisualState {
   return {
-    asset: `${art}${asset}.svg`, accent, muzzle: 'mortar-flash', projectile, impact,
+    asset: `${art}${asset}.svg`, accent, muzzle: asset === 'base' ? 'mortar-flash' : `mortar-flash-${asset}`, projectile, impact,
     scale, glow, motion: 'breathe',
   };
 }
@@ -27,7 +27,7 @@ const meteor: UpgradeDef[] = [
     id: 'mortar-a1', tier: 1, name: 'Широкий кратер', cost: 445,
     description: 'Усиленные опоры: урон ×1,12, радиус взрыва +16 пкс.',
     delta: {damageMul: 1.12, splashAdd: 16},
-    visual: visual('a1', '#ffc36e', 'mortar-shell', 'mortar-crater', 1.02, 0.38),
+    visual: visual('a1', '#ffc36e', 'mortar-wide-shell', 'mortar-crater', 1.02, 0.38),
   },
   {
     id: 'mortar-a2', tier: 2, name: 'Пороховой ускоритель', cost: 885,
@@ -46,13 +46,13 @@ const meteor: UpgradeDef[] = [
     description: 'Урон ×1,38, радиус +30 пкс; ожог 6 ед. силы на 3 с, не более 2 стеков.',
     delta: {damageMul: 1.38, splashAdd: 30},
     addStatuses: [{kind: 'burn', power: 6, duration: 3, maxStacks: 2}],
-    visual: visual('a4', '#ff9c39', 'mortar-meteor', 'mortar-inferno', 1.08, 0.65),
+    visual: visual('a4', '#ff9c39', 'mortar-burning-meteor', 'mortar-inferno', 1.08, 0.65),
   },
   {
     id: 'mortar-a5', tier: 5, name: 'Падение небес', cost: 13205,
     description: 'Два гигантских метеора за залп; урон ×1,60, радиус +40 пкс, по боссам ×1,35. Активный метеор: 520 урона в радиусе 175 пкс раз в 65 с.',
     delta: {countAdd: 1, damageMul: 1.6, splashAdd: 40, bossMultiplierMul: 1.35},
-    abilities: [{id: 'mortar-skyfall', name: 'Удар с небес', description: 'Метеорный удар по области.', kind: 'meteor', cooldown: 65, power: 520, duration: 0, radius: 175, element: 'fire'}],
+    abilities: [{id: 'mortar-skyfall', name: 'Удар с небес', description: 'Навесной удар в текущую точку ближайшего живого врага; урон при приземлении, не при активации.', kind: 'meteor', cooldown: 65, power: 520, duration: 0, radius: 175, element: 'fire'}],
     visual: visual('a5', '#ff782e', 'mortar-supermeteor', 'mortar-inferno', 1.12, 0.95),
   },
 ];
@@ -68,10 +68,10 @@ const cluster: UpgradeDef[] = [
     id: 'mortar-b2', tier: 2, name: 'Быстрая подача', cost: 760,
     description: 'Интервал ×0,86, дальность ×1,08: ускоренная кассетная обойма.',
     delta: {intervalMul: 0.86, rangeMul: 1.08},
-    visual: visual('b2', '#72dedc', 'mortar-pellet', 'mortar-cluster', 1.04, 0.48),
+    visual: visual('b2', '#72dedc', 'mortar-fast-pellet', 'mortar-cluster', 1.04, 0.48),
   },
   {
-    id: 'mortar-b3', tier: 3, name: 'Трёхлучевая кассета', cost: 1900,
+    id: 'mortar-b3', tier: 3, name: 'Четырёхзарядная кассета', cost: 1900,
     description: 'Ещё 2 снаряда за залп (всего 4); урон каждого ×0,72, радиус −6 пкс.',
     delta: {countAdd: 2, damageMul: 0.72, splashAdd: -6},
     visual: visual('b3', '#67eaf0', 'mortar-cluster-shell', 'mortar-cluster', 1.07, 0.56),
@@ -81,13 +81,13 @@ const cluster: UpgradeDef[] = [
     description: 'Ещё 2 снаряда (всего 6), интервал ×0,82; замедление на 16% в течение 1,4 с.',
     delta: {countAdd: 2, intervalMul: 0.82},
     addStatuses: [{kind: 'slow', power: 0.16, duration: 1.4}],
-    visual: visual('b4', '#65f1ea', 'mortar-cluster-shell', 'mortar-cluster', 1.09, 0.7),
+    visual: visual('b4', '#65f1ea', 'mortar-crossfire', 'mortar-cluster', 1.09, 0.7),
   },
   {
     id: 'mortar-b5', tier: 5, name: 'Соты бомбардирования', cost: 11400,
-    description: 'Десять малых зон поражения за залп; урон каждого ×1,20, радиус +12 пкс, дальность ×1,12. Активная перегрузка на 7 с, перезарядка способности 50 с.',
+    description: 'Десять снарядов за залп с перекрывающимися зонами поражения; урон каждого ×1,20, радиус +12 пкс, дальность ×1,12. Перегрузка повышает темп на 30% на 7 с, КД 50 с.',
     delta: {countAdd: 4, damageMul: 1.2, splashAdd: 12, rangeMul: 1.12},
-    abilities: [{id: 'mortar-cluster-overclock', name: 'Барабанный шквал', description: 'На 7 секунд усиливает темп кассет.', kind: 'overclock', cooldown: 50, power: 0.3, duration: 7, radius: 0, element: 'kinetic'}],
+    abilities: [{id: 'mortar-cluster-overclock', name: 'Барабанный шквал', description: 'На 7 секунд повышает темп кассет на 30% (интервал делится на 1,30).', kind: 'overclock', cooldown: 50, power: 0.3, duration: 7, radius: 0, element: 'kinetic'}],
     visual: visual('b5', '#4bfff0', 'mortar-swarm', 'mortar-cluster', 1.12, 0.9),
   },
 ];
@@ -103,7 +103,7 @@ const illuminator: UpgradeDef[] = [
     id: 'mortar-c2', tier: 2, name: 'Сигнальная метка', cost: 800,
     description: 'Накладывает метку на 4 с (+10% входящего урона по отмеченной цели); дальность ×1,12.',
     delta: {rangeMul: 1.12}, addStatuses: [mark],
-    visual: visual('c2', '#fbe9a2', 'mortar-flare', 'mortar-flareburst', 1.04, 0.51),
+    visual: visual('c2', '#fbe9a2', 'mortar-mark-flare', 'mortar-flareburst', 1.04, 0.51),
   },
   {
     id: 'mortar-c3', tier: 3, name: 'Прожекторный веер', cost: 2000,
@@ -117,14 +117,14 @@ const illuminator: UpgradeDef[] = [
     description: 'Третий заряд, интервал ×0,80, по боссам ×1,18; попадание замедляет цель на 18% на 2,5 с.',
     delta: {countAdd: 1, intervalMul: 0.8, bossMultiplierMul: 1.18},
     addStatuses: [{kind: 'slow', power: 0.18, duration: 2.5}],
-    visual: visual('c4', '#fff2b4', 'mortar-signal', 'mortar-beacon', 1.09, 0.74),
+    visual: visual('c4', '#fff2b4', 'mortar-beacon-shell', 'mortar-beacon', 1.09, 0.74),
   },
   {
     id: 'mortar-c5', tier: 5, name: 'Ночь становится днём', cost: 12000,
     description: 'Шесть парашютных сигнальных зарядов; радиус +34 пкс, интервал ×0,85. Аура обнаружения 320 пкс; метка длится 6 с.',
     delta: {countAdd: 3, splashAdd: 34, intervalMul: 0.85},
     addStatuses: [{kind: 'mark', power: 0.1, duration: 6}],
-    effects: [{id: 'mortar-signal-net', kind: 'aura', stat: 'detect', power: 1.1, radius: 320, interval: 0, duration: 0, cap: 0}],
+    effects: [{id: 'mortar-signal-net', kind: 'aura', stat: 'detect', power: 1, radius: 320, interval: 0, duration: 0, cap: 0}],
     visual: visual('c5', '#fff8d0', 'mortar-parachute', 'mortar-beacon', 1.12, 0.96),
   },
 ];

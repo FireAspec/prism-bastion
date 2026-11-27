@@ -4,6 +4,9 @@ import {resolve} from 'node:path';
 import type {AttackDef, PathIndex, StatusSpec, Tiers, TowerDef, VisualState} from '../../src/contracts';
 import {canUpgrade, legalTiers, sellRefund, upgradeCost} from '../../src/contracts/rules';
 import {getTower} from '../../src/content/towers/mortar';
+import {createCombat} from '../../src/combat';
+import {spawnEnemy} from '../../src/contracts/runtime';
+import type {CombatModule, EnemyDef, GameConfig, GameState, TowerState} from '../../src/contracts';
 
 // Isolated v1 fixture resolver; the neighboring combat implementation is pending
 // at the frozen base commit. This deliberately tests the public data contract.
@@ -203,5 +206,193 @@ describe('Небесная мортира: frozen contract', () => {
     expect(preview).toContain('lang="ru"');
     for (const asset of expected) expect(preview).toContain(asset);
     expect(preview).not.toMatch(/(?:https?:\/\/|<script)/i);
+  });
+});
+
+it('gives every full model an independent projectile and muzzle signal', () => {
+  const t = getTower();
+  const visuals = [t.visual, ...t.paths.flatMap(p => p.upgrades.map(u => u.visual))];
+  for (const key of ['asset', 'projectile', 'muzzle'] as const) {
+    expect(new Set(visuals.map(v => v[key])).size).toBe(16);
+  }
+});
+
+// Integration tests run when the public combat entry point is installed.
+// Only the precise frozen-base sentinel may skip them; unexpected failures propagate.
+let actualCombat: CombatModule | undefined;
+try {
+  actualCombat = createCombat();
+} catch (error) {
+  if (!(error instanceof Error) || error.message !== 'Combat module pending') throw error;
+}
+
+function placedMortar(id: string, tiers: Tiers, x = 0): TowerState {
+  return {id, defId: 'mortar', owner: 'player', pos: {x, y: 0}, tiers, targeting: 'first',
+    invested: 800, cooldown: 0, abilityCooldowns: {}, memory: {}, damageDealt: 0, kills: 0, generated: 0};
+}
+
+function combatScenario(tiers: Tiers, cloaked = false) {
+  const enemy: EnemyDef = {id: 'target', name: 'Target', description: '', color: '#f44', shape: 'orb',
+    hp: 10000, speed: 0, bounty: 10, leak: 1, radius: 10, armor: 0, shield: 0, regen: 0,
+    cloaked, flying: false, resist: {}, children: [], layers: [{hp: 10000, cash: 10, color: '#f44'}]};
+  const config: GameConfig = {
+    version: 1, towers: [getTower()], enemies: [enemy], waves: [],
+    maps: [{id: 'test-map', name: '', description: '', difficulty: 1, campaignIndex: 1,
+      recommendedDifficulty: 'normal', waveOverrides: {}, lanes: [[{x: 0, y: 0}, {x: 1000, y: 0}]],
+      pathWidth: 10, blocked: [], water: [], theme: 'garden', background: ''}],
+    modes: [], campaign: [], contentVersion: '1', contentDigest: 'test', knowledge: [],
+    economy: {xpCurve: [200, 40, 5], maxRewardLevel: 51, pointsPerLevel: 3, mapXP: [250,400,600,900],
+      mapSeals: [80,120,180,260], modeReward: {}, firstClearXP: 1.5, repeatXP: 0.65,
+      repeatSeals: 0.35, defeatXP: 0.35, respecCost: 200},
+    difficulties: [], knowledgeDiscount: 0, startCredits: 0, startLives: 150, sellRatio: 0.7,
+  };
+  const tower = placedMortar('t1', tiers);
+  const state: GameState = {
+    version: 1, options: {mapId: 'test-map', difficulty: 'normal', seed: 1, endless: false,
+      modeId: 'standard', unlockedTowers: ['mortar'], players: [], runId: 'mortar-test', knowledge: []},
+    phase: 'wave', time: 0, rules: {incomeMul: 1, startingCashMul: 1, enemyHpMul: 1, enemySpeedMul: 1,
+      towerCostMul: 1, sellAllowed: true, maxLives: 150, allowAbilities: true, allowPassiveIncome: true,
+      maxTowers: 60, maxTier: 5, weather: 'none', allowKnowledge: false, rounds: 60,
+      roundRewardBase: 80, roundRewardStep: 4, popCashMul: 1},
+    tick: 0, rng: 1, nextEntity: 1, nextEvent: 1, credits: 0, lives: 150, wave: 1, waveTime: 0,
+    spawnCursor: [], paused: false, speed: 1, autoStart: false, towers: [tower], enemies: [],
+    events: [], projectiles: [], strikes: [],
+    stats: {spent: 0, earned: 0, kills: 0, damage: 0, leaks: 0, abilities: 0, cashSubunits: 0},
+  };
+  const spawn = (x: number) => spawnEnemy(state, config, enemy.id, 0, x);
+  const advance = (ticks: number) => {
+    for (let i = 0; i < ticks; i++) {
+      state.tick++;
+      state.time = state.tick / 60;
+      state.waveTime = state.time;
+      actualCombat!.step(state, config, 1 / 60);
+    }
+  };
+  return {state, config, tower, spawn, advance};
+}
+
+describe.skipIf(!actualCombat)('Небесная мортира: combat integration', () => {
+  it('matches the independent resolver for all 64 legal combinations', () => {
+    const def = getTower();
+    let count = 0;
+    for (let a = 0; a <= 5; a++) for (let b = 0; b <= 5; b++) for (let c = 0; c <= 5; c++) {
+      const tiers: Tiers = [a, b, c];
+      if (!legalTiers(tiers)) continue;
+      const actual = actualCombat!.resolveTower(def, tiers);
+      const expected = fixtureResolve(def, tiers);
+      const normalize = (attack: AttackDef) => ({...attack,
+        statuses: attack.statuses.map(s => ({...s, maxStacks: s.maxStacks ?? 1}))});
+      expect(normalize(actual.attack)).toEqual(normalize(expected.attack));
+      expect(actual.effects).toEqual(expected.effects);
+      expect(actual.abilities).toEqual(expected.abilities);
+      expect(actual.visual).toEqual(expected.visual);
+      expect(actual.mainPath).toBe(expected.mainPath);
+      expect(actual.secondaryOverlay).toBe(expected.secondaryOverlay);
+      count++;
+    }
+    expect(count).toBe(64);
+  });
+
+  it('deals damage only after the windup and projectile reaches the landing point', () => {
+    const f = combatScenario([0, 0, 0]);
+    const enemy = f.spawn(100);
+    f.advance(30);
+    expect(enemy.hp).toBe(10000);
+    expect(f.state.projectiles.length).toBe(1);
+    f.advance(12);
+    expect(enemy.hp).toBe(9950);
+    expect(f.state.events.filter(e => e.kind === 'projectileImpact')).toHaveLength(1);
+    expect(f.state.events.find(e => e.kind === 'projectileImpact')?.pos?.x).toBeCloseTo(100, 6);
+  });
+
+  it('misses a target that leaves the blast area after launch', () => {
+    const f = combatScenario([0, 0, 0]);
+    const enemy = f.spawn(100);
+    f.advance(17);
+    expect(f.state.projectiles.length).toBe(1);
+    enemy.pos.x = 300; enemy.progress = 300;
+    f.advance(30);
+    expect(enemy.hp).toBe(10000);
+    expect(f.state.events.filter(e => e.kind === 'miss')).toHaveLength(1);
+  });
+
+  it('launches ten cluster shells distributed among available targets', () => {
+    const f = combatScenario([0, 5, 0]);
+    f.spawn(100); f.spawn(200);
+    f.advance(17);
+    expect(f.state.projectiles).toHaveLength(10);
+    expect(new Set(f.state.projectiles.map(p => p.target)).size).toBe(2);
+    expect(f.state.projectiles.every(p => p.visual === 'mortar-swarm')).toBe(true);
+    expect(f.state.stats.damage).toBe(0);
+    f.advance(40);
+    expect(f.state.events.filter(e => e.kind === 'projectileImpact')).toHaveLength(10);
+    expect(f.state.stats.damage).toBeGreaterThan(0);
+  });
+
+  it('launches an active meteor, enforces cooldown and respects no-actives rules', () => {
+    const f = combatScenario([5, 0, 0]);
+    const enemy = f.spawn(200);
+    const farther = f.spawn(500);
+    f.tower.cooldown = 100;
+    const id = 'mortar-skyfall';
+    f.state.rules.allowAbilities = false;
+    expect(actualCombat!.activate(f.state, f.config, f.tower.id, id).ok).toBe(false);
+    f.state.rules.allowAbilities = true;
+    expect(actualCombat!.activate(f.state, f.config, f.tower.id, id).ok).toBe(true);
+    expect(f.state.projectiles).toHaveLength(1);
+    expect(f.state.projectiles[0].target).toBe(enemy.id);
+    expect(f.tower.abilityCooldowns[id]).toBe(65);
+    expect(actualCombat!.activate(f.state, f.config, f.tower.id, id).ok).toBe(false);
+    f.advance(10);
+    expect(enemy.hp).toBe(10000);
+    f.advance(40);
+    expect(enemy.hp).toBe(9480);
+    expect(farther.hp).toBe(10000);
+  });
+
+  it('applies cluster overclock to the next attack interval', () => {
+    const f = combatScenario([0, 5, 0]);
+    f.spawn(100);
+    const id = 'mortar-cluster-overclock';
+    expect(actualCombat!.activate(f.state, f.config, f.tower.id, id).ok).toBe(true);
+    f.advance(1);
+    const ordinary = actualCombat!.resolveTower(getTower(), [0, 5, 0]).attack.interval;
+    expect(f.tower.cooldown).toBeCloseTo(ordinary / 1.3, 8);
+    expect(f.tower.memory['combat:overclockUntil']).toBe(7);
+    expect(f.tower.abilityCooldowns[id]).toBeGreaterThan(49);
+  });
+
+  it('reveals and marks a cloaked target, extending the mark at C5', () => {
+    const f = combatScenario([0, 0, 5], true);
+    const enemy = f.spawn(100);
+    f.advance(60);
+    expect(enemy.hp).toBeLessThan(10000);
+    const reveal = enemy.statuses.find(s => s.kind === 'reveal');
+    const mark = enemy.statuses.find(s => s.kind === 'mark');
+    const slow = enemy.statuses.find(s => s.kind === 'slow');
+    expect(reveal?.duration).toBe(4);
+    expect(mark?.duration).toBe(6);
+    expect(mark?.power).toBe(0.1);
+    expect(slow?.power).toBe(0.18);
+    expect(mark?.remaining).toBeGreaterThan(5);
+  });
+
+  it('supports allies inside the C5 detection radius, not outside it', () => {
+    const f = combatScenario([0, 0, 5], true);
+    f.spawn(500);
+    f.state.towers.push(placedMortar('inside', [0, 0, 0], 300),
+      placedMortar('outside', [0, 0, 0], 321));
+    f.advance(1);
+    expect(f.state.strikes.map(s => s.source)).toEqual(['inside']);
+  });
+
+  it('keeps burn at two stacks despite three shells from an A5/B1 cross-path', () => {
+    const f = combatScenario([5, 1, 0]);
+    const enemy = f.spawn(100);
+    f.advance(60);
+    const burn = enemy.statuses.find(s => s.kind === 'burn');
+    expect(burn?.stacks).toBe(2);
+    expect(burn?.power).toBe(6);
+    expect(f.state.stats.damage).toBeGreaterThan(0);
   });
 });
