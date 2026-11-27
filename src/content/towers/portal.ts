@@ -4,8 +4,8 @@ const ART = '/art/towers/portal/';
 const colors = {a: '#a997ff', b: '#ffb272', c: '#79f5d6'} as const;
 
 function visual(asset: string, accent: string, motion: VisualState['motion'] = 'pulse', glow = 1): VisualState {
-  return {asset: `${ART}${asset}.svg`, accent, muzzle: 'portal-aperture',
-    projectile: 'rift-comet', impact: 'rift-ripple', scale: 1, glow, motion};
+  return {asset: `${ART}${asset}.svg`, accent, muzzle: `portal-aperture-${asset}`,
+    projectile: `rift-comet-${asset}`, impact: `rift-ripple-${asset}`, scale: 1, glow, motion};
 }
 
 function attack(change: Partial<AttackDef> = {}): AttackDef {
@@ -39,8 +39,9 @@ const PORTAL: TowerDef = {
       description: 'Откатывает врага по маршруту, соблюдая личный иммунитет к повторному возврату.',
       upgrades: [
         upgrade('a', 1, 'Направляющие прилива',
-          'Дальность +12%; импульс отталкивает на 5 пикселей.',
-          780, {rangeMul: 1.12, pushAdd: 5}),
+          'Дальность +12%; попадание замедляет цель на 12% на 0,8 с.',
+          780, {rangeMul: 1.12},
+          {addStatuses: [{kind: 'slow', power: 0.12, duration: 0.8, maxStacks: 1}]}),
         upgrade('a', 2, 'Знак повторения',
           'Интервал −12%; попадание помечает цель на 1,8 с (+10% входящего урона).',
           1555, {intervalMul: 0.88},
@@ -62,8 +63,8 @@ const PORTAL: TowerDef = {
               homing: false, windup: 0.18, statuses: [{kind: 'mark', power: 0.1, duration: 2, maxStacks: 1}]}),
             effects: [effect('portal-return', 'portal', 135, {radius: 235, interval: 3.5, duration: 7, cap: 1})],
             abilities: [{id: 'portal-grand-rewind', name: 'Вторая попытка',
-              description: 'Возвращает цели в радиусе 235 на 165 пикселей с защитой от повторного контроля.',
-              kind: 'rewind', power: 165, duration: 0, radius: 235, cooldown: 55, element: 'energy'}]}),
+              description: 'Возвращает цели в радиусе 235 на 165 пикселей с личным иммунитетом 7 с.',
+              kind: 'rewind', power: 165, duration: 7, radius: 235, cooldown: 55, element: 'energy'}]}),
       ]},
     {id: 'portal-rift', name: 'Разлом',
       description: 'Превращает трещину в разрастающееся поле энергетических взрывов.',
@@ -72,8 +73,8 @@ const PORTAL: TowerDef = {
           'Урон энергетического импульса +30%, скорость полёта снаряда +25%.',
           675, {damageMul: 1.3, projectileSpeedMul: 1.25}),
         upgrade('b', 2, 'Осколочный концентратор',
-          'Пробивание брони +3, урон щитам ×1,2, радиус взрыва +14 пикселей.',
-          1350, {armorPierceAdd: 3, shieldMultiplierMul: 1.2, splashAdd: 14}),
+          'Бронепробитие +3, щиты ×1,2, прямой снаряд пробивает ещё одну цель; взрывы получают +14 к радиусу.',
+          1350, {armorPierceAdd: 3, shieldMultiplierMul: 1.2, pierceAdd: 1, splashAdd: 14}),
         upgrade('b', 3, 'Рваная кромка',
           'Взрыв 26 урона раз в 1,55 с, радиус 48; снимает 3 брони на 3 с.',
           3375, {rangeMul: 1.06},
@@ -88,15 +89,15 @@ const PORTAL: TowerDef = {
             statuses: [{kind: 'shred', power: 4, duration: 3.5, maxStacks: 1},
               {kind: 'slow', power: 0.25, duration: 1.3, maxStacks: 1}]})}),
         upgrade('b', 5, 'Сердце открытого разлома',
-          'Кольцевая детонация 95 урона раз в 1,75 с, область 110. Эхо 35% урона / 3,4 с максимум по 4 целям.',
+          'Дальний взрыв: базовые 95 урона, радиус 110, интервал 1,75 с. Каждая атака создаёт эхо 35% урона через 3,4 с, до 4 целей.',
           20250, {bossMultiplierMul: 1.25},
-          {replaceAttack: attack({mode: 'pulse', damage: 95, interval: 1.75, range: 220,
-            splash: 110, pierce: 4, projectileSpeed: 0, projectileRadius: 0,
-            homing: false, windup: 0.32, statuses: [
+          {replaceAttack: attack({mode: 'splash', damage: 95, interval: 1.75, range: 220,
+            splash: 110, projectileSpeed: 280, projectileRadius: 11,
+            homing: true, windup: 0.32, statuses: [
               {kind: 'shred', power: 6, duration: 4, maxStacks: 1},
               {kind: 'slow', power: 0.3, duration: 1.5, maxStacks: 1}] }),
             effects: [effect('portal-rift-echo', 'echo', 0.35,
-              {radius: 220, interval: 3.4, duration: 0, cap: 4, element: 'energy'})]}),
+              {radius: 135, interval: 3.4, duration: 0, cap: 4, element: 'energy'})]}),
       ]},
     {id: 'portal-courier', name: 'Курьер',
       description: 'Транспортные кольца увеличивают дальность и скорость атаки соседних башен, но не усиливают себя.',
@@ -123,7 +124,7 @@ const PORTAL: TowerDef = {
               effect('portal-courier-range', 'aura', 0.16, {stat: 'range', radius: 230}),
               effect('portal-courier-speed', 'aura', 0.16, {stat: 'attackSpeed', radius: 230})]}),
         upgrade('c', 5, 'Три кольца горизонта',
-          'Ауры +22% дальности и +24% темпа в радиусе 265. Цепь по 4 целям и перегрузка союзников на 7 с раз в 70 с.',
+          'Ауры +22% дальности и +24% темпа в радиусе 265. Цепь по 4 целям; активное ускорение самой арки на 30% на 7 с раз в 70 с.',
           19240, {rangeMul: 1.08},
           {replaceAttack: attack({mode: 'chain', damage: 31, interval: 1.05, range: 235,
               chains: 3, chainRadius: 135, homing: false, projectileSpeed: 0,
@@ -133,8 +134,8 @@ const PORTAL: TowerDef = {
               effect('portal-courier-range', 'aura', 0.22, {stat: 'range', radius: 265}),
               effect('portal-courier-speed', 'aura', 0.24, {stat: 'attackSpeed', radius: 265})],
             abilities: [{id: 'portal-courier-overclock', name: 'Срочная доставка',
-              description: 'Ускоряет соседние башни в радиусе 240 на 7 секунд.',
-              kind: 'overclock', power: 0.3, duration: 7, radius: 240,
+              description: 'На 7 секунд увеличивает темп атаки самой арки на 30%; не меняет её ауры.',
+              kind: 'overclock', power: 0.3, duration: 7, radius: 0,
               cooldown: 70, element: 'energy'}]}),
       ]},
   ],

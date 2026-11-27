@@ -3,29 +3,28 @@ import {readFileSync, readdirSync} from 'node:fs';
 import {resolve} from 'node:path';
 import type {AttackDef, EffectDef, PathIndex, ResolvedTower, StatDelta, Tiers, TowerDef} from '../../src/contracts';
 import {getTower} from '../../src/content/towers/portal';
+import {legalTiers} from '../../src/contracts/rules';
+import {createCombat} from '../../src/combat';
 
 const art = resolve('public/art/towers/portal');
 const expectedPrices = [[780, 1555, 3885, 9315, 23290],
   [675, 1350, 3375, 8100, 20250], [645, 1285, 3210, 7695, 19240]];
 
 function legal(tiers: Tiers): boolean {
-  return tiers.every(t => Number.isInteger(t) && t >= 0 && t <= 5)
-    && tiers.filter(t => t > 0).length <= 2
-    && tiers.filter(t => t > 2).length <= 1;
+  return legalTiers(tiers);
 }
 
 /** Fixture implementation of the documented v1 resolution order; no combat or catalog dependency. */
 function fixtureResolve(tower: TowerDef, tiers: Tiers): ResolvedTower {
   if (!legal(tiers)) throw new RangeError(`illegal tiers ${tiers.join('-')}`);
-  const mainIndex = tiers.findIndex(t => t > 2);
-  const chosenIndex = mainIndex >= 0 ? mainIndex : tiers.findIndex(t => t > 0);
-  const mainPath = chosenIndex >= 0 ? chosenIndex as PathIndex : undefined;
+  const mainPath = ([0,1,2] as PathIndex[]).filter(i => tiers[i] > 0)
+    .sort((a,b) => tiers[b] - tiers[a] || a - b)[0];
   const chosen = mainPath === undefined ? [] : tower.paths[mainPath].upgrades.slice(0, tiers[mainPath]);
   const replacement = [...chosen].reverse().find(u => u.replaceAttack)?.replaceAttack;
   const attack = structuredClone(replacement ?? tower.attack);
   const effects = new Map(tower.effects.map(e => [e.id, structuredClone(e)]));
   const abilities = new Map(tower.abilities.map(a => [a.id, structuredClone(a)]));
-  let visual = mainPath === undefined ? tower.visual : tower.paths[mainPath].upgrades[tiers[mainPath] - 1].visual;
+  const visual = mainPath === undefined ? tower.visual : tower.paths[mainPath].upgrades[tiers[mainPath] - 1].visual;
   const multiply: (keyof StatDelta)[] = ['damageMul', 'intervalMul', 'rangeMul', 'shieldMultiplierMul',
     'bossMultiplierMul', 'projectileSpeedMul', 'windupMul'];
   const map: Partial<Record<keyof StatDelta, keyof AttackDef>> = {
@@ -49,7 +48,11 @@ function fixtureResolve(tower: TowerDef, tiers: Tiers): ResolvedTower {
       for (const status of u.addStatuses ?? []) {
         const index = attack.statuses.findIndex(s => s.kind === status.kind);
         if (index === -1) attack.statuses.push(structuredClone(status));
-        else attack.statuses[index] = structuredClone(status);
+        else {
+          const prior = attack.statuses[index];
+          attack.statuses[index] = {kind: status.kind, power: Math.max(prior.power, status.power),
+            duration: Math.max(prior.duration, status.duration), maxStacks: Math.max(prior.maxStacks ?? 1, status.maxStacks ?? 1)};
+        }
       }
       for (const e of u.effects ?? []) effects.set(e.id, structuredClone(e));
       for (const a of u.abilities ?? []) abilities.set(a.id, structuredClone(a));
@@ -180,5 +183,64 @@ describe('portal tower v1 content and art', () => {
     expect(two.effects).toHaveLength(0);
     expect(two.paths[2].upgrades[4].effects?.every(e=>e.kind==='aura')).toBe(true);
     // No effect targets its own source: implementation-side aura rule is part of v1 contract.
+  });
+});
+
+describe('portal regression cases', () => {
+  it('keeps the larger early path visible and chooses the smaller index only on ties', () => {
+    expect(fixtureResolve(getTower(), [1,2,0]).visual.asset).toBe('/art/towers/portal/b2.svg');
+    expect(fixtureResolve(getTower(), [1,2,0]).secondaryOverlay).toBe('/art/towers/portal/a1-overlay.svg');
+    expect(fixtureResolve(getTower(), [2,2,0]).mainPath).toBe(0);
+  });
+  it('does not consume the portal immunity with its own basic attacks', () => {
+    for (const tiers of allTiers()) expect(fixtureResolve(getTower(), tiers).attack.push).toBe(0);
+    const a5 = fixtureResolve(getTower(), [5,0,0]);
+    expect(a5.attack.statuses.find(s => s.kind === 'slow')?.power).toBe(.2);
+    expect(a5.abilities[0].duration).toBe(7);
+    expect(a5.attack.statuses.find(s => s.kind === 'mark')?.duration).toBe(2);
+  });
+  it('gives B2 penetration and B5 a real blast plus one delayed echo definition', () => {
+    expect(fixtureResolve(getTower(), [0,2,0]).attack.pierce).toBe(2);
+    const b5 = fixtureResolve(getTower(), [2,5,0]);
+    expect(b5.attack.mode).toBe('splash');
+    expect(b5.attack.splash).toBe(124);
+    expect(b5.attack.projectileSpeed).toBeGreaterThan(0);
+    expect(b5.attack.statuses.find(s => s.kind === 'slow')?.power).toBe(.3);
+    expect(b5.effects.filter(e => e.kind === 'echo')).toHaveLength(1);
+    expect(b5.effects[0]).toMatchObject({power:.35, interval:3.4, cap:4, radius:135});
+  });
+  it('keeps C5 active acceleration separate from its persistent auras', () => {
+    const c5 = fixtureResolve(getTower(), [0,0,5]);
+    expect(c5.abilities[0]).toMatchObject({kind:'overclock', radius:0, power:.3, duration:7, cooldown:70});
+    expect(c5.effects).toHaveLength(2);
+  });
+  it('provides different attack visual identifiers for every purchased state', () => {
+    const tower = getTower();
+    const visuals = [tower.visual, ...tower.paths.flatMap(path => path.upgrades.map(u => u.visual))];
+    for (const key of ['asset','muzzle','projectile','impact'] as const)
+      expect(new Set(visuals.map(v => v[key])).size).toBe(16);
+  });
+});
+function availableCombat() {
+  try { return createCombat(); }
+  catch (error) {
+    if (error instanceof Error && error.message === 'Combat module pending') return undefined;
+    throw error;
+  }
+}
+const combat = availableCombat();
+describe.skipIf(!combat)('portal with production combat (runs after integration)', () => {
+  it('matches the independent contract fixture on all 64 legal combinations', () => {
+    const tower = getTower();
+    for (const tiers of allTiers()) {
+      const expected = fixtureResolve(tower, tiers);
+      const actual = combat!.resolveTower(tower, tiers);
+      expect(actual.attack).toEqual(expected.attack);
+      expect(actual.effects).toEqual(expected.effects);
+      expect(actual.abilities).toEqual(expected.abilities);
+      expect(actual.visual).toEqual(expected.visual);
+      expect(actual.mainPath).toBe(expected.mainPath);
+      expect(actual.secondaryOverlay).toBe(expected.secondaryOverlay);
+    }
   });
 });

@@ -7,7 +7,7 @@
   <filter id="halo" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.7"/></filter>
   <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.2"/></filter>
   <clipPath id="gateway"><path d="M45 91V53C45 26 83 26 83 53V91Z"/></clipPath>
-  </defs>
+  </defs><g transform="translate(64 64) scale(.9) translate(-64 -64)">
     <ellipse cx="64" cy="108" rx="40" ry="11" fill="#07192b" opacity=".36"/>
   <path d="M27 96L38 87H90L101 96 108 108 95 115H33L20 108Z" fill="#1a3141" stroke="#0d192a" stroke-width="3"/>
   <path d="M27 96L38 88H90L101 96 93 105H35Z" fill="url(#iron)" stroke="#e4a961" stroke-width="1.5"/>
@@ -43,4 +43,4 @@
     <path d="M13 69L42 42 54 59 76 32 89 57 113 42" fill="none" stroke="#ffefc2" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
     <path d="M24 92L48 78 64 91 84 72 109 85" fill="none" stroke="#f9a877" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
     <ellipse cx="64" cy="63" rx="33" ry="39" fill="none" stroke="#ffe1ae" stroke-width="3" stroke-dasharray="6 6"/>
-    <circle cx="64" cy="64" r="7" fill="#fff0d5"/></g></svg>
+    <circle cx="64" cy="64" r="7" fill="#fff0d5"/></g></g></svg>
