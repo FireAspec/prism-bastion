@@ -1,5 +1,5 @@
 import {describe,it,expect} from 'vitest';
-import {matrix,profiles,optionsFor,recordRun,replay,canonical,digest,MODES,DIFFICULTIES} from '../../src/balance/replay.mjs';
+import {matrix,profiles,optionsFor,recordRun,replay,canonical,digest,initial,MODES,DIFFICULTIES} from '../../src/balance/replay.mjs';
 import {positions,sampleLanes} from '../../src/balance/strategies.mjs';
 
 const config={contentDigest:'fixture-not-game',maps:Array.from({length:20},(_,i)=>({id:'m'+i,campaignIndex:i+1,recommendedDifficulty:DIFFICULTIES[Math.floor(i/5)]})),
@@ -47,6 +47,16 @@ describe('balance replay infrastructure — fixture only',()=>{
   expect(matrix(config).find(x=>x.modeId==='half-cash').availableTowers).toContain('new-tower');
   expect(optionsFor({...cell,players:4},73).players.map(p=>p.id)).toEqual(['p1','p2','p3','p4']);
   expect(optionsFor(cell,73).knowledge).toEqual([]);
+ });
+ it('checks shared budget and HP scaling for 2 and 4 players',()=>{
+  for(const players of [2,4]){
+   const options=optionsFor({...cell,players},73),factor=players===2?1.25:1.75;
+   const cfg={...config,difficulties:[{id:cell.difficulty,startCredits:100,enemyHpMul:.85,rounds:40}],modes:[{id:'standard',modifiers:{}}]};
+   const state={...fakeEngine(options).getSnapshot(),credits:100*factor,rules:{maxLives:1,rounds:40,enemyHpMul:.85*factor},stats:{earned:0,spent:0,cashSubunits:0}};
+   expect(initial({getSnapshot:()=>structuredClone(state)},options,cfg).credits).toBe(100*factor);
+   expect(()=>initial({getSnapshot:()=>({...structuredClone(state),credits:state.credits+1})},options,cfg)).toThrow(/budget/);
+   expect(()=>initial({getSnapshot:()=>({...structuredClone(state),rules:{...state.rules,enemyHpMul:.85}})},options,cfg)).toThrow(/health/);
+  }
  });
  it('rejects incomplete catalogs',()=>expect(()=>matrix({...config,maps:config.maps.slice(1)})).toThrow());
  it('records only accepted commands and replays exact digest',()=>{
