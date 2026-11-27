@@ -1,0 +1,8 @@
+/* Import once in the host stylesheet. The attributes are maintained by UIAnimator. */
+[data-motion-state='pending']{outline:2px dashed #e7b769;outline-offset:2px}
+[data-motion-state='accepted']{outline:2px solid #84d7ae;outline-offset:2px}
+[data-motion-state='rejected']{outline:2px double #ef998c;outline-offset:2px}
+[data-motion-state='pending']::after{content:' …'}
+[data-motion-state='accepted']::after{content:' ✓'}
+[data-motion-state='rejected']::after{content:' !'}
+[data-motion-state]:focus-visible{box-shadow:0 0 0 5px #f7d28b;outline-offset:2px}

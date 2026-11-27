@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>UI motion QA</title><body><pre id="output">Running</pre><script type="module">
+import {UIAnimator,createUIMotion} from '../../../src/ui-motion/index.ts';
+const settings={reducedMotion:false,quality:'high',colorblind:false,master:1,music:1,sfx:1,language:'en',fullscreen:false};
+const wait=ms=>new Promise(r=>setTimeout(r,ms));const lines=[];const check=(ok,name)=>{if(!ok)throw Error(name);lines.push('PASS '+name);};
+try {
+const root=document.createElement('main'),button=document.createElement('button'),counter=document.createElement('span');root.append(button,counter);document.body.append(root);
+const ui=new UIAnimator(root,settings),text={accepted:'Accepted',rejected:'Rejected',pending:'Pending'};let sends=0;const send=()=>{sends++;return{ok:true,pending:true,requestId:'1'}};
+button.focus();ui.counter(counter,900);ui.submit('buy',button,send,text);ui.submit('buy',button,send,text);
+check(sends===1&&button.dataset.motionState==='pending'&&button.getAnimations().length===0,'double click locks pending without success');
+check(document.activeElement===button,'focus retained');ui.confirm('buy','wrong',{ok:true});check(ui.isPending('buy'),'wrong request ignored');
+ui.confirm('buy','1',{ok:true});check(button.dataset.motionState==='accepted'&&button.getAnimations().length===1,'confirmation starts animation');
+ui.confirm('buy','1',{ok:true});check(!ui.isPending('buy'),'duplicate result ignored');
+let immediate=0;const instant=()=>{immediate++;return{ok:true}};ui.submit('instant',button,instant,text);ui.submit('instant',button,instant,text);check(immediate===1,'immediate double click suppressed');
+ui.counter(counter,650);for(let i=1;i<=500;i++)ui.counter(counter,650+i);await wait(300);check(counter.textContent==='1150','500 counter updates converge');
+ui.submit('reject',button,()=>({ok:false}),text);check(button.dataset.motionState==='rejected','rejection distinct');
+const receipt=Object.freeze({xp:250,seals:80,points:3,levelBefore:1,levelAfter:2,firstClear:true,duplicate:false});check(ui.reward('r',receipt,{reward:button},'Reward',true)&&!ui.reward('r',receipt,{},'Reward',true),'receipt dedup');
+ui.changeScreen();check(button.getAnimations().length===0,'screen change cancels');
+ui.submit('late',button,()=>({ok:false,pending:true,requestId:'2'}),text);ui.changeScreen();ui.confirm('late','2',{ok:true});check(button.getAnimations().length===0,'late confirmation does not animate previous screen');
+ui.counter(counter,0);ui.counter(counter,50);void ui.play(button,'levelUp');ui.setSettings({...settings,reducedMotion:true});check(counter.textContent==='50'&&button.getAnimations().length===0,'reduced motion immediate');
+ui.setSettings(settings);ui.changeScreen();let announcements=0;const live=root.querySelector('[role=status]');const changes=new MutationObserver(()=>announcements++);changes.observe(live,{childList:true,subtree:true,characterData:true});for(let i=0;i<100;i++)ui.submit('reject-'+i,button,()=>({ok:false}),text);await wait(400);changes.disconnect();check(announcements===1,'100 status messages coalesced');void ui.play(button,'open');root.remove();await wait(30);check(button.getAnimations().length===0&&!root.querySelector('[role=status]'),'root removal disposes');
+const motion=createUIMotion(settings);document.body.append(button);const p=motion.play(button,'open');motion.cancel();await p;check(button.getAnimations().length===0,'cancel resolves promise');motion.dispose();
+document.getElementById('output').textContent=lines.join('\n');document.body.dataset.result='passed';
+}catch(e){document.getElementById('output').textContent=lines.join('\n')+'\nFAIL '+e;document.body.dataset.result='failed';}
+</script></body></html>
