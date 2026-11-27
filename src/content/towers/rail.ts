@@ -12,8 +12,9 @@ const baseAttack:AttackDef = {
 function attack(patch:Partial<AttackDef>):AttackDef {
  return {...baseAttack,...patch,statuses:patch.statuses?.map(s=>({...s}))??[]};
 }
-function charge(power:number,cap:number,duration:number):EffectDef {
- return {id:'rail-stored-charge',kind:'charge',power,cap,duration,radius:0,interval:0};
+function charge(power:number,duration:number):EffectDef {
+ // Both power and cap describe the additional bonus, excluding base damage.
+ return {id:'rail-stored-charge',kind:'charge',power,cap:power,duration,radius:0,interval:0};
 }
 function focus(power:number,cap:number):EffectDef {
  return {id:'rail-target-lock',kind:'focus',power,cap,duration:0,radius:0,interval:0};
@@ -23,7 +24,7 @@ function upgrades(path:'a'|'b'|'c',entries:[Step,Step,Step,Step,Step]):UpgradeDe
  const colors={a:'#ffd28b',b:'#72f8eb',c:'#dcacff'};
  return entries.map((entry,index)=>{
   const {projectile,glow,...data}=entry;
-  return {...data,tier:(index+1) as UpgradeDef['tier'],visual:visual(`${path}${index+1}`,colors[path],projectile??`${path}-rail-slug`,index===4?'pulse':'rotate',glow??0.25+index*0.16)};
+  return {...data,tier:(index+1) as UpgradeDef['tier'],visual:visual(`${path}${index+1}`,colors[path],projectile??`${path}${index+1}-rail-slug`,index===4&&path!=='c'?'pulse':'rotate',glow??0.25+index*0.16)};
  });
 }
 const a=upgrades('a',[
@@ -31,19 +32,19 @@ const a=upgrades('a',[
   description:'Урон ×1,16, дальность ×1,06, скорость снаряда ×1,30.',
   delta:{damageMul:1.16,rangeMul:1.06,projectileSpeedMul:1.3}},
  {id:'rail-a2-magnetic-injector',name:'Магнитный инжектор',cost:1095,
-  description:'+14 пробития брони, урон щитам ×1,18, подготовка выстрела короче на 20%.',
-  delta:{armorPierceAdd:14,shieldMultiplierMul:1.18,windupMul:0.8}},
+  description:'+14 пробития брони, урон щитам ×1,18; усиление действует и на луч.',
+  delta:{armorPierceAdd:14,shieldMultiplierMul:1.18}},
  {id:'rail-a3-capacitor',name:'Банк накопителей',cost:2735,
   description:'Снаряд с уроном 220 раз в 3,8 с; ×1,55 по боссам. Заряд за 4,8 с до ×1,75.',delta:{},
   replaceAttack:attack({damage:220,interval:3.8,range:305,armorPierce:28,bossMultiplier:1.55,projectileSpeed:1400,projectileRadius:5.8,windup:0.62}),
-  effects:[charge(0.75,1.75,4.8)]},
+  effects:[charge(0.75,4.8)]},
  {id:'rail-a4-siege-bus',name:'Осадная шина',cost:6555,
   description:'Урон ×1,28, урон по боссам ×1,45; заряд до ×2,10 за 5,5 с.',
-  delta:{damageMul:1.28,bossMultiplierMul:1.45},effects:[charge(1.1,2.1,5.5)]},
+  delta:{damageMul:1.28,bossMultiplierMul:1.45},effects:[charge(1.1,5.5)]},
  {id:'rail-a5-last-argument',name:'Последний довод',cost:16390,
   description:'Три катушки. Одиночный 580-единичный залп раз в 5,2 с, ×4,2 по боссам, ×2,25 по щитам; заряд до ×2,65 за 8 с.',delta:{},
   replaceAttack:attack({damage:580,interval:5.2,range:365,armorPierce:72,shieldMultiplier:2.25,bossMultiplier:4.2,projectileSpeed:1900,projectileRadius:9,windup:1.05}),
-  effects:[charge(1.65,2.65,8)],projectile:'a-singularity-bolt',glow:1.3},
+  effects:[charge(1.65,8)],projectile:'a-singularity-bolt',glow:1.3},
 ]);
 const b=upgrades('b',[
  {id:'rail-b1-long-coils',name:'Удлинённые катушки',cost:475,
@@ -63,20 +64,20 @@ const b=upgrades('b',[
 ]);
 const c=upgrades('c',[
  {id:'rail-c1-gyro-array',name:'Следящий кардан',cost:455,
-  description:'Дальность ×1,10, скорость снаряда ×1,40.',delta:{rangeMul:1.1,projectileSpeedMul:1.4}},
+  description:'Дальность ×1,10, интервал между атаками ×0,90 (быстрее захват следующей цели).',delta:{rangeMul:1.1,intervalMul:0.9}},
  {id:'rail-c2-spectrum-eye',name:'Спектральное око',cost:905,
   description:'Обнаружение скрытых, ×1,12 урона по боссам и ×1,05 дальности.',
   delta:{detects:true,bossMultiplierMul:1.12,rangeMul:1.05}},
  {id:'rail-c3-seeker',name:'Искатель',cost:2260,
-  description:'Самонаведение: 125 урона каждые 2,25 с; обнаружение и метка +10% входящего урона на 3,5 с.',delta:{},
+  description:'Самонаведение: 125 урона каждые 2,25 с; обнаружение и метка +10% входящего урона на 3,5 с, фокус до +20%.',delta:{},
   replaceAttack:attack({damage:125,interval:2.25,range:350,detects:true,homing:true,projectileSpeed:1450,bossMultiplier:1.4,armorPierce:20,windup:0.18,
    statuses:[{kind:'mark',power:0.1,duration:3.5,maxStacks:1},{kind:'reveal',power:1,duration:3.5,maxStacks:1}]}),
   effects:[focus(0.06,0.2)],projectile:'c-guided-dart'},
  {id:'rail-c4-threat-matrix',name:'Матрица угроз',cost:5415,
   description:'Интервал ×0,80, урон по боссам ×1,32, добивание обычных врагов ниже 10% HP; фокус до +40%.',
-  delta:{intervalMul:0.8,bossMultiplierMul:1.32,executeBelowAdd:0.1},effects:[focus(0.1,0.4)],projectile:'c-guided-dart'},
+  delta:{intervalMul:0.8,bossMultiplierMul:1.32,executeBelowAdd:0.1},effects:[focus(0.1,0.4)],projectile:'c-threat-dart'},
  {id:'rail-c5-crown',name:'Корона искателя',cost:13540,
-  description:'Два самонаводящихся болта по 250 урона каждые 1,25 с; обнаружение, метка, фокус до +60%.',delta:{},
+  description:'Два самонаводящихся болта по 250 урона каждые 1,25 с до модификаторов; обнаружение, метка, разрушение 9 брони, добивание и фокус до +60%.',delta:{},
   replaceAttack:attack({damage:250,interval:1.25,range:445,count:2,detects:true,homing:true,projectileSpeed:1900,projectileRadius:5.5,armorPierce:36,bossMultiplier:1.6,executeBelow:0.16,windup:0.16,
    statuses:[{kind:'mark',power:0.1,duration:5,maxStacks:1},{kind:'reveal',power:1,duration:5,maxStacks:1},{kind:'shred',power:9,duration:2.5,maxStacks:1}]}),
   effects:[focus(0.14,0.6)],projectile:'c-dual-tracker',glow:1.25},

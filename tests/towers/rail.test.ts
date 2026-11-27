@@ -16,9 +16,9 @@ const costs=[
 /** Local contract fixture until feature/02-combat is integrated. No game runtime is mocked. */
 function resolveFixture(def:TowerDef,tiers:Tiers):ResolvedTower {
  if(!legalTiers(tiers))throw new RangeError('Illegal tiers');
- const locked=tiers.findIndex(t=>t>2);
- const first=tiers.findIndex(t=>t>0);
- const main=(locked>=0?locked:first) as PathIndex;
+ // The highest tier is primary; ties retain the lower path index.
+ const maxTier=Math.max(...tiers);
+ const main=(maxTier===0?-1:tiers.indexOf(maxTier)) as PathIndex;
  const mainUpgrades=main<0?[]:def.paths[main].upgrades.slice(0,tiers[main]);
  const replacement=[...mainUpgrades].reverse().find(u=>u.replaceAttack)?.replaceAttack;
  const attack:AttackDef=structuredClone(replacement??def.attack);
@@ -120,7 +120,11 @@ describe('Рельсотрон / complete standalone content',()=>{
    expect(result.attack.count).toBeGreaterThanOrEqual(1);
    expect(result.attack.statuses.every(s=>s.duration>0&&s.maxStacks!==0)).toBe(true);
    numericLeaves(result);
-   expect(result.visual.asset).toMatch(/^\/art\/towers\/rail\/(base|[abc][1-5])\.svg$/);
+   const primary=Math.max(...tiers)===0?-1:tiers.indexOf(Math.max(...tiers));
+   expect(result.mainPath).toBe(primary<0?undefined:primary);
+   expect(result.visual.asset).toBe(`/art/towers/rail/${primary<0?'base':paths[primary]+tiers[primary]}.svg`);
+   const secondary=tiers.findIndex((tier,index)=>tier>0&&index!==primary);
+   expect(result.secondaryOverlay).toBe(secondary<0?undefined:`/art/towers/rail/${paths[secondary]}${tiers[secondary]}-overlay.svg`);
    if(result.secondaryOverlay)expect(existsSync(resolve(assetDir,result.secondaryOverlay.split('/').at(-1)!))).toBe(true);
   }
   expect(legal).toBe(64);
@@ -156,6 +160,39 @@ describe('Рельсотрон / complete standalone content',()=>{
   expect(resolveFixture(def,[0,5,0]).attack.count).toBe(3);
  });
 
+ it('keeps early cross-path benefits distinct even on beam specializations',()=>{
+  const def=getTower();
+  const a=resolveFixture(def,[1,0,0]).attack;
+  const b=resolveFixture(def,[0,1,0]).attack;
+  const c=resolveFixture(def,[0,0,1]).attack;
+  expect(a.damage).toBeCloseTo(116);
+  expect(b.range).toBeCloseTo(330.6);
+  expect(b.interval).toBe(2.8);
+  expect(c.interval).toBeCloseTo(2.52);
+  expect(c.projectileSpeed).toBe(def.attack.projectileSpeed);
+  expect(resolveFixture(def,[0,5,1]).attack.interval).toBeCloseTo(1.2852);
+  expect(resolveFixture(def,[0,5,2]).attack.detects).toBe(true);
+  expect(resolveFixture(def,[1,2,0]).mainPath).toBe(1);
+  expect(resolveFixture(def,[2,2,0]).mainPath).toBe(0);
+ });
+ it('keeps charge and focus bounded without stacking obsolete effects',()=>{
+  const def=getTower();
+  for(const [tier,cap,duration] of [[3,.75,4.8],[4,1.1,5.5],[5,1.65,8]]){
+   const r=resolveFixture(def,[tier,0,0]);
+   expect(r.effects).toHaveLength(1);
+   expect(r.effects[0]).toMatchObject({kind:'charge',power:cap,cap,duration});
+  }
+  const finalA=resolveFixture(def,[5,0,0]);
+  expect(finalA.attack.damage).toBeCloseTo(861.184);
+  expect(finalA.attack.bossMultiplier).toBeCloseTo(6.09);
+  const finalC=resolveFixture(def,[0,0,5]);
+  expect(finalC.effects).toHaveLength(1);
+  expect(finalC.effects[0]).toMatchObject({kind:'focus',power:.14,cap:.6});
+  expect(finalC.attack.interval).toBeCloseTo(.9);
+  expect(finalC.attack.executeBelow).toBeCloseTo(.26);
+  expect(finalC.attack.homing).toBe(true);
+  expect(new Set([def.visual,...def.paths.flatMap(p=>p.upgrades.map(u=>u.visual))].map(v=>v.projectile)).size).toBe(16);
+ });
  it('ships the 16 distinct complete drawings, six safe overlays and the live catalog',()=>{
   const expected=['base',...paths.flatMap(p=>[1,2,3,4,5].map(t=>`${p}${t}`))];
   const bodies=new Set<string>();
