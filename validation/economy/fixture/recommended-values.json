@@ -1,0 +1,148 @@
+{
+  "status": "proposal-not-applied",
+  "source": "specification-fixture",
+  "baseline": {
+    "xpCurve": [
+      200,
+      40,
+      5
+    ],
+    "maxRewardLevel": 51,
+    "pointsPerLevel": 3,
+    "mapXP": [
+      250,
+      400,
+      600,
+      900
+    ],
+    "mapSeals": [
+      80,
+      120,
+      180,
+      260
+    ],
+    "modeReward": {
+      "standard": 1,
+      "half-cash": 1.6,
+      "no-leaks": 1.7,
+      "iron-oath": 2.25,
+      "short-supply": 1.45,
+      "blackout": 1.4,
+      "stormfront": 1.45,
+      "overdrive": 1.5,
+      "low-tech": 1.5,
+      "no-actives": 1.35
+    },
+    "firstClearXP": 1.5,
+    "repeatXP": 0.65,
+    "repeatSeals": 0.35,
+    "defeatXP": 0.35,
+    "respecCost": 200
+  },
+  "proposed": {
+    "xpCurve": [
+      200,
+      60,
+      4
+    ],
+    "maxRewardLevel": 51,
+    "pointsPerLevel": 3,
+    "mapXP": [
+      250,
+      400,
+      600,
+      900
+    ],
+    "mapSeals": [
+      80,
+      120,
+      180,
+      260
+    ],
+    "modeReward": {
+      "standard": 1,
+      "half-cash": 1.6,
+      "no-leaks": 1.7,
+      "iron-oath": 2.25,
+      "short-supply": 1.45,
+      "blackout": 1.4,
+      "stormfront": 1.45,
+      "overdrive": 1.5,
+      "low-tech": 1.5,
+      "no-actives": 1.35
+    },
+    "firstClearXP": 1.5,
+    "repeatXP": 0.65,
+    "repeatSeals": 0.35,
+    "defeatXP": 0.35,
+    "respecCost": 200
+  },
+  "candidates": [
+    {
+      "curve": [
+        200,
+        40,
+        5
+      ],
+      "campaignPoints": 54,
+      "diverseHours": 55.05,
+      "expertHours": 40.74,
+      "retryHours": 66.67
+    },
+    {
+      "curve": [
+        200,
+        60,
+        4
+      ],
+      "campaignPoints": 51,
+      "diverseHours": 51.64,
+      "expertHours": 37.97,
+      "retryHours": 62.89
+    },
+    {
+      "curve": [
+        200,
+        75,
+        3
+      ],
+      "campaignPoints": 51,
+      "diverseHours": 47.91,
+      "expertHours": 34.88,
+      "retryHours": 58.46
+    },
+    {
+      "curve": [
+        200,
+        96,
+        2
+      ],
+      "campaignPoints": 51,
+      "diverseHours": 45.2,
+      "expertHours": 32.21,
+      "retryHours": 55.13
+    },
+    {
+      "curve": [
+        200,
+        113,
+        1
+      ],
+      "campaignPoints": 48,
+      "diverseHours": 40.95,
+      "expertHours": 29.33,
+      "retryHours": 49.59
+    }
+  ],
+  "targets": {
+    "campaignPoints": [
+      30,
+      55
+    ],
+    "hours": [
+      35,
+      65
+    ]
+  },
+  "note": "Minimize nominal target deviations across diverse, expert and retry routes; validate duration and win rate in replay."
+}
