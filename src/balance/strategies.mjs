@@ -21,11 +21,24 @@ export function sampleLanes(map,spacing=32){
   return Array.from({length:n},(_,j)=>({x:a.x+(b.x-a.x)*(j+.5)/n,y:a.y+(b.y-a.y)*(j+.5)/n,weight:len/n}));
  }));
 }
-export function positions(map,def,samples,grid=32){
+function inPoly(p,poly){
+ let inside=false;
+ for(let i=0,j=poly.length-1;i<poly.length;j=i++){
+  const a=poly[i],b=poly[j];
+  if((a.y>p.y)!==(b.y>p.y)&&p.x<(b.x-a.x)*(p.y-a.y)/(b.y-a.y)+a.x)inside=!inside;
+ }
+ return inside;
+}
+function edgeDistance(p,poly){return Math.min(...poly.map((b,i)=>seg(p,poly[(i+poly.length-1)%poly.length],b)));}
+function touches(p,r,poly){return inPoly(p,poly)||edgeDistance(p,poly)<r;}
+export function positions(map,def,samples,grid=24){
  const result=[],r=def.footprint;
  for(let y=r+1;y<720-r;y+=grid)for(let x=r+1;x<1280-r;x+=grid){
   const p={x,y};
   if(map.lanes.some(l=>l.slice(1).some((b,i)=>seg(p,l[i],b)<map.pathWidth/2+r)))continue;
+  if(map.blocked.some(poly=>touches(p,r,poly)))continue;
+  if(def.placement==='water'&&!map.water.some(poly=>inPoly(p,poly)&&edgeDistance(p,poly)>=r))continue;
+  if(def.placement==='land'&&map.water.some(poly=>touches(p,r,poly)))continue;
   const range=def.attack.range||def.effects.reduce((v,e)=>Math.max(v,e.radius),0)||150;
   const coverage=samples.map(l=>l.reduce((n,q)=>n+(dist(p,q)<=range?q.weight:0),0));
   if(coverage.every(c=>c===0)&&def.category!=='economy')continue;
@@ -87,7 +100,7 @@ export function makePolicy(combat){
      if(next[p]===5&&s.towers.some(o=>o.defId===t.defId&&o.tiers[p]===5))continue;
      const u=d.paths[p].upgrades[next[p]-1];if(!u)continue;
      const res=combat.resolveTower(d,next);
-     if(forbidMoney&&economic(res)&&!economic(prev))continue;
+     if(forbidMoney&&economic(res))continue;
      const cost=estimate(u.cost);if(cost*.8>s.credits)continue;
      const benefit=value(res,st,s.phase,remaining,attacks)-value(prev,st,s.phase,remaining,attacks);
      // A modest unlock value allows buying useful but weak prerequisite tiers.
