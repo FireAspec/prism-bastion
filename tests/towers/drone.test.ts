@@ -47,7 +47,7 @@ function mergeStatuses(existing: StatusSpec[], next: StatusSpec[]): StatusSpec[]
 function fixtureResolve(def: TowerDef, tiers: Tiers): ResolvedTower {
   if (!legalTiers(tiers)) throw new RangeError('Illegal tier vector');
   const active = [0, 1, 2].filter(i => tiers[i] > 0) as PathIndex[];
-  const main = (active.find(i => tiers[i] > 2) ?? active[0]) as PathIndex | undefined;
+  const main = [...active].sort((a, b) => tiers[b] - tiers[a] || a - b)[0] as PathIndex | undefined;
   const mainUpgrades = main === undefined ? [] : def.paths[main].upgrades.slice(0, tiers[main]);
   const replacement = [...mainUpgrades].reverse().find(u => u.replaceAttack)?.replaceAttack;
   const a = structuredClone(replacement ?? def.attack);
@@ -106,8 +106,14 @@ describe('Ангар дронов — каталог и контракт', () =>
       for (const effect of u.effects ?? []) {
         for (const field of ['power', 'radius', 'interval', 'duration', 'cap'] as const)
           expect(Number.isFinite(effect[field])).toBe(true);
-        expect(effect.kind).toBe('aura');
-        expect(effect.stat).toBeTruthy();
+        if (effect.kind === 'aura') expect(effect.stat).toBeTruthy();
+        else {
+          expect(effect.kind).toBe('echo');
+          expect(effect.power).toBeGreaterThan(0);
+          expect(effect.power).toBeLessThanOrEqual(1);
+          expect(effect.cap).toBe(2);
+          expect(effect.interval).toBeGreaterThanOrEqual(0.05);
+        }
       }
     }));
   });
@@ -123,7 +129,11 @@ describe('Ангар дронов — каталог и контракт', () =>
       expect(a.range).toBeGreaterThan(0);
       expect(a.damage).toBeGreaterThan(0);
       expect(a.pierce).toBeGreaterThan(0);
-      expect(a.mode).toBe('drone');
+      expect(a.mode).toBe(tiers[1] >= 3 ? 'splash' : 'drone');
+      if (a.mode === 'drone') {
+        expect(a.splash).toBe(0);
+        expect(a.chains).toBe(0);
+      }
       for (const value of Object.values(a)) if (typeof value === 'number') expect(Number.isFinite(value)).toBe(true);
       expect(new Set(resolved.effects.map(e => e.id)).size).toBe(resolved.effects.length);
       expect(existsSync(resolve('public', resolved.visual.asset.replace(/^\.\//, '')))).toBe(true);
@@ -159,14 +169,19 @@ describe('Ангар дронов — каталог и контракт', () =>
     const c = fixtureResolve(tower, [0, 0, 5]);
     expect(base.count).toBe(1);
     expect(a.count).toBe(6);
-    expect(a.chains).toBe(1);
+    expect(a.chains).toBe(0);
+    expect(fixtureResolve(tower, [5, 0, 0]).effects).toContainEqual({
+      id: 'drone-swarm-echo', kind: 'echo', power: 0.35, radius: 65, interval: 0.35, duration: 0, cap: 2,
+    });
     expect(a.pierce).toBe(2);
+    expect(b.mode).toBe('splash');
     expect(b.splash).toBe(90);
     expect(b.armorPierce).toBe(24);
-    expect(b.statuses.map(s => s.kind)).toContain('shred');
+    expect(b.statuses).toContainEqual({kind: 'shred', power: 8, duration: 3});
     expect(c.attack.detects).toBe(true);
     expect(c.attack.count).toBe(4);
-    expect(c.effects.map(e => e.stat).sort()).toEqual(['attackSpeed', 'damage', 'detect', 'range']);
+    expect(c.effects.filter(e => e.kind === 'aura').map(e => e.stat).sort()).toEqual(['attackSpeed', 'damage', 'detect', 'range']);
+    expect(c.effects.find(e => e.kind === 'echo')).toMatchObject({power: 0.4, radius: 85, interval: 0.4, cap: 2});
     expect(c.effects.find(e => e.stat === 'detect')?.radius).toBe(310);
     expect(c.effects.find(e => e.stat === 'damage')?.power).toBe(0.18);
     expect(fixtureResolve(tower, [0, 5, 2]).attack.statuses.map(s => s.kind)).toEqual(['shred', 'reveal', 'mark']);
@@ -177,13 +192,33 @@ describe('Ангар дронов — каталог и контракт', () =>
     expect(fixtureResolve(tower, [2, 0, 5]).attack.count).toBe(5);
   });
 
+  it('chooses the higher early tier as primary, with index only breaking ties', () => {
+    const tower = getTower();
+    for (const [tiers, primary, secondary] of [
+      [[1, 2, 0], 1, 'a1'], [[1, 0, 2], 2, 'a1'], [[0, 1, 2], 2, 'b1'],
+      [[2, 2, 0], 0, 'b2'], [[2, 0, 2], 0, 'c2'], [[0, 2, 2], 1, 'c2'],
+    ] as Array<[Tiers, PathIndex, string]>) {
+      const result = fixtureResolve(tower, tiers);
+      expect(result.mainPath).toBe(primary);
+      expect(result.visual.asset).toContain(letters[primary] + '2.svg');
+      expect(result.secondaryOverlay).toContain(secondary + '-overlay.svg');
+    }
+  });
+
+  it('provides distinct projectile and launch visual keys for every model', () => {
+    const tower = getTower();
+    const visuals = [tower.visual, ...tower.paths.flatMap(p => p.upgrades.map(u => u.visual))];
+    expect(new Set(visuals.map(v => v.projectile)).size).toBe(16);
+    expect(new Set(visuals.map(v => v.muzzle)).size).toBe(16);
+  });
+
   it('does not sell for over 70% and never earns credits from its aura', () => {
     const tower = getTower();
     for (const tiers of combinations) {
       let invested = tower.cost;
       tiers.forEach((n, p) => tower.paths[p].upgrades.slice(0, n).forEach(u => { invested += u.cost; }));
       expect(sellRefund(invested)).toBeLessThanOrEqual(Math.floor(invested * 0.7));
-      expect(fixtureResolve(tower, tiers).effects.every(e => e.kind === 'aura')).toBe(true);
+      expect(fixtureResolve(tower, tiers).effects.every(e => e.kind === 'aura' || e.kind === 'echo')).toBe(true);
     }
   });
 
