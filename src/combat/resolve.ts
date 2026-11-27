@@ -65,5 +65,5 @@ export function resolveTower(def:TowerDef,tiers:Tiers):ResolvedTower {
   const secondary=selected.find(p=>p!==primary);
   return {attack,effects:[...effects.values()],abilities:[...abilities.values()],visual,
     ...(primary===undefined?{}:{mainPath:primary}),
-    ...(secondary===undefined?{}:{secondaryOverlay:def.paths[secondary].upgrades[tiers[secondary]-1].visual.asset})};
+    ...(secondary===undefined?{}:{secondaryOverlay:def.paths[secondary].upgrades[tiers[secondary]-1].visual.asset.replace(/\.svg$/,'-overlay.svg')})};
 }

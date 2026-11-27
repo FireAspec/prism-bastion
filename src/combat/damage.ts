@@ -20,7 +20,7 @@ function applyStatuses(s:GameState,e:EnemyState,def:EnemyDef,statuses:StatusSpec
     const hard=status.kind==='stun'||status.kind==='freeze';
     if(hard && (e.memory['combat:hardUntil']??0)>s.time)continue;
     const control=def.boss?num(def.boss.controlFactor,.15,1):1;
-    const duration=hard?Math.min(def.boss?.phases?0.5:1,status.duration*control):status.duration*(def.boss?control:1);
+    const duration=hard?Math.min(def.boss?.phases?0.5:1,status.duration*control):status.duration*(def.boss&&status.kind==='slow'?control:1);
     if(duration<=0)continue;
     const found=e.statuses.find(x=>x.kind===status.kind && (status.kind==='burn'||status.kind==='poison'?x.source===source:true));
     if(found){
@@ -93,7 +93,7 @@ function checkPhases(s:GameState,e:EnemyState,def:EnemyDef,previousHp:number):vo
 
 function oneHit(s:GameState,c:GameConfig,id:string,p:DamagePacket,queue:Hit[]):void {
   const e=s.enemies.find(enemy=>enemy.id===id);
-  if(!e||!alive(e)||!Number.isFinite(p.damage)||p.damage<=0)return;
+  if(!e||!alive(e)||!Number.isFinite(p.damage)||p.damage<0)return;
   const def=c.enemies.find(enemy=>enemy.id===e.defId);
   if(!def)return;
   const resist=num(def.resist[p.element]??0,0,.8);
@@ -104,7 +104,7 @@ function oneHit(s:GameState,c:GameConfig,id:string,p:DamagePacket,queue:Hit[]):v
   if(marked)raw*=1.1;
   if(wet&&p.element==='electric')raw*=1.2;
   if(cold&&p.element==='kinetic')raw*=1.1;
-  if(raw<=0)return;
+  if(raw<=0){applyStatuses(s,e,def,p.statuses,p.source);return;}
   const shieldMultiplier=Math.max(.01,num(p.shieldMultiplier,.01));
   const shieldRemoved=Math.min(e.shield,raw*shieldMultiplier);
   e.shield=Math.max(0,e.shield-shieldRemoved);

@@ -25,7 +25,7 @@ export function supportAt(s:GameState,c:GameConfig,target:TowerState,resolvedCac
     if(tower.id===target.id)continue;
     const def=defOf(c,tower);if(!def)continue;
     for(const e of (resolvedCache?.get(tower.id)??resolveTower(def,tower.tiers)).effects){
-      if(e.kind!=='aura'||!e.stat||distance(tower.pos,target.pos)>e.radius*(1+knowledgeBonus(s,c,tower,'supportRadius')))continue;
+      if(e.kind!=='aura'||!e.stat||distance(tower.pos,target.pos)>e.radius)continue;
       if(e.stat==='detect'){result.detect||=e.power>0;continue;}
       result[e.stat]=Math.max(result[e.stat],Math.max(0,e.power));
     }
@@ -36,28 +36,16 @@ export function supportAt(s:GameState,c:GameConfig,target:TowerState,resolvedCac
   return result;
 }
 
-function knowledgeBonus(s:GameState,c:GameConfig,t:TowerState,stat:string):number {
-  if(!s.rules.allowKnowledge)return 0;
-  return c.knowledge.filter(n=>s.options.knowledge.includes(n.id)).flatMap(n=>n.effects)
-    .filter(e=>e.stat===stat&&(!e.towers||e.towers.includes(t.defId)))
-    .reduce((total,e)=>total+e.value,0);
-}
-
 function effectiveAttack(s:GameState,c:GameConfig,t:TowerState,resolved:ResolvedTower,cache:Map<string,ResolvedTower>):AttackDef {
   const attack=structuredClone(resolved.attack);
   const support=supportAt(s,c,t,cache);
-  const def=defOf(c,t);
-  const elemental=attack.element!=='kinetic';
-  const water=def?.placement==='water';
-  attack.damage*=1+support.damage+knowledgeBonus(s,c,t,'weaponDamage')+(elemental?knowledgeBonus(s,c,t,'elementDamage'):0)+(water?knowledgeBonus(s,c,t,'waterDamage'):0);
+  // Progression applies knowledge once to the run configuration before combat.
+  attack.damage*=1+support.damage;
   if((t.memory['combat:overclockUntil']??0)>s.time)attack.interval/=1+(t.memory['combat:overclockPower']??0);
-  attack.interval=Math.max(.05,attack.interval/(1+support.attackSpeed+knowledgeBonus(s,c,t,'weaponSpeed')));
-  attack.range*=1+support.range+knowledgeBonus(s,c,t,'weaponRange')+(water?knowledgeBonus(s,c,t,'waterRange'):0);
+  attack.interval=Math.max(.05,attack.interval/(1+support.attackSpeed));
+  attack.range*=1+support.range;
   attack.armorPierce+=support.armorPierce;
   attack.detects||=support.detect;
-  attack.bossMultiplier*=1+knowledgeBonus(s,c,t,'bossDamage');
-  attack.shieldMultiplier*=1+knowledgeBonus(s,c,t,'shieldDamage');
-  attack.statuses=attack.statuses.map(status=>({...status,duration:status.duration*(1+knowledgeBonus(s,c,t,'statusDuration'))}));
   return attack;
 }
 
@@ -106,7 +94,7 @@ function strikeEnemy(s:GameState,c:GameConfig,e:EnemyState,a:AttackDef,source:st
   if(a.push>0 && living(e))rewindEnemy(s,c,e,a.push,source);
 }
 
-function rewindEnemy(s:GameState,c:GameConfig,e:EnemyState,amount:number,source:string):void {
+function rewindEnemy(s:GameState,c:GameConfig,e:EnemyState,amount:number,source:string,protection=0):void {
   const def=c.enemies.find(d=>d.id===e.defId);
   if(!def||!living(e))return;
   const cooldown=e.memory['combat:rewindUntil']??0;
@@ -125,7 +113,10 @@ function rewindEnemy(s:GameState,c:GameConfig,e:EnemyState,amount:number,source:
       remaining-=d;
     }
   }
-  e.memory['combat:rewindUntil']=s.time+(def.boss?2:Math.max(.5,Math.min(2,amount/100)));
+  // Even overlapping portals cannot return a boss faster than its minimum forward travel.
+  const minBossSpeed=def.speed*Math.max(.01,e.memory.speedMul??1)*Math.max(.1,e.memory['combat:phaseSpeed']??1)*.25*.15;
+  const immunity=def.boss?Math.max(2,protection,2+shift/Math.max(.01,minBossSpeed)):Math.max(protection,.5,Math.min(2,amount/100));
+  e.memory['combat:rewindUntil']=s.time+immunity;
   emit(s,{kind:'hit',source,target:e.id,pos:{...e.pos},amount:0});
 }
 
@@ -149,6 +140,18 @@ function chain(s:GameState,c:GameConfig,first:EnemyState,a:AttackDef,source:stri
   }
 }
 
+// First intersection along a swept segment, not distance to the enemy centre.
+function contactFraction(from:Vec,to:Vec,center:Vec,radius:number):number {
+  const d=sub(to,from), f=sub(from,center);
+  const aa=d.x*d.x+d.y*d.y, cc=f.x*f.x+f.y*f.y-radius*radius;
+  if(cc<=0)return 0;
+  if(aa<=EPS)return Infinity;
+  const bb=f.x*d.x+f.y*d.y, disc=bb*bb-aa*cc;
+  if(disc<0)return Infinity;
+  const t=(-bb-Math.sqrt(disc))/aa;
+  return t>=0&&t<=1?t:Infinity;
+}
+
 function lineHit(s:GameState,c:GameConfig,origin:Vec,dir:Vec,a:AttackDef,source:string,width=12):void {
   const end=add(origin,scale(normalize(dir),a.range));
   const matches=s.enemies.filter(e=>canSee(s,c,e,a)&&distanceToSegment(e.pos,origin,end)<=width+(c.enemies.find(d=>d.id===e.defId)?.radius??0))
@@ -160,8 +163,16 @@ function lineHit(s:GameState,c:GameConfig,origin:Vec,dir:Vec,a:AttackDef,source:
 function contact(s:GameState,c:GameConfig,pos:Vec,dir:Vec,a:AttackDef,source:string):void {
   emit(s,{kind:'strikeContact',source,pos:{...pos},to:add(pos,scale(normalize(dir),a.range)),element:a.element});
   switch(a.mode){
-    case 'ring':case 'pulse':case 'mine':case 'melee':
-      area(s,c,pos,a.mode==='melee'?Math.min(a.range,Math.max(20,a.splash)):a.splash>0?Math.min(a.range,a.splash):a.range,a,source);break;
+    case 'ring':case 'pulse':case 'mine':
+      area(s,c,pos,a.splash>0?Math.min(a.range,a.splash):a.range,a,source);break;
+    case 'melee':{
+      const facing=normalize(dir), halfArc=Math.min(360,Math.max(0,a.arc||90))*Math.PI/360;
+      const victims=s.enemies.filter(e=>canSee(s,c,e,a)&&distance(pos,e.pos)<=a.range+EPS)
+        .filter(e=>distance(pos,e.pos)<=EPS || Math.acos(minMax(normalize(sub(e.pos,pos)).x*facing.x+normalize(sub(e.pos,pos)).y*facing.y,-1,1))<=halfArc+EPS)
+        .sort((x,y)=>distance(pos,x.pos)-distance(pos,y.pos)||x.id.localeCompare(y.id));
+      for(const e of victims.slice(0,Math.max(1,Math.floor(a.pierce))))strikeEnemy(s,c,e,a,source);
+      break;
+    }
     case 'tide':
       area(s,c,pos,a.range,a,source);break;
     case 'cone':{
@@ -191,8 +202,9 @@ function launch(s:GameState,source:string,pos:Vec,aim:Vec,a:AttackDef,visual:str
   const dir=normalize(sub(aim,pos));
   const speed=Math.max(1,a.projectileSpeed||420);
   const travel=distance(pos,aim)/speed;
-  const projectile:ProjectileState={id:uid(s,'p'),source,pos:{...pos},previous:{...pos},velocity:scale(dir,speed),target,
-    remainingLife:a.mode==='mortar'||a.mode==='splash'?Math.max(.05,travel):Math.max(.1,a.range/speed+0.25),
+  const flight=Math.max(.05,travel);
+  const projectile:ProjectileState={id:uid(s,'p'),source,pos:{...pos},previous:{...pos},velocity:a.mode==='mortar'||a.mode==='splash'?scale(sub(aim,pos),1/flight):scale(dir,speed),target,
+    remainingLife:a.mode==='mortar'||a.mode==='splash'?flight:Math.max(.1,a.range/speed),
     remainingPierce:Math.max(1,Math.ceil(a.pierce)),hitTargets:[],attack:structuredClone(a),visual};
   s.projectiles.push(projectile);
   emit(s,{kind:'projectileSpawn',source,target:target??undefined,pos:{...pos},to:{...aim},element:a.element,visual});
@@ -208,9 +220,14 @@ function fire(s:GameState,c:GameConfig,t:TowerState,a:AttackDef,e:EnemyState,vis
     for(let i=0;i<pulses;i++){
       const selected=choices[i%choices.length]??e;
       const dir=normalize(sub(selected.pos,t.pos));
-      const center=a.mode==='chain'?selected.pos:t.pos;
-      addStrike(s,t.id,center,dir,strikeAttack,visual);
-      if(a.windup<=EPS)contact(s,c,center,dir,strikeAttack,t.id);
+      if(a.mode==='chain'){
+        emit(s,{kind:'strikeContact',source:t.id,pos:{...selected.pos},to:{...selected.pos},element:a.element,visual});
+        if(living(selected))chain(s,c,selected,strikeAttack,t.id);
+      }else if(a.mode==='beam')contact(s,c,t.pos,dir,strikeAttack,t.id);
+      else {
+        addStrike(s,t.id,t.pos,dir,strikeAttack,visual);
+        if(a.windup<=EPS)contact(s,c,t.pos,dir,strikeAttack,t.id);
+      }
     }
     return;
   }
@@ -240,7 +257,6 @@ function copyAttack(s:GameState,c:GameConfig,t:TowerState,e:EffectDef):void {
   const donor=nearby[0];if(!donor)return;
   const a=resolveTower(donor.def,donor.tower.tiers).attack;
   a.damage*=minMax(e.power,0,1);
-  a.range=Math.min(a.range,e.radius);
   a.statuses=[];
   a.count=Math.min(8,a.count);
   const target=orderTarget(candidates(s,c,t.pos,a),t)[0];
@@ -275,8 +291,8 @@ export function stepTowers(s:GameState,c:GameConfig,dt:number):void {
         t.memory[key]=(t.memory[key]??0)+dt;
         if(t.memory[key]+EPS>=Math.max(.05,e.interval)){
           t.memory[key]=0;
-          const victims=orderTarget(s.enemies.filter(enemy=>living(enemy)&&distance(enemy.pos,t.pos)<=e.radius),t);
-          if(victims[0])rewindEnemy(s,c,victims[0],e.power,t.id);
+          const victims=orderTarget(s.enemies.filter(enemy=>living(enemy)&&(enemy.memory['combat:rewindUntil']??0)<=s.time&&distance(enemy.pos,t.pos)<=e.radius),t);
+          if(victims[0])rewindEnemy(s,c,victims[0],e.power,t.id,e.duration);
         }
       }
       if(e.kind==='copy'||e.kind==='trap'){
@@ -288,7 +304,7 @@ export function stepTowers(s:GameState,c:GameConfig,dt:number):void {
         }
       }
     }
-    if(!target||a.damage<=0||a.range<=0||t.cooldown>EPS)continue;
+    if(!target||(a.damage<=0&&!a.statuses.length&&a.push<=0)||a.range<=0||t.cooldown>EPS)continue;
     let bonus=1;
     for(const e of resolved.effects){
       if(e.kind==='charge')bonus+=Math.min(e.cap||e.power,e.power*(t.memory[`combat:effect:${e.id}`]??0)/Math.max(.01,e.duration));
@@ -299,11 +315,12 @@ export function stepTowers(s:GameState,c:GameConfig,dt:number):void {
     t.cooldown=a.interval;
     for(const e of resolved.effects){
       if(e.kind==='charge')t.memory[`combat:effect:${e.id}`]=0;
-      if(e.kind==='echo'){
+      if(e.kind==='echo'&&e.cap>=1&&e===resolved.effects.filter(f=>f.kind==='echo'&&f.cap>=1).sort((x,y)=>y.power-x.power||x.id.localeCompare(y.id))[0]){
         const repeated=structuredClone(a);
         repeated.damage*=minMax(e.power,0,1);
         repeated.mode='chain';repeated.chains=Math.max(0,Math.floor(e.cap)-1);
         repeated.chainRadius=e.radius;
+        repeated.range=e.radius;
         addStrike(s,t.id,target.pos,normalize(sub(target.pos,t.pos)),repeated,`echo:${e.id}`,Math.max(.05,e.interval));
       }
     }
@@ -314,34 +331,47 @@ export function stepOrdnance(s:GameState,c:GameConfig,dt:number):void {
   for(const st of [...s.strikes]){
     st.remainingWindup-=dt;
     if(st.remainingWindup>EPS)continue;
+    // One fixed-tick contact window: the saved strike is consumed exactly once.
+    st.remainingActive=dt;
     contact(s,c,st.pos,st.direction,st.attack,st.source);
+    st.remainingActive=0;
     s.strikes=s.strikes.filter(x=>x.id!==st.id);
   }
   for(const p of [...s.projectiles]){
     p.previous={...p.pos};
     const enemy=s.enemies.find(e=>e.id===p.target);
-    if(p.attack.homing&&enemy&&living(enemy))p.velocity=scale(normalize(sub(enemy.pos,p.pos)),Math.max(1,p.attack.projectileSpeed||420));
+    if(p.attack.mode!=='mortar'&&p.attack.homing&&enemy&&living(enemy)){
+      const current=Math.atan2(p.velocity.y,p.velocity.x), desired=Math.atan2(enemy.pos.y-p.pos.y,enemy.pos.x-p.pos.x);
+      const delta=Math.atan2(Math.sin(desired-current),Math.cos(desired-current));
+      p.velocity=rotate(p.velocity,minMax(delta,-Math.PI*2*dt,Math.PI*2*dt));
+    }
     const travel=Math.min(dt,p.remainingLife);
     p.pos=add(p.pos,scale(p.velocity,travel));
     p.remainingLife-=dt;
     let expired=p.remainingLife<=EPS;
     let hitNow=false;
+    let contactEmitted=false;
     if(p.attack.mode!=='mortar'){
       // Segment sweep prevents fast projectiles from tunnelling through small enemies.
-      const hit=s.enemies.filter(e=>!p.hitTargets.includes(e.id)&&canSee(s,c,e,p.attack) && distanceToSegment(e.pos,p.previous,p.pos)<=
-        (c.enemies.find(d=>d.id===e.defId)?.radius??0)+Math.max(0,p.attack.projectileRadius))
-        .sort((x,y)=>distance(x.pos,p.previous)-distance(y.pos,p.previous)||x.id.localeCompare(y.id));
-      for(const e of hit){
+      const end={...p.pos};
+      const hit=s.enemies.filter(e=>!p.hitTargets.includes(e.id)&&canSee(s,c,e,p.attack))
+        .map(e=>({e,fraction:contactFraction(p.previous,end,e.pos,(c.enemies.find(d=>d.id===e.defId)?.radius??0)+Math.max(0,p.attack.projectileRadius))}))
+        .filter(x=>Number.isFinite(x.fraction)).sort((x,y)=>x.fraction-y.fraction||x.e.id.localeCompare(y.e.id));
+      for(const {e,fraction} of hit){
+        if(!living(e))continue;
+        const impact=add(p.previous,scale(sub(end,p.previous),fraction));
+        emit(s,{kind:'projectileImpact',source:p.source,pos:impact,target:e.id,visual:p.visual,element:p.attack.element});
+        contactEmitted=true;
         if(p.attack.mode==='splash'){
-          area(s,c,e.pos,Math.max(1,p.attack.splash),p.attack,p.source);
-          hitNow=true;
+          area(s,c,impact,Math.max(1,p.attack.splash),p.attack,p.source);
+          hitNow=true;p.pos=impact;
           expired=true;break;
         }
         p.hitTargets.push(e.id);
         hitNow=true;
         strikeEnemy(s,c,e,p.attack,p.source);
         p.remainingPierce--;
-        if(p.remainingPierce<=0){expired=true;break;}
+        if(p.remainingPierce<=0){p.pos=impact;expired=true;break;}
       }
     }else if(expired){
       const previousDamage=s.stats.damage;
@@ -355,7 +385,7 @@ export function stepOrdnance(s:GameState,c:GameConfig,dt:number):void {
     }
     if(expired){
       if(!hitNow && p.hitTargets.length===0)emit(s,{kind:'miss',source:p.source,pos:{...p.pos},target:p.target??undefined});
-      emit(s,{kind:'projectileImpact',source:p.source,pos:{...p.pos},target:p.target??undefined,visual:p.visual,element:p.attack.element});
+      if(p.attack.mode==='mortar'||(p.attack.mode==='splash'&&!contactEmitted))emit(s,{kind:'projectileImpact',source:p.source,pos:{...p.pos},visual:p.visual,element:p.attack.element});
       s.projectiles=s.projectiles.filter(x=>x.id!==p.id);
     }
   }
@@ -391,7 +421,7 @@ export function activate(s:GameState,c:GameConfig,towerId:string,abilityId:strin
       t.memory['combat:overclockUntil']=s.time+Math.max(0,a.duration);
       t.memory['combat:overclockPower']=Math.max(0,a.power);break;
     case 'rewind':
-      for(const e of s.enemies.filter(living))if(distance(t.pos,e.pos)<=a.radius)rewindEnemy(s,c,e,a.power,t.id);
+      for(const e of s.enemies.filter(living))if(distance(t.pos,e.pos)<=a.radius)rewindEnemy(s,c,e,a.power,t.id,a.duration);
       break;
     case 'barrier':
       if(s.rules.maxLives<=1)return {ok:false,reason:'Barrier disabled at one life'};
@@ -401,7 +431,7 @@ export function activate(s:GameState,c:GameConfig,towerId:string,abilityId:strin
       t.generated+=amount;break;
     }
   }
-  t.abilityCooldowns[a.id]=Math.max(.05,a.cooldown/(1+knowledgeBonus(s,c,t,'abilityCooldown')));
+  t.abilityCooldowns[a.id]=Math.max(.05,a.cooldown);
   s.stats.abilities++;
   emit(s,{kind:'ability',source:t.id,pos:{...t.pos},visual:a.id,element:a.element});
   return {ok:true,entity:t.id};

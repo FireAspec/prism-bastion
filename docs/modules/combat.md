@@ -11,7 +11,7 @@ The engine must call `combat.step` once each fixed tick **after spawning, before
 
 Wave-end `income` and `interest` effects and reward `(rewardBase + rewardStep * wave)` belong **only to the engine**. Combat does not pay them or respond to `waveEnd` render events. Effects are available via `resolveTower` for engine calculation: apply the mode's `allowPassiveIncome` and `incomeMul`/`popCashMul`, cap interest at `effect.cap`, pay once per wave. For modes `iron-oath`, skip harvest and all other non-layer income even though combat abilities are still legal. `supportAt().discount` must not change the 70% invested-refund rule.
 
-The source `TowerDef` is always cloned. The highest T3+ replacement on the main branch chooses the weapon's mode; secondary T1/T2 replacements never overwrite it. All deltas then apply A→B→C, T1→T5 within each branch. Late effects/abilities replace matching IDs; added statuses merge per kind, retaining the stronger potency, longer duration and higher stack limit. Ties choose the lower-index main branch. `secondaryOverlay` retains the highest visual of the other purchased branch. Unsupported/illegal tier triplets throw.
+The source `TowerDef` is always cloned. The highest T3+ replacement on the main branch chooses the weapon's mode; secondary T1/T2 replacements never overwrite it. All deltas then apply A→B→C, T1→T5 within each branch. Late effects/abilities replace matching IDs; added statuses merge per kind, retaining the stronger potency, longer duration and higher stack limit. Ties choose the lower-index main branch. `secondaryOverlay` references the matching `-overlay.svg` of the highest purchased tier on the other branch. Unsupported/illegal tier triplets throw.
 
 ## Attack interpretation
 
@@ -28,7 +28,7 @@ The source `TowerDef` is always cloned. The highest T3+ replacement on the main 
 | `drone` | Bounded virtual drone-origin shots, `count` independent projectiles, no render-driven damage |
 | `pulse` | Area pulse centered at tower |
 | `tide` | Area wave with per-victim bounded pushback |
-| `melee` | Bounded close-radius sweep |
+| `melee` | Directional sector using arc (degrees), range and pierce |
 
 `count` drives independent projectiles, rays, chains or local pulses (cone uses its count as pellets). Direct projectiles live within a range-based lifetime; **each projectile has its own hit-target set**, so piercing cannot repeat the same enemy. Hits are computed from world coordinates and route progress, never from canvas pixels. Attack rate is bounded below by 0.05 s. Windup stores contact as a `StrikeState` and resolves by simulation time. Echoes use the same strike mechanism with a single scheduled replay and cannot schedule further echoes. All live ordnance is held in the snapshot arrays.
 
@@ -38,7 +38,7 @@ The source `TowerDef` is always cloned. The highest T3+ replacement on the main 
 2. Shield removes up to `raw × shieldMultiplier` shield points; the raw portion consumed by shield is deducted **once**. Any remainder loses `max(0, armor − armorPierce − strongestShred)`. Positive HP penetration always does at least 1 point.
 3. For each outer-to-inner layer, the crossing threshold is `maxHp × (1 − cumulativeLayerHP / def.hp)`. A crossing from above to at/below triggers one payment at most, guarded by `paidLayers`. `bounty` is **not** awarded again at death. `credit` from frozen runtime accumulates hundredths (`cashSubunits`), including `incomeMul × popCashMul`; its `income` event records actual whole-credit payout.
 4. HP zero marks death, stats and `kill` exactly once. DoT, chains, executions, splash, death bursts and abilities all enter the same function. Death bursts propagate through an iterative bounded work queue, never call back recursively. The parent's children and phase summons are quotas in `enemy.memory`; an overfull field postpones rather than discards them. Live children ≤ 1800 and generation ≤ 3. Death grants no extra bounty.
-5. Boss thresholds process once per phase and store their phase marker; shields, phase-speed factor and delayed spawn quotas remain in `memory`. The engine must use `enemySpeedMultiplier` to apply `combat:phaseSpeed`. Boss rewind uses personal 2 s protection, displacement factors and a 90-pixel hard cap.
+5. Boss thresholds process once per phase and store their phase marker; shields, phase-speed factor and delayed spawn quotas remain in `memory`. The engine must use `enemySpeedMultiplier` to apply `combat:phaseSpeed`. Boss rewind uses at least 2 s protection, displacement factors and a 90-pixel hard cap. The protection also accounts for the displaced distance and minimum walking speed.
 
 Burn and poison stack only by kind/source, capped by status `maxStacks` and tick every **0.25 simulated seconds**; fractional elapsed time survives save/load. No UI frame can add a DoT tick. Applying another status refreshes only up to the max duration, without cumulatively extending time. `freeze`/`stun` give ordinary enemies temporary full hard control followed by 0.35 s protection; boss hard control lasts at most 0.5 s, uses a minimum control factor of 0.15 and has two seconds of subsequent protection. Slows never drop ordinary walking speed under 25%. `reveal` pierces cloak, strongest `shred` weakens armor, strongest `mark` is 10% more damage. Bosses never become permanently stuck.
 
@@ -55,7 +55,7 @@ Burn and poison stack only by kind/source, capped by status `maxStacks` and tick
 | `focus` | Adds `power × seconds` while locked to the same target, max `cap`; breaks on a target switch |
 | `deathBurst` | On death of an infected enemy, one radius burst per owning tower/effect, iterative propagation |
 | `copy` | Nearest different, genuinely attacking donor; its resolved **attack only** scaled to `power ≤ 1`, no statuses/effects, no copy-of-copy, no abilities/economy |
-| `portal` | One target every `interval`, rewind `power` pixels; individual immunity prevents perpetual looping |
+| `portal` | One target every `interval`, rewind `power` pixels; individual immunity uses `duration`; bosses also have a recovery interval long enough to make net forward progress |
 | `barrier` | Once per wave, restore `power` lives up to original `maxLives`; disabled at a one-life limit |
 | `harvest` | One best eligible nearby harvester per kill, with per-tower/effect per-wave `cap`; disabled in iron-oath |
 | `trap` | Bounded periodic local damage/status pulse on contact; no unlimited placed trap entities |
@@ -68,3 +68,7 @@ Active `nova`, `meteor`, `overclock`, `rewind`, `barrier`, `mint` consume a save
 `npm test -- tests/combat` exercises all twelve attack modes, all twelve effect kinds, nine statuses, six ability kinds, the 30×3 specialization matrix, six 5–2 crosspaths, death splitting, armor and shield ordering, DoT and layered income, phase and hard-control behavior, harvest restrictions, chain uniqueness and event/render independence. The fixtures are fully executable against local contract objects and do not import unfinished content or engine stubs.
 
 At the frozen base commit all actual thirty tower content exports and the engine are stubs; passing isolated fixtures **does not** establish balance or end-to-end playability. During integration, rerun these tests against the populated catalog, verify boss movement uses `enemySpeedMultiplier`, verify engine single ownership of wave-end income/rewards, cap initial wave spawning at 1800 as well as child spawning, and exercise deterministic co-op snapshot round-trips. The combat module does not implement tower placement legality, purchase/sell logic, wave generation or render/audio playback.
+
+## Run configuration and contact invariants
+
+Knowledge is already applied by progression to the immutable run config. Combat consumes those resolved values and adds only in-run auras/overclock; it never reads selected knowledge IDs as additional multipliers. Beam and chain contact immediately; melee uses a single fixed-tick contact window after its saved windup. Mortar preserves the original ground aim, homing turns at most 360 degrees/s, and projectiles report the first geometric intersection along the swept segment. A missed direct projectile emits `miss`, not a fake impact. Echo schedules at most one copy per firing, choosing the strongest eligible effect.

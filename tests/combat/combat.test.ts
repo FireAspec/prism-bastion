@@ -18,7 +18,7 @@ describe('fixed attack and upgrade interpretation',()=>{
       const result=resolveTower(def,combination);
       const main=combination.indexOf(5),secondary=combination.indexOf(2);
       expect(result.mainPath).toBe(main);
-      expect(result.secondaryOverlay).toBe(`${secondary}-2.svg`);
+      expect(result.secondaryOverlay).toBe(`${secondary}-2-overlay.svg`);
       expect(result.visual.asset).toBe(`${main}-5.svg`);
       expect(result.attack.damage).toBeCloseTo((50+main)*1.1**7,5);
       expect(result.attack.statuses).toHaveLength(2);
@@ -339,5 +339,54 @@ describe('effects and active abilities',()=>{
     step(state,config,15);
     expect(resolveTower(def,[0,0,0]).effects).toContainEqual(original);
     expect(def.effects[0]).toEqual(original);
+  });
+});
+
+
+describe('contact and integration regressions',()=>{
+  it('melee checks its saved facing and current positions after windup',()=>{
+    const d=tower('sword','melee',[],[],attack('melee',{damage:40,range:110,arc:60,windup:.1,interval:10,pierce:3}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('sword'));
+    const front=spawn('foe',80), side=spawn('foe',60);side.pos={x:0,y:60};
+    step(state,config);front.pos={x:0,y:80};
+    step(state,config,10);
+    expect(front.hp).toBe(100);expect(side.hp).toBe(100);
+  });
+  it('melee hits only inside its sector, once',()=>{
+    const d=tower('sword','melee',[],[],attack('melee',{damage:40,range:110,arc:60,windup:.1,interval:10,pierce:3}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('sword'));
+    const front=spawn('foe',80), rear=spawn('foe',60);rear.pos={x:-60,y:0};
+    step(state,config,20);expect(front.hp).toBe(60);expect(rear.hp).toBe(100);
+  });
+  it('mortar ignores homing and lands at the original ground aim',()=>{
+    const d=tower('m','mortar',[],[],attack('mortar',{damage:40,splash:10,homing:true,interval:10}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('m'));const e=spawn();
+    step(state,config);e.pos={x:80,y:100};step(state,config,20);
+    expect(e.hp).toBe(100);
+    const impact=state.events.find(event=>event.kind==='projectileImpact');
+    expect(impact?.pos?.x).toBeCloseTo(80);expect(impact?.pos?.y).toBeCloseTo(0);
+  });
+  it('projectile impact uses the swept boundary rather than its end point',()=>{
+    const d=tower('g','shot',[],[],attack('shot',{damage:40,projectileSpeed:6000,projectileRadius:8,interval:10}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('g'));spawn();
+    step(state,config,2);const impact=state.events.find(event=>event.kind==='projectileImpact');
+    expect(impact?.pos?.x).toBeCloseTo(62);expect(impact?.pos?.y).toBeCloseTo(0);
+  });
+  it('portal respects the configured personal immunity and skips immune targets',()=>{
+    const d=tower('p','shot',[effect('portal',{power:10,interval:.1,duration:5,radius:300})],[],attack('shot',{damage:0}));
+    const {config,state,spawn}=fixture([d]);state.towers.push(placed('p'));const e=spawn();
+    step(state,config,6);expect(e.progress).toBe(70);
+    step(state,config,60);expect(e.progress).toBe(70);
+  });
+  it('zero damage status attacks reveal without granting credits',()=>{
+    const d=tower('r','pulse',[],[],attack('pulse',{damage:0,statuses:[status('reveal')],interval:10}));
+    const {config,state,spawn}=fixture([d],[enemy('foe',{cloaked:true})]);state.towers.push(placed('r'));const e=spawn();
+    step(state,config);expect(e.statuses.some(x=>x.kind==='reveal')).toBe(true);expect(e.hp).toBe(100);expect(state.credits).toBe(0);
+  });
+  it('does not apply selected knowledge a second time',()=>{
+    const d=tower('g','beam',[],[],attack('beam',{damage:40,interval:10}));
+    const {config,state,spawn}=fixture([d]);state.rules.allowKnowledge=true;state.options.knowledge=['k'];
+    config.knowledge=[{id:'k',branch:'ballistics',index:1,name:'',description:'',requires:[],minLevel:1,pointCost:1,sealCost:1,effects:[{stat:'weaponDamage',value:.15}],icon:''}];
+    state.towers.push(placed('g'));const e=spawn();step(state,config);expect(e.hp).toBe(60);
   });
 });
