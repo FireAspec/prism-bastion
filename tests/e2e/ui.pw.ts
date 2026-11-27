@@ -237,3 +237,36 @@ test('browser guest uses real app lobby and client transport, then sees host dis
     await assertPortClosed(room.ready.port);
   }
 });
+
+test('all twenty campaign maps open the real renderer with their own layout',async({page},info)=>{
+  test.setTimeout(240_000);
+  requireModules(appModules);
+  const errors=await open(page),config=await catalog(page);
+  expect(config.maps.map(m=>m.id).sort()).toEqual([...MAPS].sort());
+  // A completed campaign is imported through the actual profile interface.
+  // This is a UI coverage fixture, not evidence of map solvability.
+  const save=await exportSave(page);
+  save.profile.completedNodes=config.campaign.map(n=>n.id);
+  save.profile.unlockedTowers=config.towers.map(t=>t.id);
+  save.run=null;
+  await importSave(page,save);
+  for(const [index,id] of MAPS.entries()){
+    await test.step(id,async()=>{
+      const map=config.maps.find(m=>m.id===id)!;
+      await focus(page,'campaign').click();
+      await focus(page,'map-'+id).click();
+      await focus(page,'difficulty-'+map.recommendedDifficulty).click();
+      await expect(focus(page,'start')).toBeEnabled();
+      await focus(page,'start').click();
+      await expect(page.locator('#game-canvas')).toBeVisible();
+      await expect(action(page,'buy-needle')).toBeVisible({timeout:15000});
+      await expect.poll(()=>cash(page)).toBe(config.difficulties.find(d=>d.id===map.recommendedDifficulty)!.startCredits);
+      if(index===0||index===MAPS.length-1)await photo(page,info,'map-'+id);
+      await action(page,'exit').click();
+      await expect(focus(page,'campaign')).toBeVisible();
+      const snapshot=await exportSave(page);
+      expect(snapshot.run?.options.mapId).toBe(id);
+    });
+  }
+  expect(errors).toEqual([]);
+});
