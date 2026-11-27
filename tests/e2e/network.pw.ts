@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {launch,Peer,converge,positions,ledger,assertPortClosed} from './wire';
 import {requireModules,networkModules} from './preflight';
+import {shortConfig} from './short-config';
 import type {GameState,GameAction} from '../../src/contracts';
 
 async function withRoom(count:2|4,short:boolean,body:(room:Awaited<ReturnType<typeof launch>>,peers:Peer[],welcomes:Awaited<ReturnType<Peer['join']>>[])=>Promise<void>){
@@ -114,7 +115,7 @@ test('terminal result re-delivery after resume cannot duplicate persistent rewar
   const [{loadContent},{createProgression},{createSaveStore,defaultProfile}]=await Promise.all([
     import('../../src/content'),import('../../src/progression'),import('../../src/persistence')
   ]);
-  const config=loadContent(),progression=createProgression(config);
+  const config=shortConfig(loadContent()),progression=createProgression(config);
   await withRoom(2,true,async(room,peers,welcomes)=>{
     const [host,guest]=peers;
     host.send({type:'start'});
