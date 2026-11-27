@@ -59,7 +59,7 @@ export function advance(engine,from,limit=MAX_TICKS){
 function checkpoint(s){
  return [10,20,40,60,80,100].includes(s.wave)?{wave:s.wave,credits:s.credits,t5:s.towers.filter(t=>Math.max(...t.tiers)===5).map(t=>({id:t.defId,tiers:t.tiers})),spent:s.stats.spent}:null;
 }
-export function initial(engine,options){
+export function initial(engine,options,config){
  const s=safeState(engine);
  if(s.tick!==0||s.phase!=='build'||s.options.knowledge.length||canonical(s.options.unlockedTowers)!==canonical(options.unlockedTowers)||s.options.players.length!==options.players.length) throw Error('Unexpected initial state/profile');
  if(s.rules.maxLives===1&&s.lives!==1) throw Error('One-life rule violated');
@@ -69,6 +69,16 @@ export function initial(engine,options){
  if(options.modeId==='short-supply'&&s.rules.maxTowers!==12)throw Error('Tower limit violated');
  if(options.modeId==='low-tech'&&s.rules.maxTier!==3)throw Error('Tier limit violated');
  if(options.modeId==='no-actives'&&s.rules.allowAbilities)throw Error('Ability limit violated');
+ if(config?.difficulties?.some(d=>d.id===options.difficulty&&Number.isFinite(d.startCredits))){
+  const d=config.difficulties.find(d=>d.id===options.difficulty),m=config.modes.find(m=>m.id===options.modeId);
+  const factor={1:1,2:1.25,4:1.75}[options.players.length];
+  const starting=options.modeId==='half-cash'?.5:(m.modifiers.startingCashMul??1);
+  const expectedCents=Math.round(d.startCredits*starting*factor*100);
+  if(s.credits*100+s.stats.cashSubunits!==expectedCents||s.stats.earned!==0||s.stats.spent!==0)throw Error('Starting budget/scaling mismatch');
+  const hp=(m.modifiers.enemyHpMul??d.enemyHpMul)*factor;
+  if(Math.abs(s.rules.enemyHpMul-hp)>1e-9)throw Error('Enemy health scaling mismatch');
+  if(s.rules.rounds!==d.rounds)throw Error('Difficulty round count mismatch');
+ }
  return s;
 }
 export function outcome(s){
@@ -80,7 +90,7 @@ export function outcome(s){
 export function stateDigest(s){return digest({...s,events:[]});}
 export function recordRun(config,cell,seed,strategy,makeEngine,policy,limit=MAX_TICKS){
  const options=optionsFor(cell,seed),engine=makeEngine(options);
- let s=initial(engine,options);
+ let s=initial(engine,options,config);
  const actions=[],bossCheckpoints=[];
  const issue=command=>{
   const result=engine.dispatch(command);
@@ -109,7 +119,7 @@ export function replay(config,record,makeEngine,limit=MAX_TICKS){
  if(record.schema!==1||record.contentDigest!==config.contentDigest) throw Error('Replay content mismatch');
  const expected=optionsFor(record.cell,record.seed);
  if(canonical(expected)!==canonical(record.options)) throw Error('Replay profile mismatch');
- const engine=makeEngine(expected);let s=initial(engine,expected);const bossCheckpoints=[];
+ const engine=makeEngine(expected);let s=initial(engine,expected,config);const bossCheckpoints=[];
  for(const item of record.actions){
   if(!Number.isSafeInteger(item.tick)||item.tick<s.tick) throw Error('Invalid action order');
   while(s.tick<item.tick){
