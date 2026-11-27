@@ -18,5 +18,5 @@ export function requireModules(paths:readonly string[]):void {
     }
   }
 }
-export const appModules=['src/app/main.ts','src/content/index.ts','src/engine/index.ts','src/combat/index.ts','src/ui/menus.ts','src/ui/hud.ts','src/persistence/index.ts'];
+export const appModules=['src/app/main.ts','src/content/index.ts','src/engine/index.ts','src/combat/index.ts','src/ui/menus.ts','src/ui/hud.ts','src/persistence/index.ts','src/render/index.ts','src/campaign/index.ts','src/progression/index.ts','src/ui/knowledge.ts','src/ui/lobby.ts','src/audio/index.ts','src/localization/index.ts','src/network/client/index.ts'];
 export const networkModules=['src/content/index.ts','src/engine/index.ts','src/combat/index.ts','src/network/host/index.ts','src/network/protocol/index.ts'];
