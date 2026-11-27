@@ -40,6 +40,7 @@ test('Windows Electron hosts through actual preload/IPC and releases listening p
     await page.locator('#lobby input[name=port]').fill(String(port));
     await page.locator('#lobby input[name=password]').fill(password);
     await page.locator('#lobby button[type=submit]').click();
+    await expect(page.locator('#lobby [data-focus=ready]')).toBeVisible({timeout:15000});
     guest=new Peer('ws://127.0.0.1:'+port);
     await guest.open();
     guest.send({type:'join',protocolVersion:1,contentDigest:loadContent().contentDigest,name:'Remote QA',password});
