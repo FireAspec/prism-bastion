@@ -32,36 +32,31 @@ function applyDelta(attack: AttackDef, d: StatDelta): AttackDef {
     // AttackDef has mixed properties; writing numeric keys through a validated record.
     (next as unknown as Record<string,number>)[target] = multiply[key] ? old*(value as number) : old+(value as number);
   }
-  next.arc=Math.min(360,next.arc);
   return next;
 }
 
 function resolveFixture(tower: TowerDef, tiers: Tiers): ResolvedTower {
   if(!legalTiers(tiers))throw new RangeError('Invalid upgrade combination');
-  const main=tiers.findIndex(t=>t>2);
-  const active=main>=0?main:tiers.findIndex(t=>t>0);
+  const active=([0,1,2] as PathIndex[]).filter(p=>tiers[p]>0).sort((a,b)=>tiers[b]-tiers[a]||a-b)[0];
   let attack=structuredClone(tower.attack);
   const effects=structuredClone(tower.effects), abilities=structuredClone(tower.abilities);
-  let visual=structuredClone(tower.visual);
-  const order=main>=0?[main,...[0,1,2].filter(i=>i!==main)]:[0,1,2];
-  for(const p of order){
-    const upgrades=tower.paths[p].upgrades.slice(0,tiers[p]);
-    // The mode-changing replacement already incorporates same-path T1/T2.
-    let lastReplacement=-1;
-    for(let i=0;i<upgrades.length;i++)if(upgrades[i].replaceAttack!==undefined)lastReplacement=i;
-    if(lastReplacement>=0)attack=structuredClone(upgrades[lastReplacement].replaceAttack!);
-    for(let i=(lastReplacement>=0?lastReplacement+1:0);i<upgrades.length;i++)attack=applyDelta(attack,upgrades[i].delta);
-    for(const upgrade of upgrades){
+  if(active!==undefined && tiers[active]>=3){
+    const replacement=tower.paths[active].upgrades.slice(0,tiers[active]).filter(u=>u.replaceAttack).at(-1)?.replaceAttack;
+    if(replacement)attack=structuredClone(replacement);
+  }
+  for(const p of [0,1,2] as const){
+    for(const upgrade of tower.paths[p].upgrades.slice(0,tiers[p])){
+      attack=applyDelta(attack,upgrade.delta);
       if(upgrade.addStatuses)attack.statuses.push(...structuredClone(upgrade.addStatuses));
       if(upgrade.effects)effects.push(...structuredClone(upgrade.effects));
       if(upgrade.abilities)abilities.push(...structuredClone(upgrade.abilities));
     }
-    if(p===active && upgrades.length)visual=structuredClone(upgrades.at(-1)!.visual);
   }
-  const secondary=main>=0?[0,1,2].find(i=>i!==main&&tiers[i]>0):undefined;
+  const visual=structuredClone(active===undefined?tower.visual:tower.paths[active].upgrades[tiers[active]-1].visual);
+  const secondary=([0,1,2] as PathIndex[]).find(i=>i!==active&&tiers[i]>0);
   const secondaryOverlay=secondary===undefined?undefined:
     `/art/towers/scatter/${'abc'[secondary]}${tiers[secondary]}-overlay.svg`;
-  return {attack,effects,abilities,visual,secondaryOverlay,...(main<0?{}:{mainPath:main as PathIndex})};
+  return {attack,effects,abilities,visual,secondaryOverlay,...(active===undefined?{}:{mainPath:active})};
 }
 
 describe('Веерный страж: содержание',()=>{
@@ -120,17 +115,23 @@ describe('Веерный страж: содержание',()=>{
       expect(r.attack.interval).toBeGreaterThanOrEqual(0.25);
       expect(r.attack.damage).toBeGreaterThan(0);
       expect(r.attack.count).toBeGreaterThanOrEqual(1);
-      expect(r.attack.armorPierce).toBeLessThanOrEqual(1);
+      expect(r.attack.armorPierce).toBeLessThanOrEqual(16);
       expect(r.attack.arc).toBeLessThanOrEqual(360);
       expect(r.visual.asset.endsWith('.svg')).toBe(true);
       expect(existsSync(resolve(process.cwd(),'public'+r.visual.asset))).toBe(true);
-      if(Math.max(...tiers)>2)expect(r.mainPath).toBe(tiers.findIndex(t=>t>2));
+      const highest=Math.max(...tiers);
+      expect(r.mainPath).toBe(highest>0?tiers.indexOf(highest):undefined);
+      const secondary=tiers.findIndex((tier,i)=>tier>0&&i!==r.mainPath);
+      if(secondary>=0){
+        expect(r.secondaryOverlay).toBe(`/art/towers/scatter/${'abc'[secondary]}${tiers[secondary]}-overlay.svg`);
+        expect(existsSync(resolve(process.cwd(),'public'+r.secondaryOverlay!))).toBe(true);
+      }
       for(const p of [0,1,2] as PathIndex[]){
         const next:Tiers=[...tiers];next[p]++;
         expect(canUpgrade(tiers,p)).toBe(legalTiers(next));
       }
     }
-    expect(legal).toBeGreaterThan(60);
+    expect(legal).toBe(64);
   });
   it('makes early cross-path choices useful regardless of main specialization',()=>{
     const tower=getTower();
@@ -142,9 +143,9 @@ describe('Веерный страж: содержание',()=>{
         const result=resolveFixture(tower,cross).attack;
         expect(result.mode).toBe(original.mode);
         expect(result).not.toEqual(original);
-        if(secondary===0){expect(result.pierce).toBeGreaterThan(original.pierce);expect(result.interval).toBeLessThan(original.interval);}
-        if(secondary===1){expect(result.armorPierce).toBeGreaterThan(original.armorPierce);expect(result.bossMultiplier).toBeGreaterThan(original.bossMultiplier);}
-        if(secondary===2){expect(result.range).toBeGreaterThan(original.range);expect(result.detects).toBe(true);}
+        if(secondary===0){expect(result.count).toBe(original.count+1);expect(result.pierce).toBeGreaterThan(original.pierce);expect(result.interval).toBeLessThan(original.interval);}
+        if(secondary===1){expect(result.armorPierce).toBe(original.armorPierce+2);expect(result.bossMultiplier).toBeGreaterThan(original.bossMultiplier);}
+        if(secondary===2){expect(result.range).toBeGreaterThan(original.range);expect(result.detects).toBe(true);expect(result.damage).toBeCloseTo(original.damage*1.1);}
       }
     }
   });
@@ -157,12 +158,40 @@ describe('Веерный страж: содержание',()=>{
     expect(B.attack.mode).toBe('shot');
     expect(B.attack.count).toBe(3);
     expect(B.attack.damage).toBeCloseTo(40.6725);
-    expect(B.attack.armorPierce).toBeCloseTo(0.82);
-    expect(B.attack.statuses[0].kind).toBe('shred');
-    expect(C.attack).toMatchObject({mode:'ring',count:20,arc:360,detects:true});
+    expect(B.attack.armorPierce).toBe(16);
+    expect(B.attack.shieldMultiplier).toBeCloseTo(1.56);
+    expect(B.attack.bossMultiplier).toBeCloseTo(1.344);
+    expect(B.attack.projectileSpeed).toBeCloseTo(410);
+    expect(B.attack.statuses[0]).toEqual({kind:'shred',power:3,duration:2,maxStacks:1});
+    expect(C.attack).toMatchObject({mode:'ring',count:2,arc:360,detects:true});
     expect(C.attack.interval).toBeCloseTo(0.5738688);
+    expect(C.attack.damage).toBeCloseTo(10.8);
     expect(C.abilities).toHaveLength(1);
     expect(C.abilities[0]).toMatchObject({kind:'nova',power:42,cooldown:20,radius:120});
+  });
+  it('does not double apply the early deltas at either attack replacement',()=>{
+    const tower=getTower(), B=resolveFixture(tower,[0,3,0]).attack, C=resolveFixture(tower,[0,0,3]).attack;
+    expect(B.damage).toBeCloseTo(17);
+    expect(B.interval).toBeCloseTo(1.04);
+    expect(B.armorPierce).toBe(8);
+    expect(B.shieldMultiplier).toBeCloseTo(1.2);
+    expect(B.bossMultiplier).toBeCloseTo(1.12);
+    expect(B.projectileSpeed).toBeCloseTo(410);
+    expect(C.damage).toBeCloseTo(8);
+    expect(C.range).toBeCloseTo(128);
+    expect(C.interval).toBeCloseTo(0.972);
+    expect(C.push).toBeCloseTo(0.6);
+    expect(C.count).toBe(1);
+    expect(C.detects).toBe(true);
+  });
+  it('keeps ring cross-path pulses bounded and preserves full circle geometry',()=>{
+    const tower=getTower(), a=resolveFixture(tower,[2,0,5]).attack,b=resolveFixture(tower,[0,2,5]).attack;
+    expect(a.count).toBe(3);
+    expect(a.arc).toBe(360);
+    expect(b.count).toBe(2);
+    expect(b.armorPierce).toBe(2);
+    expect(a.damage*a.count/a.interval).toBeLessThan(61);
+    expect(b.damage*b.count/b.interval).toBeLessThan(40);
   });
   it('keeps every fifth-tier cross-path silhouette and loads its exact secondary overlay',()=>{
     const tower=getTower();
