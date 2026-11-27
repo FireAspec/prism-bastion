@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Полевая кузня — атлас моделей</title>
+ <style>
+  :root {color-scheme: dark; font-family: system-ui, 'Segoe UI', sans-serif; background: #071b25; color: #f4e6c7}
+  * {box-sizing: border-box}
+  body {max-width: 1380px; margin: auto; padding: 34px 24px 60px; background: radial-gradient(ellipse at top, #183e43 0%, #071b25 70%)}
+  h1 {margin: 0; font-size: clamp(30px,5vw,48px); color: #ffd493; letter-spacing: -.03em}
+  p {color: #b7d0cb; line-height: 1.6; max-width: 850px}
+  h2 {margin: 36px 0 18px; font-size: 24px; border-bottom: 1px solid #446067; padding-bottom: 10px}
+  .gallery {display: grid; grid-template-columns: repeat(auto-fit, minmax(162px, 1fr)); gap: 16px}
+  .tile {min-width: 0; border: 1px solid #43636b; border-radius: 16px; padding: 16px; background: linear-gradient(165deg,#25454a,#102932); box-shadow: 0 14px 28px #0004}
+  .tile.finale {border-color: #dca869; background: linear-gradient(155deg,#294a4e,#303439)}
+  .scene {position: relative; height: 148px; display: grid; place-items: center; border-radius: 11px; overflow: hidden; background: radial-gradient(circle, #4d6766 0%,#24444c 42%,#102b39 85%)}
+  .scene::before {content: ''; position: absolute; inset: 0; background-image: linear-gradient(#9acdc214 1px,transparent 1px),linear-gradient(90deg,#9acdc214 1px,transparent 1px); background-size: 17px 17px}
+  img {position: absolute; width: 136px; height: 136px; object-fit: contain; image-rendering: auto; filter: drop-shadow(0 3px 7px #051b22a0)}
+  .overlay {filter: drop-shadow(0 2px 3px #001a20)}
+  .name {display: block; font-weight: 700; margin-top: 13px; font-size: 14px}
+  .hint {display: block; margin-top: 4px; font-size: 12px; color: #b3cfce}
+  .price {color: #f2bf7d; font-size: 12px; font-variant-numeric: tabular-nums}
+  .key {display: inline-flex; align-items: center; gap: 7px; font-size: 13px; padding: 6px 10px; border-radius: 99px; background: #20444c; margin: 10px 6px 0 0}
+  .dot {width: 9px; height: 9px; border-radius: 50%; background: var(--color)}
+  footer {margin-top: 40px; color: #a8c0bd; border-top: 1px solid #446067; padding-top: 18px; font-size: 13px}
+  @media (prefers-reduced-motion: no-preference) {.tile:hover img:not(.overlay) {transform: translateY(-3px); transition: transform .2s ease}}
+ </style>
+</head>
+<body>
+ <h1>Полевая кузня</h1>
+ <p>Prism Bastion · 16 законченных видов и 6 вторичных накладок. Прозрачные SVG 128 × 128; рисунок не зависит от шрифтов и внешних файлов. Ветки усиливают поддержку; C3–C5 также открывают локальные тепловые импульсы с активным форсажем.</p>
+ <div class="key" style="--color:#ffc171"><span class="dot"></span> A — оружейник</div>
+ <div class="key" style="--color:#84ecd3"><span class="dot"></span> B — сборочный цех</div>
+ <div class="key" style="--color:#ff8060"><span class="dot"></span> C — перегрузка</div>
+ <h2>Начальная постройка</h2>
+ <div class="gallery" id="start"></div>
+ <section id="upgrades"></section>
+ <h2>Все 6 финальных сочетаний 5–2–0</h2>
+ <p>Первый слой — полный T5-вид основной ветки, второй — честная накладка T2 вторичной ветки. Силуэт T5 сохраняется.</p>
+ <div class="gallery" id="crosses"></div>
+ <footer>Отображение модели здесь — визуальная проверка исходного атласа, а не запись боевой симуляции. Дальность аур и цены указаны в документации модуля.</footer>
+ <script>
+  const names = {
+   a: ['Калибровка бойка','Закалённое остриё','Двойной горн','Молот бастиона','Три пылающих наковальни'],
+   b: ['Разметка конвейера','Стандартизация деталей','Механическая линия','Цех точной сборки','Мастер-конвейер'],
+   c: ['Ускоренный привод','Вольфрамовые шестерни','Рычаг форсажа','Меха высокого давления','Сердце перегрузки'],
+  };
+  const prices = {a:[375,750,1875,4500,11250],b:[395,790,1970,4725,11815],c:[360,715,1785,4275,10690]};
+  const captions = {a:'Оружейник',b:'Сборочный цех',c:'Перегрузка'};
+  const card = (name,file,subtitle,overlay,finale=false) => {
+   const tile = document.createElement('article'); tile.className = 'tile' + (finale?' finale':'');
+   const scene = document.createElement('div'); scene.className = 'scene';
+   const image = document.createElement('img'); image.src = file; image.alt = name; image.loading = 'eager'; scene.append(image);
+   if(overlay) {const layer = document.createElement('img');layer.className='overlay';layer.src=overlay;layer.alt='Вторичная накладка';layer.loading='eager';scene.append(layer);}
+   const label = document.createElement('span');label.className='name';label.textContent = name;
+   const hint = document.createElement('span');hint.className='hint';hint.textContent=subtitle;
+   tile.append(scene,label,hint);return tile;
+  };
+  document.querySelector('#start').append(card('Полевая кузня','base.svg','750 кредитов · +6% урона, радиус 145'));
+  for(const branch of ['a','b','c']) {
+   const section=document.createElement('section');
+   const heading=document.createElement('h2');heading.textContent = `${branch.toUpperCase()} · ${captions[branch]}`;
+   const gallery=document.createElement('div');gallery.className='gallery';
+   for(let i=0;i<5;i++)gallery.append(card(names[branch][i],`${branch}${i+1}.svg`,`T${i+1} · ${prices[branch][i].toLocaleString('ru-RU')} кредитов`,null,i===4));
+   section.append(heading,gallery);document.querySelector('#upgrades').append(section);
+  }
+  for(const main of ['a','b','c'])for(const secondary of ['a','b','c'])if(main!==secondary)
+   document.querySelector('#crosses').append(card(`${captions[main]} + ${captions[secondary]}`,`${main}5.svg`,`T5 ${main.toUpperCase()} / T2 ${secondary.toUpperCase()}`,`${secondary}2-overlay.svg`,true));
+ </script>
+</body>
+</html>
