@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="C1 secondary upgrade overlay">
+<defs>
+ <linearGradient id="copper" x2="1" y2="1"><stop stop-color="#f9c98a"/><stop offset=".26" stop-color="#a96646"/><stop offset=".66" stop-color="#493d48"/><stop offset="1" stop-color="#c28d5c"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9fff2" stop-opacity=".74"/><stop offset=".26" stop-color="#548b88" stop-opacity=".38"/><stop offset=".72" stop-color="#102f46" stop-opacity=".82"/><stop offset="1" stop-color="#b4e5d7" stop-opacity=".58"/></linearGradient>
+ <linearGradient id="liquid" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#c3a3ff"/><stop offset=".46" stop-color="#725bc4"/><stop offset="1" stop-color="#0a3345"/></linearGradient>
+ <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7d7"/><stop offset=".52" stop-color="#9ac1b3"/><stop offset="1" stop-color="#4e7177"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#c3a3ff" stop-opacity=".34"/><stop offset="1" stop-color="#c3a3ff" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.1"/></filter>
+</defs>
+<g stroke-linecap="round" stroke-linejoin="round"><path d="M48 72 34 62" fill="none" stroke="#c3a3ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /><circle cx="29" cy="58" r="7.2" fill="url(#glass)" stroke="#c3a3ff" stroke-width="1.6"/>
+<circle cx="29" cy="58" r="3.5360000000000005" fill="url(#liquid)" /><circle cx="27.804" cy="56.492" r="1.092" fill="#f1f1ff" /></g></svg>

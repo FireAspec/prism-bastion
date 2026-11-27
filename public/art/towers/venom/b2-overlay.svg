@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="B2 secondary upgrade overlay">
+<defs>
+ <linearGradient id="copper" x2="1" y2="1"><stop stop-color="#f9c98a"/><stop offset=".26" stop-color="#a96646"/><stop offset=".66" stop-color="#493d48"/><stop offset="1" stop-color="#c28d5c"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9fff2" stop-opacity=".74"/><stop offset=".26" stop-color="#548b88" stop-opacity=".38"/><stop offset=".72" stop-color="#102f46" stop-opacity=".82"/><stop offset="1" stop-color="#b4e5d7" stop-opacity=".58"/></linearGradient>
+ <linearGradient id="liquid" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#ffda7a"/><stop offset=".46" stop-color="#c87027"/><stop offset="1" stop-color="#0a3345"/></linearGradient>
+ <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7d7"/><stop offset=".52" stop-color="#9ac1b3"/><stop offset="1" stop-color="#4e7177"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#ffda7a" stop-opacity=".34"/><stop offset="1" stop-color="#ffda7a" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.1"/></filter>
+</defs>
+<g stroke-linecap="round" stroke-linejoin="round"><path d="M77 77 97 68" fill="none" stroke="#ffda7a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /><g transform="translate(100 62) rotate(56) scale(0.65)">
+<path d="M-8 -11 Q0 -16 8 -11 L11 8 Q0 15 -11 8Z" fill="url(#ceramic)" stroke="#385365" stroke-width="1.6"/>
+<path d="M-12 8 H12 V14 Q0 20 -12 14Z" fill="url(#copper)" stroke="#f1d4a6" stroke-width="1.2"/>
+<path d="M-6 9 Q0 5 6 9 L4 15 H-4Z" fill="#e9dfb7" /><circle cx="0" cy="10" r="2" fill="#d66c29" />
+</g><circle cx="112" cy="56" r="2.4" fill="#ffda7a" /><path d="M51 77 30 68" fill="none" stroke="#ffda7a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /><g transform="translate(28 62) rotate(-56) scale(0.65)">
+<path d="M-8 -11 Q0 -16 8 -11 L11 8 Q0 15 -11 8Z" fill="url(#ceramic)" stroke="#385365" stroke-width="1.6"/>
+<path d="M-12 8 H12 V14 Q0 20 -12 14Z" fill="url(#copper)" stroke="#f1d4a6" stroke-width="1.2"/>
+<path d="M-6 9 Q0 5 6 9 L4 15 H-4Z" fill="#e9dfb7" /><circle cx="0" cy="10" r="2" fill="#d66c29" />
+</g>
+   <circle cx="15" cy="57" r="2.4" fill="#ffda7a" /></g></svg>

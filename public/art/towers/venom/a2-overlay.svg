@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="A2 secondary upgrade overlay">
+<defs>
+ <linearGradient id="copper" x2="1" y2="1"><stop stop-color="#f9c98a"/><stop offset=".26" stop-color="#a96646"/><stop offset=".66" stop-color="#493d48"/><stop offset="1" stop-color="#c28d5c"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9fff2" stop-opacity=".74"/><stop offset=".26" stop-color="#548b88" stop-opacity=".38"/><stop offset=".72" stop-color="#102f46" stop-opacity=".82"/><stop offset="1" stop-color="#b4e5d7" stop-opacity=".58"/></linearGradient>
+ <linearGradient id="liquid" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#68eb91"/><stop offset=".46" stop-color="#09573f"/><stop offset="1" stop-color="#0a3345"/></linearGradient>
+ <linearGradient id="ceramic" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff7d7"/><stop offset=".52" stop-color="#9ac1b3"/><stop offset="1" stop-color="#4e7177"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#68eb91" stop-opacity=".34"/><stop offset="1" stop-color="#68eb91" stop-opacity="0"/></radialGradient>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.1"/></filter>
+</defs>
+<g stroke-linecap="round" stroke-linejoin="round"><path d="M48 83 Q36 74 26 77 M80 83 Q92 74 102 77" fill="none" stroke="#68eb91" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M27 77 Q18 64 31 66 Q36 73 27 77Z" fill="#68eb91" opacity=".95"/><circle cx="26" cy="77" r="2" fill="#d7ff91" /><path d="M101 77 Q112 61 99 64 Q94 72 101 77Z" fill="#68eb91" opacity=".95"/>
+   <path d="M49 50 Q38 34 28 34" fill="none" stroke="#09573f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /><circle cx="28" cy="34" r="6" fill="url(#glass)" stroke="#68eb91" stroke-width="1.6"/>
+<circle cx="28" cy="34" r="2.72" fill="url(#liquid)" /><circle cx="27.08" cy="32.84" r="1" fill="#f1f1ff" /></g></svg>
