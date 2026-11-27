@@ -1,0 +1,26 @@
+import {inflateSync, deflateSync} from 'node:zlib';
+const signature=Buffer.from([137,80,78,71,13,10,26,10]);
+const table=Array.from({length:256},(_,n)=>{for(let k=0;k<8;k++)n=(n&1)?0xedb88320^(n>>>1):n>>>1;return n>>>0;});
+function crc(b){let c=0xffffffff;for(const v of b)c=table[(c^v)&255]^(c>>>8);return (c^0xffffffff)>>>0;}
+function chunk(name,data){const body=Buffer.concat([Buffer.from(name),data]),h=Buffer.alloc(4),t=Buffer.alloc(4);h.writeUInt32BE(data.length);t.writeUInt32BE(crc(body));return Buffer.concat([h,body,t]);}
+export function decodePNG(b){
+ if(!b.subarray(0,8).equals(signature))throw Error('Invalid PNG signature');
+ let p=8,w,h,type,depth,interlace, palette,trans,parts=[],end=false;
+ while(p+12<=b.length){const n=b.readUInt32BE(p),e=p+12+n;if(e>b.length)throw Error('Truncated PNG');const name=b.toString('ascii',p+4,p+8),d=b.subarray(p+8,p+8+n);if(crc(b.subarray(p+4,e-4))!==b.readUInt32BE(e-4))throw Error('PNG CRC mismatch');p=e;
+  if(name==='IHDR'){if(n!==13||w!==undefined)throw Error('Invalid IHDR');w=d.readUInt32BE(0);h=d.readUInt32BE(4);depth=d[8];type=d[9];interlace=d[12];if(d[10]||d[11])throw Error('Unsupported PNG method');}
+  else if(name==='PLTE')palette=d;else if(name==='tRNS')trans=d;else if(name==='IDAT')parts.push(d);else if(name==='acTL')throw Error('Animated PNG requires individual frames');else if(name==='IEND'){end=true;break;}
+ }
+ const channels=({0:1,2:3,3:1,4:2,6:4})[type];if(!end||!w||!h||w*h>32_000_000||depth!==8||interlace!==0||!channels||!parts.length)throw Error('Unsupported PNG: require non-interlaced 8-bit, <=32 MP');
+ const stride=w*channels,raw=inflateSync(Buffer.concat(parts),{maxOutputLength:(stride+1)*h});if(raw.length!==(stride+1)*h)throw Error('Invalid PNG scanlines');const rows=Buffer.alloc(stride*h),out=Buffer.alloc(w*h*4);
+ const paeth=(a,b,c)=>{const p=a+b-c,pa=Math.abs(p-a),pb=Math.abs(p-b),pc=Math.abs(p-c);return pa<=pb&&pa<=pc?a:pb<=pc?b:c;};
+ for(let y=0;y<h;y++){const f=raw[y*(stride+1)];if(f>4)throw Error('Unknown PNG filter');for(let x=0;x<stride;x++){const i=y*stride+x,a=x>=channels?rows[i-channels]:0,b=y?rows[i-stride]:0,c=y&&x>=channels?rows[i-stride-channels]:0;rows[i]=(raw[y*(stride+1)+1+x]+[0,a,b,Math.floor((a+b)/2),paeth(a,b,c)][f])&255;}}
+ for(let i=0,j=0;i<rows.length;i+=channels,j+=4){const a=rows[i],b=rows[i+1],c=rows[i+2];if(type===6){out.set(rows.subarray(i,i+4),j);continue;}if(type===3){if(!palette||a*3+2>=palette.length)throw Error('Bad palette');out.set([palette[a*3],palette[a*3+1],palette[a*3+2],trans?.[a]??255],j);}else if(type===2)out.set([a,b,c,trans?.length===6&&a===trans.readUInt16BE(0)&&b===trans.readUInt16BE(2)&&c===trans.readUInt16BE(4)?0:255],j);else out.set([a,a,a,type===4?b:trans?.length===2&&a===trans.readUInt16BE(0)?0:255],j);}
+ return {width:w,height:h,data:out};
+}
+export function encodePNG({width:w,height:h,data},rgb=false){if(!Number.isInteger(w)||!Number.isInteger(h)||w<=0||h<=0||w*h>32_000_000||data.length!==w*h*4)throw Error('Invalid image dimensions');const k=rgb?3:4,head=Buffer.alloc(13),raw=Buffer.alloc((w*k+1)*h);head.writeUInt32BE(w);head.writeUInt32BE(h,4);head[8]=8;head[9]=rgb?2:6;for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=(y*w+x)*4;data.copy(raw,y*(w*k+1)+1+x*k,i,i+k);}return Buffer.concat([signature,chunk('IHDR',head),chunk('IDAT',deflateSync(raw)),chunk('IEND',Buffer.alloc(0))]);}
+export function crop(im,{x,y,width,height}){const data=Buffer.alloc(width*height*4);for(let j=0;j<height;j++)im.data.copy(data,j*width*4,((y+j)*im.width+x)*4,((y+j)*im.width+x+width)*4);return {width,height,data};}
+export function paste(dst,src,x,y){for(let j=0;j<src.height;j++)src.data.copy(dst.data,((y+j)*dst.width+x)*4,j*src.width*4,(j+1)*src.width*4);}
+export function alphaInfo(im){let transparent=0,partial=0,opaque=0;for(let i=3;i<im.data.length;i+=4){const a=im.data[i];if(a===0)transparent++;else if(a===255)opaque++;else partial++;}return {transparent,partial,opaque};}
+// Extend visible colours into transparent pixels, independently of alpha.
+export function colourInput(im){const data=Buffer.from(im.data),n=im.width*im.height,q=new Int32Array(n),seen=new Uint8Array(n);let tail=0;for(let i=0;i<n;i++){if(data[i*4+3]>0){q[tail++]=i;seen[i]=1;}}for(let head=0;head<tail;head++){const i=q[head],x=i%im.width,y=Math.floor(i/im.width);for(const j of [x?i-1:-1,x+1<im.width?i+1:-1,y?i-im.width:-1,y+1<im.height?i+im.width:-1])if(j>=0&&!seen[j]){seen[j]=1;q[tail++]=j;data.copy(data,j*4,i*4,i*4+3);}}for(let i=3;i<data.length;i+=4)data[i]=255;return {...im,data};}
+export function restoreAlpha(source,result,scale){if(result.width!==source.width*scale||result.height!==source.height*scale)throw Error('Backend returned unexpected dimensions');const data=Buffer.from(result.data);for(let y=0;y<result.height;y++)for(let x=0;x<result.width;x++){const sx=Math.max(0,Math.min(source.width-1,(x+.5)/scale-.5)),sy=Math.max(0,Math.min(source.height-1,(y+.5)/scale-.5));const x0=Math.floor(sx),y0=Math.floor(sy),x1=Math.min(source.width-1,x0+1),y1=Math.min(source.height-1,y0+1),u=sx-x0,v=sy-y0,a=(xx,yy)=>source.data[(yy*source.width+xx)*4+3];data[(y*result.width+x)*4+3]=Math.round((a(x0,y0)*(1-u)+a(x1,y0)*u)*(1-v)+(a(x0,y1)*(1-u)+a(x1,y1)*u)*v);}return {...result,data};}
