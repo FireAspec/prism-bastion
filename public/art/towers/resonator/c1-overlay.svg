@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none"><defs><linearGradient id="deck" x2=".8" y2="1"><stop stop-color="#2a5a6a"/><stop offset="1" stop-color="#102c43"/></linearGradient>
+<linearGradient id="wall" x2=".3" y2="1"><stop stop-color="#547b87"/><stop offset=".55" stop-color="#23485b"/><stop offset="1" stop-color="#102536"/></linearGradient>
+<linearGradient id="inner" x2="1" y2="1"><stop stop-color="#1b374b"/><stop offset="1" stop-color="#102333"/></linearGradient>
+<linearGradient id="steel" x2="1" y2="1"><stop stop-color="#a7d0d6"/><stop offset=".32" stop-color="#5d8494"/><stop offset=".65" stop-color="#25475d"/><stop offset="1" stop-color="#13263a"/></linearGradient>
+<radialGradient id="housing"><stop stop-color="#799fa8"/><stop offset=".7" stop-color="#36586b"/><stop offset="1" stop-color="#142b40"/></radialGradient>
+<radialGradient id="cone"><stop stop-color="#9be9f1"/><stop offset=".23" stop-color="#42697d"/><stop offset=".76" stop-color="#1d3b51"/><stop offset="1" stop-color="#051c2f"/></radialGradient>
+<radialGradient id="membrane"><stop stop-color="#155466"/><stop offset=".6" stop-color="#0b2e45"/><stop offset="1" stop-color="#5b8997"/></radialGradient>
+<radialGradient id="glass"><stop stop-color="#f8ffff"/><stop offset=".16" stop-color="#c8f2f9"/><stop offset=".34" stop-color="#66d4e3"/><stop offset=".8" stop-color="#1b5975"/><stop offset="1" stop-color="#08283d"/></radialGradient></defs><g transform="scale(.8)"><path d="M 24 108 Q 12 91 28 77" fill="none" stroke="#f8d67b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M 136 108 Q 148 91 132 77" fill="none" stroke="#f8d67b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g></svg>
