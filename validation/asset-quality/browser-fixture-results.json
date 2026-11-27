@@ -1,0 +1,350 @@
+{
+  "environment": "Linux headless Chromium; emulated 3840x2160 physical viewport; embedded fixture URLs; test-double, not Windows",
+  "measurements": [
+    {
+      "asset": "ui/crystal.png",
+      "model": "Original",
+      "mode": "target",
+      "dpr": 1,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        480,
+        480
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 2.3,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 102400
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "digital-art-4x",
+      "mode": "target",
+      "dpr": 1,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        480,
+        480
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 7,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 921600
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "Original",
+      "mode": "native",
+      "dpr": 1,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        160,
+        160
+      ],
+      "css": [
+        160,
+        160
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 1.6,
+      "canvasBytes": 102400,
+      "decodedImageBytes": 102400
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "digital-art-4x",
+      "mode": "native",
+      "dpr": 1,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        480,
+        480
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 1.1,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 921600
+    },
+    {
+      "asset": "ui/vector.svg",
+      "model": "Original",
+      "mode": "native",
+      "dpr": 1,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "css": [
+        128,
+        128
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 2.8,
+      "canvasBytes": 65536,
+      "decodedImageBytes": 65536
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "Original",
+      "mode": "target",
+      "dpr": 1.5,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        320,
+        320
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 15.2,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 102400
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "digital-art-4x",
+      "mode": "target",
+      "dpr": 1.5,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        320,
+        320
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 14.9,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 921600
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "Original",
+      "mode": "native",
+      "dpr": 1.5,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        160,
+        160
+      ],
+      "css": [
+        106.65625,
+        106.65625
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 2.9,
+      "canvasBytes": 102400,
+      "decodedImageBytes": 102400
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "digital-art-4x",
+      "mode": "native",
+      "dpr": 1.5,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        320,
+        320
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 0.5,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 921600
+    },
+    {
+      "asset": "ui/vector.svg",
+      "model": "Original",
+      "mode": "native",
+      "dpr": 1.5,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "css": [
+        85.328125,
+        85.328125
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 1.7,
+      "canvasBytes": 65536,
+      "decodedImageBytes": 65536
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "Original",
+      "mode": "target",
+      "dpr": 2,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        240,
+        240
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 11.2,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 102400
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "digital-art-4x",
+      "mode": "target",
+      "dpr": 2,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        240,
+        240
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 3.1,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 921600
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "Original",
+      "mode": "native",
+      "dpr": 2,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        160,
+        160
+      ],
+      "css": [
+        80,
+        80
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 1.7,
+      "canvasBytes": 102400,
+      "decodedImageBytes": 102400
+    },
+    {
+      "asset": "ui/crystal.png",
+      "model": "digital-art-4x",
+      "mode": "native",
+      "dpr": 2,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        480,
+        480
+      ],
+      "css": [
+        240,
+        240
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 0.6,
+      "canvasBytes": 921600,
+      "decodedImageBytes": 921600
+    },
+    {
+      "asset": "ui/vector.svg",
+      "model": "Original",
+      "mode": "native",
+      "dpr": 2,
+      "screenPhysical": [
+        3840,
+        2160
+      ],
+      "canvas": [
+        128,
+        128
+      ],
+      "css": [
+        64,
+        64
+      ],
+      "dprMatch": true,
+      "filter": "high",
+      "decodeMs": 1.8,
+      "canvasBytes": 65536,
+      "decodedImageBytes": 65536
+    }
+  ]
+}
