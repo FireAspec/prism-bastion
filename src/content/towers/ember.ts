@@ -16,7 +16,7 @@ const burst = (id:string,power:number,radius:number):EffectDef =>
 const focus = (power:number,cap:number):EffectDef =>
   ({id:'ember-forge-focus',kind:'focus',power,radius:0,interval:0,duration:0,cap});
 const echo = (power:number,interval:number,cap:number):EffectDef =>
-  ({id:'ember-solar-echo',kind:'echo',power,radius:0,interval,duration:0,cap,element:'fire'});
+  ({id:'ember-solar-echo',kind:'echo',power,radius:115,interval,duration:0,cap,element:'fire'});
 const ability = (
   id:string,name:string,description:string,kind:'nova'|'overclock'|'meteor',
   cooldown:number,power:number,duration:number,radius:number,
@@ -85,33 +85,33 @@ export function getTower():TowerDef {
       {intervalMul:0.92,rangeMul:1.1}),
     up('b',2,660,'Рассветная оптика','Интервал ×0,90, урон щитам ×1,15; обнаружение скрытых врагов для любого пути.',
       {intervalMul:0.9,shieldMultiplierMul:1.15,detects:true}),
-    up('b',3,1650,'Корона фотонов','Кольцо 27 урона каждые 1,35 с в радиусе 150, до 12 целей. Обжигает и раскрывает скрытых.',
+    up('b',3,1650,'Корона фотонов','Кольцо 27 урона каждые 1,35 с в радиусе 150. Обжигает и раскрывает скрытых.',
       {},{replaceAttack:baseAttack({mode:'ring',damage:27,interval:1.35,range:150,pierce:12,projectileSpeed:0,projectileRadius:0,detects:true,shieldMultiplier:1.25,
         statuses:[burn(4,3.5,3),{kind:'reveal',power:1,duration:4}]})}),
-    up('b',4,3960,'Пульсарная розетка','Кольцо 46 урона / 1,15 с, радиус 188, до 16 целей, метка +10%. Активная нова 120 урона в радиусе 190.',
+    up('b',4,3960,'Пульсарная розетка','Кольцо 46 урона / 1,15 с, радиус 188, метка +10%. Активная нова 120 урона в радиусе 190.',
       {},{replaceAttack:baseAttack({mode:'ring',damage:46,interval:1.15,range:188,pierce:16,projectileSpeed:0,projectileRadius:0,detects:true,shieldMultiplier:1.4,
-        statuses:[burn(6,4.2,4),{kind:'mark',power:0.1,duration:4}]}),
+        statuses:[burn(6,4.2,4),{kind:'mark',power:0.1,duration:4},{kind:'reveal',power:1,duration:4}]}),
         abilities:[ability('ember-solar-nova','Солнечная нова','Широкий ручной импульс вокруг сферы.','nova',38,120,0,190)]}),
-    up('b',5,9900,'Сердце протуберанца','Парящее солнце: кольцо 78 урона / 0,85 с, радиус 230, до 24 целей; эхо 35% каждые 2 с. Сверхновая 260 урона в радиусе 255.',
+    up('b',5,9900,'Сердце протуберанца','Парящее солнце: кольцо 78 урона / 0,85 с, радиус 230; эхо 35% с задержкой 2 с, радиус 115. Сверхновая 260 урона в радиусе 255.',
       {},{replaceAttack:baseAttack({mode:'ring',damage:78,interval:0.85,range:230,pierce:24,projectileSpeed:0,projectileRadius:0,detects:true,shieldMultiplier:1.75,bossMultiplier:1.3,
-        statuses:[burn(9,4.8,5),{kind:'mark',power:0.1,duration:5}]}),
+        statuses:[burn(9,4.8,5),{kind:'mark',power:0.1,duration:5},{kind:'reveal',power:1,duration:5}]}),
         effects:[echo(0.35,2,8)],
         abilities:[ability('ember-solar-nova','Сверхновая','Корональный выброс вокруг солнечного сердца.','nova',29,260,0,255)]}),
   ];
   const c:UpgradeDef[] = [
-    up('c',1,285,'Искровой распылитель','Урон ×1,09, площадь взрыва +10, скорость снаряда ×1,15; полезен и другим веткам.',
-      {damageMul:1.09,splashAdd:10,projectileSpeedMul:1.15}),
-    up('c',2,570,'Магматическая смесь','Дальность ×1,12, площадь взрыва +12, бронепробитие +1; горение 3 ед./с на 4 с.',
-      {rangeMul:1.12,splashAdd:12,armorPierceAdd:1},{addStatuses:[burn(3,4,3)]}),
-    up('c',3,1425,'Кратерный ствол','Навесной заряд 48 урона / 1,85 с, радиус взрыва 58, дальность 275. Горение 7 ед./с.',
-      {},{replaceAttack:baseAttack({mode:'mortar',damage:48,interval:1.85,range:275,splash:58,projectileSpeed:245,projectileRadius:6,statuses:[burn(7,4.5,4)]})}),
-    up('c',4,3420,'Двойной вулкан','Два навесных заряда по 76 урона / 1,55 с, взрыв радиусом 72. Убийства от огня дают вспышку 34 урона.',
-      {},{replaceAttack:baseAttack({mode:'mortar',damage:76,interval:1.55,range:315,count:2,splash:72,armorPierce:2,projectileSpeed:275,projectileRadius:7,statuses:[burn(10,5,5)]}),
+    up('c',1,285,'Искровой распылитель','Урон ×1,09, скорость снаряда ×1,15; не уменьшает радиус солнечного кольца.',
+      {damageMul:1.09,projectileSpeedMul:1.15}),
+    up('c',2,570,'Магматическая смесь','Дальность ×1,12, бронепробитие +1; горение 3 ед./с на 4 с, до 3 слоёв.',
+      {rangeMul:1.12,armorPierceAdd:1},{addStatuses:[burn(3,4,3)]}),
+    up('c',3,1425,'Кратерный ствол','Навесной заряд 48 урона / 1,85 с, радиус взрыва 80, дальность 275. Горение 7 ед./с.',
+      {},{replaceAttack:baseAttack({mode:'mortar',damage:48,interval:1.85,range:275,splash:80,projectileSpeed:245,projectileRadius:6,statuses:[burn(7,4.5,4)]})}),
+    up('c',4,3420,'Двойной вулкан','Два навесных заряда по 76 урона / 1,55 с, взрыв радиусом 94. Убийства от огня дают вспышку 34 урона.',
+      {},{replaceAttack:baseAttack({mode:'mortar',damage:76,interval:1.55,range:315,count:2,splash:94,armorPierce:2,projectileSpeed:275,projectileRadius:7,statuses:[burn(10,5,5)]}),
         effects:[burst('ember-ash-burst',34,48)]}),
-    up('c',5,8550,'Вулканический триумвират','Три трубы: по 108 урона / 1,2 с, взрыв радиусом 94, дальность 355, сильное горение. Активная кальдера — метеор на 360 урона.',
-      {},{replaceAttack:baseAttack({mode:'mortar',damage:108,interval:1.2,range:355,count:3,splash:94,armorPierce:3,bossMultiplier:1.25,projectileSpeed:320,projectileRadius:9,statuses:[burn(15,6,6)]}),
+    up('c',5,8550,'Вулканический триумвират','Три трубы: по 108 урона / 1,2 с, взрыв радиусом 116, дальность 355, сильное горение. Активная кальдера — метеор на 360 урона.',
+      {},{replaceAttack:baseAttack({mode:'mortar',damage:108,interval:1.2,range:355,count:3,splash:116,armorPierce:3,bossMultiplier:1.25,projectileSpeed:320,projectileRadius:9,statuses:[burn(15,6,6)]}),
         effects:[burst('ember-ash-burst',72,68)],
-        abilities:[ability('ember-ash-meteor','Кальдера','Автоматический метеор по скоплению врагов в досягаемости.','meteor',36,360,0,125)]}),
+        abilities:[ability('ember-ash-meteor','Кальдера','Автоматический метеор по ближайшему живому врагу, без выбора точки.','meteor',36,360,0,125)]}),
   ];
   return {
     id:'ember',name:'Жаровая печь',

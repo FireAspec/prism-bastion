@@ -3,6 +3,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {resolve} from 'node:path';
 import type {AttackDef,AbilityDef,EffectDef,StatDelta,StatusSpec,Tiers,TowerDef,VisualState} from '../../src/contracts';
 import {getTower} from '../../src/content/towers/ember';
+import {legalTiers} from '../../src/contracts/rules';
 
 const assetRoot = resolve(process.cwd(),'public/art/towers/ember');
 const expectedPrices = [
@@ -12,7 +13,7 @@ const expectedPrices = [
 ];
 
 function legal(t:[number,number,number]):boolean {
-  return t.filter(n=>n>0).length<=2 && t.filter(n=>n>2).length<=1;
+  return legalTiers(t);
 }
 function allBuilds():Tiers[] {
   const result:Tiers[]=[];
@@ -26,7 +27,7 @@ function allBuilds():Tiers[] {
 /** Local contract fixture while src/combat is independently developed. */
 function fixture(def:TowerDef,tiers:Tiers){
   if(!legal(tiers))throw Error('illegal tiers');
-  const main=tiers.findIndex(n=>n>=3)>=0 ? tiers.findIndex(n=>n>=3) : tiers.findIndex(n=>n>0);
+  const main=tiers.every(n=>n===0)?-1:tiers.indexOf(Math.max(...tiers));
   const high= main<0 ? null : def.paths[main].upgrades[tiers[main]-1];
   let attack:AttackDef=structuredClone(def.attack);
   if(main>=0 && tiers[main]>=3){
@@ -54,10 +55,10 @@ function fixture(def:TowerDef,tiers:Tiers){
       const field=k.replace(/Add$/,'') as keyof AttackDef;
       (attack as unknown as Record<string,number>)[field]+=d[k] as number;
     }
-    if(d.detects!==undefined)attack.detects=d.detects;
+    attack.detects ||= d.detects??false;
     for(const s of u.addStatuses??[]){
       const original=statuses.get(s.kind);
-      if(!original || s.power>original.power)statuses.set(s.kind,structuredClone(s));
+      statuses.set(s.kind,original?{kind:s.kind,power:Math.max(original.power,s.power),duration:Math.max(original.duration,s.duration),maxStacks:Math.max(original.maxStacks??1,s.maxStacks??1)}:structuredClone(s));
     }
     for(const e of u.effects??[])effects.set(e.id,structuredClone(e));
     for(const a of u.abilities??[])abilities.set(a.id,structuredClone(a));
@@ -140,7 +141,7 @@ describe('ember content: 3 × 5',()=>{
       if(t.some(x=>x>=3))expect(r.attack.mode).toBe(['shot','ring','mortar'][t.findIndex(x=>x>=3)]);
       else expect(r.attack.mode).toBe('shot');
     }
-    for(const illegal of [[1,1,1],[3,3,0],[5,5,0],[5,2,2],[3,0,3]] as Tiers[]){
+    for(const illegal of [[1,1,1],[3,3,0],[5,5,0],[5,2,2],[3,0,3],[-1,0,0],[6,0,0],[0,1.5,0]] as Tiers[]){
       expect(()=>fixture(def,illegal)).toThrow();
     }
   });
@@ -172,6 +173,25 @@ describe('ember content: 3 × 5',()=>{
     expect(c.splash).toBe(116);
     expect(c.range).toBeCloseTo(355*1.12*1.1,6);
     expect(c.detects).toBe(true);
+  });
+
+  it('preserves the full ring radius, useful cross bonuses, reveal and a nonzero echo radius',()=>{
+    const def=getTower();
+    const ringRadius=(a:AttackDef)=>a.splash>0?Math.min(a.range,a.splash):a.range;
+    for(const tier of [3,4,5]){
+      const pure=fixture(def,[0,tier,0]), cross=fixture(def,[0,tier,2]);
+      expect(cross.attack.splash).toBe(0);
+      expect(ringRadius(cross.attack)).toBeCloseTo(ringRadius(pure.attack)*1.12);
+      expect(cross.attack.damage).toBeCloseTo(pure.attack.damage*1.09);
+      expect(cross.attack.statuses.some(s=>s.kind==='reveal')).toBe(true);
+    }
+    expect(fixture(def,[0,5,2]).attack.range).toBeCloseTo(283.36);
+    expect(fixture(def,[0,3,2]).attack.statuses.find(s=>s.kind==='burn')?.duration).toBe(4);
+    expect(fixture(def,[1,2,0]).visual.asset).toContain('b2.svg');
+    expect(fixture(def,[1,2,0]).secondaryOverlay).toContain('a1-overlay.svg');
+    expect(fixture(def,[2,2,0]).visual.asset).toContain('a2.svg');
+    expect(fixture(def,[0,5,0]).effects.find(e=>e.kind==='echo')).toMatchObject({radius:115,interval:2,cap:8});
+    expect([3,4,5].map(t=>fixture(def,[0,0,t]).attack.splash)).toEqual([80,94,116]);
   });
 
   it('has 16 full views, 6 transparent overlays, and a locally complete 22-image preview',()=>{
