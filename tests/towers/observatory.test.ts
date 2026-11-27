@@ -18,9 +18,8 @@ function fixtureResolve(def: TowerDef, tiers: Tiers): ResolvedTower {
   if (!legal(tiers) || tiers.some(t => !Number.isInteger(t) || t < 0 || t > 5)) {
     throw new Error('illegal cross-path tiers');
   }
-  const main = (tiers.findIndex(t => t > 2) >= 0
-    ? tiers.findIndex(t => t > 2)
-    : tiers.findIndex(t => t > 0)) as PathIndex | -1;
+  const highest = Math.max(...tiers);
+  const main = (highest === 0 ? -1 : tiers.indexOf(highest)) as PathIndex | -1;
   const lastReplace = main === -1 ? undefined :
     def.paths[main].upgrades.slice(0, tiers[main]).reverse().find(upgrade => !!upgrade.replaceAttack);
   const attack: AttackDef = structuredClone(lastReplace?.replaceAttack ?? def.attack);
@@ -135,6 +134,13 @@ describe('observatory tower', () => {
       expect(r.attack.statuses.every(s => s.duration > 0 && Number.isFinite(s.power))).toBe(true);
       expect(new Set(r.effects.map(effect => effect.id)).size).toBe(r.effects.length);
       expect(r.effects.every(effect => Number.isFinite(effect.power))).toBe(true);
+      const selected = ([0, 1, 2] as const).filter(i => tiers[i] > 0)
+        .sort((x, y) => tiers[y] - tiers[x] || x - y);
+      expect(r.mainPath).toBe(selected[0]);
+      expect(r.visual.asset).toBe(selected.length ?
+        `/art/towers/observatory/${letters[selected[0]]}${tiers[selected[0]]}.svg` : def.visual.asset);
+      expect(r.secondaryOverlay).toBe(selected.length === 2 ?
+        `/art/towers/observatory/${letters[selected[1]]}${tiers[selected[1]]}-overlay.svg` : undefined);
       expect(existsSync(assetFile(r.visual.asset))).toBe(true);
       if (r.secondaryOverlay) expect(existsSync(assetFile(r.secondaryOverlay))).toBe(true);
       expect(r.effects.some(e => e.stat === 'detect')).toBe(true);
@@ -150,6 +156,10 @@ describe('observatory tower', () => {
     expect(a.attack).toMatchObject({mode: 'ring', damage: 18, interval: 1.35});
     expect(a.attack.range).toBeCloseTo(455 * 1.03);
     expect(a.attack.statuses).toContainEqual({kind: 'reveal', power: 1, duration: 10});
+    expect(a.attack.statuses).toContainEqual({kind: 'slow', power: .20, duration: 2.5});
+    expect(fixtureResolve(def, [4, 0, 0]).attack.statuses.some(s => s.kind === 'slow')).toBe(false);
+    expect([a.visual.projectile, b.visual.projectile, c.visual.projectile]).toEqual(['ring', 'beam', 'chain']);
+    expect([a.visual.motion, b.visual.motion, c.visual.motion]).toEqual(['pulse', 'rotate', 'orbit']);
     expect(a.effects.find(effect => effect.id === 'observatory-detection')?.radius).toBe(500);
     expect(b.attack).toMatchObject({mode: 'beam', element: 'kinetic', count: 2, pierce: 9,
       armorPierce: 30, damage: 55, bossMultiplier: 1.6});
@@ -186,6 +196,13 @@ describe('observatory tower', () => {
       expect(secondary).not.toBe(main);
     }
     expect(fixtureResolve(def, [2, 2, 0]).mainPath).toBe(0);
+    expect(fixtureResolve(def, [1, 2, 0])).toMatchObject({mainPath: 1,
+      visual: {asset: '/art/towers/observatory/b2.svg'}, secondaryOverlay: '/art/towers/observatory/a1-overlay.svg'});
+    expect(fixtureResolve(def, [0, 1, 2])).toMatchObject({mainPath: 2,
+      visual: {asset: '/art/towers/observatory/c2.svg'}, secondaryOverlay: '/art/towers/observatory/b1-overlay.svg'});
+    for (const tiers of [[-1, 0, 0], [6, 0, 0], [1.5, 0, 0]] as Tiers[]) {
+      expect(() => fixtureResolve(def, tiers)).toThrow();
+    }
   });
 
   it('has 22 distinct internal SVGs and a complete 22-model gallery', () => {

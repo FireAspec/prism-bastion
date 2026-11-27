@@ -19,7 +19,9 @@ function attack(patch: Partial<AttackDef> = {}): AttackDef {
 }
 
 function appearance(asset: string, accent: string, motion: VisualState['motion'], glow: number): VisualState {
-  return {asset: `${ROOT}${asset}.svg`, accent, muzzle: 'star', projectile: 'ray',
+  const projectile = /^a[3-5]$/.test(asset) ? 'ring' : /^c[45]$/.test(asset) ? 'chain' :
+    /^[bc][3-5]$/.test(asset) ? 'beam' : 'ray';
+  return {asset: `${ROOT}${asset}.svg`, accent, muzzle: 'star', projectile,
     impact: 'rings', scale: 1, glow, motion};
 }
 
@@ -31,7 +33,7 @@ function upgrade(
   return {
     id: `observatory-${path}${tier}`, tier, name, description, cost, delta,
     ...options,
-    visual: appearance(`${path}${tier}`, accents[path], tier === 5 ? 'orbit' : tier >= 3 ? 'rotate' : 'breathe',
+    visual: appearance(`${path}${tier}`, accents[path], tier === 5 ? ({a: 'pulse', b: 'rotate', c: 'orbit'} as const)[path] : tier >= 3 ? 'rotate' : 'breathe',
       0.32 + tier * 0.12),
   };
 }
@@ -73,10 +75,11 @@ export function getTower(): TowerDef {
                 aura('observatory-a-range', 'range', .12, 320), aura('observatory-a-speed', 'attackSpeed', .11, 320)],
             }),
           upgrade('a', 5, 'Небосвод без тайн',
-            'Раскрытый купол испускает круговую волну: 18 урона / 1,35 с, радиус 455 и раскрытие на 10 с. Обнаружение 500; союзникам +16% дальности и +15% темпа.',
+            'Раскрытый купол испускает круговую волну: 18 урона / 1,35 с, радиус 455, раскрытие на 10 с и замедление на 20% на 2,5 с. Обнаружение 500; союзникам +16% дальности и +15% темпа.',
             9265, {}, {
               replaceAttack: attack({mode: 'ring', damage: 18, interval: 1.35, range: 455,
-                detects: true, statuses: [{kind: 'reveal', power: 1, duration: 10}]}),
+                detects: true, statuses: [{kind: 'reveal', power: 1, duration: 10},
+                  {kind: 'slow', power: .20, duration: 2.5}]}),
               effects: [aura('observatory-detection', 'detect', 1, 500),
                 aura('observatory-a-range', 'range', .16, 400), aura('observatory-a-speed', 'attackSpeed', .15, 390)],
             }),
