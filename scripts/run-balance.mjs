@@ -16,7 +16,7 @@ if(v.help){
 }
 const seed=Number(v.seed),limit=Number(v.limit),players=v.players.split(',').map(Number);
 if(!Number.isSafeInteger(seed)||seed<0||seed>0xffffffff||!Number.isSafeInteger(limit)||limit<1||limit>MAX_TICKS) throw Error('Invalid seed/tick limit');
-if(new Set(players).size!==players.length)throw Error('Duplicate player counts');
+if(!['gate','expanded'].includes(v.scope)||players.some(n=>![1,2,4].includes(n))||new Set(players).size!==players.length)throw Error('Invalid scope/player counts');
 const strategies=STRATEGIES.filter(s=>!v.strategy||s.id===v.strategy);
 if(!strategies.length)throw Error('Unknown strategy');
 const out=resolve(v.output);
@@ -26,7 +26,7 @@ async function save(path,data){
  await writeFile(tmp,JSON.stringify(data,null,2)+'\n');
  await rename(tmp,path);
 }
-const report={schema:1,scope:v.scope,players,seed,limit,strategies:strategies.map(s=>s.id),filters:{map:v.map,mode:v.mode,difficulty:v.difficulty},status:'blocked',cells:[],errors:[]};
+const report={schema:1,scope:v.scope,players,seed,limit,strategies:strategies.map(s=>s.id),filters:{map:v.map,mode:v.mode,difficulty:v.difficulty},status:'blocked',expected:20*10*(v.scope==='expanded'?4:1)*players.length,selected:0,cells:[],errors:[]};
 const reportPath=join(out,'report.json');
 try{
  const [{loadContent,validateContent},{createGame},{createCombat}]=await Promise.all([
@@ -90,7 +90,7 @@ try{
   if(report.status!=='passed')process.exitCode=1;
  }
 }catch(e){
- report.status='blocked';report.errors.push(String(e?.stack||e));
+ report.status='blocked';report.unverified=report.expected-report.cells.filter(r=>r.status==='verified-win').length;report.errors.push(String(e?.stack||e));
  // Verification must not overwrite a prior matrix report.
  if(!v.verify)await save(reportPath,report);
  console.error(e);process.exitCode=1;
