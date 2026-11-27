@@ -3,10 +3,11 @@ import type {AttackDef, EffectDef, TowerDef, UpgradeDef, VisualState} from '../.
 const ART = '/art/towers/needle/';
 
 function visual(asset: string, accent: string, projectile: string, motion: VisualState['motion']): VisualState {
+  const attackKey = asset === 'base' ? `needle-${projectile}` : `needle-${projectile}-${asset}`;
   return {
     asset: `${ART}${asset}.svg`, accent,
-    muzzle: `needle-${projectile}-muzzle`, projectile: `needle-${projectile}`,
-    impact: `needle-${projectile}-impact`,
+    muzzle: `${attackKey}-muzzle`, projectile: attackKey,
+    impact: `${attackKey}-impact`,
     scale: 1, glow: asset.endsWith('5') ? 0.95 : 0.32, motion,
   };
 }

@@ -13,7 +13,7 @@ const paths = ['a', 'b', 'c'] as const;
 function resolveNeedle(tower: TowerDef, tiers: Tiers): ResolvedTower {
   if (!legalTiers(tiers)) throw new RangeError('Illegal tower tiers');
   const active = ([0, 1, 2] as PathIndex[]).filter(p => tiers[p] > 0);
-  const main = active.find(p => tiers[p] > 2) ?? active[0];
+  const main = [...active].sort((a, b) => tiers[b] - tiers[a] || a - b)[0];
   let attack: AttackDef = structuredClone(tower.attack);
   if (main !== undefined) {
     const replacements = tower.paths[main].upgrades.slice(0, tiers[main])
@@ -149,7 +149,7 @@ describe('fixture resolver for the full legal matrix', () => {
         }
       }
     }
-    expect(count).toBeGreaterThan(50);
+    expect(count).toBe(64);
   });
 
   it('keeps the intended shape-changing T5 attacks and full primary bonuses', () => {
@@ -222,6 +222,40 @@ describe('fixture resolver for the full legal matrix', () => {
 });
 
 describe('art and offline preview', () => {
+  it('chooses the higher visual tier and breaks equal-tier ties by path index', () => {
+    const def = getTower();
+    const cases: [Tiers, string, string][] = [
+      [[1, 2, 0], 'b2', 'a1'], [[1, 0, 2], 'c2', 'a1'],
+      [[0, 1, 2], 'c2', 'b1'], [[2, 1, 0], 'a2', 'b1'],
+      [[2, 2, 0], 'a2', 'b2'], [[0, 2, 2], 'b2', 'c2'],
+    ];
+    for (const [tiers, main, secondary] of cases) {
+      const result = resolveNeedle(def, tiers);
+      expect(result.visual.asset).toBe(`/art/towers/needle/${main}.svg`);
+      expect(result.secondaryOverlay).toBe(`/art/towers/needle/${secondary}-overlay.svg`);
+    }
+  });
+
+  it('exposes distinct attack visual keys for every upgrade', () => {
+    const def = getTower();
+    const visuals = [def.visual, ...def.paths.flatMap(path => path.upgrades.map(up => up.visual))];
+    for (const key of ['muzzle', 'projectile', 'impact'] as const) {
+      expect(new Set(visuals.map(v => v[key])).size).toBe(16);
+    }
+  });
+
+  it('keeps the outer A5 tracers inside the SVG viewport including their stroke', () => {
+    const lines = [...readAsset('a5.svg').matchAll(/<line\b[^>]*stroke-dasharray="2 3"[^>]*\/>/g)];
+    expect(lines).toHaveLength(12);
+    for (const [line] of lines) {
+      const coordinates = [...line.matchAll(/\b[xy][12]="(-?[\d.]+)"/g)].map(match => Number(match[1]));
+      expect(coordinates).toHaveLength(4);
+      for (const coordinate of coordinates) {
+        expect(coordinate).toBeGreaterThanOrEqual(2);
+        expect(coordinate).toBeLessThanOrEqual(126);
+      }
+    }
+  });
   it('ships sixteen distinct full views and six meaningful transparent overlays', () => {
     const names = ['base', ...paths.flatMap(p => [1, 2, 3, 4, 5].map(n => `${p}${n}`))];
     const overlays = paths.flatMap(p => [1, 2].map(n => `${p}${n}-overlay`));
