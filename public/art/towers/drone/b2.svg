@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" role="img" aria-label="Ангар дронов">
+  <defs>
+ <linearGradient id="steel" x1="0" x2="0.92" y1="0" y2="1"><stop stop-color="#86a5a9"/><stop offset=".28" stop-color="#426d79"/><stop offset=".64" stop-color="#244456"/><stop offset="1" stop-color="#102c3d"/></linearGradient>
+ <linearGradient id="roof" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#355d69"/><stop offset=".48" stop-color="#112e40"/><stop offset="1" stop-color="#071e30"/></linearGradient>
+ <linearGradient id="copper" x1="0" x2=".8" y1="0" y2="1"><stop stop-color="#ffe2a0"/><stop offset=".48" stop-color="#bd8359"/><stop offset="1" stop-color="#7b453c"/></linearGradient>
+ <radialGradient id="reactor"><stop stop-color="#ecfff6"/><stop offset=".25" stop-color="#9af4db"/><stop offset=".55" stop-color="#38bcae"/><stop offset="1" stop-color="#0c4c60"/></radialGradient>
+ <radialGradient id="hot"><stop stop-color="#fff8ca"/><stop offset=".3" stop-color="#ffca78"/><stop offset=".75" stop-color="#f48b4e"/><stop offset="1" stop-color="#6c3741"/></radialGradient>
+ <linearGradient id="glass" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#c1fbff" stop-opacity=".95"/><stop offset=".4" stop-color="#3dafa7" stop-opacity=".55"/><stop offset="1" stop-color="#12526b" stop-opacity=".7"/></linearGradient>
+ <filter id="halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+ </defs><g><ellipse cx="64" cy="103" rx="43" ry="12" fill="#061d27" opacity=".58"/>
+ <path d="M23 71 L34 56 L93 56 L105 71 L105 94 L92 108 L36 108 L23 94Z" fill="url(#steel)" stroke="#153448" stroke-width="3"/>
+ <path d="M19 75 L36 62 L92 62 L109 75 L102 99 L91 109 L38 109 L26 99Z" fill="url(#roof)" stroke="url(#copper)" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M30 83 L42 76 L86 76 L99 83 L94 99 L34 99Z" fill="#102c3e" stroke="#a47354" stroke-width="2"/>
+ <path d="M43 79 L43 98 M85 79 L85 98" stroke="#497681" stroke-width="2"/>
+ <path d="M46 88 H82 M46 94 H82" stroke="#244d5d" stroke-width="2"/>
+ <path d="M34 67 L45 50 L84 50 L95 67 L89 79 L39 79Z" fill="url(#steel)" stroke="#0d2a3c" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M44 64 L50 55 L78 55 L85 64 L79 74 L49 74Z" fill="url(#roof)" stroke="#d1a677" stroke-width="1.7"/>
+ <path d="M55 59 H73 L77 66 L71 71 H57 L51 66Z" fill="url(#glass)" stroke="#75d4d1" stroke-width="1.2"/>
+ <circle cx="64" cy="65" r="5" fill="url(#reactor)" stroke="#d1ffed" stroke-width="1.2"/>
+ <rect x="17" y="76" width="11" height="25" rx="2" fill="url(#steel)" stroke="#9f6f58" stroke-width="2"/>
+ <rect x="100" y="76" width="11" height="25" rx="2" fill="url(#steel)" stroke="#9f6f58" stroke-width="2"/>
+ <path d="M22 81 L22 95" stroke="#71e9f0" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="1" /><path d="M106 81 L106 95" stroke="#71e9f0" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="1" />
+ <circle cx="38" cy="99" r="2.2" fill="#ffba70" stroke="#1d4552" stroke-width="1.5"/><circle cx="90" cy="99" r="2.2" fill="#ffba70" stroke="#1d4552" stroke-width="1.5"/>
+ <circle cx="37" cy="69" r="2" fill="#b67a55" stroke="#1d4552" stroke-width="1.5"/><circle cx="91" cy="69" r="2" fill="#b67a55" stroke="#1d4552" stroke-width="1.5"/><path d="M31 85 H18 M97 85 H110" stroke="#efc891" stroke-width="3"/><path d="M31 77 L13 71 L17 56 L31 59 M97 77 L115 71 L111 56 L97 59" fill="url(#steel)" stroke="#d29c75" stroke-width="2.6"/><rect x="22" y="67" width="12" height="22" rx="2" fill="url(#copper)" stroke="#402f35" stroke-width="2"/><rect x="94" y="67" width="12" height="22" rx="2" fill="url(#copper)" stroke="#402f35" stroke-width="2"/><path d="M34 73 L22 59 L30 50 M94 73 L106 59 L98 50" stroke="#f2c18e" stroke-width="3"/><g transform="translate(64 50) rotate(0)">
+   <rect x="-6" y="-15" width="12" height="23" rx="2" fill="url(#steel)" stroke="#dda678" stroke-width="1.8"/>
+   <rect x="-3" y="-21" width="6" height="14" rx="2" fill="url(#copper)" stroke="#583c3b" stroke-width="1.2"/>
+   <circle cx="0" cy="1" r="4" fill="url(#hot)" stroke="#fff0c2" stroke-width="1"/>
+  </g><circle cx="43" cy="64" r="7" fill="url(#hot)" stroke="#ecbb7d" stroke-width="2"/><circle cx="85" cy="64" r="7" fill="url(#hot)" stroke="#ecbb7d" stroke-width="2"/>
+ <path d="M43 64 L64 50" stroke="#ffba70" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.65" /><path d="M85 64 L64 50" stroke="#ffba70" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.65" /></g></svg>
