@@ -22,8 +22,8 @@ function up(path:'a'|'b'|'c',tier:1|2|3|4|5,name:string,description:string,cost:
   extras:Partial<Pick<UpgradeDef,'replaceAttack'|'addStatuses'|'effects'|'abilities'>>={}):UpgradeDef {
   return {id:`frost-${path}${tier}`,name,description,cost,tier,delta,...extras,visual:{...visuals[path][tier-1]}};
 }
-const echo = (power:number,interval:number,cap:number):EffectDef => ({
-  id:'frost-shard-echo',kind:'echo',power,radius:0,interval,duration:0,cap,element:'kinetic',
+const echo = (power:number,interval:number,cap:number,radius:number):EffectDef => ({
+  id:'frost-shard-echo',kind:'echo',power,radius,interval,duration:0,cap,element:'kinetic',
 });
 
 /** Returns independent nested content so a resolver cannot mutate the catalog. */
@@ -46,17 +46,17 @@ export function getTower():TowerDef {
       ]},
       {id:'frost-b',name:'Ледокол',description:'Кинетические осколки пробивают оболочки и ломают замедленные цели.',upgrades:[
         up('b',1,'Алмазное острие','Урон ×1,25, скорость снаряда ×1,25 и пробитие брони +1.',275,{damageMul:1.25,projectileSpeedMul:1.25,armorPierceAdd:1}),
-        up('b',2,'Раздвоенный скол','Пробитие +1 цель; множитель урона по щиту ×1,15.',550,{pierceAdd:1,shieldMultiplierMul:1.15}),
+        up('b',2,'Раздвоенный скол','Бронепробитие +2; множитель урона по щиту ×1,15.',550,{armorPierceAdd:2,shieldMultiplierMul:1.15}),
         up('b',3,'Стальной ледник','Кинетические шипы: 13 урона, осколочный радиус 13, бронепробитие 3. По уже замедленным целям действует бонус +10%.',1375,{},
-          {replaceAttack:atk({element:'kinetic',damage:13,interval:.92,range:168,splash:13,armorPierce:3,projectileSpeed:480,projectileRadius:5,statuses:[slow(.24,1.9)]})}),
-        up('b',4,'Трещина полюса','20 урона и раскол радиусом 30; бронепробитие 5; эхо-атака 45% через 1,1 с, до 2 целей.',3300,{},
-          {replaceAttack:atk({mode:'splash',element:'kinetic',damage:20,interval:.88,range:178,splash:30,armorPierce:5,shieldMultiplier:1.25,projectileSpeed:500,projectileRadius:7,statuses:[slow(.3,2.1)]}),effects:[echo(.45,1.1,2)]}),
-        up('b',5,'Сердце айсберга','Тройной залп: 28 урона каждым шипом, радиус раскола 38, бронепробитие 7, эхо 50% через 0,9 с по 3 целям.',8250,{},
-          {replaceAttack:atk({mode:'splash',element:'kinetic',damage:28,interval:.9,range:195,count:3,splash:38,armorPierce:7,shieldMultiplier:1.4,bossMultiplier:1.2,projectileSpeed:540,projectileRadius:8,statuses:[slow(.34,2.3)]}),effects:[echo(.5,.9,3)]}),
+          {replaceAttack:atk({mode:'splash',element:'kinetic',damage:13,interval:.92,range:168,splash:13,armorPierce:3,projectileSpeed:480,projectileRadius:5,statuses:[slow(.24,1.9)]})}),
+        up('b',4,'Трещина полюса','20 урона и раскол радиусом 30; бронепробитие 5; эхо-атака 45% через 1,1 с, до 2 целей в радиусе 45.',3300,{},
+          {replaceAttack:atk({mode:'splash',element:'kinetic',damage:20,interval:.88,range:178,splash:30,armorPierce:5,shieldMultiplier:1.25,projectileSpeed:500,projectileRadius:7,statuses:[slow(.3,2.1)]}),effects:[echo(.45,1.1,2,45)]}),
+        up('b',5,'Сердце айсберга','Тройной залп: 28 урона каждым шипом, радиус раскола 38, бронепробитие 7, эхо 50% через 0,9 с до 3 целей в радиусе 60.',8250,{},
+          {replaceAttack:atk({mode:'splash',element:'kinetic',damage:28,interval:.9,range:195,count:3,splash:38,armorPierce:7,shieldMultiplier:1.4,bossMultiplier:1.2,projectileSpeed:540,projectileRadius:8,statuses:[slow(.34,2.3)]}),effects:[echo(.5,.9,3,60)]}),
       ]},
       {id:'frost-c',name:'Полярный фронт',description:'Расширяет зону обморожения и распространяет ледяные волны.',upgrades:[
-        up('c',1,'Снежная опушка','Дальность ×1,10; радиус ледяного всплеска +14.',250,{rangeMul:1.1,splashAdd:14}),
-        up('c',2,'Туман изморози','Дальность ×1,08, ещё +12 к радиусу всплеска; замедление 36% на 2,4 с.',500,{rangeMul:1.08,splashAdd:12},{addStatuses:[slow(.36,2.4)]}),
+        up('c',1,'Снежная опушка','Дальность ×1,10; замедление 28% на 1,9 с.',250,{rangeMul:1.1},{addStatuses:[slow(.28,1.9)]}),
+        up('c',2,'Туман изморози','Дальность ×1,08; замедление 36% на 2,4 с.',500,{rangeMul:1.08},{addStatuses:[slow(.36,2.4)]}),
         up('c',3,'Кольцо инея','Кольцевой удар: 6 урона по радиусу 185 раз в 1,05 с, замедление 43% на 2,6 с.',1250,{},
           {replaceAttack:atk({mode:'ring',damage:6,interval:1.05,range:185,projectileSpeed:0,projectileRadius:0,windup:0,statuses:[slow(.43,2.6)]})}),
         up('c',4,'Северное сияние','Кольцевая волна радиусом 215: 9 урона каждые 0,9 с, замедление 50% на 3 с.',3000,{},

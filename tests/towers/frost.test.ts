@@ -11,7 +11,7 @@ const costs=[[225,450,1125,2700,6750],[275,550,1375,3300,8250],[250,500,1250,300
 // Independent local test double for the frozen resolver rules. It is not installed as gameplay code.
 function fixtureResolve(tower:TowerDef,tiers:Tiers):ResolvedTower {
   if(!legalTiers(tiers))throw new RangeError('illegal tier combination');
-  const main=tiers.findIndex(t=>t>2)>=0?tiers.findIndex(t=>t>2):tiers.findIndex(t=>t>0);
+  const main=tiers.every(t=>t===0)?-1:tiers.indexOf(Math.max(...tiers));
   const mainPath=main<0?undefined:main as PathIndex;
   const attack={...tower.attack,statuses:tower.attack.statuses.map(s=>({...s}))};
   const replacements=mainPath===undefined?[]:tower.paths[mainPath].upgrades.slice(0,tiers[mainPath]).filter(u=>u.replaceAttack);
@@ -21,7 +21,7 @@ function fixtureResolve(tower:TowerDef,tiers:Tiers):ResolvedTower {
   const statusByKind=new Map<string,StatusSpec>();
   function merge(s:StatusSpec){
     const prior=statusByKind.get(s.kind);
-    if(!prior||s.power>prior.power||(s.power===prior.power&&s.duration>prior.duration))statusByKind.set(s.kind,{...s});
+    statusByKind.set(s.kind,prior?{kind:s.kind,power:Math.max(prior.power,s.power),duration:Math.max(prior.duration,s.duration),maxStacks:Math.max(prior.maxStacks??1,s.maxStacks??1)}:{...s});
   }
   attack.statuses.forEach(merge);
   const effects=new Map<string,EffectDef>(tower.effects.map(e=>[e.id,{...e}]));
@@ -51,7 +51,7 @@ function fixtureResolve(tower:TowerDef,tiers:Tiers):ResolvedTower {
   const visual=mainPath===undefined?tower.visual:tower.paths[mainPath].upgrades[tiers[mainPath]-1].visual;
   const secondary=tiers.findIndex((v,i)=>i!==mainPath&&v>0);
   const overlay=mainPath!==undefined&&secondary>=0
-    ?`/art/towers/frost/cross-${'abc'[mainPath]}-${'abc'[secondary]}.svg`:undefined;
+    ?`/art/towers/frost/${'abc'[secondary]}${tiers[secondary]}-overlay.svg`:undefined;
   return {attack,effects:[...effects.values()],abilities:[...abilities.values()],visual:{...visual},mainPath,secondaryOverlay:overlay};
 }
 
@@ -129,7 +129,7 @@ describe('Криокристалл: contract and independent data',()=>{
     expect([a.attack.mode,b.attack.mode,c.attack.mode]).toEqual(['pulse','splash','pulse']);
     expect([a.attack.element,b.attack.element,c.attack.element]).toEqual(['frost','kinetic','frost']);
     expect(a.attack.statuses.find(s=>s.kind==='freeze')?.duration).toBe(.45);
-    expect(b.attack.count).toBe(3);expect(b.attack.armorPierce).toBe(8);expect(b.effects[0]).toMatchObject({kind:'echo',power:.5,cap:3});
+    expect(b.attack.count).toBe(3);expect(b.attack.armorPierce).toBe(10);expect(b.effects[0]).toMatchObject({kind:'echo',power:.5,cap:3,radius:60});
     expect(c.attack.statuses.find(s=>s.kind==='slow')?.power).toBe(.55);
     expect(a.abilities[0]).toMatchObject({kind:'nova',power:100,cooldown:48});
     expect(c.abilities[0]).toMatchObject({kind:'nova',power:90,cooldown:40});
@@ -137,15 +137,15 @@ describe('Криокристалл: contract and independent data',()=>{
     const cross=targets.map(x=>fixtureResolve(t,x));
     expect(cross.map(x=>x.mainPath)).toEqual([0,0,1,1,2,2]);
     expect(cross.map(x=>x.secondaryOverlay)).toEqual([
-      '/art/towers/frost/cross-a-b.svg','/art/towers/frost/cross-a-c.svg',
-      '/art/towers/frost/cross-b-a.svg','/art/towers/frost/cross-b-c.svg',
-      '/art/towers/frost/cross-c-a.svg','/art/towers/frost/cross-c-b.svg',
+      '/art/towers/frost/b2-overlay.svg','/art/towers/frost/c2-overlay.svg',
+      '/art/towers/frost/a2-overlay.svg','/art/towers/frost/c2-overlay.svg',
+      '/art/towers/frost/a2-overlay.svg','/art/towers/frost/b2-overlay.svg',
     ]);
     expect(cross[0].attack.damage).toBe(18.75);
     expect(cross[0].attack.interval).toBeCloseTo(.602);
     expect(cross[1].attack.range).toBeCloseTo(205*1.08*1.1*1.08);
     expect(cross[2].attack.interval).toBeCloseTo(.9*.86);
-    expect(cross[3].attack.splash).toBe(64);
+    expect(cross[3].attack.splash).toBe(38);
     expect(cross[4].attack.interval).toBeCloseTo(.68*.86);
     expect(cross[5].attack.damage).toBe(17.5);
     for(const tiers of targets){
@@ -153,6 +153,23 @@ describe('Криокристалл: contract and independent data',()=>{
       expect(spent).toBeGreaterThan(500);
       expect(sellRefund(spent)).toBeLessThan(spent);
     }
+  });
+
+  it('uses the higher early tier as primary and selects the exact secondary tier',()=>{
+    const t=getTower();
+    expect(fixtureResolve(t,[1,2,0])).toMatchObject({mainPath:1,secondaryOverlay:'/art/towers/frost/a1-overlay.svg'});
+    expect(fixtureResolve(t,[2,2,0])).toMatchObject({mainPath:0,secondaryOverlay:'/art/towers/frost/b2-overlay.svg'});
+    expect(fixtureResolve(t,[0,1,2])).toMatchObject({mainPath:2,secondaryOverlay:'/art/towers/frost/b1-overlay.svg'});
+  });
+
+  it('preserves full area radius for every legal ring or pulse and gives echoes a nonzero reach',()=>{
+    const t=getTower();
+    for(const tiers of allLegal()){
+      const r=fixtureResolve(t,tiers);
+      if(r.attack.mode==='ring'||r.attack.mode==='pulse')expect(r.attack.splash).toBe(0);
+      for(const e of r.effects)if(e.kind==='echo'){expect(e.radius).toBeGreaterThan(0);expect(e.cap).toBeLessThanOrEqual(3);}
+    }
+    expect(fixtureResolve(t,[0,3,0]).attack).toMatchObject({mode:'splash',splash:13});
   });
 
   it('validates every upgrade edge in the entire finite state-space',()=>{
@@ -170,20 +187,23 @@ describe('Криокристалл: SVG art assets',()=>{
     expect(new Set(sources).size).toBe(16);
     for(const source of sources){
       expect(source).toMatch(/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/);
-      expect(source).toContain('viewBox="0 0 240 240"');
+      expect(source).toContain('width="128" height="128" viewBox="0 0 128 128"');
       expect(source).toContain('<polygon');
       expect(source).toContain('</svg>');
       expect(source).not.toMatch(/<script|<text|<foreignObject|<image|href="https?:|url\(https?:/i);
     }
-    for(const a of 'abc')for(const b of 'abc')if(a!==b){
-      const overlay=readFileSync(join(artRoot,`cross-${a}-${b}.svg`),'utf8');
-      expect(overlay).toContain('viewBox="0 0 240 240"');
+    const overlaySources=new Set<string>();
+    for(const a of 'abc')for(const tier of [1,2]){
+      const overlay=readFileSync(join(artRoot,`${a}${tier}-overlay.svg`),'utf8');
+      overlaySources.add(overlay);
+      expect(overlay).toContain('width="128" height="128" viewBox="0 0 128 128"');
       expect(overlay).not.toMatch(/<script|<text|<image|<foreignObject|href="https?:/i);
       expect(overlay).not.toContain('fill="#061421"');
     }
+    expect(overlaySources.size).toBe(6);
     const html=readFileSync(join(artRoot,'preview.html'),'utf8');
     for(const model of names)expect(html).toContain(`src="${model}.svg"`);
-    for(const a of 'abc')for(const b of 'abc')if(a!==b)expect(html).toContain(`src="cross-${a}-${b}.svg"`);
+    for(const a of 'abc')for(const tier of [1,2])expect(html).toContain(`src="${a}${tier}-overlay.svg"`);
     expect(html).toContain('lang="ru"');
   });
 });
