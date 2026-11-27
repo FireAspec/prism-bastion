@@ -1,0 +1,20 @@
+# Enemy motion (85)
+
+`createEnemyMotion(config?)` implements frozen `EntityMotion` and returns a compatible extension, `EnemyMotion`. It is presentation-only; it never writes to GameState or RNG. Profiles cover 24 regular enemies and six bosses. The optional config supplies accurate lane tangents at intersections, shell colors and boss thresholds. Without config, heading follows forward authoritative position samples; large jumps/backtracking do not change heading.
+
+## Renderer integration
+
+1. Create one instance per run with `createEnemyMotion(config)`. Call `reset(initialSnapshot)` before delivering new events; call `reset(reconnectSnapshot)` on reconnect/load even if runId stays the same. First observed snapshot is deliberately silent and watermarks `nextEvent - 1`. Subsequent batches are sorted by ID, deduplicated and checked against the snapshot's nextEvent. Deliver complete ordered batches from app, not historical fragments after newer events. Call `consume(events,state)` then `update(realFrameDelta,state)` once per frame. Use `setPreferences(overlay.preferences)`.
+2. Draw live art at authoritative `enemy.pos + sample.offset`, using rotation (radians, +x forward), scale, alpha and glow. Hit testing, targeting and collision always use the unmodified pos. Use `appearance(id)` for active layer color/index, shield, status glyphs and boss phase. Paid layers do not return after regeneration. Phase counter uses event transitions and config threshold inference for reconnect.
+3. Use `paintEnemyAppearance(ctx, visualPos, radius, appearance, preferences)` after body art; apply its shell-color value to the body tint according to renderer asset policy. Draw `tails()` with last authoritative position and sample until expiration, then `paintEnemyEffects(ctx,motion.effects(),preferences)` in world space. The frozen sample alone cannot enumerate dead entities or multiple contact positions, hence this optional compatible API. No change to contracts needed. On disposal release motion. Renderer owns DPR and world transform; paint helpers save/restore context and never change canvas dimensions.
+4. Contact effects require finite `GameEvent.pos` and target. No fallback to the enemy center for a missing contact. Distinct layer IDs and event IDs are retained even within the same tick; a previously paid or already observed shell ID does not replay when a newer event repeats it. No hit/HP comparison invents break events. `split` is a visual parent-death cue for known splitting types; frozen spawn event has no parent ID, so child attribution is not inferred. Child spawn itself is handled separately. Phase/kill events use target as enemy ID. A spawn and death entirely between snapshots may have no body tail because frozen event has no defId; contact effects still work if position supplied.
+
+## Limits and accessibility
+
+192/64 concurrent FX (high/low), each at most 6/3 paint fragments; 120/40 removed bodies exposed at most. Oldest effects/tails are culled under load; active bodies are never dropped. Timers use simulation speed with real frame delta and monotonic snapshot time; pause stops local advancement. Reduced motion suppresses bob/recoil/scale pulses and moving fragments; directional facing and static, fading symbols remain. Colorblind mode adds shell ticks, and all modes distinguish shields/statuses/phases by outlines and glyphs rather than color alone. No strobe or screen shake.
+
+## Verification
+
+- `npx vitest run tests/animations/enemies/motion.test.ts` in the full checkout.
+- `npm run dev`, visit `/tests/animations/enemies/gallery.html`; controls: 1×/3×, reduced motion, colorblind, low quality, pause and restart. All 30 types use the same motion and paint functions; test geometry is intentionally not production SVG. The gallery is a deterministic presentation fixture, not the combat engine.
+- `npm run check` after dependencies are installed. Full integration with renderer, combat, production assets and co-op delivery must be checked after their modules land.
