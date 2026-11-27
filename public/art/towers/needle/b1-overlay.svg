@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Накладка B1">
+<defs>
+ <linearGradient id="copper" x2="0.85" y2="1"><stop stop-color="#ffe1a2"/><stop offset=".3" stop-color="#b87943"/><stop offset=".64" stop-color="#754633"/><stop offset="1" stop-color="#382f3a"/></linearGradient>
+ <linearGradient id="midnight" x2="1" y2="1"><stop stop-color="#315e65"/><stop offset=".48" stop-color="#153643"/><stop offset="1" stop-color="#122331"/></linearGradient>
+ <linearGradient id="teal" x1=".15" x2=".85" y2="1"><stop stop-color="#effff6"/><stop offset=".35" stop-color="#7cf9e5"/><stop offset=".8" stop-color="#25b7c3"/><stop offset="1" stop-color="#147885"/></linearGradient>
+ <linearGradient id="diamond" x1="0" x2="1" y2="1"><stop stop-color="#f8ffff"/><stop offset=".28" stop-color="#b2eaff"/><stop offset=".52" stop-color="#4b9db7"/><stop offset=".78" stop-color="#e4f9ff"/><stop offset="1" stop-color="#35627c"/></linearGradient>
+ <linearGradient id="gold" x1="0" x2=".8" y2="1"><stop stop-color="#fff3b5"/><stop offset=".36" stop-color="#ffcf6d"/><stop offset=".7" stop-color="#be762f"/><stop offset="1" stop-color="#764b32"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#adfff0" stop-opacity=".55"/><stop offset=".55" stop-color="#53d6db" stop-opacity=".17"/><stop offset="1" stop-color="#40bed0" stop-opacity="0"/></radialGradient>
+ <radialGradient id="halo"><stop stop-color="#fff9c6" stop-opacity=".4"/><stop offset="1" stop-color="#ffb12b" stop-opacity="0"/></radialGradient>
+ </defs>
+<polygon points="57,98 64,84 71,98 64,108" fill="url(#diamond)" stroke="#f1ffff" stroke-width="1.6" stroke-linejoin="round"/><line x1="64" y1="84" x2="64" y2="108" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" />
+</svg>
