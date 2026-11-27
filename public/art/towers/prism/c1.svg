@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Оптический суд — ступень 1"><defs>
+ <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6d696"/><stop offset=".37" stop-color="#a76b49"/><stop offset=".74" stop-color="#6a3d43"/><stop offset="1" stop-color="#3f374e"/></linearGradient>
+ <linearGradient id="steel" x1="0" x2=".85" y2="1"><stop stop-color="#c1fff2"/><stop offset=".23" stop-color="#427d8e"/><stop offset=".7" stop-color="#233b59"/><stop offset="1" stop-color="#121d35"/></linearGradient>
+ <linearGradient id="glass" x1=".1" x2=".8" y2="1"><stop stop-color="#ffffff"/><stop offset=".35" stop-color="#aaffef"/><stop offset=".7" stop-color="#43b0dd"/><stop offset="1" stop-color="#395087"/></linearGradient>
+ <radialGradient id="white"><stop stop-color="#ffffff"/><stop offset=".38" stop-color="#fffdf0"/><stop offset=".68" stop-color="#c7fff2"/><stop offset="1" stop-color="#62aaca"/></radialGradient>
+ <radialGradient id="deep"><stop stop-color="#ceffff"/><stop offset=".34" stop-color="#53d2da"/><stop offset=".78" stop-color="#365875"/><stop offset="1" stop-color="#1b263f"/></radialGradient>
+ <filter id="halo" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="2.3"/></filter>
+ </defs><ellipse cx="64" cy="115" rx="30" ry="6.5" fill="#061a27" opacity=".36"/>
+ <path d="M41 99L49 91H79L87 99L85 109Q64 116 43 109Z" fill="url(#copper)" stroke="#302b3e" stroke-width="2"/>
+ <path d="M45 102Q64 108 83 102L81 109Q64 113 47 109Z" fill="#30465a" stroke="#e4b976" stroke-width="1.5"/>
+ <path d="M50 90L56 79H72L78 90L74 101H54Z" fill="url(#steel)" stroke="#d9be88" stroke-width="2"/>
+ <path d="M48 100H80" stroke="#fbe6b1" stroke-width="1.1" opacity=".8"/>
+ <circle cx="49" cy="105" r="1.7" fill="#ffe3a2" stroke="#4a4144" stroke-width="0.5"/><circle cx="64" cy="105" r="1.7" fill="#ffe3a2" stroke="#4a4144" stroke-width="0.5"/><circle cx="79" cy="105" r="1.7" fill="#ffe3a2" stroke="#4a4144" stroke-width="0.5"/>
+ <path d="M55 96L51 60L56 37L72 37L77 60L73 96Z" fill="url(#steel)" stroke="#e4ba8d" stroke-width="2.5"/>
+  <path d="M50 83H78M52 69H76" stroke="#edc488" stroke-width="2"/><path d="M42 58L48 46M86 58L80 46" stroke="#deb47e" stroke-width="4"/><circle cx="64" cy="53" r="10" fill="url(#copper)" stroke="#fce6aa" stroke-width="1.6"/><circle cx="64" cy="53" r="7" fill="url(#glass)" stroke="#fff" stroke-width="1.5"/></svg>
