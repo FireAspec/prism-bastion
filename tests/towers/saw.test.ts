@@ -37,8 +37,7 @@ function applyDelta(target: AttackDef, delta: StatDelta): void {
 
 function resolveFixture(tower: TowerDef, tiers: Tiers): ResolvedTower {
   if (!legalTiers(tiers)) throw new Error(`Illegal tiers: ${tiers}`);
-  const main = tiers.findIndex(n => n > 2) >= 0 ? tiers.findIndex(n => n > 2)
-    : tiers.findIndex(n => n > 0);
+  const main = tiers.every(n => n === 0) ? -1 : tiers.indexOf(Math.max(...tiers));
   const mainPath = main >= 0 ? main as PathIndex : undefined;
   const attack = structuredClone(tower.attack);
   const effects = new Map(tower.effects.map(e => [e.id, {...e}]));
@@ -124,7 +123,8 @@ describe('Saw tower content and prices', () => {
       }
       for (const effect of upgrade.effects ?? [] as EffectDef[]) {
         expect(effect.power).toBeGreaterThan(0);
-        expect(effect.cap).toBeGreaterThan(0);
+        expect(effect.cap).toBeGreaterThanOrEqual(0);
+        if (effect.kind === 'echo') expect(effect.cap).toBeGreaterThan(0);
         expect(effect.interval).toBeGreaterThan(0);
       }
       for (const ability of upgrade.abilities ?? []) {
@@ -146,6 +146,12 @@ describe('Every legal path combination', () => {
     for (const tiers of legal) {
       const before = JSON.stringify(data);
       const result = resolveFixture(data,tiers);
+      const max = Math.max(...tiers);
+      const primary = max === 0 ? undefined : tiers.indexOf(max);
+      expect(result.mainPath).toBe(primary);
+      expect(result.visual.asset).toBe(primary === undefined ? data.visual.asset : data.paths[primary].upgrades[max-1].visual.asset);
+      const secondary = tiers.findIndex((n,i) => n > 0 && i !== primary);
+      expect(result.secondaryOverlay).toBe(secondary < 0 ? undefined : `/art/towers/saw/${'abc'[secondary]}${tiers[secondary]}-overlay.svg`);
       expect(result.attack.interval).toBeGreaterThanOrEqual(.05);
       expect(result.attack.damage).toBeGreaterThan(0);
       expect(result.attack.range).toBeGreaterThan(0);
@@ -174,7 +180,7 @@ describe('Every legal path combination', () => {
       expect(result.mainPath).toBe(path);
       expect(result.visual.asset).toContain(`${'abc'[path]}5.svg`);
       expect(result.secondaryOverlay).toContain(overlays[i]);
-      expect(result.attack.mode).toBe(['ring','cone','shot'][path]);
+      expect(result.attack.mode).toBe(['ring','melee','shot'][path]);
       expect(sellRefund(data.cost+tiers.reduce((sum,level,p)=> sum +
         data.paths[p].upgrades.slice(0,level).reduce((acc,u)=>acc+u.cost,0),0)))
         .toBeLessThan(data.cost+tiers.reduce((sum,level,p)=> sum +
@@ -193,6 +199,23 @@ describe('Every legal path combination', () => {
     expect(c.range).toBeCloseTo(115*1.2);
     expect(c.pierce).toBe(2);
     expect(c.push).toBe(5);
+  });
+  it('uses degree-based melee sectors and preserves the intended target geometry', () => {
+    expect(data.attack.arc).toBe(90);
+    for (const [level,arc,pierce] of [[3,70,3],[4,78,4],[5,90,6]]) {
+      const a = resolveFixture(data,[0,level,0]).attack;
+      expect(a.mode).toBe('melee');
+      expect(a.arc).toBe(arc);
+      expect(a.pierce).toBe(pierce);
+      expect(a.windup).toBeGreaterThan(0);
+    }
+    const ring = resolveFixture(data,[5,0,2]);
+    expect(ring.attack.push).toBe(5);
+    expect(ring.effects.find(e=>e.kind==='trap')).toMatchObject({radius:115,interval:.8,power:24,cap:0});
+    const shot = resolveFixture(data,[0,0,5]);
+    expect(shot.attack).toMatchObject({mode:'shot',homing:true,arc:8,projectileSpeed:700});
+    expect(shot.effects.filter(e=>e.kind==='echo')).toHaveLength(1);
+    expect(shot.effects.find(e=>e.kind==='echo')).toMatchObject({power:.6,cap:4,interval:.42});
   });
   it('has substantive T5 mechanics beyond T4 in all three paths', () => {
     for (let p=0;p<3;p++) {
