@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Mechanical saw defense tower">
+  <defs>
+    <linearGradient id="steel" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f4e8c7"/><stop offset=".42" stop-color="#76939d"/><stop offset=".78" stop-color="#304e62"/><stop offset="1" stop-color="#c6d1cd"/></linearGradient>
+    <radialGradient id="disc"><stop stop-color="#c6eadf"/><stop offset=".56" stop-color="#587887"/><stop offset="1" stop-color="#183947"/></radialGradient>
+    <linearGradient id="copper"><stop stop-color="#ffdfa2"/><stop offset=".45" stop-color="#b77446"/><stop offset="1" stop-color="#5b352a"/></linearGradient>
+    <linearGradient id="plinth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2bb76"/><stop offset=".45" stop-color="#a76c42"/><stop offset="1" stop-color="#543b35"/></linearGradient>
+    <linearGradient id="side"><stop stop-color="#c78c4e"/><stop offset="1" stop-color="#54332d"/></linearGradient>
+    <radialGradient id="core"><stop stop-color="#f9ffff"/><stop offset=".4" stop-color="#d2fff6"/><stop offset="1" stop-color="#236c78"/></radialGradient>
+  </defs>
+  <g><g transform="translate(37 86) rotate(10) scale(1 0.75)">
+    <circle r="12.4" fill="none" stroke="#6fd9d2" stroke-width=".7" opacity=".38"/>
+    <polygon points="0.00,-8.30 1.56,-9.88 3.09,-9.51 3.77,-7.40 4.88,-6.71 7.07,-7.07 8.09,-5.88 7.40,-3.77 7.89,-2.56 9.88,-1.56 10.00,0.00 8.20,1.30 7.89,2.56 8.91,4.54 8.09,5.88 5.87,5.87 4.88,6.71 4.54,8.91 3.09,9.51 1.30,8.20 0.00,8.30 -1.56,9.88 -3.09,9.51 -3.77,7.40 -4.88,6.71 -7.07,7.07 -8.09,5.88 -7.40,3.77 -7.89,2.56 -9.88,1.56 -10.00,0.00 -8.20,-1.30 -7.89,-2.56 -8.91,-4.54 -8.09,-5.88 -5.87,-5.87 -4.88,-6.71 -4.54,-8.91 -3.09,-9.51 -1.30,-8.20" fill="url(#steel)" stroke="#d2fff6" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle r="7.4" fill="#236c78" stroke="#1b3040" stroke-width="2"/>
+    <circle r="6.800000000000001" fill="url(#disc)" stroke="#6fd9d2" stroke-width="1.2"/>
+    <circle r="5.5" fill="none" stroke="#d2fff6" stroke-width=".9" stroke-dasharray="3 3" opacity=".55"/>
+    <line x1="2.9" y1="0" x2="6.2" y2="0" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="2.0506096654409878" y1="2.0506096654409873" x2="4.384062043356595" y2="4.384062043356594" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="1.7757378587636622e-16" y1="2.9" x2="3.796405077356795e-16" y2="6.2" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-2.0506096654409873" y1="2.0506096654409878" x2="-4.384062043356594" y2="4.384062043356595" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-2.9" y1="3.5514757175273243e-16" x2="-6.2" y2="7.59281015471359e-16" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-2.050609665440988" y1="-2.0506096654409873" x2="-4.384062043356596" y2="-4.384062043356594" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-5.327213576290985e-16" y1="-2.9" x2="-1.1389215232070384e-15" y2="-6.2" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="2.0506096654409873" y1="-2.050609665440988" x2="4.384062043356594" y2="-4.384062043356596" stroke="#d2fff6" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><circle r="2.4" fill="#192633" stroke="#d2fff6" stroke-width="1.8"/>
+    <circle r="1.1" fill="#ffda91"/>
+    <path d="M -4.6000000000000005 -5.2 Q 0 -8.299999999999999 4.8 -4.8" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".6"/>
+  </g><g><path d="M51 83 43 86" stroke="#172932" stroke-width="6" stroke-linecap="round"/><path d="M51 83 43 86" stroke="#a0fbdd" stroke-width="3" stroke-linecap="round"/><circle cx="43" cy="86" r="3.3" fill="#ffe7ad" stroke="#31404c" stroke-width="1.2"/></g></g>
+  </svg>

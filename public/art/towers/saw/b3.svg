@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Mechanical saw defense tower">
+  <defs>
+    <linearGradient id="steel" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f4e8c7"/><stop offset=".42" stop-color="#76939d"/><stop offset=".78" stop-color="#304e62"/><stop offset="1" stop-color="#c6d1cd"/></linearGradient>
+    <radialGradient id="disc"><stop stop-color="#c6eadf"/><stop offset=".56" stop-color="#587887"/><stop offset="1" stop-color="#183947"/></radialGradient>
+    <linearGradient id="copper"><stop stop-color="#ffdfa2"/><stop offset=".45" stop-color="#b77446"/><stop offset="1" stop-color="#5b352a"/></linearGradient>
+    <linearGradient id="plinth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f2bb76"/><stop offset=".45" stop-color="#a76c42"/><stop offset="1" stop-color="#543b35"/></linearGradient>
+    <linearGradient id="side"><stop stop-color="#c78c4e"/><stop offset="1" stop-color="#54332d"/></linearGradient>
+    <radialGradient id="core"><stop stop-color="#f9ffff"/><stop offset=".4" stop-color="#ffd0a0"/><stop offset="1" stop-color="#77332d"/></radialGradient>
+  </defs>
+  <g>
+    <ellipse cx="64" cy="111" rx="41" ry="10" fill="#071a25" opacity=".35"/>
+    <path d="M 25 76 64 56 103 76 103 96 64 116 25 96 Z" fill="#152e39" stroke="#071c28" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M25 76 64 96 64 116 25 96Z" fill="url(#side)" stroke="#664335" stroke-width="1.3"/>
+    <path d="M103 76 64 96 64 116 103 96Z" fill="#264754" stroke="#f1b46c" stroke-width="1.3"/>
+    <path d="M25 76 64 56 103 76 64 97Z" fill="url(#plinth)" stroke="#e6ad6e" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M35 77 64 62 94 77 64 91Z" fill="#28444e" stroke="#ffd29a" stroke-width="1.4"/>
+    <path d="M44 76 64 66 83 76 64 87Z" fill="#152a35" stroke="#e7834d" stroke-width="1.4"/>
+    <path d="M29 86 39 91 M89 91 99 86 M36 103 48 108 M80 108 92 102" stroke="#ffd5a1" stroke-width="2" opacity=".65"/>
+    <circle cx="64" cy="76" r="7" fill="#0f242f" stroke="#ffd0a0" stroke-width="2"/>
+    <circle cx="64" cy="76" r="3" fill="#f6bc67"/>
+    <path d="M32 78 19 74 18 88 34 91 M96 78 110 73 111 89 94 93" fill="#77332d" stroke="#e7834d" stroke-width="2"/>
+  </g><g>
+    <path d="M48 76 49 46 56 34 72 34 79 46 80 76" fill="url(#copper)" stroke="#1c2a31" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="52" y="46" width="24" height="25" rx="5" fill="#213842" stroke="#e7834d" stroke-width="2"/>
+    <path d="M55 38 56 29 72 29 73 38" fill="#bd7a44" stroke="#ffe1a7" stroke-width="2"/>
+    <path d="M50 56 42 61 41 78 M78 56 86 61 87 78" fill="none" stroke="#9b6741" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="64" cy="59" r="8" fill="#0d2736" stroke="#e3a568" stroke-width="2"/>
+    <circle cx="64" cy="59" r="4" fill="#ffd0a0"/>
+    <path d="M50 71 43 78 M78 71 85 78" stroke="#e5a15c" stroke-width="2"/>
+  </g><g><path d="M28 85 26 33 43 22 M100 85 102 32 86 23" fill="none" stroke="#71422e" stroke-width="8" stroke-linejoin="round"/>
+      <path d="M28 82 28 34 44 25 M100 82 100 34 85 25" fill="none" stroke="#e9a062" stroke-width="3" stroke-linejoin="round"/><g transform="translate(64 43) rotate(-8) scale(1 0.92)">
+    <circle r="31.4" fill="none" stroke="#e7834d" stroke-width=".7" opacity=".38"/>
+    <polygon points="0.00,-24.07 3.03,-28.84 6.03,-28.37 7.44,-22.89 9.79,-21.99 14.50,-25.11 17.05,-23.46 16.11,-17.89 17.89,-16.11 23.46,-17.05 25.11,-14.50 21.99,-9.79 22.89,-7.44 28.37,-6.03 28.84,-3.03 24.07,0.00 23.94,2.52 28.37,6.03 27.58,8.96 21.99,9.79 20.85,12.03 23.46,17.05 21.55,19.40 16.11,17.89 14.15,19.47 14.50,25.11 11.80,26.49 7.44,22.89 5.00,23.54 3.03,28.84 0.00,29.00 -2.52,23.94 -5.00,23.54 -8.96,27.58 -11.80,26.49 -12.04,20.85 -14.15,19.47 -19.40,21.55 -21.55,19.40 -19.47,14.15 -20.85,12.04 -26.49,11.80 -27.58,8.96 -23.54,5.00 -23.94,2.52 -29.00,0.00 -28.84,-3.03 -23.54,-5.00 -22.89,-7.44 -26.49,-11.80 -25.11,-14.50 -19.47,-14.15 -17.89,-16.11 -19.40,-21.55 -17.05,-23.46 -12.04,-20.85 -9.79,-21.99 -8.96,-27.58 -6.03,-28.37 -2.52,-23.94" fill="url(#steel)" stroke="#ffd0a0" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle r="21.46" fill="#77332d" stroke="#1b3040" stroke-width="2"/>
+    <circle r="19.720000000000002" fill="url(#disc)" stroke="#e7834d" stroke-width="1.2"/>
+    <circle r="15.950000000000001" fill="none" stroke="#ffd0a0" stroke-width=".9" stroke-dasharray="3 3" opacity=".55"/>
+    <line x1="8.41" y1="0" x2="17.98" y2="0" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="5.946768029778865" y1="5.946768029778863" x2="12.713779925734126" y2="12.713779925734123" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="5.14963979041462e-16" y1="8.41" x2="1.1009574724334705e-15" y2="17.98" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="-5.946768029778863" y1="5.946768029778865" x2="-12.713779925734123" y2="12.713779925734126" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="-8.41" y1="1.029927958082924e-15" x2="-17.98" y2="2.201914944866941e-15" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="-5.946768029778866" y1="-5.946768029778863" x2="-12.713779925734128" y2="-12.713779925734123" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="-1.5448919371243858e-15" y1="-8.41" x2="-3.3028724173004114e-15" y2="-17.98" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><line x1="5.9467680297788625" y1="-5.946768029778866" x2="12.713779925734121" y2="-12.713779925734128" stroke="#ffd0a0" stroke-width="2.2" stroke-linecap="round" opacity=".85"/><circle r="6.96" fill="#192633" stroke="#ffd0a0" stroke-width="1.8"/>
+    <circle r="3.19" fill="#ffda91"/>
+    <path d="M -13.34 -15.08 Q 0 -24.07 13.92 -13.92" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".6"/>
+  </g><path d="M46 56 29 72 M82 56 99 72" stroke="#d87543" stroke-width="5" stroke-linecap="round"/><g transform="translate(31 61) rotate(25) scale(1 0.9)">
+    <circle r="13.4" fill="none" stroke="#e7834d" stroke-width=".7" opacity=".38"/>
+    <polygon points="0.00,-9.13 1.57,-10.89 3.10,-10.55 3.79,-8.30 4.94,-7.68 7.20,-8.31 8.31,-7.20 7.68,-4.94 8.30,-3.79 10.55,-3.10 10.89,-1.57 9.13,0.00 9.04,1.30 10.55,3.10 10.01,4.57 7.68,4.94 6.90,5.98 7.20,8.31 5.95,9.25 3.79,8.30 2.57,8.76 1.57,10.89 0.00,11.00 -1.30,9.04 -2.57,8.76 -4.57,10.01 -5.95,9.25 -5.98,6.90 -6.90,5.98 -9.25,5.95 -10.01,4.57 -8.76,2.57 -9.04,1.30 -11.00,0.00 -10.89,-1.57 -8.76,-2.57 -8.30,-3.79 -9.25,-5.95 -8.31,-7.20 -5.98,-6.90 -4.94,-7.68 -4.57,-10.01 -3.10,-10.55 -1.30,-9.04" fill="url(#steel)" stroke="#ffd0a0" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle r="8.14" fill="#77332d" stroke="#1b3040" stroke-width="2"/>
+    <circle r="7.48" fill="url(#disc)" stroke="#e7834d" stroke-width="1.2"/>
+    <circle r="6.050000000000001" fill="none" stroke="#ffd0a0" stroke-width=".9" stroke-dasharray="3 3" opacity=".55"/>
+    <line x1="3.19" y1="0" x2="6.82" y2="0" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="2.2556706319850868" y1="2.2556706319850863" x2="4.822468247692255" y2="4.822468247692253" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="1.9533116446400284e-16" y1="3.19" x2="4.176045585092475e-16" y2="6.82" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-2.2556706319850863" y1="2.2556706319850868" x2="-4.822468247692253" y2="4.822468247692255" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-3.19" y1="3.9066232892800567e-16" x2="-6.82" y2="8.35209117018495e-16" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-2.2556706319850868" y1="-2.2556706319850863" x2="-4.822468247692255" y2="-4.822468247692253" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="-5.859934933920085e-16" y1="-3.19" x2="-1.2528136755277423e-15" y2="-6.82" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><line x1="2.255670631985086" y1="-2.2556706319850868" x2="4.822468247692253" y2="-4.822468247692255" stroke="#ffd0a0" stroke-width="1.4" stroke-linecap="round" opacity=".85"/><circle r="2.6399999999999997" fill="#192633" stroke="#ffd0a0" stroke-width="1.8"/>
+    <circle r="1.21" fill="#ffda91"/>
+    <path d="M -5.0600000000000005 -5.720000000000001 Q 0 -9.129999999999999 5.279999999999999 -5.279999999999999" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".6"/>
+  </g></g>
+  </svg>
